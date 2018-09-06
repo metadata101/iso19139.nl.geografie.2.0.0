@@ -79,7 +79,9 @@
   <!-- For record not having status obsolete, flag them as non
   obsolete records. Some catalog like to restrict to non obsolete
   records only the default search. -->
-  <!-- TODO: Compare with ISO19139 version, there is the value is false() -->
+  <!-- TODO: Compare with ISO19139 version, there is the value is false()
+       P: Suggest to keep to true, since quite some users use this and users that don't, have not much overhead.      
+  -->
   <xsl:variable name="flagNonObseleteRecords" select="true()"/>
 
   <!-- Choose if WMS should be also indexed
@@ -108,7 +110,11 @@
 
       <!-- not tokenized title for sorting, needed for multilingual sorting -->
       <xsl:if test="geonet:info/isTemplate != 's'">
-        <!-- TODO: Compare with ISO19139 version, there is not used lower-case -->
+        <!-- TODO: Compare with ISO19139 version, there is not used lower-case
+             P: lowercase works in combination with lcase(any), because the lucene
+             field _title seemed case sensitive (maybe can be changed the _title
+             field to be case-insensitive?)
+        -->
         <Field name="_title" string="{lower-case(string($_defaultTitle))}" store="true" index="true"/>
       </xsl:if>
 
@@ -183,7 +189,10 @@
           <Field name="identifier" string="{string(.)}" store="true" index="true"/>
         </xsl:for-each>
 
-        <!-- TODO: Compare with ISO19139 version, this one seem wrong! -->
+        <!-- TODO: Compare with ISO19139 version, this one seem wrong! 
+             P: dutch profile does not use rs-identifier, please also consider
+             the unique uri to be in gmd:code/gmx:anchor[@xlink:href]
+        -->
         <xsl:for-each select="gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString|gmd:identifier/gmd:MD_Identifier/gmd:code/gmx:Anchor">
           <Field name="identifier" string="{string(.)}" store="true" index="true"/>
         </xsl:for-each>
@@ -198,7 +207,10 @@
           <Field name="altTitle" string="{string(.)}" store="true" index="true"/>
         </xsl:for-each>
 
-        <!-- TODO: Compare with ISO19139 code, dates indexing is quite different -->
+        <!-- TODO: Compare with ISO19139 code, dates indexing is quite different
+             P: we added this to be able to differentiate between create, revision,
+             publication, feel free to optimise, maybe also add it to iso19139
+        -->
         <xsl:for-each
           select="gmd:date/gmd:CI_Date[gmd:dateType/gmd:CI_DateTypeCode/@codeListValue='revision']/gmd:date">
           <xsl:variable name="myDate" select="tokenize(gco:Date|gco:DateTime,'T')[1]"/>
@@ -474,7 +486,8 @@
 
       <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-      <!-- TODO: Updated to use template with mode="index-contact", kept 1.3 code to review, seem doing some special management of the email -->
+      <!-- TODO: Updated to use template with mode="index-contact", kept 1.3 code to review, seem doing some special management of the email
+          P: i don't remember any change here, ok to delegate -->
       <xsl:for-each select="gmd:pointOfContact">
         <xsl:apply-templates mode="index-contact"
                              select="gmd:CI_ResponsibleParty|*[@gco:isoType = 'gmd:CI_ResponsibleParty']">
@@ -616,7 +629,8 @@
 
       <xsl:for-each select="gmd:topicCategory/gmd:MD_TopicCategoryCode">
         <Field name="topicCat" string="{string(.)}" store="true" index="true"/>
-        <!-- TODO: Check as in ISO19139 topic categories are indexed as keywords also -->
+        <!-- TODO: Check as in ISO19139 topic categories are indexed as keywords also 
+            P: it's fine for 'query-by-keyword', but a bit weird if you display keywords for a record -->
       </xsl:for-each>
 
       <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -662,7 +676,9 @@
       </xsl:for-each>
 
 
-      <!-- TODO: Review this was commented in Dutch 1.3, but not in ISO19139 -->
+      <!-- TODO: Review this was commented in Dutch 1.3, but not in ISO19139 
+           P: afaik 'otherconstraints' should not be indexed seperately from the accessconstraints or usagelimitation it refers to.
+      -->
       <!--
                   <xsl:for-each select="gmd:resourceConstraints/*">
                       <xsl:variable name="fieldPrefix" select="local-name()"/>
@@ -1112,7 +1128,9 @@
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-    <!-- TODO: Review, updated from ISO19139 to use mode="index-contact", kept Dutch 1.3 commented code to review -->
+    <!-- TODO: Review, updated from ISO19139 to use mode="index-contact", kept Dutch 1.3 commented code to review
+         P: i don't remember any change, would be good to align, however quite impactfull, seems using a different lucene field metadataPOC vs responsibleParty, or is getting that from index-contact()?
+         -->
     <xsl:for-each select="gmd:contact">
       <Field name="metadataPOC"
              string="{string(*/gmd:organisationName/(gco:CharacterString|gmx:Anchor))}"
