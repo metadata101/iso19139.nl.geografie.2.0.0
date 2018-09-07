@@ -79,9 +79,7 @@
   <!-- For record not having status obsolete, flag them as non
   obsolete records. Some catalog like to restrict to non obsolete
   records only the default search. -->
-  <!-- TODO: Compare with ISO19139 version, there is the value is false()
-       P: Suggest to keep to true, since quite some users use this and users that don't, have not much overhead.      
-  -->
+  <!-- Custom value for schema -->
   <xsl:variable name="flagNonObseleteRecords" select="true()"/>
 
   <!-- Choose if WMS should be also indexed
@@ -185,15 +183,8 @@
                 gmd:identificationInfo/srv:SV_ServiceIdentification">
 
       <xsl:for-each select="gmd:citation/gmd:CI_Citation">
+        <!-- Ducth schema only uses gmd:MD_Identifier -->
         <xsl:for-each select="gmd:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString|gmd:identifier/gmd:MD_Identifier/gmd:code/gmx:Anchor">
-          <Field name="identifier" string="{string(.)}" store="true" index="true"/>
-        </xsl:for-each>
-
-        <!-- TODO: Compare with ISO19139 version, this one seem wrong! 
-             P: dutch profile does not use rs-identifier, please also consider
-             the unique uri to be in gmd:code/gmx:anchor[@xlink:href]
-        -->
-        <xsl:for-each select="gmd:identifier/gmd:RS_Identifier/gmd:code/gco:CharacterString|gmd:identifier/gmd:MD_Identifier/gmd:code/gmx:Anchor">
           <Field name="identifier" string="{string(.)}" store="true" index="true"/>
         </xsl:for-each>
 
@@ -207,10 +198,6 @@
           <Field name="altTitle" string="{string(.)}" store="true" index="true"/>
         </xsl:for-each>
 
-        <!-- TODO: Compare with ISO19139 code, dates indexing is quite different
-             P: we added this to be able to differentiate between create, revision,
-             publication, feel free to optimise, maybe also add it to iso19139
-        -->
         <xsl:for-each
           select="gmd:date/gmd:CI_Date[gmd:dateType/gmd:CI_DateTypeCode/@codeListValue='revision']/gmd:date">
           <xsl:variable name="myDate" select="tokenize(gco:Date|gco:DateTime,'T')[1]"/>
@@ -449,7 +436,6 @@
         </xsl:for-each>
       </xsl:for-each>
 
-      <!-- TODO: Review - added from ISO19139, probably required in GeoNetwork 3.4 -->
       <xsl:variable name="listOfKeywords">{
         <xsl:variable name="keywordWithNoThesaurus"
                       select="//gmd:MD_Keywords[
@@ -629,7 +615,7 @@
 
       <xsl:for-each select="gmd:topicCategory/gmd:MD_TopicCategoryCode">
         <Field name="topicCat" string="{string(.)}" store="true" index="true"/>
-        <!-- TODO: Check as in ISO19139 topic categories are indexed as keywords also 
+        <!-- TODO: Check as in ISO19139 topic categories are indexed as keywords also
             P: it's fine for 'query-by-keyword', but a bit weird if you display keywords for a record -->
       </xsl:for-each>
 
@@ -676,7 +662,7 @@
       </xsl:for-each>
 
 
-      <!-- TODO: Review this was commented in Dutch 1.3, but not in ISO19139 
+      <!-- TODO: Review this was commented in Dutch 1.3, but not in ISO19139
            P: afaik 'otherconstraints' should not be indexed seperately from the accessconstraints or usagelimitation it refers to.
       -->
       <!--

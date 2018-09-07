@@ -14,7 +14,7 @@ The best approach is to add the plugin as a submodule into GeoNetwork schema mod
 
 ```
 cd schemas
-git submodule add -b master https://github.com/metadata101/iso19139.nl.geografie.2.0.0 iso19139.nl.geografie.2.0.0
+git submodule add -b 3.4.x https://github.com/metadata101/iso19139.nl.geografie.2.0.0 iso19139.nl.geografie.2.0.0
 ```
 
 Add the new module to the schema/pom.xml:
