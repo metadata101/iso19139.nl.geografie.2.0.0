@@ -1539,6 +1539,11 @@
   <element name="gmd:metadataStandardVersion" id="11.0">
     <label>Metadata standard version</label>
     <description>Version (profile) of the metadata standard used</description>
+    <helper>
+      <option value="Nederlands metadata profiel op ISO 19115 voor geografie 2.0.0"> Nederlands metadata profiel op ISO 19115 voor geografie 2.0.0</option>
+      <option value="Nederlands metadata profiel op ISO 19115 voor geografie 1.3.1"> Nederlands metadata profiel op ISO 19115 voor geografie 1.3.1</option>
+      <option value="Nederlands metadata profiel op ISO 19115 voor geografie 1.3"> Nederlands metadata profiel op ISO 19115 voor geografie 1.3</option>
+    </helper>
   </element>
   <element name="gmd:minValue" id="261.0">
     <label>Minimum value</label>
@@ -2173,28 +2178,52 @@
     <label>Protocol</label>
     <description>Protocol of the resource</description>
     <helper>
-      <option value="OGC:CSW"> Web Catalog service </option>
-      <option value="OGC:WMS"> Web Map service</option>
-      <option value="OGC:WMTS"> Web Mapping Tiling Service</option>
-      <option value="OGC:WFS"> Web Feature Service</option>
-      <option value="OGC:WCS"> Web Coverage Service</option>
-      <option value="INSPIRE Atom">Atom Service Feed Download</option>
-      <option value="OGC:WCTS"> Web Coordinate Transformation</option>
-      <option value="OGC:WPS"> Web Processing Service</option>
-      <option value="UKST">Unknown Service Type</option>
-      <option value="OGC:WMC"> Web Map Context</option>
-      <option value="OGC:KML"> Keyhole Mark-up Language</option>
-      <option value="OGC:GML"> Geography Markup Language</option>
-      <option value="OGC:WFS-G"> Gazzetteer service</option>
-      <option value="OGC:SOS"> Sensor Observation Service</option>
-      <option value="OGC:SPS"> Sensor Planning Service</option>
-      <option value="OGC:SAS"> Sensor Alert Service</option>
-      <option value="OGC:WNS"> Web Notification Service</option>
-      <option value="OGC:ODS"> OpenLS Directory Service</option>
-      <option value="OGC:OGS"> OpenLS Gateway Service </option>
-      <option value="OGC:OUS"> OpenLS Utility Service </option>
-      <option value="OGC:OPS"> OpenLS Presentation Service </option>
-      <option value="OGC:ORS"> OpenLS Route Service</option>
+      <helper>
+      <option value="" type="separator">-- AccessPoints --</option>
+      <option value="OGC:CSW" type="accessPoint"> Web Catalog service </option>
+      <option value="OGC:WMS" type="accessPoint"> Web Map service</option>
+      <option value="OGC:WMTS" type="accessPoint"> Web Mapping Tiling Service</option>
+      <option value="OGC:WFS" type="accessPoint"> Web Feature Service</option>
+      <option value="OGC:WCS" type="accessPoint"> Web Coverage Service</option>
+      <option value="INSPIRE Atom" type="accessPoint">Atom Service Feed Download</option>
+      <option value="OGC:WCTS" type="accessPoint"> Web Coordinate Transformation</option>
+      <option value="OGC:WPS" type="accessPoint"> Web Processing Service</option>
+      <option value="UKST" type="accessPoint"> Unknown Service Type</option>
+      <option value="OGC:WFS-G" type="accessPoint"> Gazzetteer service</option>
+      <option value="OGC:SOS" type="accessPoint"> Sensor Observation Service</option>
+      <option value="OGC:SPS" type="accessPoint"> Sensor Planning Service</option>
+      <option value="OGC:SAS" type="accessPoint"> Sensor Alert Service</option>
+      <option value="OGC:WNS" type="accessPoint"> Web Notification Service</option>
+      <option value="OGC:ODS" type="accessPoint"> OpenLS Directory Service</option>
+      <option value="OGC:OGS" type="accessPoint"> OpenLS Gateway Service </option>
+      <option value="OGC:OUS" type="accessPoint"> OpenLS Utility Service </option>
+      <option value="OGC:OPS" type="accessPoint"> OpenLS Presentation Service </option>
+      <option value="OGC:ORS" type="accessPoint"> OpenLS Route Service</option>
+      <option value="OGC:SensorThings" type="accessPoint"> SensorThings API</option>
+      <option value="W3C:SPARQL" type="accessPoint"> SPARQL Query Language for RDF</option>
+      <option value="OASIS:OData" type="accessPoint">  Open data protocol</option>
+      <option value="OAS" type="accessPoint">  Open API Specification</option>
+      <option value="landingpage" type="accessPoint"> Een webpagina die toegang geeft tot de dataset of overige informatie bevat</option>
+      <option value="application" type="accessPoint">  Een (web) applicatie die rechtstreeks toegang geeft tot de dataset</option>
+      <option value="dataset" type="accessPoint"> Referentie naar een locale dataset locatie</option>
+      <option value="" type="separator">-- EndPoints --</option>
+      <option value="wmc" type="endPoint"> Web Map Context</option>
+      <option value="kml" type="endPoint"> Keyhole Mark-up Language</option>
+      <option value="gml" type="endPoint"> Geography Markup Language</option>
+      <option value="geojson" type="endPoint"> Vector data geencodeerd in JSON</option>
+      <option value="gpkg" type="endPoint">  GeoPackage</option>
+      <option value="json" type="endPoint">  Javascript object notation</option>
+      <option value="jsonld" type="endPoint">  RDF geencodeerd in JSON</option>
+      <option value="rdf-xml" type="endPoint"> RDF geencodeerd in XML</option>
+      <option value="xml" type="endPoint"> Extensible Markup Language</option>
+      <option value="zip" type="endPoint"> Bestands archief</option>
+      <option value="png" type="endPoint"> Portable Network Graphics</option>
+      <option value="gif" type="endPoint"> Graphics Interchange Format</option>
+      <option value="jp2" type="endPoint"> JPEG 2000</option>
+      <option value="tiff" type="endPoint">  TIFF</option>
+      <option value="csv" type="endPoint"> Komma gescheiden waarden</option>
+      <option value="mapbox-vector-tile" type="endPoint">  Mapbox vector tile</option>
+    </helper>
     </helper>
     <condition>conditional</condition>
   </element>
@@ -2853,11 +2882,11 @@
       <option value="W3C:HTML:DOWNLOAD">Download (W3C:HTML:DOWNLOAD)</option>
       <option value="W3C:HTML:LINK">Information (W3C:HTML:LINK)</option>
       <!--INSPIRE Service type defined in MD IR / 1.3.1 Spatial data service type -->
-      <!--<option value="discovery">INSPIRE Discovery Service (discovery)</option>
+      <option value="discovery">INSPIRE Discovery Service (discovery)</option>
       <option value="view">INSPIRE View Service (view)</option>
       <option value="download">INSPIRE Download Service (download)</option>
       <option value="transformation">INSPIRE Transformation Service (transformation)</option>
-      <option value="other">INSPIRE Other Services (other)</option>-->
+      <option value="other">INSPIRE Other Services (other)</option>
     </helper>
   </element>
   <element name="srv:serviceTypeVersion">
