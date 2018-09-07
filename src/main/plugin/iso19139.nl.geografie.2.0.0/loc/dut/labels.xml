@@ -1885,14 +1885,6 @@
     <label>Verplichte elementen</label>
     <description></description>
   </element>
-  <element name="pointOfContact">
-    <label>Contactgegevens data</label>
-    <description></description>
-  </element>
-  <element name="metadataPointOfContact">
-    <label>Contact gegevens</label>
-    <description></description>
-  </element>
   <element name="organisationName">
     <label>Organisatie</label>
     <description></description>

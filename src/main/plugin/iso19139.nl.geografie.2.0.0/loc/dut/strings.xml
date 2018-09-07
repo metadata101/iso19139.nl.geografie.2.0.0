@@ -83,11 +83,6 @@
   <explanation>Explanation</explanation>
   <pass>Conformity</pass>
   <indeterminatePosition>Indeterminate position</indeterminatePosition>
-  <pointOfContact>Contact for the resource</pointOfContact>
-  <metadataPointOfContact>Contact for the metadata</metadataPointOfContact>
-  <organisationName>Organisation name</organisationName>
-  <electronicMailAddress>Email</electronicMailAddress>
-  <role>Role</role>
   <encoding>Encoding</encoding>
   <inspireTheme>INSPIRE themes</inspireTheme>
   <inspireThemeURI>INSPIRE themes</inspireThemeURI>
@@ -229,7 +224,6 @@
   <dataIdentificatie>Identificatie</dataIdentificatie>
   <distributorContact>Contact informatie</distributorContact>
 
-
   <metadataPointOfContact>Contact gegevens</metadataPointOfContact>
   <pointOfContact>Contactgegevens dataset</pointOfContact>
   <lineage>Algemene beschrijving herkomst </lineage>
@@ -301,6 +295,7 @@
   <addLanguage>Taal toevoegen</addLanguage>
   <addTopic>Onderwerp toevoegen</addTopic>
   <addCharacterset>Karakterset toevoegen</addCharacterset>
+  <addAbstract>Samenvatting toevoegen</addAbstract>
   <addDate>Datum toevoegen</addDate>
   <addLineage>Herkomst toevoegen</addLineage>
   <addUseLimitation>Gebruiksbeperkingen toevoegen</addUseLimitation>
