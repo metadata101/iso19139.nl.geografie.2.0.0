@@ -51,8 +51,6 @@
     <for name="gmd:specificUsage" use="textarea"/>
     <for name="gmd:userNote" use="textarea"/>
     <for name="gmd:useLimitation" use="textarea"/>
-
-
     <for name="gco:Distance" use="number"/>
     <for name="gco:Decimal" use="number"/>
     <for name="gco:Integer" use="number"/>
@@ -205,9 +203,8 @@
       Exclude all thesaurus already used in the metadata:
       -->
       <directiveAttributes data-include="xpath::string-join(gmd:MD_Metadata/gmd:identificationInfo
-                                          //gmd:thesaurusName/*/gmd:identifier/*/
-                                            gmd:code/gmx:Anchor/
-                                              concat('-', substring-after(text()[. != ''], 'geonetwork.thesaurus.')), ',')"/>
+          //gmd:thesaurusName/*/gmd:identifier/*/gmd:code/gmx:Anchor/
+          concat('-', substring-after(text()[. != ''], 'geonetwork.thesaurus.')), ',')"/>
     </for>
   </fields>
 
@@ -244,8 +241,8 @@
     <name>srv:containsOperations</name>
     <!-- TODO: Disabled in Dutch schema -->
     <!--<name>srv:SV_Parameter</name>
-    <name>srv:connectPoint</name>-->
-    <name>srv:SV_CoupledResource</name>
+    <name>srv:connectPoint</name>
+    <name>srv:SV_CoupledResource</name>-->
     <name>gmd:metadataConstraints</name>
     <name>gmd:aggregationInfo</name>
     <name>gmd:processStep</name>
@@ -438,8 +435,11 @@
     </table>
   </tableFields>
 
-  <!-- View configuration -->
   <views>
+
+    <!-- ======================================= -->
+    <!-- =========== default =================== -->
+    <!-- ======================================= -->
     <view name="default" default="true" upAndDownControlHidden="true" displayTooltips="true" displayTooltipsMode="icon">
       <sidePanel>
         <directive data-gn-validation-report=""/>
@@ -474,16 +474,15 @@
 
           <action type="add"
                   btnLabel="addIdentifier"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:identifier) = 0"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier) = 0"
                   name="datasetcode" or="identifier"
-                  in="/gmd:MD_Metadata">
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation">
             <template>
               <snippet>
                 <gmd:identifier>
                   <gmd:MD_Identifier>
                     <gmd:code>
-                      <!-- Unieke identifier van de dataset, deze kan men zelf maken en beheren. Dit is niet hetzelfde als de metadata identifier van dit document -->
-                      <gco:CharacterString></gco:CharacterString>
+                      <gmx:Anchor xlink:href=""></gmx:Anchor>
                     </gmd:code>
                   </gmd:MD_Identifier>
                 </gmd:identifier>
@@ -493,15 +492,16 @@
 
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:status"/>
+
           <action type="add"
                   btnLabel="addStatus"
                   if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:status) = 0"
                   name="status" or="status"
-                  in="/gmd:MD_Metadata">
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
                 <gmd:status>
-                  <gmd:MD_ProgressCode codeListValue="onGoing"
+                  <gmd:MD_ProgressCode codeListValue=""
                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ProgressCode"/>
                 </gmd:status>
               </snippet>
@@ -510,10 +510,11 @@
 
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory/gmd:MD_TopicCategoryCode"/>
+
           <action type="add"
                   btnLabel="addTopic"
                   name="topicCategory" or="topicCategory"
-                  in="/gmd:MD_Metadata">
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
                 <gmd:topicCategory>
@@ -525,6 +526,21 @@
 
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract"/>
+
+          <action type="add"
+                  btnLabel="addAbstract"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract) = 0"
+                  name="abstract" or="abstract"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:abstract>
+                  <gco:CharacterString></gco:CharacterString>
+                </gmd:abstract>
+              </snippet>
+            </template>
+          </action>
+
 
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/
@@ -625,10 +641,7 @@
                         codeListValue="otherRestrictions"/>
                     </gmd:accessConstraints>
                     <gmd:otherConstraints>
-                      <gco:CharacterString></gco:CharacterString>
-                    </gmd:otherConstraints>
-                    <gmd:otherConstraints>
-                      <gco:CharacterString></gco:CharacterString>
+                      <gmx:Anchor xlink:href=""></gmx:Anchor>
                     </gmd:otherConstraints>
                   </gmd:MD_LegalConstraints>
                 </gmd:resourceConstraints>
@@ -644,81 +657,44 @@
             <template>
               <snippet>
                 <gmd:otherConstraints>
-                  <gco:CharacterString></gco:CharacterString>
+                  <gmx:Anchor xlink:href=""></gmx:Anchor>
                 </gmd:otherConstraints>
               </snippet>
             </template>
           </action>
 
-
-          <field name="pointOfContact" templateModeOnly="true" notDisplayedIfMissing="true"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact"
-                 del="."
-                 if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification) > 0">
-            <template>
-              <values readonlyIf="count(@xlink:href) > 0">
-                <key label="organisationName" required="true" tooltip="gmd:organisationName"
-                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
-                <key label="electronicMailAddress" tooltip="gmd:electronicMailAddress"
-                     xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/
-                                  gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString"
-                     use="email" required="true"/>
-                <key label="role" required="true" tooltip="gmd:CI_RoleCode"
-                     xpath="gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue">
-                  <codelist name="gmd:CI_RoleCode"/>
-                </key>
-              </values>
-              <snippet>
-                <gmd:pointOfContact>
-                  <gmd:CI_ResponsibleParty>
-                    <gn:copy select="gmd:individualName"/>
-                    <gmd:organisationName>
-                      <gco:CharacterString>{{organisationName}}</gco:CharacterString>
-                      <gn:copy select="gmd:PT_FreeText"/>
-                    </gmd:organisationName>
-                    <gn:copy select="gmd:positionName"/>
-                    <gmd:contactInfo>
-                      <gmd:CI_Contact>
-                        <gn:copy select="gmd:phone"/>
-                        <gmd:address>
-                          <gmd:CI_Address>
-                            <gn:copy select="gmd:deliveryPoint"/>
-                            <gn:copy select="gmd:city"/>
-                            <gn:copy select="gmd:administrativeArea"/>
-                            <gn:copy select="gmd:postalCode"/>
-                            <gn:copy select="gmd:country"/>
-                            <gmd:electronicMailAddress>
-                              <gco:CharacterString>{{electronicMailAddress}}</gco:CharacterString>
-                              <gn:copy select="gmd:PT_FreeText"/>
-                            </gmd:electronicMailAddress>
-                          </gmd:CI_Address>
-                        </gmd:address>
-                        <gn:copy select="gmd:onlineResource"/>
-                        <gn:copy select="gmd:hoursOfService"/>
-                        <gn:copy select="gmd:contactInstructions"/>
-                      </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    <gmd:role>
-                      <gmd:CI_RoleCode
-                        codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
-                        codeListValue="{{role}}"/>
-                    </gmd:role>
-                  </gmd:CI_ResponsibleParty>
-                </gmd:pointOfContact>
-              </snippet>
-            </template>
-          </field>
+          <field name="pointOfContact"
+            notDisplayedIfMissing="true"
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact"/>
 
           <action type="add"
                   btnLabel="addPointOfContact"
                   or="pointOfContact"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/pointOfContact">
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
                 <gmd:pointOfContact>
                   <gmd:CI_ResponsibleParty>
-                    <gmd:organisationName><gco:CharacterString></gco:CharacterString></gmd:organisationName>
-                    <gmd:role><gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact"/></gmd:role>
+                    <gmd:individualName>
+                      <gco:CharacterString />
+                    </gmd:individualName>
+                    <gmd:organisationName>
+                      <gco:CharacterString />
+                    </gmd:organisationName>
+                    <gmd:contactInfo>
+                      <gmd:CI_Contact>
+                        <gmd:address>
+                          <gmd:CI_Address>
+                            <gmd:electronicMailAddress>
+                              <gco:CharacterString />
+                            </gmd:electronicMailAddress>
+                          </gmd:CI_Address>
+                        </gmd:address>
+                      </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    <gmd:role>
+                      <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
+                    </gmd:role>
                   </gmd:CI_ResponsibleParty>
                 </gmd:pointOfContact>
               </snippet>
@@ -736,6 +712,7 @@
           <!-- scale -->
           <action type="add"
                   btnLabel="addScale"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale) &lt; 2"
                   name="equivalentScale" or="spatialResolution"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
@@ -759,6 +736,7 @@
           <action type="add"
                   btnLabel="addResolution"
                   name="distance" or="spatialResolution"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance) &lt; 2"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
@@ -778,62 +756,9 @@
 
         <section name="metadata">
 
-          <field name="metadataPointOfContact" templateModeOnly="true"
+          <field name="metadataPointOfContact"
                  notDisplayedIfMissing="true"
-                 xpath="/gmd:MD_Metadata/gmd:contact" del=".">
-            <template>
-              <values readonlyIf="count(@xlink:href) > 0">
-                <key label="organisationName" required="true" tooltip="gmd:organisationName"
-                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
-                <key label="electronicMailAddress" tooltip="gmd:electronicMailAddress"
-                     xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/
-                                  gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString"
-                     use="email" required="true"/>
-                <key label="role" required="true" tooltip="gmd:CI_RoleCode"
-                     xpath="gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue">
-                  <codelist name="gmd:CI_RoleCode"/>
-                </key>
-              </values>
-              <snippet>
-                <gmd:contact>
-                  <gmd:CI_ResponsibleParty>
-                    <gn:copy select="gmd:individualName"/>
-                    <gmd:organisationName>
-                      <gco:CharacterString>{{organisationName}}</gco:CharacterString>
-                      <gn:copy select="gmd:PT_FreeText"/>
-                    </gmd:organisationName>
-                    <gn:copy select="gmd:positionName"/>
-                    <gmd:contactInfo>
-                      <gmd:CI_Contact>
-                        <gn:copy select="gmd:phone"/>
-                        <gmd:address>
-                          <gmd:CI_Address>
-                            <gn:copy select="gmd:deliveryPoint"/>
-                            <gn:copy select="gmd:city"/>
-                            <gn:copy select="gmd:administrativeArea"/>
-                            <gn:copy select="gmd:postalCode"/>
-                            <gn:copy select="gmd:country"/>
-                            <gmd:electronicMailAddress>
-                              <gco:CharacterString>{{electronicMailAddress}}</gco:CharacterString>
-                              <gn:copy select="gmd:PT_FreeText"/>
-                            </gmd:electronicMailAddress>
-                          </gmd:CI_Address>
-                        </gmd:address>
-                        <gn:copy select="gmd:onlineResource"/>
-                        <gn:copy select="gmd:hoursOfService"/>
-                        <gn:copy select="gmd:contactInstructions"/>
-                      </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    <gmd:role>
-                      <gmd:CI_RoleCode
-                        codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
-                        codeListValue="{{role}}"/>
-                    </gmd:role>
-                  </gmd:CI_ResponsibleParty>
-                </gmd:contact>
-              </snippet>
-            </template>
-          </field>
+                 xpath="/gmd:MD_Metadata/gmd:contact" del="." />
 
           <action type="add" name="metadataPointOfContact"
                   btnLabel="addPointOfContact"
@@ -842,23 +767,41 @@
               <snippet>
                 <gmd:contact>
                   <gmd:CI_ResponsibleParty>
-                    <gmd:organisationName><gco:CharacterString></gco:CharacterString></gmd:organisationName>
-                    <gmd:role><gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/></gmd:role>
+                    <gmd:individualName>
+                      <gco:CharacterString />
+                    </gmd:individualName>
+                    <gmd:organisationName>
+                      <gco:CharacterString />
+                    </gmd:organisationName>
+                    <gmd:contactInfo>
+                      <gmd:CI_Contact>
+                        <gmd:address>
+                          <gmd:CI_Address>
+                            <gmd:electronicMailAddress>
+                              <gco:CharacterString />
+                            </gmd:electronicMailAddress>
+                          </gmd:CI_Address>
+                        </gmd:address>
+                      </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    <gmd:role>
+                      <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
+                    </gmd:role>
                   </gmd:CI_ResponsibleParty>
                 </gmd:contact>
               </snippet>
             </template>
           </action>
-
-
         </section>
-
 
       </tab>
 
     </view>
 
 
+    <!-- ======================================= -->
+    <!-- =========== dutch profile ============= -->
+    <!-- ======================================= -->
     <view name="dutchprofile" upAndDownControlHidden="true" displayTooltips="true" displayTooltipsMode="icon">
       <sidePanel>
         <directive data-gn-validation-report=""/>
@@ -963,8 +906,7 @@
                 <gmd:identifier>
                   <gmd:MD_Identifier>
                     <gmd:code>
-                      <!-- Unieke identifier van de dataset, deze kan men zelf maken en beheren. Dit is niet hetzelfde als de metadata identifier van dit document -->
-                      <gco:CharacterString></gco:CharacterString>
+                      <gmx:Anchor xlink:href=""></gmx:Anchor>
                     </gmd:code>
                   </gmd:MD_Identifier>
                 </gmd:identifier>
@@ -1068,9 +1010,9 @@
           </action>
 
           <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:purpose"></field>
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:purpose"></field>
           <action type="add"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:purpose) = 0"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/*/gmd:purpose) = 0"
                   btnLabel="addPurpose" forceLabel="true"
                   or="purpose"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
@@ -1591,21 +1533,18 @@
             <template>
               <values>
                 <key label="code"
-                     xpath="gmd:RS_Identifier/gmd:code/gco:CharacterString"
+                     xpath="gmd:RS_Identifier/gmd:code/gmx:Anchor"
                      tooltip="gmd:code"/>
                 <key label="codeSpace" tooltip="gmd:codeSpace"
-                     xpath="gmd:RS_Identifier/gmd:codeSpace/gco:CharacterString"/>
+                     xpath="gmd:RS_Identifier/gmd:code/gmx:Anchor/@xlink.href"/>
                 <!-- TODO: Get the helper -->
               </values>
               <snippet>
                 <gmd:referenceSystemIdentifier>
                   <gmd:RS_Identifier>
                     <gmd:code>
-                      <gco:CharacterString>{{code}}</gco:CharacterString>
+                      <gmx:Anchor xlink:href="{{codeSpace}}">{{code}}</gmx:Anchor>
                     </gmd:code>
-                    <gmd:codeSpace>
-                      <gco:CharacterString>{{codeSpace}}</gco:CharacterString>
-                    </gmd:codeSpace>
                     <gn:copy select="gmd:version"/>
                   </gmd:RS_Identifier>
                 </gmd:referenceSystemIdentifier>
@@ -1623,11 +1562,8 @@
                     <gmd:referenceSystemIdentifier>
                       <gmd:RS_Identifier>
                         <gmd:code>
-                          <gco:CharacterString></gco:CharacterString>
+                          <gmx:Anchor xlink:href=""></gmx:Anchor>
                         </gmd:code>
-                        <gmd:codeSpace>
-                          <gco:CharacterString></gco:CharacterString>
-                        </gmd:codeSpace>
                       </gmd:RS_Identifier>
                     </gmd:referenceSystemIdentifier>
                   </gmd:MD_ReferenceSystem>
