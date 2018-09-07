@@ -183,8 +183,11 @@
                 gmd:identificationInfo/srv:SV_ServiceIdentification">
 
       <xsl:for-each select="gmd:citation/gmd:CI_Citation">
-        <!-- Ducth schema only uses gmd:MD_Identifier -->
-        <xsl:for-each select="gmd:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString|gmd:identifier/gmd:MD_Identifier/gmd:code/gmx:Anchor">
+        <!-- INSPIRE uses only gmd:MD_Identifier -->
+        <xsl:for-each select="
+            gmd:identifier/*/gmd:code/gco:CharacterString|
+            gmd:identifier/*/gmd:code/gmx:Anchor|
+            gmd:identifier/*/gmd:code/gmx:Anchor/@xlink:href">
           <Field name="identifier" string="{string(.)}" store="true" index="true"/>
         </xsl:for-each>
 
