@@ -25,7 +25,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:gco="http://www.isotc211.org/2005/gco"
                 xmlns:gmd="http://www.isotc211.org/2005/gmd"
-                version="2.0">
+                xmlns:geonet="http://www.fao.org/geonetwork"
+                version="2.0" exclude-result-prefixes="#all">
   <xsl:import href="../iso19139/update-fixed-info.xsl"/>
 
   <!-- Dutch profile uses gco:Date instead of gco:DateTime -->
