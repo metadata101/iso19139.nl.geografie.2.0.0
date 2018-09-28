@@ -593,6 +593,18 @@
     <label>Conformiteitindicatie met de specificatie</label>
     <description>Resultaat conformiteit met de specificatie.</description>
   </element>
+  <element name="gmd:DQ_QuantitativeResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult">
+    <label>Compleetheid</label>
+    <description></description>
+  </element>
+  <element name="gmd:DQ_QuantitativeResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult">
+    <label>Topologische samenhang</label>
+    <description></description>
+  </element>
+  <element name="gmd:DQ_QuantitativeResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult">
+    <label>Geometrische nauwkeurigheid</label>
+    <description></description>
+  </element>
   <!-- ==================================================== -->
   <element name="gmd:DQ_DataQuality" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
     <label>Data kwaliteit</label>
@@ -932,9 +944,13 @@
     <label>Identifier</label>
     <description>Unieke identifier van de bron.</description>
   </element>
-  <element name="gmd:MD_Identifier" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicDescription/gmd:geographicIdentifier/gmd:MD_Identifier">
+  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement/gmd:EX_VerticalExtent/gml:VerticalCRS/gml:identifier">
+    <label>verticaal ruimtelijk referentiesysteem</label>
+    <description>Identificatie van het verticaal ruimtelijk referentiesysteem</description>
+  </element>
+  <element name="gmd:MD_Identifier" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier">
     <label>Identifier</label>
-    <description>Geografische identifier.</description>
+    <description>Unieke identifier van de bron.</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:MD_Keywords" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords">
@@ -943,7 +959,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:MD_LegalConstraints" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints">
-    <label>Legale beperkingen</label>
+    <label>Juridische beperkingen</label>
     <description>Restricties en juridische voorwaarden die van toepassing zijn op zowel het gebruik van als de toegang tot de data.</description>
   </element>
   <!-- ==================================================== -->
@@ -1150,18 +1166,6 @@
   <element name="gmd:otherConstraints" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints">
     <label>Overige beperkingen</label>
     <description>Andere restricties of beperkingen. Dit veld is te gebruiken om de URL naar de licentie van Public domain, Creative Commons of Geo Gedeeld in te vullen. </description>
-    <helper>
-      <option value="http://creativecommons.org/publicdomain/mark/1.0/deed.nl">Opendata (publiek domein)</option>
-      <option value="http://creativecommons.org/publicdomain/zero/1.0/deed.nl">Opendata (CCO)</option>
-      <option value="http://creativecommons.org/licenses/by/3.0/nl">Opendata (CC-BY)</option>
-      <option value="http://creativecommons.org/licenses/by-sa/3.0/nl">Gebruiksvoorwaarden (naamsvermelding, gelijk delen)</option>
-      <option value="http://creativecommons.org/licenses/by-nc/3.0/nl">Gebruiksvoorwaarden (naamsvermelding, niet commercieel)</option>
-      <option value="http://creativecommons.org/licenses/by-nc-sa/3.0/nl">Gebruiksvoorwaarden (naamsvermelding, niet commercieel, gelijke wijzen delen)</option>
-      <option value="http://creativecommons.org/licenses/by-nd/3.0/nl">Gebruiksvoorwaarden (naamsvermelding, geen afgeleide werken)</option>
-      <option value="http://creativecommons.org/licenses/by-nc-nd/3.0/nl">Gebruiksvoorwaarden (naamsvermelding, niet commerieel, geen afgeleide werken)</option>
-      <option value="http://">Gebruiksvoorwaarden Geogedeeld</option>
-    </helper>
-    <help_link>http://wiki.geonovum.nl/index.php/2.4.34_Overige_beperkingen</help_link>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:parentIdentifier" context="/gmd:MD_Metadata/gmd:parentIdentifier">
@@ -1354,7 +1358,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:resourceConstraints" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints">
-    <label>Beperkingen van de omschreven data</label>
+    <label>Beperkingen</label>
     <description>Informatie over de beperkingen van de beschreven databron.</description>
   </element>
   <!-- ==================================================== -->
@@ -1445,7 +1449,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:spatialResolution" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution">
-    <label>Ruimtelijke elementen</label>
+    <label>Ruimtelijke dichtheid</label>
     <description>Factor waarmee de dichtheid van de gegevens in de dataset wordt aangegeven.</description>
   </element>
   <!-- ==================================================== -->
@@ -1479,7 +1483,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:temporalElement" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement">
-    <label>Temporeel element</label>
+    <label>Temporele dekking</label>
     <description>Informatie over de temporele dekking van de gegevens.</description>
   </element>
   <!-- ==================================================== -->
@@ -1650,7 +1654,7 @@
 
   <!-- ==================================================== -->
   <element name="gmd:verticalElement" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement">
-    <label>Verticaal element</label>
+    <label>Verticale dekking</label>
     <description>Informatie over de vertikale dekking.</description>
   </element>
   <!-- ==================================================== -->

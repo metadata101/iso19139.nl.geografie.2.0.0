@@ -55,6 +55,7 @@
   <!--<identificationInfo>Identificatie</identificationInfo>-->
   <distributionInfo>Distributie</distributionInfo>
   <dataQualityInfo>Kwaliteit</dataQualityInfo>
+  <spatialInfo>Ruimtelijke informatie</spatialInfo>
   <spatialRepresentationInfo>Ruimtelijke rep.</spatialRepresentationInfo>
   <referenceSystemInfo>Ref. systeem</referenceSystemInfo>
   <contentInfo>Inhoud</contentInfo>
@@ -66,40 +67,41 @@
   <bboxesSection>Geografische dekking</bboxesSection>
 
   <!-- INSPIRE view labels and help -->
-  <url>Online resource</url>
-  <identifier>Resource identifier</identifier>
-  <rsIdentifier>Projection</rsIdentifier>
-  <referenceDate>Temporal information</referenceDate>
-  <creationDate>Creation date</creationDate>
-  <hierarchyLevel>Hierarchy level</hierarchyLevel>
-  <publicationDate>Publication date</publicationDate>
-  <revisionDate>Revision date</revisionDate>
-  <temporalRangeSection>Temporal extent</temporalRangeSection>
+  <url>url</url>
+  <identifier>Bron identificatie</identifier>
+  <rsIdentifier>Ruimtelijk referentiesysteem</rsIdentifier>
+  <referenceDate>Temporele informatie</referenceDate>
+  <creationDate>Aanmaak datum</creationDate>
+  <hierarchyLevel>Hierarchie niveau</hierarchyLevel>
+  <publicationDate>Publicatie datum</publicationDate>
+  <revisionDate>Revisie datum</revisionDate>
+  <temporalRangeSection>Temporele extent</temporalRangeSection>
   <beginPosition>Begin</beginPosition>
-  <endPosition>End</endPosition>
-  <conformity>Conformity</conformity>
-  <conformity_title>Title</conformity_title>
-  <conformity_date>Date</conformity_date>
-  <explanation>Explanation</explanation>
-  <pass>Conformity</pass>
+  <endPosition>Eind</endPosition>
+  <conformity>Conformiteit</conformity>
+  <conformity_title>Titel</conformity_title>
+  <conformity_date>Datum</conformity_date>
+  <explanation>Verklaring</explanation>
+  <pass>Conformiteit</pass>
   <indeterminatePosition>Indeterminate position</indeterminatePosition>
   <encoding>Encoding</encoding>
-  <inspireTheme>INSPIRE themes</inspireTheme>
-  <inspireThemeURI>INSPIRE themes</inspireThemeURI>
-  <format>Format</format>
-  <format_version>Version</format_version>
-  <format_specification>Specification</format_specification>
-  <lineage>Lineage</lineage>
+  <inspireTheme>INSPIRE themas</inspireTheme>
+  <inspireThemeURI>INSPIRE themas</inspireThemeURI>
+  <format>Formaat</format>
+  <format_version>Versie</format_version>
+  <format_specification>Specificatie</format_specification>
+  <lineage>Herkomst</lineage>
   <spatialResolution>Spatial resolution (scale)</spatialResolution>
   <spatialDistance>Spatial resolution (distance)</spatialDistance>
   <accessConstraints>Access constraints</accessConstraints>
   <useConstraints>Use constraints</useConstraints>
-  <useLimitation>Use limitation</useLimitation>
   <add-resource-id>Compute resource identifier</add-resource-id>
   <add-resource-idHelp>Compose the resource identifier using the catalog URL and the metadata
     identifier (eg. http://www.organization.org/catalogue/5391bf69-44bc-4ea0-8cc0-6cf6c3bc81ae).
   </add-resource-idHelp>
   <add-extent-from-geokeywords>Compute extent from keyword</add-extent-from-geokeywords>
+  <addGeographicIdentifier>Identifier geografisch gebied</addGeographicIdentifier>
+  <addVerticalExtent>Verticale dekking toevoegen</addVerticalExtent>
   <add-extent-from-geokeywordsHelp>Analyze each keyword of type place and add matching extent.
   </add-extent-from-geokeywordsHelp>
   <classificationSection>Classification of data and services</classificationSection>
@@ -294,12 +296,13 @@
   <addStatus>Status toevoegen</addStatus>
   <addLanguage>Taal toevoegen</addLanguage>
   <addTopic>Onderwerp toevoegen</addTopic>
-  <addCharacterset>Karakterset toevoegen</addCharacterset>
+
   <addAbstract>Samenvatting toevoegen</addAbstract>
   <addDate>Datum toevoegen</addDate>
   <addLineage>Herkomst toevoegen</addLineage>
   <addUseLimitation>Gebruiksbeperkingen toevoegen</addUseLimitation>
   <addLegalConstraints>Juridische beperkingen toevoegen</addLegalConstraints>
+  <addSecurityConstraints>Veiligheids beperkingen toevoegen</addSecurityConstraints>
   <addResourceConstraints>Bron beperkingen toevoegen</addResourceConstraints>
   <addUrl>URL toevoegen</addUrl>
   <addStandardName>Standaard toevoegen</addStandardName>
@@ -336,7 +339,6 @@
   <format>Naam distributie formaat</format>
   <format_version>Versie distributie formaat</format_version>
   <format_specification>Specificatie distributie formaat</format_specification>
-  <rsIdentifier>Referentie systeem</rsIdentifier>
   <codeSpace>Namespace</codeSpace>
   <code>Code</code>
   <orderProcess>Bestel proces</orderProcess>
@@ -358,11 +360,11 @@
   <AddKeyword>Trefwoord toevoegen</AddKeyword>
   <AddKeywordFromThesaurus>Trefwoord uit woordenlijst toevoegen</AddKeywordFromThesaurus>
   <legalConstraints>Juridische beperkingen</legalConstraints>
+  <securityConstraints>Veiligheids beperkingen</securityConstraints>
   <addReferenceSystem>Referentie systeem toevoegen</addReferenceSystem>
 
   <restrictions>Restricties en beperkingen</restrictions>
   <addParentIdentifier>Voeg parent toe</addParentIdentifier>
-
 
   <Basis>Basis elementen</Basis>
   <Extra>Extra elementen</Extra>

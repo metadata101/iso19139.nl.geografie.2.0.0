@@ -67,10 +67,13 @@
     <for name="gmd:date" use="data-gn-date-picker">
       <directiveAttributes data-hide-time="true"/>
     </for>
-	<for name="gml:beginPosition" use="data-gn-date-picker">
+    <for name="gmd:CI_Date" use="data-gn-date-picker">
       <directiveAttributes data-hide-time="true"/>
     </for>
-	<for name="gml:endPosition" use="data-gn-date-picker">
+	  <for name="gml:beginPosition" use="data-gn-date-picker">
+      <directiveAttributes data-hide-time="true"/>
+    </for>
+	  <for name="gml:endPosition" use="data-gn-date-picker">
       <directiveAttributes data-hide-time="true"/>
     </for>
 
@@ -217,6 +220,9 @@
     <name>gmd:portrayalCatalogueCitation</name>
     <name>gmd:thesaurusName</name>
     <name>gmd:resourceConstraints</name>
+    <name>gmd:MD_LegalConstraints</name>
+    <name>gmd:MD_SecurityConstraints</name>
+    <name>gmd:MD_Constraints</name>
     <name>gmd:spatialRepresentationInfo</name>
     <name>gmd:pointOfContact</name>
     <name>gmd:contact</name>
@@ -226,7 +232,7 @@
     <name>gmd:contentInfo</name>
     <name>gmd:distributionFormat</name>
     <name>gmd:referenceSystemInfo</name>
-    <name>gmd:spatialResolution</name>
+    <!--<name>gmd:spatialResolution</name>-->
     <name>gmd:offLine</name>
     <name>gmd:onLine</name>
     <name>gmd:address</name>
@@ -254,8 +260,8 @@
     <name>gmd:identifier</name>
     <name>gmd:topicCategory</name>
 
-    <!-- TODO: Review Specific for Dutch schema -->
-    <name>gmd:verticalCRS</name>
+    <!-- TODO: Review Specific for Dutch schema-->
+    <name>gmd:verticalElement</name>
 
   </fieldsWithFieldset>
 
@@ -352,14 +358,12 @@
       <header>
         <!-- TODO: Add label from strings.xml / label with context-->
         <col label="gmd:organisationName"/>
-        <col label="gmd:individualName"/>
         <col label="gmd:electronicMailAddress"/>
         <col label="gmd:role"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:organisationName"/>
-        <col xpath="gmd:individualName"/>
         <col xpath="gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress"/>
         <col xpath="gmd:role"/>
         <col del=".."/>
@@ -469,6 +473,30 @@
             </template>
           </action>
 
+          <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:date"/>
+
+          <action type="add" or="date"
+                  btnLabel="addDate"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:date)=0"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation">
+            <template>
+              <snippet>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2000-01-01</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode
+                        codeList="http://www.isotc211.org/2005/resources/codeList.xml#CI_DateTypeCode"
+                        codeListValue="revision"/>
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </snippet>
+            </template>
+          </action>
+
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code"/>
 
@@ -486,6 +514,23 @@
                     </gmd:code>
                   </gmd:MD_Identifier>
                 </gmd:identifier>
+              </snippet>
+            </template>
+          </action>
+
+          <field
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract"/>
+
+          <action type="add"
+                  btnLabel="addAbstract"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract) = 0"
+                  name="abstract" or="abstract"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:abstract>
+                  <gco:CharacterString></gco:CharacterString>
+                </gmd:abstract>
               </snippet>
             </template>
           </action>
@@ -514,6 +559,7 @@
           <action type="add"
                   btnLabel="addTopic"
                   name="topicCategory" or="topicCategory"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory/gmd:MD_TopicCategoryCode) = 0"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
@@ -524,24 +570,7 @@
             </template>
           </action>
 
-          <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract"/>
-
-          <action type="add"
-                  btnLabel="addAbstract"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract) = 0"
-                  name="abstract" or="abstract"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:abstract>
-                  <gco:CharacterString></gco:CharacterString>
-                </gmd:abstract>
-              </snippet>
-            </template>
-          </action>
-
-
+          <!-- keywords -->
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/
             gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword[not(../gmd:thesaurusName)]"
@@ -549,31 +578,211 @@
             in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/
             gmd:descriptiveKeywords/gmd:MD_Keywords[not(gmd:thesaurusName)]"/>
 
-          <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:date"/>
+          <!-- constraints -->
+          <field del=".." removable="true" name="useLimitation" or="MD_Constraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints"/>
 
-          <action type="add" name="referenceDate" or="date"
-                  btnLabel="addDate"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation">
+          <action type="add"
+                  btnLabel="addResourceConstraints"
+                  name="useLimitation" or="resourceConstraints" forceLabel="true"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints)=0">
             <template>
               <snippet>
-                <gmd:date>
-                  <gmd:CI_Date>
-                    <gmd:date>
-                      <gco:Date>2000-01-01</gco:Date>
-                    </gmd:date>
-                    <gmd:dateType>
-                      <gmd:CI_DateTypeCode
-                        codeList="http://www.isotc211.org/2005/resources/codeList.xml#CI_DateTypeCode"
-                        codeListValue="revision"/>
-                    </gmd:dateType>
-                  </gmd:CI_Date>
-                </gmd:date>
+                <gmd:resourceConstraints>
+                  <gmd:MD_Constraints>
+                    <gmd:useLimitation>
+                      <gco:CharacterString></gco:CharacterString>
+                    </gmd:useLimitation>
+                  </gmd:MD_Constraints>
+                </gmd:resourceConstraints>
+              </snippet>
+            </template>
+          </action>
+
+          <!-- constraints -->
+          <field removable="true" del=".." name="legalConstraints" or="MD_LegalConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"/>
+
+          <action type="add"
+                  btnLabel="addLegalConstraints"
+                  name="legalConstraints" or="resourceConstraints" forceLabel="true"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:resourceConstraints>
+                  <gmd:MD_LegalConstraints>
+                    <gmd:accessConstraints>
+                      <gmd:MD_RestrictionCode
+                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode"
+                        codeListValue="otherRestrictions"/>
+                    </gmd:accessConstraints>
+                    <gmd:otherConstraints>
+                      <gmx:Anchor xlink:href=""></gmx:Anchor>
+                    </gmd:otherConstraints>
+                  </gmd:MD_LegalConstraints>
+                </gmd:resourceConstraints>
               </snippet>
             </template>
           </action>
 
 
+          <!-- scale -->
+          <field name="scale" or="MD_Resolution"
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution[gmd:MD_Resolution/gmd:equivalentScale]"/>
+          <action type="add"
+                  btnLabel="addScale"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale) &lt; 2"
+                  name="equivalentScale" or="spatialResolution"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:spatialResolution>
+                  <gmd:MD_Resolution>
+                    <gmd:equivalentScale>
+                      <gmd:MD_RepresentativeFraction>
+                        <gmd:denominator>
+                          <gco:Integer></gco:Integer>
+                        </gmd:denominator>
+                      </gmd:MD_RepresentativeFraction>
+                    </gmd:equivalentScale>
+                  </gmd:MD_Resolution>
+                </gmd:spatialResolution>
+              </snippet>
+            </template>
+          </action>
+
+          <field name="distance" or="MD_Resolution"
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution[gmd:MD_Resolution/gmd:distance]"/>
+
+          <!-- of resolutie -->
+          <action type="add"
+                  btnLabel="addResolution"
+                  name="distance" or="spatialResolution"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance) &lt; 2"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:spatialResolution>
+                  <gmd:MD_Resolution>
+                    <gmd:distance>
+                      <gco:Distance uom="meter"></gco:Distance>
+                    </gmd:distance>
+                  </gmd:MD_Resolution>
+                </gmd:spatialResolution>
+              </snippet>
+            </template>
+          </action>
+
+          <field name="rsIdentifier"
+                 xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier"
+                 del="../..">
+          </field>
+          <action type="add" del="."
+                  btnLabel="addReferenceSystem"
+                  if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier) = 0"
+                  or="referenceSystemInfo"
+                  in="/gmd:MD_Metadata">
+            <template>
+              <snippet>
+                <gmd:referenceSystemInfo>
+                  <gmd:MD_ReferenceSystem>
+                    <gmd:referenceSystemIdentifier>
+                      <gmd:RS_Identifier>
+                        <gmd:code>
+                          <gmx:Anchor
+                            xlink:href="http://www.opengis.net/def/crs/EPSG/0/28992">Amersfoort / RD New</gmx:Anchor>
+                        </gmd:code>
+                      </gmd:RS_Identifier>
+                    </gmd:referenceSystemIdentifier>
+                  </gmd:MD_ReferenceSystem>
+                </gmd:referenceSystemInfo>
+              </snippet>
+            </template>
+          </action>
+
+        <field name="pointOfContact"
+            notDisplayedIfMissing="true"
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact"/>
+
+          <action type="add"
+                  btnLabel="addPointOfContact"
+                  or="pointOfContact"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:pointOfContact>
+                  <gmd:CI_ResponsibleParty>
+                    <gmd:organisationName>
+                      <gco:CharacterString />
+                    </gmd:organisationName>
+                    <gmd:contactInfo>
+                      <gmd:CI_Contact>
+                        <gmd:address>
+                          <gmd:CI_Address>
+                            <gmd:electronicMailAddress>
+                              <gco:CharacterString />
+                            </gmd:electronicMailAddress>
+                          </gmd:CI_Address>
+                        </gmd:address>
+                      </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    <gmd:role>
+                      <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
+                    </gmd:role>
+                  </gmd:CI_ResponsibleParty>
+                </gmd:pointOfContact>
+              </snippet>
+            </template>
+          </action>
+
+        <field
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/
+              gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox"/>
+
+        </section>
+
+        <section name="DataQuality">
+
+          <action type="add"
+                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality) = 0"
+                  btnLabel="Add_Quality"
+                  name="dataQualityInfo" or="dataQualityInfo"
+                  in="/gmd:MD_Metadata">
+            <template>
+              <snippet>
+                <gmd:dataQualityInfo>
+                  <gmd:DQ_DataQuality></gmd:DQ_DataQuality>
+                </gmd:dataQualityInfo>
+              </snippet>
+            </template>
+          </action>
+
+          <field
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope"/>
+
+          <action type="add"
+                  btnLabel="addQualityLevel"
+                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode) = 0"
+                  name="DQ_Scope" or="DQ_Scope"
+                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope">
+            <template>
+              <snippet>
+
+                <gmd:DQ_Scope>
+                  <gmd:level>
+                    <gmd:MD_ScopeCode
+                      codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                      codeListValue="dataset"/>
+                  </gmd:level>
+                </gmd:DQ_Scope>
+
+              </snippet>
+            </template>
+          </action>
+
           <field xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:statement"/>
+
           <action type="add"
                   btnLabel="addLineage"
                   name="lineage" or="statement"
@@ -602,159 +811,62 @@
             </template>
           </action>
 
-
-          <field del="." removable="true"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints"/>
-          <action type="add"
-                  btnLabel="addResourceConstraints"
-                  name="resourceConstraints" or="resourceConstraints" forceLabel="true"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints)=0">
-            <template>
-              <snippet>
-                <gmd:resourceConstraints>
-                  <gmd:MD_Constraints>
-                    <gmd:useLimitation>
-                      <gco:CharacterString></gco:CharacterString>
-                    </gmd:useLimitation>
-                  </gmd:MD_Constraints>
-                </gmd:resourceConstraints>
-              </snippet>
-            </template>
-          </action>
-
-
-          <field removable="true"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"/>
-
-          <action type="add"
-                  btnLabel="addLegalConstraints"
-                  name="legalConstraints" or="resourceConstraints" forceLabel="true"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:resourceConstraints>
-                  <gmd:MD_LegalConstraints>
-                    <gmd:accessConstraints>
-                      <gmd:MD_RestrictionCode
-                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode"
-                        codeListValue="otherRestrictions"/>
-                    </gmd:accessConstraints>
-                    <gmd:otherConstraints>
-                      <gmx:Anchor xlink:href=""></gmx:Anchor>
-                    </gmd:otherConstraints>
-                  </gmd:MD_LegalConstraints>
-                </gmd:resourceConstraints>
-              </snippet>
-            </template>
-          </action>
-
-          <action type="add"
-                  btnLabel="addOtherConstraint"
-                  or="otherConstraints" forceLabel="true"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints) &lt; 2">
-            <template>
-              <snippet>
-                <gmd:otherConstraints>
-                  <gmx:Anchor xlink:href=""></gmx:Anchor>
-                </gmd:otherConstraints>
-              </snippet>
-            </template>
-          </action>
-
-          <field name="pointOfContact"
-            notDisplayedIfMissing="true"
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact"/>
-
-          <action type="add"
-                  btnLabel="addPointOfContact"
-                  or="pointOfContact"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:pointOfContact>
-                  <gmd:CI_ResponsibleParty>
-                    <gmd:individualName>
-                      <gco:CharacterString />
-                    </gmd:individualName>
-                    <gmd:organisationName>
-                      <gco:CharacterString />
-                    </gmd:organisationName>
-                    <gmd:contactInfo>
-                      <gmd:CI_Contact>
-                        <gmd:address>
-                          <gmd:CI_Address>
-                            <gmd:electronicMailAddress>
-                              <gco:CharacterString />
-                            </gmd:electronicMailAddress>
-                          </gmd:CI_Address>
-                        </gmd:address>
-                      </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    <gmd:role>
-                      <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
-                    </gmd:role>
-                  </gmd:CI_ResponsibleParty>
-                </gmd:pointOfContact>
-              </snippet>
-            </template>
-          </action>
-
-          <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/
-              gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox"/>
-
-
-          <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution"/>
-
-          <!-- scale -->
-          <action type="add"
-                  btnLabel="addScale"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale) &lt; 2"
-                  name="equivalentScale" or="spatialResolution"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:spatialResolution>
-                  <gmd:MD_Resolution>
-                    <gmd:equivalentScale>
-                      <gmd:MD_RepresentativeFraction>
-                        <gmd:denominator>
-                          <gco:Integer></gco:Integer>
-                        </gmd:denominator>
-                      </gmd:MD_RepresentativeFraction>
-                    </gmd:equivalentScale>
-                  </gmd:MD_Resolution>
-                </gmd:spatialResolution>
-              </snippet>
-            </template>
-          </action>
-
-          <!-- of resolutie -->
-          <action type="add"
-                  btnLabel="addResolution"
-                  name="distance" or="spatialResolution"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance) &lt; 2"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:spatialResolution>
-                  <gmd:MD_Resolution>
-                    <gmd:distance>
-                      <gco:Distance uom="meter"></gco:Distance>
-                    </gmd:distance>
-                  </gmd:MD_Resolution>
-                </gmd:spatialResolution>
-              </snippet>
-            </template>
-          </action>
-
-
         </section>
 
+
+
         <section name="metadata">
+
+          <field xpath="/gmd:MD_Metadata/gmd:language" in="/gmd:MD_Metadata"/>
+          <action type="add"
+                  btnLabel="addLanguage"
+                  if="count(gmd:MD_Metadata/gmd:language) = 0"
+                  name="md_language" or="language"
+                  in="/gmd:MD_Metadata">
+            <template>
+              <snippet>
+                <gmd:language>
+                  <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="dut">Nederlands
+                  </gmd:LanguageCode>
+                </gmd:language>
+              </snippet>
+            </template>
+          </action>
+
+          <!-- 5.4 Hiërarchieniveau.-->
+          <field
+            xpath="/gmd:MD_Metadata/gmd:hierarchyLevel" removable="false" />
+          <action type="add"
+                  btnLabel="addHierarchy"
+                  if="count(gmd:MD_Metadata/gmd:hierarchyLevel)=0"
+                  or="hierarchyLevel"
+                  in="/gmd:MD_Metadata" >
+            <template>
+              <snippet>
+                <gmd:hierarchyLevel>
+                  <gmd:MD_ScopeCode
+                    codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
+                    codeListValue="dataset"/>
+                </gmd:hierarchyLevel>
+              </snippet>
+            </template>
+          </action>
+
+          <field
+            xpath="/gmd:MD_Metadata/gmd:hierarchyLevelName" removable="true" />
+          <action type="add"
+                  btnLabel="addhierarchyLevelName"
+                  if="count(gmd:MD_Metadata/gmd:hierarchyLevelName)=0"
+                  name="hierarchyLevelName" or="hierarchyLevelName"
+                  in="/gmd:MD_Metadata">
+            <template>
+              <snippet>
+                <gmd:hierarchyLevelName>
+                  <gco:CharacterString></gco:CharacterString>
+                </gmd:hierarchyLevelName>
+              </snippet>
+            </template>
+          </action>
 
           <field name="metadataPointOfContact"
                  notDisplayedIfMissing="true"
@@ -767,9 +879,6 @@
               <snippet>
                 <gmd:contact>
                   <gmd:CI_ResponsibleParty>
-                    <gmd:individualName>
-                      <gco:CharacterString />
-                    </gmd:individualName>
                     <gmd:organisationName>
                       <gco:CharacterString />
                     </gmd:organisationName>
@@ -792,6 +901,7 @@
               </snippet>
             </template>
           </action>
+
         </section>
 
       </tab>
@@ -799,14 +909,28 @@
     </view>
 
 
+
+
+
     <!-- ======================================= -->
     <!-- =========== dutch profile ============= -->
     <!-- ======================================= -->
-    <view name="dutchprofile" upAndDownControlHidden="true" displayTooltips="true" displayTooltipsMode="icon">
+
+
+
+
+
+
+
+    <view
+        name="dutchprofile" upAndDownControlHidden="true"
+        displayTooltips="true" displayTooltipsMode="icon">
+
       <sidePanel>
         <directive data-gn-validation-report=""/>
         <directive data-gn-suggestion-list=""/>
       </sidePanel>
+
       <tab id="dutch-default" default="true" mode="flat">
 
         <text ref="dutchProfileTitle"/>
@@ -815,15 +939,14 @@
         <directive data-gn-onlinesrc-list=""/>
 
         <section name="dataIdentificatie">
-          <!-- 5.1 Titel van de bron  -->
 
+          <!-- Titel van de bron  -->
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:title"/>
 
-          <action type="add"
+          <action type="add" name="title"
                   btnLabel="addtitle"
                   if="count(gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:title) = 0"
-                  name="title" or="title"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation">
             <template>
               <snippet>
@@ -834,11 +957,12 @@
             </template>
           </action>
 
+          <!-- Alt Titel van de bron  -->
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:alternateTitle"></field>
-          <action type="add" del="." removable="true"
+
+          <action type="add" name="alternateTitle"
                   btnLabel="addAlternateTitle"
-                  name="alternateTitle" or="alternateTitle"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation">
             <template>
               <snippet>
@@ -849,26 +973,21 @@
             </template>
           </action>
 
-          <!--   5.21 Datum van de bron . -->
-
-
+          <!--   Datum van de bron . -->
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:date"/>
 
           <action type="add" name="referenceDate" or="date"
                   btnLabel="addDate"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:date) &lt; 3"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation">
             <template>
               <snippet>
                 <gmd:date>
                   <gmd:CI_Date>
-                    <gmd:date>
-                      <gco:Date></gco:Date>
-                    </gmd:date>
-                    <gmd:dateType><!--   5.22 Datum type van de bron.. -->
+                    <gmd:date><gco:Date/></gmd:date>
+                    <gmd:dateType>
                       <gmd:CI_DateTypeCode
                         codeList="http://www.isotc211.org/2005/resources/codeList.xml#CI_DateTypeCode"
-                        codeListValue="revision"/>
+                        codeListValue=""/>
                     </gmd:dateType>
                   </gmd:CI_Date>
                 </gmd:date>
@@ -876,12 +995,12 @@
             </template>
           </action>
 
-          <field del="."
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:edition"></field>
-          <action type="add"
+          <!-- version -->
+          <field
+              xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:edition"></field>
+          <action type="add" name="edition"
                   if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:edition) = 0"
-                  btnLabel="addEdition"
-                  name="edition" or="edition" forceLabel="true" removable="true"
+                  btnLabel="addEdition" forceLabel="true" removable="true"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation">
             <template>
               <snippet>
@@ -892,7 +1011,51 @@
             </template>
           </action>
 
-          <!--   5.9 Unieke Identifier van de bron -->
+          <!-- herzieningsfrequentie -->
+          <field name="resourceMaintenance" templateModeOnly="true" notDisplayedIfMissing="true" del="."
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceMaintenance">
+            <template>
+              <values>
+                <key label="maintenanceAndUpdateFrequency" tooltip="gmd:maintenanceAndUpdateFrequency"
+                     xpath="gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue">
+                  <codelist name="gmd:MD_MaintenanceFrequencyCode" /></key>
+                <key label="dateOfNextUpdate"
+                     xpath="gmd:MD_MaintenanceInformation/gmd:dateOfNextUpdate/gco:Date" use="gn-date-picker"
+                     tooltip="gmd:dateOfNextUpdate">
+                  <directiveAttributes data-hide-time="true"/>
+                </key>
+              </values>
+              <snippet>
+                <gmd:resourceMaintenance>
+                  <gmd:MD_MaintenanceInformation>
+                    <gmd:maintenanceAndUpdateFrequency>
+                      <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml" codeListValue="{{maintenanceAndUpdateFrequency}}"></gmd:MD_MaintenanceFrequencyCode>
+                    </gmd:maintenanceAndUpdateFrequency>
+                    <gmd:dateOfNextUpdate><gco:Date>{{dateOfNextUpdate}}</gco:Date></gmd:dateOfNextUpdate>
+                  </gmd:MD_MaintenanceInformation>
+                </gmd:resourceMaintenance>
+              </snippet>
+            </template>
+          </field>
+
+          <action type="add"
+                  btnLabel="addResourceMaintenance"
+                  name="resourceMaintenance" or="resourceMaintenance"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceMaintenance)=0"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:resourceMaintenance>
+                  <gmd:MD_MaintenanceInformation>
+                    <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml" codeListValue=""></gmd:MD_MaintenanceFrequencyCode>
+                    <gmd:dateOfNextUpdate></gmd:dateOfNextUpdate>
+                  </gmd:MD_MaintenanceInformation>
+                </gmd:resourceMaintenance>
+              </snippet>
+            </template>
+          </action>
+
+          <!-- Unieke Identifier van de bron -->
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code"/>
 
@@ -914,60 +1077,8 @@
             </template>
           </action>
 
-          <!--   39. Taal van de bron. -->
-          <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language"
-            in="/gmd:MD_Metadata"/>
-          <action type="add"
-                  btnLabel="addLanguage"
-                  name="ds_language" or="language"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language">
-            <template>
-              <snippet>
-                <gmd:language>
-                  <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="dut">Nederlands
-                  </gmd:LanguageCode>
-                </gmd:language>
-              </snippet>
-            </template>
-          </action>
 
-          <!--   40. Karakterset van de bron .. 16-->
-          <field del="."
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:characterSet"></field>
-          <action type="add"
-                  name="DsCharacterSet" or="characterSet"
-                  btnLabel="addCharacterset"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:characterSet>
-                  <gmd:MD_CharacterSetCode
-                    codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode"
-                    codeListValue="utf8">
-                  </gmd:MD_CharacterSetCode>
-                </gmd:characterSet>
-              </snippet>
-            </template>
-          </action>
-
-          <!--   41. Onderwerp. -->
-          <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory/gmd:MD_TopicCategoryCode"/>
-
-          <action type="add"
-                  btnLabel="addTopic"
-                  name="topicCategory" or="topicCategory"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:topicCategory>
-                  <gmd:MD_TopicCategoryCode></gmd:MD_TopicCategoryCode>
-                </gmd:topicCategory>
-              </snippet>
-            </template>
-          </action>
-
+<!-- series -->
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:series/gmd:CI_Series/gmd:name"/>
 
@@ -989,8 +1100,6 @@
             </template>
           </action>
 
-
-
           <!-- 5.2 Samenvatting. -->
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract"/>
@@ -1009,6 +1118,7 @@
             </template>
           </action>
 
+          <!-- doel -->
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:purpose"></field>
           <action type="add"
@@ -1026,13 +1136,13 @@
           </action>
 
 
-          <!-- 5.3 Status -->
-
+          <!-- Status -->
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:status"/>
           <action type="add"
                   btnLabel="addStatus"
                   name="status" or="status"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:status)=0"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
@@ -1040,6 +1150,61 @@
                   <gmd:MD_ProgressCode codeListValue="onGoing"
                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ProgressCode"/>
                 </gmd:status>
+              </snippet>
+            </template>
+          </action>
+
+<!--   Taal van de bron. -->
+          <field
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language"
+            in="/gmd:MD_Metadata"/>
+          <action type="add"
+                  btnLabel="addLanguage"
+                  name="ds_language" or="language"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language">
+            <template>
+              <snippet>
+                <gmd:language>
+                  <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="dut">Nederlands
+                  </gmd:LanguageCode>
+                </gmd:language>
+              </snippet>
+            </template>
+          </action>
+
+          <!--   Karakterset van de bron -->
+          <field del="."
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:characterSet"></field>
+          <action type="add"
+                  name="DsCharacterSet" or="characterSet"
+                  btnLabel="addCharacterset"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:characterSet)=0"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:characterSet>
+                  <gmd:MD_CharacterSetCode
+                    codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode"
+                    codeListValue="utf8">
+                  </gmd:MD_CharacterSetCode>
+                </gmd:characterSet>
+              </snippet>
+            </template>
+          </action>
+
+          <!--   Onderwerp. -->
+          <field
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory/gmd:MD_TopicCategoryCode"/>
+
+          <action type="add"
+                  btnLabel="addTopic"
+                  name="topicCategory" or="topicCategory"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:topicCategory>
+                  <gmd:MD_TopicCategoryCode></gmd:MD_TopicCategoryCode>
+                </gmd:topicCategory>
               </snippet>
             </template>
           </action>
@@ -1145,49 +1310,6 @@
             </template>
           </action>
 
-          <!-- 30 resource maintenance -->
-          <field name="resourceMaintenance" templateModeOnly="true" notDisplayedIfMissing="true" del="."
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceMaintenance">
-            <template>
-              <values>
-                <key label="maintenanceAndUpdateFrequency" tooltip="gmd:maintenanceAndUpdateFrequency"
-                     xpath="gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode/@codeListValue">
-                  <codelist name="gmd:MD_MaintenanceFrequencyCode" /></key>
-                <key label="dateOfNextUpdate"
-                     xpath="gmd:MD_MaintenanceInformation/gmd:dateOfNextUpdate/gco:Date" use="gn-date-picker"
-                     tooltip="gmd:dateOfNextUpdate">
-                  <directiveAttributes data-hide-time="true"/>
-                </key>
-              </values>
-              <snippet>
-                <gmd:resourceMaintenance>
-                  <gmd:MD_MaintenanceInformation>
-                    <gmd:maintenanceAndUpdateFrequency>
-                      <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml" codeListValue="{{maintenanceAndUpdateFrequency}}"></gmd:MD_MaintenanceFrequencyCode>
-                    </gmd:maintenanceAndUpdateFrequency>
-                    <gmd:dateOfNextUpdate><gco:Date>{{dateOfNextUpdate}}</gco:Date></gmd:dateOfNextUpdate>
-                  </gmd:MD_MaintenanceInformation>
-                </gmd:resourceMaintenance>
-              </snippet>
-            </template>
-          </field>
-
-          <action type="add"
-                  btnLabel="addResourceMaintenance"
-                  name="resourceMaintenance" or="resourceMaintenance"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:resourceMaintenance>
-                  <gmd:MD_MaintenanceInformation>
-                    <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml" codeListValue=""></gmd:MD_MaintenanceFrequencyCode>
-                    <gmd:dateOfNextUpdate></gmd:dateOfNextUpdate>
-                  </gmd:MD_MaintenanceInformation>
-                </gmd:resourceMaintenance>
-              </snippet>
-            </template>
-          </action>
-
           <!-- 5.12 graphic overview, zie zijpaneel -->
 
           <!--   5.13 Trefwoord .. 17-->
@@ -1257,74 +1379,27 @@
             </template>
           </action>
 
-          <!--   5.14 Thesaurus..-->
-          <!--   5.15 Thesaurus datum -->
-          <!--   5.16 Thesaurus datum type. -->
+          <!--   supplemental -->
+<field
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:supplementalInformation"></field>
+          <action type="add"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:supplementalInformation) = 0"
+                  btnLabel="addSupplementalInformation"
+                  name="supplementalInformation" or="supplementalInformation" forceLabel="true" removable="true"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:supplementalInformation gco:nilReason="missing">
+                  <gco:CharacterString/>
+                </gmd:supplementalInformation>
+              </snippet>
+            </template>
+          </action>
 
         </section>
-        <section name="restrictions">
-
-          <field removable="true"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints"/>
-          <action type="add"
-                  btnLabel="addResourceConstraints"
-                  name="resourceConstraints" or="resourceConstraints" forceLabel="true"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:resourceConstraints>
-                  <gmd:MD_Constraints>
-                    <gmd:useLimitation>
-                      <gco:CharacterString></gco:CharacterString>
-                    </gmd:useLimitation>
-                  </gmd:MD_Constraints>
-                </gmd:resourceConstraints>
-              </snippet>
-            </template>
-          </action>
 
 
-          <field  removable="true"
-                  xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"/>
-
-          <action type="add"
-                  btnLabel="addLegalConstraints"
-                  name="legalConstraints" or="resourceConstraints" forceLabel="true"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:resourceConstraints>
-                  <gmd:MD_LegalConstraints>
-                    <gmd:accessConstraints>
-                      <gmd:MD_RestrictionCode
-                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode"
-                        codeListValue="otherRestrictions"/>
-                    </gmd:accessConstraints>
-                    <gmd:otherConstraints>
-                      <gco:CharacterString></gco:CharacterString>
-                    </gmd:otherConstraints>
-                    <gmd:otherConstraints>
-                      <gco:CharacterString></gco:CharacterString>
-                    </gmd:otherConstraints>
-                  </gmd:MD_LegalConstraints>
-                </gmd:resourceConstraints>
-              </snippet>
-            </template>
-          </action>
-
-          <action type="add"
-                  btnLabel="addOtherConstraint"
-                  or="otherConstraints" forceLabel="true"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints) &lt; 2">
-            <template>
-              <snippet>
-                <gmd:otherConstraints>
-                  <gco:CharacterString></gco:CharacterString>
-                </gmd:otherConstraints>
-              </snippet>
-            </template>
-          </action>
+        <section name="spatialInfo">
 
           <!-- aggregation info, zie zijpaneel -->
 
@@ -1348,35 +1423,14 @@
           </action>
 
           <!--   38 Toepassingsschaal .. -->
-          <!-- of resolutie -->
-          <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution"/>
-
-          <!-- of afstand -->
-          <action type="add"
-                  btnLabel="addResolution"
-                  name="distance" or="spatialResolution"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance)&lt;2">
-            <template>
-              <snippet>
-                <gmd:spatialResolution>
-                  <gmd:MD_Resolution>
-                    <gmd:distance>
-                      <gco:Distance uom="meters"></gco:Distance>
-                    </gmd:distance>
-                  </gmd:MD_Resolution>
-                </gmd:spatialResolution>
-              </snippet>
-            </template>
-          </action>
-
-          <!-- resolution -->
+          <!-- scale -->
+          <field name="scale" or="MD_Resolution"
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution[gmd:MD_Resolution/gmd:equivalentScale]"/>
           <action type="add"
                   btnLabel="addScale"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale) &lt; 2"
                   name="equivalentScale" or="spatialResolution"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale)&lt;2">
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
                 <gmd:spatialResolution>
@@ -1394,9 +1448,31 @@
             </template>
           </action>
 
+          <field name="distance" or="MD_Resolution"
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution[gmd:MD_Resolution/gmd:distance]"/>
+
+          <!-- of resolutie -->
+          <action type="add"
+                  btnLabel="addResolution"
+                  name="distance" or="spatialResolution"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance) &lt; 2"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:spatialResolution>
+                  <gmd:MD_Resolution>
+                    <gmd:distance>
+                      <gco:Distance uom="meter"></gco:Distance>
+                    </gmd:distance>
+                  </gmd:MD_Resolution>
+                </gmd:spatialResolution>
+              </snippet>
+            </template>
+          </action>
+
           <!--   5.17 bounds -->
           <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement"/>
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement[gmd:EX_GeographicBoundingBox]"/>
 
           <action type="add"
                   btnLabel="addGeographicBoundingBox"
@@ -1416,45 +1492,98 @@
             </template>
           </action>
 
+          <!--     5.27 Code referentiesysteem ... -->
+          <field name="rsIdentifier" or="code"
+                 xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code"
+                 del="../../../..">
+          </field>
+          <action type="add" del="."
+                  btnLabel="addReferenceSystem"
+                  or="referenceSystemInfo"
+                  if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code) = 0"
+                  in="/gmd:MD_Metadata">
+            <template>
+              <snippet>
+                <gmd:referenceSystemInfo>
+                  <gmd:MD_ReferenceSystem>
+                    <gmd:referenceSystemIdentifier>
+                      <gmd:RS_Identifier>
+                        <gmd:code>
+                          <gmx:Anchor
+                            xlink:href="http://www.opengis.net/def/crs/EPSG/0/28992">Amersfoort / RD New</gmx:Anchor>
+                        </gmd:code>
+                      </gmd:RS_Identifier>
+                    </gmd:referenceSystemIdentifier>
+                  </gmd:MD_ReferenceSystem>
+                </gmd:referenceSystemInfo>
+              </snippet>
+            </template>
+          </action>
 
           <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement"/>
-          <!--
-              <template>
-                <values>
-                  <key label="beginPosition"
-                       xpath="gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/*/gml:beginPosition"
-                       use="gn-date-picker"
-                       tooltip="gmd:extent|gmd:EX_TemporalExtent">
-                    <directiveAttributes data-hide-time="true"
-                                         data-tag-name="gml:beginPosition"/>
-                  </key>
-                  <key label="endPosition"
-                       xpath="gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/*/gml:endPosition"
-                       use="gn-date-picker"
-                       tooltip="gmd:extent|gmd:EX_TemporalExtent"
-                  >
-                    <directiveAttributes data-hide-time="true"
-                                         data-tag-name="gml:endPosition"/>
-                                      data-indeterminate-position="eval#gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/*/gml:endPosition/@indeterminatePosition"/>
-                  </key>
-                </values>
-                <snippet><gmd:extent>
-                       <gmd:EX_Extent>
-                  <gmd:temporalElement>
-                    <gmd:EX_TemporalExtent>
-                      <gmd:extent>
-                        <gml:TimePeriod>
-                          {{beginPosition}}
-                          {{endPosition}}
-                        </gml:TimePeriod>
-                      </gmd:extent>
-                    </gmd:EX_TemporalExtent>
-                  </gmd:temporalElement></gmd:EX_Extent></gmd:extent>
-                </snippet>
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement[gmd:EX_GeographicDescription/gmd:geographicIdentifier]"/>
 
-              </template>
-            </field>-->
+          <action type="add"
+                  btnLabel="addGeographicIdentifier"
+                  or="extent" name="geographicIdentifier" forceLabel="true"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicDescription)=0">
+            <template>
+              <snippet>
+                <gmd:extent>
+                  <gmd:EX_Extent>
+                    <gmd:geographicElement>
+                      <gmd:EX_GeographicDescription>
+                        <gmd:geographicIdentifier>
+                          <gmd:MD_Identifier>
+                            <gmd:code><gmx:Anchor xlink:href=""/></gmd:code>
+                          </gmd:MD_Identifier>
+                        </gmd:geographicIdentifier>
+                      </gmd:EX_GeographicDescription>
+                    </gmd:geographicElement>
+                  </gmd:EX_Extent>
+                </gmd:extent>
+              </snippet>
+            </template>
+          </action>
+
+          <!--   vertical bounds -->
+          <field
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement"/>
+
+          <action type="add"
+                  btnLabel="addVerticalExtent"
+                  or="extent" name="verticalElement" forceLabel="true"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement)=0">
+            <template>
+              <snippet>
+                <gmd:extent>
+                  <gmd:EX_Extent>
+                    <gmd:verticalElement>
+                       <gmd:EX_VerticalExtent>
+                          <gmd:minimumValue>
+                             <gco:Real/>
+                          </gmd:minimumValue>
+                          <gmd:maximumValue>
+                             <gco:Real/>
+                          </gmd:maximumValue>
+                          <gmd:verticalCRS>
+                            <gml:VerticalCRS gml:id="vertical">
+                              <gml:identifier codeSpace="http://www.opengis.net/def/crs/EPSG/0/"/>
+                            </gml:VerticalCRS>
+                          </gmd:verticalCRS>
+                       </gmd:EX_VerticalExtent>
+                    </gmd:verticalElement>
+                  </gmd:EX_Extent>
+                </gmd:extent>
+              </snippet>
+            </template>
+          </action>
+
+          <!-- temporele dekking -->
+          <field
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement"/>
 
           <action type="add"
                   btnLabel="addTemporalExtent"
@@ -1467,8 +1596,8 @@
                     <gmd:EX_TemporalExtent>
                       <gmd:extent>
                         <gml:TimePeriod id="period">
-                          <gml:beginPosition>2018-01-01</gml:beginPosition>
-                          <gml:endPosition>2018-01-01</gml:endPosition>
+                          <gml:beginPosition></gml:beginPosition>
+                          <gml:endPosition></gml:endPosition>
                         </gml:TimePeriod>
                       </gmd:extent>
                     </gmd:EX_TemporalExtent>
@@ -1496,78 +1625,78 @@
             </template>
           </action>
 
-          <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:supplementalInformation"></field>
+
+
+        </section>
+
+        <section name="restrictions">
+
+          <field del=".." removable="true" name="useLimitation" or="MD_Constraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints"/>
+
           <action type="add"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:supplementalInformation) = 0"
-                  btnLabel="addSupplementalInformation"
-                  name="supplementalInformation" or="supplementalInformation" forceLabel="true" removable="true"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+                  btnLabel="addResourceConstraints"
+                  name="useLimitation" or="resourceConstraints" forceLabel="true"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints)=0">
             <template>
               <snippet>
-                <gmd:supplementalInformation gco:nilReason="missing">
-                  <gco:CharacterString/>
-                </gmd:supplementalInformation>
+                <gmd:resourceConstraints>
+                  <gmd:MD_Constraints>
+                    <gmd:useLimitation>
+                      <gco:CharacterString></gco:CharacterString>
+                    </gmd:useLimitation>
+                  </gmd:MD_Constraints>
+                </gmd:resourceConstraints>
               </snippet>
             </template>
           </action>
 
-        </section>
+          <!-- constraints -->
+          <field removable="true" del=".." name="legalConstraints" or="MD_LegalConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"/>
 
-        <!-- content info - featurecatalogue - via zijpaneel -->
-
-        <!--
- Titel van de featurecatalogMD_Metadata. contentInfo>MD_FeatureCatalogueDescription. includedWithDataset
-
- FeatureTypes MD_Metadata. contentInfo>MD_FeatureCatalogueDescription.featureTypes
-
- Datum van de featurecatalog
- Datum type van de featurecatalog
-           -->
-
-        <section name="referenceSystemInfo">
-          <!--     5.27 Code referentiesysteem ... -->
-          <field name="rsIdentifier" templateModeOnly="true"
-                 xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier"
-                 del="../..">
+          <action type="add"
+                  btnLabel="addLegalConstraints"
+                  name="legalConstraints" or="resourceConstraints" forceLabel="true"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
-              <values>
-                <key label="code"
-                     xpath="gmd:RS_Identifier/gmd:code/gmx:Anchor"
-                     tooltip="gmd:code"/>
-                <key label="codeSpace" tooltip="gmd:codeSpace"
-                     xpath="gmd:RS_Identifier/gmd:code/gmx:Anchor/@xlink.href"/>
-                <!-- TODO: Get the helper -->
-              </values>
               <snippet>
-                <gmd:referenceSystemIdentifier>
-                  <gmd:RS_Identifier>
-                    <gmd:code>
-                      <gmx:Anchor xlink:href="{{codeSpace}}">{{code}}</gmx:Anchor>
-                    </gmd:code>
-                    <gn:copy select="gmd:version"/>
-                  </gmd:RS_Identifier>
-                </gmd:referenceSystemIdentifier>
+                <gmd:resourceConstraints>
+                  <gmd:MD_LegalConstraints>
+                    <gmd:accessConstraints>
+                      <gmd:MD_RestrictionCode
+                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode"
+                        codeListValue="otherRestrictions"/>
+                    </gmd:accessConstraints>
+                    <gmd:otherConstraints>
+                      <gmx:Anchor xlink:href=""></gmx:Anchor>
+                    </gmd:otherConstraints>
+                  </gmd:MD_LegalConstraints>
+                </gmd:resourceConstraints>
               </snippet>
             </template>
-          </field>
-          <action type="add" del="."
-                  btnLabel="addReferenceSystem"
-                  or="referenceSystemInfo"
-                  in="/gmd:MD_Metadata">
+          </action>
+
+          <field removable="true" del=".."
+            name="securityConstraints" or="MD_SecurityConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_SecurityConstraints"/>
+          <action type="add"
+                  btnLabel="addSecurityConstraints"
+                  name="securityConstraints" or="resourceConstraints" forceLabel="true"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
-                <gmd:referenceSystemInfo>
-                  <gmd:MD_ReferenceSystem>
-                    <gmd:referenceSystemIdentifier>
-                      <gmd:RS_Identifier>
-                        <gmd:code>
-                          <gmx:Anchor xlink:href=""></gmx:Anchor>
-                        </gmd:code>
-                      </gmd:RS_Identifier>
-                    </gmd:referenceSystemIdentifier>
-                  </gmd:MD_ReferenceSystem>
-                </gmd:referenceSystemInfo>
+                <gmd:resourceConstraints>
+                  <gmd:MD_SecurityConstraints>
+                   <gmd:classification>
+                      <gmd:MD_ClassificationCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ClassificationCode" codeListValue=""/>
+                   </gmd:classification>
+                   <gmd:userNote>
+                      <gco:CharacterString/>
+                   </gmd:userNote>
+                  </gmd:MD_SecurityConstraints>
+                </gmd:resourceConstraints>
               </snippet>
             </template>
           </action>
@@ -1576,7 +1705,7 @@
 
         <section name="distributionInfo">
 
-          <!--        271 Naam distributie formaat . -->
+          <!-- Naam distributie formaat . -->
           <field name="encoding" templateModeOnly="true" notDisplayedIfMissing="true"
                  xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat"
                  del=".">
@@ -1774,7 +1903,7 @@
             </template>
           </action>
 
-
+<!-- offline / Naam medium -->
 
 
 
@@ -1798,10 +1927,8 @@
             </template>
           </action>
           <!--    5.23 Niveau kwaliteitsbeschrijving -->
-
           <field
             xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope"/>
-
           <action type="add"
                   btnLabel="addQualityLevel"
                   if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode) = 0"
@@ -1809,7 +1936,6 @@
                   in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope">
             <template>
               <snippet>
-
                 <gmd:DQ_Scope>
                   <gmd:level>
                     <gmd:MD_ScopeCode
@@ -1817,10 +1943,39 @@
                       codeListValue="dataset"/>
                   </gmd:level>
                 </gmd:DQ_Scope>
-
               </snippet>
             </template>
           </action>
+
+            <!--    5.23 Niveau kwaliteitsbeschrijving -->
+          <field
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope"/>
+          <action type="add"
+                  btnLabel="addQualityLevel"
+                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode) = 0"
+                  name="DQ_Scope" or="DQ_Scope"
+                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope">
+            <template>
+              <snippet>
+                <gmd:DQ_Scope>
+                  <gmd:level>
+                    <gmd:MD_ScopeCode
+                      codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
+                      codeListValue="dataset"/>
+                  </gmd:level>
+                  <gmd:levelDescription>
+                  <gmd:MD_ScopeDescription>
+
+                  </gmd:MD_ScopeDescription>
+                  </gmd:levelDescription>
+                </gmd:DQ_Scope>
+              </snippet>
+            </template>
+          </action>
+
+
+
+
           <!--   5.24 Algemene beschrijving herkomst .. -->
           <field xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:statement" del="."/>
           <action type="add"
