@@ -444,7 +444,7 @@
     <!-- ======================================= -->
     <!-- =========== default =================== -->
     <!-- ======================================= -->
-    <view name="default" default="true" upAndDownControlHidden="true" displayTooltips="true" displayTooltipsMode="icon">
+    <view name="default" default="true" hideTimeInCalendar="true" upAndDownControlHidden="true" displayTooltips="true" displayTooltipsMode="icon">
       <sidePanel>
         <directive data-gn-validation-report=""/>
         <directive data-gn-suggestion-list=""/>
@@ -923,7 +923,7 @@
 
 
     <view
-        name="dutchprofile" upAndDownControlHidden="true"
+        name="dutchprofile" hideTimeInCalendar="true" upAndDownControlHidden="true"
         displayTooltips="true" displayTooltipsMode="icon">
 
       <sidePanel>
@@ -2485,7 +2485,7 @@
       </flatModeExceptions>
     </view>
 
-    <view name="advanced" displayTooltips="true" displayTooltipsMode="icon">
+    <view name="advanced"  hideTimeInCalendar="true" displayTooltips="true" displayTooltipsMode="icon">
       <sidePanel>
         <directive data-gn-validation-report=""/>
         <directive data-gn-suggestion-list=""/>
