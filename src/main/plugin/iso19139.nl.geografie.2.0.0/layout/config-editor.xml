@@ -463,6 +463,23 @@
       </row>
     </table>
 
+<table for="gmd:DQ_ConceptualConsistency">
+  <header>
+        <col label="gmd:nameOfMeasure"/>
+        <col label="gmd:measureDescription"/>
+        <col label="gmd:valueUnit"/>
+        <col label="gmd:value"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:nameOfMeasure"/>
+        <col xpath="gmd:measureDescription"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
+        <col del=".."/>
+      </row>
+</table>
+
   </tableFields>
 
   <views>
@@ -2102,6 +2119,41 @@
           <!--      5.37 Specificatie datum type ... -->
           <!--     5.38 Type waarde .. -->
 
+<!--   QOS  -->
+          <field name="DQ_ConceptualConsistency" or="report"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_ConceptualConsistency]" />
+
+          <action type="add"
+                  btnLabel="addQOS"
+                  name="ConceptualConsistency"
+                  or="report"
+                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
+            <template>
+              <snippet>
+                <gmd:report>
+                  <gmd:DQ_ConceptualConsistency>
+                  <gmd:nameOfMeasure>
+                   <gmx:Anchor
+                   xlink:href="http://inspire.ec.europa.eu/metadatacodelist/QualityOfServiceCriteriaCode/performance">performance</gmx:Anchor>
+                   </gmd:nameOfMeasure>
+                   <gmd:measureDescription>
+                   <gco:CharacterString/>
+                   </gmd:measureDescription>
+                   <gmd:result>
+                   <gmd:DQ_QuantitativeResult>
+                   <gmd:valueUnit xlink:href="http://www.opengis.net/def/uom/SI/second"/>
+                   <gmd:value>
+                   <gco:Record xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:double"/>
+                   </gmd:value>
+                   </gmd:DQ_QuantitativeResult>
+                   </gmd:result>
+                   </gmd:DQ_ConceptualConsistency>
+                </gmd:report>
+              </snippet>
+            </template>
+          </action>
+
+
           <!--    5.39 Topologische samenhang . -->
           <field
             xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult"></field>
@@ -2525,6 +2577,9 @@
         <for name="gmd:processor"/>
         <for name="gmd:topicCategory"/>
         <for name="gmd:distributionFormat"/>
+        <for name="gmd:report"/>
+        <for name="gmd:result"/>
+
       </flatModeExceptions>
     </view>
 
