@@ -70,11 +70,18 @@
     <for name="gmd:CI_Date" use="data-gn-date-picker">
       <directiveAttributes data-hide-time="true"/>
     </for>
-	  <for name="gml:beginPosition" use="data-gn-date-picker">
+    <for name="gml:beginPosition" use="data-gn-date-picker">
       <directiveAttributes data-hide-time="true"/>
     </for>
-	  <for name="gml:endPosition" use="data-gn-date-picker">
+    <for name="gml:endPosition" use="data-gn-date-picker">
       <directiveAttributes data-hide-time="true"/>
+    </for>
+
+
+    <for name="gmd:protocol"
+      use="data-gn-keyword-picker">
+      <directiveAttributes data-thesaurus-key="local.theme.protocols"
+                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
     <!-- gmx:FileName/@src attribute -->
@@ -417,11 +424,13 @@
       <header>
         <col label="gmd:name"/>
         <col label="gmd:version"/>
+        <col label="gmd:specification"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:name"/>
         <col xpath="gmd:version"/>
+        <col xpath="gmd:specification"/>
         <col del=".."/>
       </row>
     </table>
@@ -601,8 +610,18 @@
           </action>
 
           <!-- constraints -->
-          <field removable="true" del=".." name="legalConstraints" or="MD_LegalConstraints"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"/>
+          <field removable="true" del=".." name="legalConstraints"
+            or="MD_LegalConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"
+                 use="data-gn-keyword-picker">
+  <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistConditionsApplyingToAccessAndUse-ConditionsApplyingToAccessAndUse"/>
+</field>
+
+<field removable="true" del=".." name="legalConstraints" or="MD_LegalConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"
+                 use="data-gn-keyword-picker">
+  <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess"/>
+</field>
 
           <action type="add"
                   btnLabel="addLegalConstraints"
@@ -674,13 +693,16 @@
             </template>
           </action>
 
-          <field name="rsIdentifier"
-                 xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier"
-                 del="../..">
+          <field name="rsIdentifierFull" use="data-gn-keyword-picker"
+                 xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code"
+                 del="../../../..">
+                 <directiveAttributes data-thesaurus-key="local.theme.projections"
+                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
           </field>
+
           <action type="add" del="."
                   btnLabel="addReferenceSystem"
-                  if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier) = 0"
+                  if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier) &lt; 2"
                   or="referenceSystemInfo"
                   in="/gmd:MD_Metadata">
             <template>
@@ -1493,9 +1515,11 @@
           </action>
 
           <!--     5.27 Code referentiesysteem ... -->
-          <field name="rsIdentifier" or="code"
+          <field name="rsIdentifier" use="data-gn-keyword-picker"
                  xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code"
                  del="../../../..">
+                 <directiveAttributes data-thesaurus-key="local.theme.projections"
+                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
           </field>
           <action type="add" del="."
                   btnLabel="addReferenceSystem"
@@ -1680,7 +1704,8 @@
 
           <field removable="true" del=".."
             name="securityConstraints" or="MD_SecurityConstraints"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_SecurityConstraints"/>
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_SecurityConstraints" />
+
           <action type="add"
                   btnLabel="addSecurityConstraints"
                   name="securityConstraints" or="resourceConstraints" forceLabel="true"
@@ -1706,10 +1731,10 @@
         <section name="distributionInfo">
 
           <!-- Naam distributie formaat . -->
-          <field name="encoding" templateModeOnly="true" notDisplayedIfMissing="true"
+          <field name="distributionFormat"
                  xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat"
-                 del=".">
-            <template>
+                 del="." />
+            <!--<template>
               <values>
                 <key label="format"
                      xpath="gmd:MD_Format/gmd:name/gco:CharacterString"
@@ -1740,7 +1765,7 @@
                 </gmd:distributionFormat>
               </snippet>
             </template>
-          </field>
+          </field>-->
 
           <action type="add"
                   btnLabel="addDistributionFormat"
@@ -1751,13 +1776,13 @@
                 <gmd:distributionFormat>
                   <gmd:MD_Format>
                     <gmd:name>
-                      <gco:CharacterString></gco:CharacterString>
+                      <gmx:Anchor/>
                     </gmd:name>
                     <gmd:version>
                       <gco:CharacterString></gco:CharacterString>
                     </gmd:version>
                     <gmd:specification>
-                      <gco:CharacterString></gco:CharacterString>
+                      <gmx:Anchor/>
                     </gmd:specification>
                   </gmd:MD_Format>
                 </gmd:distributionFormat>
@@ -2005,6 +2030,10 @@
               </snippet>
             </template>
           </action>
+
+
+<field name="DQ_DomainConsistency"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency]"/>
 
           <!--   5.33 Conformiteitindicatie met de specificatie  -->
           <field
@@ -2270,7 +2299,7 @@
 
           <!-- todo: or via related items -->
           <field xpath="/gmd:MD_Metadata/gmd:parentIdentifier" />
-          `	<action type="add"
+          ` <action type="add"
                      btnLabel="addParentIdentifier"
                      name="parentIdentifier" or="parentIdentifier"
                      in="/gmd:MD_Metadata">
@@ -2482,6 +2511,7 @@
         <for name="gmd:contact"/>
         <for name="gmd:processor"/>
         <for name="gmd:topicCategory"/>
+        <for name="gmd:distributionFormat"/>
       </flatModeExceptions>
     </view>
 
