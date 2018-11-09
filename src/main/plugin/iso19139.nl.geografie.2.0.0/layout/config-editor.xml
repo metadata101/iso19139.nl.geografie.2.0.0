@@ -79,7 +79,7 @@
 
 
     <for name="gmd:protocol"
-      use="data-gn-keyword-picker">
+      addDirective="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="local.theme.protocols"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
@@ -94,8 +94,7 @@
 
     <for name="gmd:country" use="data-gn-country-picker"/>
 
-    <for name="gmd:referenceSystemInfo" addDirective="data-gn-crs-selector"/>
-
+    <for name="gmd:referenceSystemIdentifier" use="data-gn-crs-selector"/>
 
     <!--
     Enable the following to use subtemplates for extent type.
@@ -176,7 +175,7 @@
         data-insert-modes=""
         data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"/>
     </for>
-    <!-- TODO: Review Dutch schemas - For 1.3 this was not defined -->
+    <!-- TODO: Review Dutch schemas - For 1.3 this was not defined
    <for name="gmd:report" addDirective="data-gn-directory-entry-selector">
      <directiveAttributes
        data-template-add-action="true"
@@ -185,7 +184,7 @@
        data-filter='{"_root": "gmd:DQ_DomainConsistency"}'
        data-insert-modes=""
        data-template-type="report"/>
-   </for>
+   </for>-->
 
 
    <!-- Example configuration: Add onLine source from subtemplate
@@ -238,8 +237,8 @@
     <name>gmd:dataQualityInfo</name>
     <name>gmd:contentInfo</name>
     <name>gmd:distributionFormat</name>
-    <name>gmd:referenceSystemInfo</name>
-    <!--<name>gmd:spatialResolution</name>-->
+    <!--<name>gmd:referenceSystemInfo</name>
+    <name>gmd:spatialResolution</name>-->
     <name>gmd:offLine</name>
     <name>gmd:onLine</name>
     <name>gmd:address</name>
@@ -446,6 +445,24 @@
         <col del=".."/>
       </row>
     </table>
+
+    <table for="gmd:DQ_ConformanceResult" >
+      <header>
+        <col label="gmd:title"/>
+        <col label="gmd:date"/>
+        <col label="gmd:explanation"/>
+        <col label="gmd:pass"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:specification/gmd:CI_Citation/gmd:title"/>
+        <col xpath="gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date"/>
+        <col xpath="gmd:explanation"/>
+        <col xpath="gmd:pass"/>
+        <col del=".."/>
+      </row>
+    </table>
+
   </tableFields>
 
   <views>
@@ -713,7 +730,7 @@
                       <gmd:RS_Identifier>
                         <gmd:code>
                           <gmx:Anchor
-                            xlink:href="http://www.opengis.net/def/crs/EPSG/0/28992">Amersfoort / RD New</gmx:Anchor>
+                            xlink:href=""></gmx:Anchor>
                         </gmd:code>
                       </gmd:RS_Identifier>
                     </gmd:referenceSystemIdentifier>
@@ -1450,7 +1467,7 @@
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution[gmd:MD_Resolution/gmd:equivalentScale]"/>
           <action type="add"
                   btnLabel="addScale"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale) &lt; 2"
+                  if="not(count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale) > 2)"
                   name="equivalentScale" or="spatialResolution"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
@@ -2031,13 +2048,9 @@
             </template>
           </action>
 
-
-<field name="DQ_DomainConsistency"
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency]"/>
-
           <!--   5.33 Conformiteitindicatie met de specificatie  -->
-          <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result"/>
+          <field del="../../.." name="DQ_ConformanceResult" or="result"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result[gmd:DQ_ConformanceResult]"/>
 
           <action type="add"
                   btnLabel="addConformance"
