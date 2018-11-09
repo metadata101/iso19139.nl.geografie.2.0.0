@@ -1524,7 +1524,7 @@
           <action type="add" del="."
                   btnLabel="addReferenceSystem"
                   or="referenceSystemInfo"
-                  if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code) = 0"
+                  if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier) &lt; 2"
                   in="/gmd:MD_Metadata">
             <template>
               <snippet>
