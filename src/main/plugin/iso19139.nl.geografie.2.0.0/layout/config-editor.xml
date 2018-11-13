@@ -520,22 +520,6 @@
       </row>
     </table>
 
-    <table for="gmd:DQ_AbsoluteExternalPositionalAccuracy">
-      <header>
-        <col label="gmd:nameOfMeasure"/>
-        <col label="gmd:measureDescription"/>
-        <col label="gmd:valueUnit"/>
-        <col label="gmd:value"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:nameOfMeasure"/>
-        <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
-        <col del=".."/>
-      </row>
-    </table>
 
     <table for="gmd:DQ_CompletenessOmission">
       <header>
@@ -553,6 +537,58 @@
         <col del=".."/>
       </row>
     </table>
+
+    <table for="gmd:DQ_TopologicalConsistency">
+      <header>
+        <col label="gmd:nameOfMeasure"/>
+        <col label="gmd:measureDescription"/>
+        <col label="gmd:valueUnit"/>
+        <col label="gmd:value"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:nameOfMeasure"/>
+        <col xpath="gmd:measureDescription"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
+        <col del=".."/>
+      </row>
+    </table>
+
+    <table for="gmd:DQ_AbsoluteExternalPositionalAccuracy">
+      <header>
+        <col label="gmd:nameOfMeasure"/>
+        <col label="gmd:measureDescription"/>
+        <col label="gmd:valueUnit"/>
+        <col label="gmd:value"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:nameOfMeasure"/>
+        <col xpath="gmd:measureDescription"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
+        <col del=".."/>
+      </row>
+    </table>
+
+    <table for="gmd:LI_ProcessStep">
+      <header>
+        <col label="gmd:description"/>
+        <col label="gmd:dateTime"/>
+        <col label="gmd:organisationName"/>
+        <col label="gmd:email"/>
+        <col label="gmd:role"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:description"/>
+        <col xpath="gmd:dateTime"/>
+        <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:organisationName"/>
+        <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress" />
+        <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:role"/>
+      </row>
+
   </tableFields>
 
   <views>
@@ -2226,10 +2262,38 @@
             </template>
           </action>
 
+          <field
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_CompletenessOmission]"></field>
+
+          <action type="add"
+                  btnLabel="Add_DQ_CompletenessOmission"
+                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult) = 0"
+                  name="DQ_CompletenessOmission" or="report"
+                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
+            <template>
+              <snippet>
+                <gmd:report>
+                  <gmd:DQ_CompletenessOmission>
+                    <gmd:result>
+                      <gmd:DQ_QuantitativeResult>
+                        <gmd:valueType>
+                          <gco:RecordType></gco:RecordType>
+                        </gmd:valueType>
+                        <gmd:valueUnit gco:nilReason="inapplicable"/>
+                        <gmd:value>
+                          <gco:Record></gco:Record>
+                        </gmd:value>
+                      </gmd:DQ_QuantitativeResult>
+                    </gmd:result>
+                  </gmd:DQ_CompletenessOmission>
+                </gmd:report>
+              </snippet>
+            </template>
+          </action>
 
           <!--    5.39 Topologische samenhang . -->
-          <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult]"></field>
+          <field name="DQ_TopologicalConsistency" or="report"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_TopologicalConsistency]"></field>
 
           <action type="add"
                   btnLabel="Add_DQ_TopologicalConsistency"
@@ -2257,8 +2321,8 @@
             </template>
           </action>
 
-          <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult]"></field>
+          <field name="DQ_AbsoluteExternalPositionalAccuracy" or="report"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_AbsoluteExternalPositionalAccuracy]"></field>
 
           <action type="add"
                   btnLabel="Add_DQ_AbsoluteExternalPositionalAccuracy"
@@ -2282,36 +2346,6 @@
                       </gmd:DQ_QuantitativeResult>
                     </gmd:result>
                   </gmd:DQ_AbsoluteExternalPositionalAccuracy>
-                </gmd:report>
-              </snippet>
-            </template>
-          </action>
-
-
-          <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult]"></field>
-
-          <action type="add"
-                  btnLabel="Add_DQ_CompletenessOmission"
-                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult) = 0"
-                  name="DQ_CompletenessOmission" or="report"
-                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
-            <template>
-              <snippet>
-                <gmd:report>
-                  <gmd:DQ_CompletenessOmission>
-                    <gmd:result>
-                      <gmd:DQ_QuantitativeResult>
-                        <gmd:valueType>
-                          <gco:RecordType></gco:RecordType>
-                        </gmd:valueType>
-                        <gmd:valueUnit gco:nilReason="inapplicable"/>
-                        <gmd:value>
-                          <gco:Record></gco:Record>
-                        </gmd:value>
-                      </gmd:DQ_QuantitativeResult>
-                    </gmd:result>
-                  </gmd:DQ_CompletenessOmission>
                 </gmd:report>
               </snippet>
             </template>
