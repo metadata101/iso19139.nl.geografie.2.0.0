@@ -215,6 +215,18 @@
           //gmd:thesaurusName/*/gmd:identifier/*/gmd:code/gmx:Anchor/
           concat('-', substring-after(text()[. != ''], 'geonetwork.thesaurus.')), ',')"/>
     </for>
+
+    <for name="gmd:useLimitation"
+         use="data-gn-keyword-picker">
+      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess"
+                         data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+    </for>
+
+    <for name="gmd:name" parent="MD_Format"
+         use="data-gn-keyword-picker">
+      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess"
+                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+    </for>
   </fields>
 
 
@@ -446,7 +458,7 @@
       </row>
     </table>
 
-    <table for="gmd:DQ_ConformanceResult" >
+    <table for="gmd:DQ_ConformanceResult">
       <header>
         <col label="gmd:title"/>
         <col label="gmd:date"/>
@@ -463,8 +475,25 @@
       </row>
     </table>
 
-<table for="gmd:DQ_ConceptualConsistency">
-  <header>
+    <table for="gmd:DQ_DomainConsistency" label="conformance">
+      <header>
+        <col label="gmd:title"/>
+        <col label="gmd:date"/>
+        <col label="gmd:explanation"/>
+        <col label="gmd:pass"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title"/>
+        <col xpath="gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date"/>
+        <col xpath="gmd:result/gmd:DQ_ConformanceResult/gmd:explanation"/>
+        <col xpath="gmd:result/gmd:DQ_ConformanceResult/gmd:pass"/>
+        <col del=".."/>
+      </row>
+    </table>
+
+    <table for="gmd:DQ_ConceptualConsistency" label="qos">
+      <header>
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
         <col label="gmd:valueUnit"/>
@@ -478,7 +507,58 @@
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
-</table>
+    </table>
+
+    <table for="gmd:DQ_TopologicalConsistency">
+      <header>
+        <col label="gmd:nameOfMeasure"/>
+        <col label="gmd:measureDescription"/>
+        <col label="gmd:valueUnit"/>
+        <col label="gmd:value"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:nameOfMeasure"/>
+        <col xpath="gmd:measureDescription"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
+        <col del=".."/>
+      </row>
+    </table>
+
+    <table for="gmd:DQ_AbsoluteExternalPositionalAccuracy">
+      <header>
+        <col label="gmd:nameOfMeasure"/>
+        <col label="gmd:measureDescription"/>
+        <col label="gmd:valueUnit"/>
+        <col label="gmd:value"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:nameOfMeasure"/>
+        <col xpath="gmd:measureDescription"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
+        <col del=".."/>
+      </row>
+    </table>
+
+    <table for="gmd:DQ_CompletenessOmission">
+      <header>
+        <col label="gmd:nameOfMeasure"/>
+        <col label="gmd:measureDescription"/>
+        <col label="gmd:valueUnit"/>
+        <col label="gmd:value"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:nameOfMeasure"/>
+        <col xpath="gmd:measureDescription"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
+        <col del=".."/>
+      </row>
+    </table>
 
   </tableFields>
 
@@ -980,7 +1060,7 @@
 
     <view
         name="dutchprofile" hideTimeInCalendar="true" upAndDownControlHidden="true"
-        displayTooltips="true" displayTooltipsMode="icon">
+        displayTooltips="true" displayTooltipsMode="icon" >
 
       <sidePanel>
         <directive data-gn-validation-report=""/>
@@ -2066,8 +2146,8 @@
           </action>
 
           <!--   5.33 Conformiteitindicatie met de specificatie  -->
-          <field del="../../.." name="DQ_ConformanceResult" or="result"
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result[gmd:DQ_ConformanceResult]"/>
+          <field del="../../.." name="addConformance" or="result"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult]"/>
 
           <action type="add"
                   btnLabel="addConformance"
@@ -2119,8 +2199,8 @@
           <!--      5.37 Specificatie datum type ... -->
           <!--     5.38 Type waarde .. -->
 
-<!--   QOS  -->
-          <field name="DQ_ConceptualConsistency" or="report"
+          <!--   QOS  -->
+          <field
             xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_ConceptualConsistency]" />
 
           <action type="add"
@@ -2156,7 +2236,7 @@
 
           <!--    5.39 Topologische samenhang . -->
           <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult"></field>
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult]"></field>
 
           <action type="add"
                   btnLabel="Add_DQ_TopologicalConsistency"
@@ -2185,7 +2265,7 @@
           </action>
 
           <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult"></field>
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult]"></field>
 
           <action type="add"
                   btnLabel="Add_DQ_AbsoluteExternalPositionalAccuracy"
@@ -2216,7 +2296,7 @@
 
 
           <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult"></field>
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult]"></field>
 
           <action type="add"
                   btnLabel="Add_DQ_CompletenessOmission"

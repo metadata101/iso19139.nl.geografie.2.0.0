@@ -369,4 +369,8 @@
   <Basis>Basis elementen</Basis>
   <Extra>Extra elementen</Extra>
   <!--<INSPIRE>INSPIRE elementen</INSPIRE>-->
+
+  <!-- Data quality reports -->
+  <conformance>Conformance</conformance>
+  <qos>Quality of Service</qos>
 </strings>

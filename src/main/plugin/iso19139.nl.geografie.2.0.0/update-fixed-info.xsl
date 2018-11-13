@@ -45,6 +45,23 @@
     </xsl:choose>
   </xsl:template>
 
+  <xsl:template match="gmd:DQ_DataQuality">
+    <xsl:copy>
+      <xsl:copy-of select="@*" />
+
+      <xsl:apply-templates select="gmd:scope" />
+
+      <!-- Sort reports by child content, required in metadata editor to render the reports in table format -->
+      <xsl:for-each select="gmd:report">
+        <xsl:sort select="*[1]/name()"/>
+        <xsl:apply-templates select="." />
+      </xsl:for-each>
+
+      <xsl:apply-templates select="gmd:lineage" />
+    </xsl:copy>
+
+  </xsl:template>
+
   <!-- remove gmd:identifier with gmx:Anchor inside gmd:code
     <xsl:template match="gmd:identifier[name(*/gmd:code/*) = 'gmx:Anchor']" />-->
   <!-- remove gmd:identifier in gmd:thesaurusName with gmx:Anchor inside gmd:code -->

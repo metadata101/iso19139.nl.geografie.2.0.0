@@ -247,4 +247,8 @@
   <xmlViewDescription><div>In deze weergave worden alle ingevulde elementen getoond in XML.</div></xmlViewDescription>
 
   <dutchprofile>Nederlands profiel</dutchprofile>
+
+  <!-- Data quality reports -->
+  <conformance>Conformance</conformance>
+  <qos>Quality of Service</qos>
 </strings>
