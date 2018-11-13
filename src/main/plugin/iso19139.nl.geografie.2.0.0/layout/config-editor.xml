@@ -231,10 +231,10 @@
     <name>gmd:portrayalCatalogueInfo</name>
     <name>gmd:portrayalCatalogueCitation</name>
     <name>gmd:thesaurusName</name>
-    <name>gmd:resourceConstraints</name>
+    <!--<name>gmd:resourceConstraints</name>
     <name>gmd:MD_LegalConstraints</name>
     <name>gmd:MD_SecurityConstraints</name>
-    <name>gmd:MD_Constraints</name>
+    <name>gmd:MD_Constraints</name>-->
     <name>gmd:spatialRepresentationInfo</name>
     <name>gmd:pointOfContact</name>
     <name>gmd:contact</name>
@@ -452,7 +452,50 @@
       </row>
     </table>
 
-    <table for="gmd:DQ_ConformanceResult">
+    <table for="gmd:MD_LegalConstraints" >
+      <header>
+        <col label="gmd:MD_Constraints"/>
+        <col label="gmd:otherConstraints"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="*[name()='gmd:useLimitation' or name()='gmd:accessConstraints' or name()='gmd:useConstraints']"/>
+        <col xpath="gmd:otherConstraints"/>
+        <col del=".."/>
+      </row>
+    </table>
+
+    <table for="gmd:MD_Constraints" >
+      <header>
+        <col label="gmd:useLimitation"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:useLimitation"/>
+        <col del=".."/>
+      </row>
+    </table>
+
+    <table for="gmd:MD_SecurityConstraints" >
+      <header>
+        <col label="gmd:useLimitation"/>
+        <col label="gmd:classification"/>
+        <col label="gmd:userNote"/>
+        <col label="gmd:classificationSystem"/>
+        <col label="gmd:handlingDescription"/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:useLimitation"/>
+        <col xpath="gmd:classification"/>
+        <col xpath="gmd:userNote"/>
+        <col xpath="gmd:classificationSystem"/>
+        <col xpath="gmd:handlingDescription"/>
+        <col del=".."/>
+      </row>
+    </table>
+
+    <table for="gmd:DQ_ConformanceResult" >
       <header>
         <col label="gmd:title"/>
         <col label="gmd:date"/>
@@ -508,13 +551,15 @@
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
         <col label="gmd:valueUnit"/>
+        <col label="codespace"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier/@codeSpace"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
@@ -526,13 +571,15 @@
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
         <col label="gmd:valueUnit"/>
+        <col label="codespace"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier/@codeSpace"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
@@ -543,13 +590,15 @@
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
         <col label="gmd:valueUnit"/>
+        <col label="codespace"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier/@codeSpace"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
@@ -560,13 +609,15 @@
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
         <col label="gmd:valueUnit"/>
+        <col label="codespace"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier/@codeSpace"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
@@ -588,6 +639,7 @@
         <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress" />
         <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:role"/>
       </row>
+    </table>
 
   </tableFields>
 
@@ -731,11 +783,11 @@
             gmd:descriptiveKeywords/gmd:MD_Keywords[not(gmd:thesaurusName)]"/>
 
           <!-- constraints -->
-          <field del=".." removable="true" name="useLimitation" or="MD_Constraints"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints"/>
+          <field name="useLimitation" or="resourceConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_Constraints]"/>
 
           <action type="add"
-                  btnLabel="addResourceConstraints"
+                  btnLabel="adduseLimitation"
                   name="useLimitation" or="resourceConstraints" forceLabel="true"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
                   if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints)=0">
@@ -752,23 +804,14 @@
             </template>
           </action>
 
-          <!-- constraints -->
-          <field removable="true" del=".." name="legalConstraints"
-            or="MD_LegalConstraints"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"
-                 use="data-gn-keyword-picker">
-  <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistConditionsApplyingToAccessAndUse-ConditionsApplyingToAccessAndUse"/>
-</field>
-
-<field removable="true" del=".." name="legalConstraints" or="MD_LegalConstraints"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"
-                 use="data-gn-keyword-picker">
-  <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess"/>
-</field>
+          <!-- legal access constraints -->
+          <field name="legalAccessConstraints" or="resourceConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints]">
+          </field>
 
           <action type="add"
-                  btnLabel="addLegalConstraints"
-                  name="legalConstraints" or="resourceConstraints" forceLabel="true"
+                  btnLabel="addLegalAccessConstraints"
+                  name="legalAccessConstraints" or="resourceConstraints" forceLabel="true"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
@@ -788,6 +831,11 @@
             </template>
           </action>
 
+
+          <!-- MD_SecurityConstraints  constraints
+          <field name="useLimitation" or="resourceConstraints"
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_SecurityConstraints]">
+          </field>-->
 
           <!-- scale -->
           <field name="scale" or="MD_Resolution"
@@ -1555,7 +1603,7 @@
             <template>
               <snippet>
                 <gmd:supplementalInformation gco:nilReason="missing">
-                  <gco:CharacterString/>
+                  <gmx:Anchor xlink:href=""/>
                 </gmd:supplementalInformation>
               </snippet>
             </template>
@@ -1677,7 +1725,7 @@
                       <gmd:RS_Identifier>
                         <gmd:code>
                           <gmx:Anchor
-                            xlink:href="http://www.opengis.net/def/crs/EPSG/0/28992">Amersfoort / RD New</gmx:Anchor>
+                            xlink:href=""></gmx:Anchor>
                         </gmd:code>
                       </gmd:RS_Identifier>
                     </gmd:referenceSystemIdentifier>
@@ -1714,7 +1762,7 @@
             </template>
           </action>
 
-          <!--   vertical bounds -->
+          <!--   vertical bounds
           <field
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement"/>
 
@@ -1746,7 +1794,7 @@
                 </gmd:extent>
               </snippet>
             </template>
-          </action>
+          </action>-->
 
           <!-- temporele dekking -->
           <field
@@ -1796,10 +1844,10 @@
 
         </section>
 
-        <section name="restrictions">
+        <section name="useLimitation">
 
-          <field del=".." removable="true" name="useLimitation" or="MD_Constraints"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints"/>
+          <field name="useLimitation" or="MD_Constraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_Constraints]"/>
 
           <action type="add"
                   btnLabel="addResourceConstraints"
@@ -1819,13 +1867,40 @@
             </template>
           </action>
 
-          <!-- constraints -->
-          <field removable="true" del=".." name="legalConstraints" or="MD_LegalConstraints"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints"/>
+</section>
+<section name="legalConstraints">
+
+          <!-- use constraints -->
+          <field name="legalUseLimitation" or="resourceConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:useLimitation]"/>
 
           <action type="add"
-                  btnLabel="addLegalConstraints"
-                  name="legalConstraints" or="resourceConstraints" forceLabel="true"
+                  btnLabel="addLegaluseLimitation"
+                  name="legalUseLimitation" or="resourceConstraints" forceLabel="true"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:resourceConstraints>
+                  <gmd:MD_LegalConstraints>
+                    <gmd:useLimitation>
+                      <gco:CharacterString/>
+                    </gmd:useLimitation>
+                    <gmd:otherConstraints>
+                      <gmx:Anchor xlink:href=""></gmx:Anchor>
+                    </gmd:otherConstraints>
+                  </gmd:MD_LegalConstraints>
+                </gmd:resourceConstraints>
+              </snippet>
+            </template>
+          </action>
+
+          <!-- access constraints -->
+          <field name="legalAccessConstraints" or="resourceConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]"/>
+
+          <action type="add"
+                  btnLabel="addLegalAccessConstraints"
+                  name="legalAccessConstraints" or="resourceConstraints" forceLabel="true"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
@@ -1845,9 +1920,37 @@
             </template>
           </action>
 
-          <field removable="true" del=".."
-            name="securityConstraints" or="MD_SecurityConstraints"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_SecurityConstraints" />
+          <!-- legal use constraints -->
+          <field name="lagelUseConstraints" or="resourceConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:useConstraints]"/>
+
+          <action type="add"
+                  btnLabel="addLegaluseConstraints"
+                  name="lagelUseConstraints" or="resourceConstraints" forceLabel="true"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:resourceConstraints>
+                  <gmd:MD_LegalConstraints>
+                    <gmd:useConstraints>
+                      <gmd:MD_RestrictionCode
+                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode"
+                        codeListValue="otherRestrictions"/>
+                    </gmd:useConstraints>
+                    <gmd:otherConstraints>
+                      <gmx:Anchor xlink:href=""></gmx:Anchor>
+                    </gmd:otherConstraints>
+                  </gmd:MD_LegalConstraints>
+                </gmd:resourceConstraints>
+              </snippet>
+            </template>
+          </action>
+
+</section>
+<section name="securityConstraints">
+          <field
+            name="MD_SecurityConstraints" or="resourceConstraints"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_SecurityConstraints]" />
 
           <action type="add"
                   btnLabel="addSecurityConstraints"
@@ -1857,12 +1960,21 @@
               <snippet>
                 <gmd:resourceConstraints>
                   <gmd:MD_SecurityConstraints>
+                   <gmd:useLimitation>
+                      <gco:CharacterString/>
+                   </gmd:useLimitation>
                    <gmd:classification>
                       <gmd:MD_ClassificationCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ClassificationCode" codeListValue=""/>
                    </gmd:classification>
                    <gmd:userNote>
                       <gco:CharacterString/>
                    </gmd:userNote>
+                   <gmd:classificationSystem>
+                      <gco:CharacterString/>
+                   </gmd:classificationSystem>
+                   <gmd:handlingDescription>
+                      <gco:CharacterString/>
+                   </gmd:handlingDescription>
                   </gmd:MD_SecurityConstraints>
                 </gmd:resourceConstraints>
               </snippet>
@@ -2175,8 +2287,8 @@
           </action>
 
           <!--   5.33 Conformiteitindicatie met de specificatie  -->
-          <field del="../../.." name="addConformance" or="result"
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult]"/>
+          <field name="DQ_ConformanceResult" or="report"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency]"/>
 
           <action type="add"
                   btnLabel="addConformance"
@@ -2262,7 +2374,7 @@
             </template>
           </action>
 
-          <field
+          <field name="DQ_CompletenessOmission" or="report"
             xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_CompletenessOmission]"></field>
 
           <action type="add"
@@ -2274,12 +2386,20 @@
               <snippet>
                 <gmd:report>
                   <gmd:DQ_CompletenessOmission>
+                   <gmd:nameOfMeasure>
+                    <gco:CharacterString/>
+                   </gmd:nameOfMeasure>
+                   <gmd:measureDescription>
+                    <gco:CharacterString/>
+                   </gmd:measureDescription>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
-                        <gmd:valueType>
-                          <gco:RecordType></gco:RecordType>
-                        </gmd:valueType>
-                        <gmd:valueUnit gco:nilReason="inapplicable"/>
+                        <gmd:valueUnit>
+                          <gml:BaseUnit gml:id="id">
+                             <gml:identifier codeSpace=""/>
+                             <gml:unitsSystem/>
+                          </gml:BaseUnit>
+                        </gmd:valueUnit>
                         <gmd:value>
                           <gco:Record></gco:Record>
                         </gmd:value>
@@ -2297,19 +2417,26 @@
 
           <action type="add"
                   btnLabel="Add_DQ_TopologicalConsistency"
-                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult) = 0"
                   name="DQ_TopologicalConsistency" or="report"
                   in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
             <template>
               <snippet>
                 <gmd:report>
                   <gmd:DQ_TopologicalConsistency>
+                   <gmd:nameOfMeasure>
+                    <gco:CharacterString/>
+                   </gmd:nameOfMeasure>
+                   <gmd:measureDescription>
+                    <gco:CharacterString/>
+                   </gmd:measureDescription>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
-                        <gmd:valueType>
-                          <gco:RecordType></gco:RecordType>
-                        </gmd:valueType>
-                        <gmd:valueUnit gco:nilReason="inapplicable"/>
+                        <gmd:valueUnit>
+                          <gml:BaseUnit gml:id="id">
+                             <gml:identifier codeSpace=""/>
+                             <gml:unitsSystem/>
+                          </gml:BaseUnit>
+                        </gmd:valueUnit>
                         <gmd:value>
                           <gco:Record></gco:Record>
                         </gmd:value>
@@ -2333,16 +2460,23 @@
               <snippet>
                 <gmd:report>
                   <gmd:DQ_AbsoluteExternalPositionalAccuracy>
+                   <gmd:nameOfMeasure>
+                    <gco:CharacterString/>
+                   </gmd:nameOfMeasure>
+                   <gmd:measureDescription>
+                    <gco:CharacterString/>
+                   </gmd:measureDescription>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
-                        <gmd:valueType>
-                          <gco:RecordType></gco:RecordType>
-                        </gmd:valueType>
-                        <gmd:valueUnit gco:nilReason="inapplicable"/>
+                        <gmd:valueUnit>
+                          <gml:BaseUnit gml:id="id">
+                             <gml:identifier codeSpace=""/>
+                             <gml:unitsSystem/>
+                          </gml:BaseUnit>
+                        </gmd:valueUnit>
                         <gmd:value>
                           <gco:Record></gco:Record>
                         </gmd:value>
-
                       </gmd:DQ_QuantitativeResult>
                     </gmd:result>
                   </gmd:DQ_AbsoluteExternalPositionalAccuracy>
@@ -2354,7 +2488,7 @@
           <!-- 84. Li-processstep-->
 
           <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep/gmd:LI_ProcessStep"></field>
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep"></field>
 
           <action type="add"
                   btnLabel="AddProcessStep"
@@ -2372,7 +2506,14 @@
                     </gmd:dateTime>
                     <gmd:processor>
                       <gmd:CI_ResponsibleParty>
-                        <gmd:organisationName><gco:CharacterString></gco:CharacterString></gmd:organisationName>
+                        <gmd:organisationName><gco:CharacterString/></gmd:organisationName>
+                          <gmd:address>
+                            <gmd:CI_Address>
+                              <gmd:electronicMailAddress>
+                                <gco:CharacterString />
+                              </gmd:electronicMailAddress>
+                            </gmd:CI_Address>
+                          </gmd:address>
                         <gmd:role><gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/></gmd:role>
                       </gmd:CI_ResponsibleParty>
                     </gmd:processor>
@@ -2386,8 +2527,6 @@
 
           <field removable="true" del="."
                  xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:source"></field>
-
-
 
           <action type="add"
                   btnLabel="AddSource"
@@ -2411,6 +2550,13 @@
                         <gmd:processor>
                           <gmd:CI_ResponsibleParty>
                             <gmd:organisationName><gco:CharacterString></gco:CharacterString></gmd:organisationName>
+                            <gmd:address>
+                              <gmd:CI_Address>
+                                <gmd:electronicMailAddress>
+                                  <gco:CharacterString />
+                                </gmd:electronicMailAddress>
+                              </gmd:CI_Address>
+                            </gmd:address>
                             <gmd:role><gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/></gmd:role>
                           </gmd:CI_ResponsibleParty>
                         </gmd:processor>

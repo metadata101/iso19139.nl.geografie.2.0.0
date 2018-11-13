@@ -93,8 +93,8 @@
   <lineage>Herkomst</lineage>
   <spatialResolution>Spatial resolution (scale)</spatialResolution>
   <spatialDistance>Spatial resolution (distance)</spatialDistance>
-  <accessConstraints>Access constraints</accessConstraints>
-  <useConstraints>Use constraints</useConstraints>
+
+  <useConstraints>Gebruiks beperkingen</useConstraints>
   <add-resource-id>Compute resource identifier</add-resource-id>
   <add-resource-idHelp>Compose the resource identifier using the catalog URL and the metadata
     identifier (eg. http://www.organization.org/catalogue/5391bf69-44bc-4ea0-8cc0-6cf6c3bc81ae).
