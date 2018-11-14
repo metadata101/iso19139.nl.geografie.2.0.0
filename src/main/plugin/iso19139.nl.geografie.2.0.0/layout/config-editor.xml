@@ -216,15 +216,9 @@
           concat('-', substring-after(text()[. != ''], 'geonetwork.thesaurus.')), ',')"/>
     </for>
 
-    <for name="gmd:useLimitation"
+    <for name="gmd:name" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name"
          use="data-gn-keyword-picker">
-      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess"
-                         data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
-    </for>
-
-    <for name="gmd:name" parent="MD_Format"
-         use="data-gn-keyword-picker">
-      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess"
+      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumediatypes-media-types"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
   </fields>
@@ -559,7 +553,6 @@
         <col del=".."/>
       </row>
     </table>
-
   </tableFields>
 
   <views>
