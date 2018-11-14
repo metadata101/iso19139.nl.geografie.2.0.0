@@ -187,14 +187,7 @@
    </for>-->
 
 
-   <!-- Example configuration: Add onLine source from subtemplate
-   <for name="gmd:onLine" addDirective="data-gn-directory-entry-selector">
-     <directiveAttributes
-             data-template-add-action="true"
-             data-template-type="onLine"
-             data-filter='{"_root": "gmd:CI_OnlineResource"}'/>
-   </for>
-   -->
+
 
 
     <for name="gmd:descriptiveKeywords" addDirective="data-gn-thesaurus-selector">
@@ -1851,7 +1844,7 @@
 
           <action type="add"
                   btnLabel="addResourceConstraints"
-                  name="useLimitation" or="resourceConstraints" forceLabel="true"
+                  name="useLimitation" or="resourceConstraints"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
                   if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints)=0">
             <template>
@@ -1868,7 +1861,7 @@
           </action>
 
 </section>
-<section name="legalConstraints">
+<section name="legalUseLimitation">
 
           <!-- use constraints -->
           <field name="legalUseLimitation" or="resourceConstraints"
@@ -1876,7 +1869,7 @@
 
           <action type="add"
                   btnLabel="addLegaluseLimitation"
-                  name="legalUseLimitation" or="resourceConstraints" forceLabel="true"
+                  name="legalUseLimitation" or="resourceConstraints"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
@@ -1894,13 +1887,15 @@
             </template>
           </action>
 
+</section>
+<section name="legalAccessConstraints">
           <!-- access constraints -->
           <field name="legalAccessConstraints" or="resourceConstraints"
                  xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]"/>
 
           <action type="add"
                   btnLabel="addLegalAccessConstraints"
-                  name="legalAccessConstraints" or="resourceConstraints" forceLabel="true"
+                  name="legalAccessConstraints" or="resourceConstraints"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
@@ -1919,14 +1914,15 @@
               </snippet>
             </template>
           </action>
-
+</section>
+<section name="legalUseConstraints">
           <!-- legal use constraints -->
-          <field name="lagelUseConstraints" or="resourceConstraints"
+          <field name="legalUseConstraints" or="resourceConstraints"
                  xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:useConstraints]"/>
 
           <action type="add"
                   btnLabel="addLegaluseConstraints"
-                  name="lagelUseConstraints" or="resourceConstraints" forceLabel="true"
+                  name="legalUseConstraints" or="resourceConstraints"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
@@ -1954,7 +1950,7 @@
 
           <action type="add"
                   btnLabel="addSecurityConstraints"
-                  name="securityConstraints" or="resourceConstraints" forceLabel="true"
+                  name="securityConstraints" or="resourceConstraints"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>

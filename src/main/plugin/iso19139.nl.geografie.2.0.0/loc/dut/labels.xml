@@ -1692,6 +1692,12 @@
     <label>Unieke Identifier van de featurecatalog</label>
     <description>Unieke waarde om de featurecatalog te beschrijven binnen een namespace.</description>
   </element>
+
+  <element name="link:href">
+    <label>URL Verwijzing</label>
+    <description>Een hyperlink waarop meer informatie over dit item te vinden is.</description>
+  </element>
+
   <!-- ==================================================== -->
   <!-- === GCO namespace                                    -->
   <!-- ==================================================== -->
