@@ -211,7 +211,17 @@
 
     <for name="gmd:name" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name"
          use="data-gn-keyword-picker">
-      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumediatypes-media-types"
+      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeuapplicationschema-applicationschema"
+                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+    </for>
+    <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/*/gmd:resourceConstraints/gmd:MD_LegalConstraints[gmd:accessConstraints]/gmd:otherConstraints"
+         use="data-gn-keyword-picker">
+      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess"
+                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+    </for>
+    <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/*/gmd:resourceConstraints/gmd:MD_LegalConstraints[gmd:useConstraints]/gmd:otherConstraints"
+         use="data-gn-keyword-picker">
+      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeuConditionsApplyingToAccessAndUse-ConditionsApplyingToAccessAndUse"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
   </fields>

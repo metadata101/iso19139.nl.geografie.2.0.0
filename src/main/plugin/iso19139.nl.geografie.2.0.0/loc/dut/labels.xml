@@ -716,6 +716,10 @@
     <description>Inhoudelijke geldigheid van de data, gespecificeerd naar begin- en einddatum.</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.19_Temporele_dekking</help_link>
   </element>
+  <element name="gmd:extent">
+    <label>Dekking</label>
+    <description>Informatie over de ruimtelijke, verticale en temporele dekking van de dataset.</description>
+  </element>
   <!-- ==================================================== -->
   <element name="gmd:facsimile" context="/gmd:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:facsimile">
     <label>Fax</label>
@@ -1693,7 +1697,7 @@
     <description>Unieke waarde om de featurecatalog te beschrijven binnen een namespace.</description>
   </element>
 
-  <element name="link:href">
+  <element name="xlink:href">
     <label>URL Verwijzing</label>
     <description>Een hyperlink waarop meer informatie over dit item te vinden is.</description>
   </element>

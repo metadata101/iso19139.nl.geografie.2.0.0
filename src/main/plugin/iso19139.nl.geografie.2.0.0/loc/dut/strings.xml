@@ -381,4 +381,17 @@
   <!-- Data quality reports -->
   <conformance>Conformance</conformance>
   <qos>Quality of Service</qos>
+
+<!-- missing-->
+<descriptiveKeywords>Trefwoorden</descriptiveKeywords>
+<scale>Schaal</scale>
+<distance>Afstand</distance>
+<MD_SecurityConstraints>Beveiligings beperkingen</MD_SecurityConstraints>
+<distributionFormat>Distributie formaat</distributionFormat>
+<DQ_ConformanceResult>Conformiteit</DQ_ConformanceResult>
+<DQ_CompletenessOmission>Compleetheid</DQ_CompletenessOmission>
+<DQ_TopologicalConsistency>Topologische consistentie</DQ_TopologicalConsistency>
+<DQ_AbsoluteExternalPositionalAccuracy>Postionele consistentie</DQ_AbsoluteExternalPositionalAccuracy>
+
+
 </strings>
