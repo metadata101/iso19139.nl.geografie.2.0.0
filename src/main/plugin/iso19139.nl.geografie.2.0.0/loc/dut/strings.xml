@@ -383,7 +383,6 @@
   <qos>Quality of Service</qos>
 
 <!-- missing-->
-<descriptiveKeywords>Trefwoorden</descriptiveKeywords>
 <scale>Schaal</scale>
 <distance>Afstand</distance>
 <MD_SecurityConstraints>Beveiligings beperkingen</MD_SecurityConstraints>

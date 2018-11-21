@@ -45,10 +45,10 @@
     <for name="gmd:measureDescription" use="textarea"/>
     <for name="gmd:purpose" use="textarea"/>
     <for name="gmd:orderingInstructions" use="textarea"/>
-    <for name="gmd:otherConstraints" use="textarea"/>
+    <!--<for name="gmd:otherConstraints" use="textarea"/>-->
     <for name="gmd:statement" use="textarea"/>
-    <for name="gmd:supplementalInformation" use="textarea"/>
-    <for name="gmd:specificUsage" use="textarea"/>
+    <!--<for name="gmd:supplementalInformation" use="textarea"/>
+    <for name="gmd:specificUsage" use="textarea"/>-->
     <for name="gmd:userNote" use="textarea"/>
     <for name="gmd:useLimitation" use="textarea"/>
     <for name="gco:Distance" use="number"/>
@@ -56,6 +56,10 @@
     <for name="gco:Integer" use="number"/>
     <for name="gco:Real" use="number"/>
     <for name="gco:Boolean" use="checkbox"/>
+
+    <for name="gmd:code" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code" use="data-gn-anchor-switcher"/>
+    <for name="gmd:supplementalInformation" use="data-gn-anchor-switcher"/>
+    <for name="gmd:organisationName" use="data-gn-anchor-switcher"/>
 
     <!-- TODO: Specific in Dutch schema - data-hide-time -->
     <for name="gco:Date" use="data-gn-date-picker">
@@ -214,12 +218,12 @@
       <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeuapplicationschema-applicationschema"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
-    <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/*/gmd:resourceConstraints/gmd:MD_LegalConstraints[gmd:accessConstraints]/gmd:otherConstraints"
+    <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints[gmd:accessConstraints]/gmd:otherConstraints"
          use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
-    <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/*/gmd:resourceConstraints/gmd:MD_LegalConstraints[gmd:useConstraints]/gmd:otherConstraints"
+    <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints[gmd:useConstraints]/gmd:otherConstraints"
          use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeuConditionsApplyingToAccessAndUse-ConditionsApplyingToAccessAndUse"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
