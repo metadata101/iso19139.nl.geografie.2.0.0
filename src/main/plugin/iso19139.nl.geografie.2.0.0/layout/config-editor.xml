@@ -83,7 +83,7 @@
 
 
     <for name="gmd:protocol"
-      addDirective="data-gn-keyword-picker">
+      use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="local.theme.protocols"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
