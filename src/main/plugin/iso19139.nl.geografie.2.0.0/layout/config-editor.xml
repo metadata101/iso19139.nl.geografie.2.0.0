@@ -1995,6 +1995,21 @@
 
         <section name="distributionInfo">
 
+          <!-- Butotn to add distribution section if not present -->
+          <action type="add"
+                  btnLabel="addDistribution"
+                  name="distributionInfo" or="distributionInfo"
+                  if="count(gmd:MD_Metadata/gmd:distributionInfo) = 0"
+                  in="/gmd:MD_Metadata">
+            <template>
+              <snippet>
+                <gmd:distributionInfo>
+                  <gmd:MD_Distribution />
+                </gmd:distributionInfo>
+              </snippet>
+            </template>
+          </action>
+
           <!-- Naam distributie formaat . -->
           <field name="distributionFormat"
                  xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat"

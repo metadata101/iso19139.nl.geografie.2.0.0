@@ -328,6 +328,7 @@
   <AddSource>Bron en inwinning toevoegen</AddSource>
   <addSeries>Series toevoegen</addSeries>
   <addResourceMaintenance>Onderhouds informatie toevoegen</addResourceMaintenance>
+  <addDistribution>Distributie toevoegen</addDistribution>
   <addDistributionFormat>Distributie formaat toevoegen</addDistributionFormat>
   <addHierarchy>Hiërarchisch niveau toevoegen</addHierarchy>
   <addhierarchyLevelName>Beschrijving hiërarchisch niveau toevoegen</addhierarchyLevelName>
