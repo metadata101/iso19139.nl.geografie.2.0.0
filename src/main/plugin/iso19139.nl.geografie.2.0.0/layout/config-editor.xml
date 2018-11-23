@@ -27,7 +27,6 @@
         xmlns:gco="http://www.isotc211.org/2005/gco"
         xmlns:gmd="http://www.isotc211.org/2005/gmd"
         xmlns:gmx="http://www.isotc211.org/2005/gmx"
-        xmlns:srv="http://www.isotc211.org/2005/srv"
         xmlns:gml="http://www.opengis.net/gml"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         xsi:noNamespaceSchemaLocation="../../../../../../config-editor.xsd">
@@ -263,11 +262,6 @@
     <!-- TODO: Disabled in Dutch schema -->
     <!--<name>gmd:EX_VerticalExtent</name>-->
     <name>gmd:MD_Distributor</name>
-    <name>srv:containsOperations</name>
-    <!-- TODO: Disabled in Dutch schema -->
-    <!--<name>srv:SV_Parameter</name>
-    <name>srv:connectPoint</name>
-    <name>srv:SV_CoupledResource</name>-->
     <name>gmd:metadataConstraints</name>
     <name>gmd:aggregationInfo</name>
     <name>gmd:processStep</name>
@@ -358,12 +352,6 @@
       <name>gmd:transformationDimensionDescription</name>
       <name>gmd:orientationParameterDescription</name>
       <name>gmd:distance</name>
-      <name>srv:name</name>
-      <name>srv:invocationName</name>
-      <name>srv:serviceTypeVersion</name>
-      <name>srv:operationName</name>
-      <name>srv:identifier</name>
-      <name>srv:serviceType</name>
       <name ancestor="gmd:thesaurusName">gmd:code</name>
       <name ancestor="gmd:aggregateDataSetIdentifier">gmd:code</name>
       <name ancestor="gmd:CI_Citation">gmd:code</name>
@@ -399,36 +387,6 @@
         <col xpath="gmd:protocol"/>
         <col xpath="gmd:linkage"/>
         <col xpath="gmd:name"/>
-        <col del=".."/>
-      </row>
-    </table>
-    <table for="srv:SV_OperationMetadata">
-      <header>
-        <col label="srv:operationName"/>
-        <col label="srv:DCP"/>
-        <col label="srv:connectPoint"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="srv:operationName"/>
-        <col xpath="srv:DCP"/>
-        <col xpath="srv:connectPoint/gmd:CI_OnlineResource/gmd:linkage"/>
-        <col del=".."/>
-        <section xpath="srv:SV_OperationMetadata/srv:parameters"
-                 or="parameters" in="srv:SV_OperationMetadata"/>
-      </row>
-    </table>
-    <table for="srv:SV_CoupledResource">
-      <header>
-        <col label="srv:operationName"/>
-        <col label="gco:ScopedName"/>
-        <col label="srv:identifier"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="srv:operationName"/>
-        <col xpath="gco:ScopedName"/>
-        <col xpath="srv:identifier"/>
         <col del=".."/>
       </row>
     </table>
