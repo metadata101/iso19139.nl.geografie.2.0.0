@@ -56,9 +56,9 @@
     <for name="gco:Real" use="number"/>
     <for name="gco:Boolean" use="checkbox"/>
 
-    <for name="gmd:code" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code" use="data-gn-anchor-switcher"/>
-    <for name="gmd:supplementalInformation" use="data-gn-anchor-switcher"/>
-    <for name="gmd:organisationName" use="data-gn-anchor-switcher"/>
+    <for name="gmd:code" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code" use="data-gn-anchor-switcher2"/>
+    <for name="gmd:supplementalInformation" use="data-gn-anchor-switcher2"/>
+    <for name="gmd:organisationName" use="data-gn-anchor-switcher2"/>
 
     <!-- TODO: Specific in Dutch schema - data-hide-time -->
     <for name="gco:Date" use="data-gn-date-picker">
