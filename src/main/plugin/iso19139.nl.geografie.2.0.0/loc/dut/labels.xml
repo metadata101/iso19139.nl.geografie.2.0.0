@@ -380,8 +380,8 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:contact" context="/gmd:MD_Metadata/gmd:contact">
-    <label>Partijen verantwoordelijk voor de metadata</label>
-    <description>Organisatie(s) die verantwoordelijk zijn voor de metadata.</description>
+    <label>Contact gegevens voor de metadata</label>
+    <description>Organisatie(s) die betrokken zijn bij de samenstelling van de metadata.</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:contactInfo" context="/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:contactInfo">
@@ -583,8 +583,24 @@
     <label>Geometrische nauwkeurigheid</label>
     <description>Beschrijving van de geometrische nauwkeurigheid.</description>
   </element>
+  <element name="gmd:DQ_QuantitativeResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult">
+    <label>Geometrische nauwkeurigheid</label>
+    <description></description>
+  </element>
+  <element name="gmd:report" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_AbsoluteExternalPositionalAccuracy]">
+    <label>Geometrische nauwkeurigheid</label>
+    <description></description>
+  </element>
   <!-- ==================================================== -->
   <element name="gmd:DQ_CompletenessOmission" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission">
+    <label>Compleetheid</label>
+    <description>Data welke niet aanwezig is in de dataset zoals beschreven in het toepassingsgebied.</description>
+  </element>
+  <element name="gmd:report" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_CompletenessOmission]">
+    <label>Compleetheid</label>
+    <description>Data welke niet aanwezig is in de dataset zoals beschreven in het toepassingsgebied.</description>
+  </element>
+  <element name="gmd:DQ_QuantitativeResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult">
     <label>Compleetheid</label>
     <description>Data welke niet aanwezig is in de dataset zoals beschreven in het toepassingsgebied.</description>
   </element>
@@ -593,16 +609,13 @@
     <label>Conformiteitindicatie met de specificatie</label>
     <description>Resultaat conformiteit met de specificatie.</description>
   </element>
-  <element name="gmd:DQ_QuantitativeResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult">
-    <label>Compleetheid</label>
+
+  <element name="gmd:DQ_QuantitativeResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency">
+    <label>Topologische samenhang</label>
     <description></description>
   </element>
   <element name="gmd:DQ_QuantitativeResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult">
     <label>Topologische samenhang</label>
-    <description></description>
-  </element>
-  <element name="gmd:DQ_QuantitativeResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult">
-    <label>Geometrische nauwkeurigheid</label>
     <description></description>
   </element>
   <!-- ==================================================== -->
@@ -1518,66 +1531,6 @@
     <description>Naam van de specificatie. Indien het een INSPIRE dataset is dient de specificatie opgenomen te worden</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.30_Specificatie</help_link>
     <condition>C</condition>
-    <helper>
-      <option value="-" class="title">--- INSPIRE ---</option>
-      <option value="VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens">Interoperabiliteit van datasets en services (EU VERORDENING 1089/2010)</option>
-      <option value="VERORDENING (EG) Nr. 976/2009 VAN DE COMMISSIE van 19 oktober 2009 tot uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad wat betreft de netwerkdiensten">VERORDENING (EG) wat betreft de netwerkdiensten</option>
-      <option value="Technical Guidance for the implementation of INSPIRE Download Services">Download Services</option>
-      <option value="Technical Guidance for the implementation of INSPIRE View Services">View Services</option>
-      <option value="INSPIRE Data Specification on Addresses and Technical Guidelines">Adressen</option>
-      <option value="INSPIRE Data Specification on Administrative Units and Technical Guidelines">Administratieve eenheden</option>
-      <option value="INSPIRE Data Specification on Cadastral Parcels and Technical Guidelines">Kadastrale percelen</option>
-      <option value="INSPIRE Data Specification on Coordinate Reference Systems and Technical Guidelines">Systemen voor verwijzing door middel van coördinaten</option>
-      <option value="INSPIRE Data Specification on Geographical Grid Systems and Technical Guidelines">Geografisch rastersysteem</option>
-      <option value="INSPIRE Data Specification on Geographical Names and Technical Guidelines">Geografische namen</option>
-      <option value="INSPIRE Data Specification on Hydrography and Technical Guidelines">Hydrografie</option>
-      <option value="INSPIRE Data Specification on Protected Sites and Technical Guidelines">Beschermde gebieden</option>
-      <option value="INSPIRE Data Specification on Transport Networks and Technical Guidelines">Vervoersnetwerken</option>
-      <option value="INSPIRE Data Specification on Agricultural and Aquaculture Facilities and Technical Guidelines">Faciliteiten voor landbouw en aquacultuur</option>
-      <option value="INSPIRE Data Specification on Area Management/Restriction/Regulation Zones and Reporting Units and Technical Guidelines">Gebiedsbeheer, gebieden waar beperkingen gelden, gereguleerde gebieden en rapportage-eenheden</option>
-      <option value="INSPIRE Data Specification on Atmospheric Conditions and Meteorological Geographical Features and Technical Guidelines">Atmosferische omstandigheden en Meteorologische geografische kenmerken</option>
-      <option value="INSPIRE Data Specification on Bio-geographical Regions and Technical Guidelines">Biogeografische gebieden</option>
-      <option value="INSPIRE Data Specification on Buildings and Technical Guidelines">Gebouwen</option>
-      <option value="INSPIRE Data Specification on Elevation and Technical Guidelines">Hoogte</option>
-      <option value="INSPIRE Data Specification on Energy Resources and Technical Guidelines">Energiebronnen</option>
-      <option value="INSPIRE Data Specification on Environmental Monitoring Facilities and Technical Guidelines">Milieubewakingsvoorzieningen</option>
-      <option value="INSPIRE Data Specification on Geology and Technical Guidelines">Geologie</option>
-      <option value="INSPIRE Data Specification on Habitats and Biotopes and Technical Guidelines">Habitats en biotopen</option>
-      <option value="INSPIRE Data Specification on Human Health and Safety and Technical Guidelines">Menselijke gezondheid en veiligheid</option>
-      <option value="INSPIRE Data Specification on Land Cover and Technical Guidelines">Landgebruik</option>
-      <option value="INSPIRE Data Specification on Land Use and Technical Guidelines">Bodemgebruik</option>
-      <option value="INSPIRE Data Specification on Mineral Resources and Technical Guidelines">Minerale bronnen</option>
-      <option value="INSPIRE Data Specification on Natural Risk Zones and Technical Guidelines">Gebieden met natuurrisico’s</option>
-      <option value="INSPIRE Data Specification on Oceanographic geographical features and Technical Guidelines">Oceanografische geografische kenmerken</option>
-      <option value="INSPIRE Data Specification on Orthoimagery and Technical Guidelines">Orthobeeldvorming</option>
-      <option value="INSPIRE Data Specification on Population Distribution and Technical Guidelines">Spreiding van de bevolking – demografie</option>
-      <option value="INSPIRE Data Specification on Production and Industrial Facilities and Technical Guidelines">Faciliteiten voor productie en industrie</option>
-      <option value="INSPIRE Data Specification on Sea Regions and Technical Guidelines">Zeegebieden</option>
-      <option value="INSPIRE Data Specification on Soil and Technical Guidelines">Bodem</option>
-      <option value="INSPIRE Data Specification on Species Distribution and Technical Guidelines">Verspreiding van soorten</option>
-      <option value="INSPIRE Data Specification on Statistical Units and Technical Guidelines">Statistische eenheden</option>
-      <option value="INSPIRE Data Specification on Utility and Government Services and Technical Guidelines">Nutsdiensten en overheidsdiensten</option>
-      <option value="-" class="title">--- Nationaal ---</option>
-      <option value="Basismodel geo-informatie (NEN3610:2011)">Basismodel geo-informatie</option>
-      <option value="Informatiemodel AERIUS (IMAER)">IM AERIUS</option>
-      <option value="Informatiemodel Archeologie (IM SIKB0102)">IM Archeologie</option>
-      <option value="Informatiemodel Basisregistratie Ondergrond">IM Basisregistratie Ondergrond</option>
-      <option value="Informatiemodel Beheer openbare ruimte (IMBOR)">IM Beheer openbare ruimte</option>
-      <option value="Informatiemodel berichtenverkeer Digitale Bereikbaarheidskaart">IM berichtenverkeer Digitale Bereikbaarheidskaart</option>
-      <option value="Informatiemodel Bodembeheer (IMSIKB0101)">IM Bodembeheer</option>
-      <option value="Informatiemodel IMOOV conceptueel model">IMOOV conceptueel model</option>
-      <option value="Informatiemodel IMOOV UML model">IMOOV UML model</option>
-      <option value="Informatiemodel Kabels en Leidingen (IMKL)">IM Kabels en Leidingen</option>
-      <option value="Informatiemodel Kadaster (IMKAD)">IM Kadaster</option>
-      <option value="Informatiemodel Landelijk Gebied (IMLG)">IM Landelijk Gebied</option>
-      <option value="Informatiemodel Metingen (IM Metingen)">IM Metingen</option>
-      <option value="Informatiemodel Natuurbeheerplannen (IMNA)">IM Natuurbeheerplannen</option>
-      <option value="Informatiemodel Ruimtelijke Ordening (IMRO2012)">IM Ruimtelijke Ordening</option>
-      <option value="Informatiemodel Ruimtelijke Ordening Planteksten (IMROPT2012)">IM Ruimtelijke Ordening Planteksten</option>
-      <option value="Informatiemodel Stedelijk Water (IMSW)">IM Stedelijk Water</option>
-      <option value="Informatiemodel TOP10NL">IM TOP10NL</option>
-      <option value="Informatiemodel Water (IMWA)">IM Water</option>
-    </helper>
   </element>
   <element name="gmd:title" context="/gmd:MD_Metadata/gmd:contentInfo/gmd:MD_FeatureCatalogueDescription/gmd:featureCatalogueCitation/gmd:CI_Citation/gmd:title">
     <label>Titel van de featurecatalog</label>

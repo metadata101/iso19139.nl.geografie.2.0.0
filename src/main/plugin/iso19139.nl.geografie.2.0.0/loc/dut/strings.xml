@@ -46,7 +46,7 @@
   <providedBy>Provided by</providedBy>
   <shareOnSocialSite>Share on social sites</shareOnSocialSite>
   <viewMode>Views</viewMode>
-  <keywordFrom>Trefwoord van </keywordFrom>
+  <keywordFrom>Trefwoord uit </keywordFrom>
   <resource>Bron</resource>
   <xml>XML</xml>
   <metadata>Over de metadata</metadata>
@@ -75,22 +75,20 @@
   <hierarchyLevel>Hierarchie niveau</hierarchyLevel>
   <publicationDate>Publicatie datum</publicationDate>
   <revisionDate>Revisie datum</revisionDate>
-  <temporalRangeSection>Temporele extent</temporalRangeSection>
+
   <beginPosition>Begin</beginPosition>
-  <endPosition>Eind</endPosition>
   <conformity>Conformiteit</conformity>
   <conformity_title>Titel</conformity_title>
   <conformity_date>Datum</conformity_date>
   <explanation>Verklaring</explanation>
   <pass>Conformiteit</pass>
   <indeterminatePosition>Indeterminate position</indeterminatePosition>
-  <encoding>Encoding</encoding>
-  <inspireTheme>INSPIRE themas</inspireTheme>
+
+
   <inspireThemeURI>INSPIRE themas</inspireThemeURI>
-  <format>Formaat</format>
-  <format_version>Versie</format_version>
-  <format_specification>Specificatie</format_specification>
-  <lineage>Herkomst</lineage>
+
+
+
   <spatialResolution>Spatial resolution (scale)</spatialResolution>
   <spatialDistance>Spatial resolution (distance)</spatialDistance>
 
@@ -118,8 +116,7 @@
   <metadataSection>Metadata information</metadataSection>
   <responsibleOrganisationSection>Responsible organization (s)</responsibleOrganisationSection>
   <qualityAndValiditySection>Quality and validity</qualityAndValiditySection>
-  <spatialRepresentationType>Spatial representation type</spatialRepresentationType>
-  <topicCategory>Topic category code</topicCategory>
+
   <metadataLanguage>Metadata language</metadataLanguage>
   <inspireServiceTaxonomy>INSPIRE Service Taxonomy</inspireServiceTaxonomy>
   <otherConstraints>Other constraints</otherConstraints>
@@ -274,7 +271,6 @@
   <metadataStandardName>Standaard</metadataStandardName>
   <metadataStandardVersion>Standaard versie</metadataStandardVersion>
 
-  <CompletenessOmission>Compleetheid</CompletenessOmission>
   <spatialRepresentationType>Ruimtelijk schema</spatialRepresentationType>
   <qualityScope>Niveau kwaliteitsbeschrijving</qualityScope>
 
@@ -377,21 +373,21 @@
 
   <Basis>Basis elementen</Basis>
   <Extra>Extra elementen</Extra>
-  <!--<INSPIRE>INSPIRE elementen</INSPIRE>-->
-
-  <!-- Data quality reports -->
-  <conformance>Conformance</conformance>
-  <qos>Quality of Service</qos>
+  <qos>Service kwaliteit</qos>
+  <addQOS>Voeg service kwaliteit toe</addQOS>
 
 <!-- missing-->
 <scale>Schaal</scale>
-<distance>Afstand</distance>
 <MD_SecurityConstraints>Beveiligings beperkingen</MD_SecurityConstraints>
 <distributionFormat>Distributie formaat</distributionFormat>
 <DQ_ConformanceResult>Conformiteit</DQ_ConformanceResult>
-<DQ_CompletenessOmission>Compleetheid</DQ_CompletenessOmission>
-<DQ_TopologicalConsistency>Topologische consistentie</DQ_TopologicalConsistency>
-<DQ_AbsoluteExternalPositionalAccuracy>Postionele consistentie</DQ_AbsoluteExternalPositionalAccuracy>
+<addLegaluseConstraints>Juridische gebruiks beperkingen toevoegen</addLegaluseConstraints>
 
+<ConformanceResult>Conformiteit</ConformanceResult>
+<DomainConsistency>Conformiteit met een domein specificatie</DomainConsistency>
+<TopologicalConsistency>Topologische samenhang</TopologicalConsistency>
+<CompletenessOmission>Compleetheid</CompletenessOmission>
+<AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid</AbsoluteExternalPositionalAccuracy>
+<ProcessStep>Bewerkings stap</ProcessStep>
 
 </strings>

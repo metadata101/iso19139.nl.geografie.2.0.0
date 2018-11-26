@@ -83,7 +83,7 @@
 
     <for name="gmd:protocol"
       use="data-gn-keyword-picker">
-      <directiveAttributes data-thesaurus-key="local.theme.protocols"
+      <directiveAttributes data-thesaurus-key="external.theme.protocols"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
@@ -214,6 +214,13 @@
       <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeuapplicationschema-applicationschema"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
+
+    <for name="gmd:title" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title"
+         use="data-gn-keyword-picker">
+      <directiveAttributes data-thesaurus-key="external.theme.domainspecifications"
+                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+    </for>
+
     <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints[gmd:accessConstraints]/gmd:otherConstraints"
          use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess"
@@ -414,7 +421,7 @@
       </row>
     </table>
 
-    <table for="gmd:MD_LegalConstraints" >
+    <table for="gmd:MD_LegalConstraints" label="MD_LegalConstraints">
       <header>
         <col label="gmd:MD_Constraints"/>
         <col label="gmd:otherConstraints"/>
@@ -427,7 +434,7 @@
       </row>
     </table>
 
-    <table for="gmd:MD_Constraints" >
+    <table for="gmd:MD_Constraints" label="MD_Constraints">
       <header>
         <col label="gmd:useLimitation"/>
         <col/>
@@ -438,7 +445,7 @@
       </row>
     </table>
 
-    <table for="gmd:MD_SecurityConstraints" >
+    <table for="gmd:MD_SecurityConstraints" label="MD_SecurityConstraints">
       <header>
         <col label="gmd:useLimitation"/>
         <col label="gmd:classification"/>
@@ -457,7 +464,7 @@
       </row>
     </table>
 
-    <table for="gmd:DQ_ConformanceResult" >
+    <table for="gmd:DQ_ConformanceResult" label="ConformanceResult">
       <header>
         <col label="gmd:title"/>
         <col label="gmd:date"/>
@@ -474,7 +481,7 @@
       </row>
     </table>
 
-    <table for="gmd:DQ_DomainConsistency" label="conformance">
+    <table for="gmd:DQ_DomainConsistency" label="DomainConsistency">
       <header>
         <col label="gmd:title"/>
         <col label="gmd:date"/>
@@ -508,98 +515,88 @@
       </row>
     </table>
 
-    <table for="gmd:DQ_TopologicalConsistency">
+    <table for="gmd:DQ_TopologicalConsistency" label="TopologicalConsistency">
       <header>
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
         <col label="gmd:valueUnit"/>
-        <col label="codespace"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier/@codeSpace"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
     </table>
 
 
-    <table for="gmd:DQ_CompletenessOmission">
+    <table for="gmd:DQ_CompletenessOmission" label="CompletenessOmission">
       <header>
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
         <col label="gmd:valueUnit"/>
-        <col label="codespace"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier/@codeSpace"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
     </table>
 
-    <table for="gmd:DQ_TopologicalConsistency">
+    <table for="gmd:DQ_TopologicalConsistency" label="TopologicalConsistency">
       <header>
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
         <col label="gmd:valueUnit"/>
-        <col label="codespace"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier/@codeSpace"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
     </table>
 
-    <table for="gmd:DQ_AbsoluteExternalPositionalAccuracy">
+    <table for="gmd:DQ_AbsoluteExternalPositionalAccuracy" label="AbsoluteExternalPositionalAccuracy">
       <header>
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
         <col label="gmd:valueUnit"/>
-        <col label="codespace"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/*/gml:identifier/@codeSpace"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
     </table>
 
-    <table for="gmd:LI_ProcessStep">
+    <table for="gmd:LI_ProcessStep" label="ProcessStep">
       <header>
         <col label="gmd:description"/>
         <col label="gmd:dateTime"/>
         <col label="gmd:organisationName"/>
-        <col label="gmd:email"/>
-        <col label="gmd:role"/>
+        <col label="gmd:electronicMailAddress"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:description"/>
         <col xpath="gmd:dateTime"/>
         <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:organisationName"/>
-        <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress" />
-        <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:role"/>
+        <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:address/gmd:CI_Address/gmd:electronicMailAddress" />
       </row>
     </table>
 
@@ -845,10 +842,11 @@
             </template>
           </action>
 
-          <field name="rsIdentifierFull" use="data-gn-keyword-picker"
+          <field name="referenceSystemIdentifier"
+                 or="code" use="data-gn-keyword-picker"
                  xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code"
                  del="../../../..">
-                 <directiveAttributes data-thesaurus-key="local.theme.projections"
+                 <directiveAttributes data-thesaurus-key="external.theme.projections"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
           </field>
 
@@ -955,7 +953,7 @@
             </template>
           </action>
 
-          <field xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:statement"/>
+          <field name="lineage" or="statement" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:statement"/>
 
           <action type="add"
                   btnLabel="addLineage"
@@ -1644,7 +1642,7 @@
           <field name="rsIdentifier" use="data-gn-keyword-picker"
                  xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code"
                  del="../../../..">
-                 <directiveAttributes data-thesaurus-key="local.theme.projections"
+                 <directiveAttributes data-thesaurus-key="external.theme.projections"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
           </field>
           <action type="add" del="."
@@ -2317,7 +2315,7 @@
                    <gmd:DQ_QuantitativeResult>
                    <gmd:valueUnit xlink:href="http://www.opengis.net/def/uom/SI/second"/>
                    <gmd:value>
-                   <gco:Record xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:double"/>
+                   <gco:Record xsi:type="xs:double"/>
                    </gmd:value>
                    </gmd:DQ_QuantitativeResult>
                    </gmd:result>
