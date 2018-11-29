@@ -221,16 +221,12 @@
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
-    <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints[gmd:accessConstraints]/gmd:otherConstraints"
+    <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints"
          use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
-    <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints[gmd:useConstraints]/gmd:otherConstraints"
-         use="data-gn-keyword-picker">
-      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeuConditionsApplyingToAccessAndUse-ConditionsApplyingToAccessAndUse"
-                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
-    </for>
+
   </fields>
 
 
@@ -241,10 +237,10 @@
     <name>gmd:portrayalCatalogueInfo</name>
     <name>gmd:portrayalCatalogueCitation</name>
     <name>gmd:thesaurusName</name>
-    <!--<name>gmd:resourceConstraints</name>
+    <!--<name>gmd:resourceConstraints</name>-->
     <name>gmd:MD_LegalConstraints</name>
     <name>gmd:MD_SecurityConstraints</name>
-    <name>gmd:MD_Constraints</name>-->
+    <name>gmd:MD_Constraints</name>
     <name>gmd:spatialRepresentationInfo</name>
     <name>gmd:pointOfContact</name>
     <name>gmd:contact</name>
@@ -421,7 +417,7 @@
       </row>
     </table>
 
-    <table for="gmd:MD_LegalConstraints" label="MD_LegalConstraints">
+  <!--  <table for="gmd:MD_LegalConstraints" label="MD_LegalConstraints">
       <header>
         <col label="gmd:MD_Constraints"/>
         <col label="gmd:otherConstraints"/>
@@ -432,7 +428,7 @@
         <col xpath="gmd:otherConstraints"/>
         <col del=".."/>
       </row>
-    </table>
+    </table> -->
 
     <table for="gmd:MD_Constraints" label="MD_Constraints">
       <header>
@@ -502,14 +498,16 @@
       <header>
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
-        <col label="gmd:valueUnit"/>
+        <col label="gml:identifier"/>
+        <col label="gml:unitsSystem"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
@@ -519,14 +517,16 @@
       <header>
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
-        <col label="gmd:valueUnit"/>
+        <col label="gml:identifier"/>
+        <col label="gml:unitsSystem"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
@@ -537,31 +537,16 @@
       <header>
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
-        <col label="gmd:valueUnit"/>
+        <col label="gml:identifier"/>
+        <col label="gml:unitsSystem"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
-        <col del=".."/>
-      </row>
-    </table>
-
-    <table for="gmd:DQ_TopologicalConsistency" label="TopologicalConsistency">
-      <header>
-        <col label="gmd:nameOfMeasure"/>
-        <col label="gmd:measureDescription"/>
-        <col label="gmd:valueUnit"/>
-        <col label="gmd:value"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:nameOfMeasure"/>
-        <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
@@ -571,14 +556,16 @@
       <header>
         <col label="gmd:nameOfMeasure"/>
         <col label="gmd:measureDescription"/>
-        <col label="gmd:valueUnit"/>
+        <col label="gml:identifier"/>
+        <col label="gml:unitsSystem"/>
         <col label="gmd:value"/>
         <col/>
       </header>
       <row>
         <col xpath="gmd:nameOfMeasure"/>
         <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier"/>
+        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem"/>
         <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
         <col del=".."/>
       </row>
@@ -764,7 +751,7 @@
 
           <!-- legal access constraints -->
           <field name="legalAccessConstraints" or="resourceConstraints"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints]">
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]">
           </field>
 
           <action type="add"
@@ -1834,6 +1821,19 @@
                  xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]"/>
 
           <action type="add"
+                  btnLabel="addOtherConstraints"
+                  name="otherConstraints" or="otherConstraints"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints">
+            <template>
+              <snippet>
+                    <gmd:otherConstraints>
+                      <gmx:Anchor xlink:href=""></gmx:Anchor>
+                    </gmd:otherConstraints>
+              </snippet>
+            </template>
+          </action>
+
+          <action type="add"
                   btnLabel="addLegalAccessConstraints"
                   name="legalAccessConstraints" or="resourceConstraints"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
@@ -2216,7 +2216,7 @@
             <template>
               <snippet>
                 <gmd:statement>
-                  <gco:CharacterString></gco:CharacterString>
+                  <gco:CharacterString/>
                 </gmd:statement>
               </snippet>
             </template>
@@ -2313,7 +2313,12 @@
                    </gmd:measureDescription>
                    <gmd:result>
                    <gmd:DQ_QuantitativeResult>
-                   <gmd:valueUnit xlink:href="http://www.opengis.net/def/uom/SI/second"/>
+                   <gmd:valueUnit>
+                    <gml:BaseUnit gml:id="id-0">
+                       <gml:identifier codeSpace="http://www.opengis.net/def"/>
+                       <gml:unitsSystem><gco:CharacterString/></gml:unitsSystem>
+                     </gml:BaseUnit>
+                   </gmd:valueUnit>
                    <gmd:value>
                    <gco:Record xsi:type="xs:double"/>
                    </gmd:value>
@@ -2346,8 +2351,8 @@
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
                         <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="id">
-                             <gml:identifier codeSpace=""/>
+                          <gml:BaseUnit gml:id="id-1">
+                             <gml:identifier codeSpace="http://www.opengis.net/def"/>
                              <gml:unitsSystem/>
                           </gml:BaseUnit>
                         </gmd:valueUnit>
@@ -2384,8 +2389,8 @@
                       <gmd:DQ_QuantitativeResult>
                         <gmd:valueUnit>
                           <gml:BaseUnit gml:id="id">
-                             <gml:identifier codeSpace=""/>
-                             <gml:unitsSystem/>
+                             <gml:identifier codeSpace="http://www.opengis.net/def"/>
+                             <gml:unitsSystem><gco:CharacterString/></gml:unitsSystem>
                           </gml:BaseUnit>
                         </gmd:valueUnit>
                         <gmd:value>
@@ -2420,9 +2425,9 @@
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
                         <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="id">
-                             <gml:identifier codeSpace=""/>
-                             <gml:unitsSystem/>
+                          <gml:BaseUnit gml:id="id-2">
+                             <gml:identifier codeSpace="http://www.opengis.net/def"/>
+                             <gml:unitsSystem><gco:CharacterString/></gml:unitsSystem>
                           </gml:BaseUnit>
                         </gmd:valueUnit>
                         <gmd:value>
@@ -2783,6 +2788,7 @@
         <for name="gmd:distributionFormat"/>
         <for name="gmd:report"/>
         <for name="gmd:result"/>
+        <for name="gmd:resourceConstraints"/>
       </flatModeExceptions>
 
       <!--
