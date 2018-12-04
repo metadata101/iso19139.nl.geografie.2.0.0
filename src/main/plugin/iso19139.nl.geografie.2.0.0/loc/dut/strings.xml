@@ -77,17 +77,14 @@
   <revisionDate>Revisie datum</revisionDate>
 
   <beginPosition>Begin</beginPosition>
-  <conformity>Conformiteit</conformity>
+
   <conformity_title>Titel</conformity_title>
   <conformity_date>Datum</conformity_date>
   <explanation>Verklaring</explanation>
   <pass>Conformiteit</pass>
   <indeterminatePosition>Indeterminate position</indeterminatePosition>
 
-
   <inspireThemeURI>INSPIRE themas</inspireThemeURI>
-
-
 
   <spatialResolution>Spatial resolution (scale)</spatialResolution>
   <spatialDistance>Spatial resolution (distance)</spatialDistance>
@@ -210,17 +207,15 @@
   <sds-section-custodian>Responsible custodian</sds-section-custodian>
   <sds-addOperation>Add Operation</sds-addOperation>
 
-
-
   <!-- New strings added for the AngularJS editor -->
   <!-- View and tabs -->
-  <viewTitle><h3>Basis weergave</h3></viewTitle>
+  <viewTitle><h3>Nederlands profiel voor Datasets &amp; Series 2.0 - Basis</h3></viewTitle>
   <viewDescription><div>Het basis formulier kan gebruikt worden voor het bewerken van metadata van Nederlandstalige datasets die gebaseerd zijn op het Rijksdriehoekstelsel. Dit formulier toont een beperkte set van elementen en doet een aantal aannames. Voor het bewerken van alle elementen uit het Nederlands profiel gebruikt u het formulier met titel "Nederlands profiel" (via de weergave knop met het "oogje" aan de rechter zijkant).</div></viewDescription>
 
-  <dutchProfileTitle><h3>Nederlands profiel weergave</h3></dutchProfileTitle>
+  <dutchProfileTitle><h3>Nederlands profiel voor Datasets &amp; Series 2.0 - Volledig</h3></dutchProfileTitle>
   <dutchProfileDescription><div>In deze weergave worden alle elementen van het Nederlands profiel getoond.</div></dutchProfileDescription>
 
-  <fullViewTitle><h3>Volledige weergave</h3></fullViewTitle>
+  <fullViewTitle><h3>Volledige iso19139 weergave</h3></fullViewTitle>
   <fullViewDescription><div>De volledige weergave toont alle ISO elementen.</div></fullViewDescription>
 
   <xmlViewTitle><h3>XML weergave</h3></xmlViewTitle>
