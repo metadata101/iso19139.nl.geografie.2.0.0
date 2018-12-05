@@ -777,12 +777,49 @@
           </action>
 
 
-          <!-- MD_SecurityConstraints  constraints
-          <field name="useLimitation" or="resourceConstraints"
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_SecurityConstraints]">
-          </field>-->
+        <field name="pointOfContact"
+            notDisplayedIfMissing="true"
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact"/>
 
-          <!-- scale -->
+          <action type="add"
+                  btnLabel="addPointOfContact"
+                  or="pointOfContact"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:pointOfContact>
+                  <gmd:CI_ResponsibleParty>
+                    <gmd:organisationName>
+                      <gco:CharacterString />
+                    </gmd:organisationName>
+                    <gmd:contactInfo>
+                      <gmd:CI_Contact>
+                        <gmd:address>
+                          <gmd:CI_Address>
+                            <gmd:electronicMailAddress>
+                              <gco:CharacterString />
+                            </gmd:electronicMailAddress>
+                          </gmd:CI_Address>
+                        </gmd:address>
+                      </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    <gmd:role>
+                      <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
+                    </gmd:role>
+                  </gmd:CI_ResponsibleParty>
+                </gmd:pointOfContact>
+              </snippet>
+            </template>
+          </action>
+
+</section>
+<section name="spatial">
+
+        <field
+            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/
+              gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox"/>
+
+<!-- scale -->
           <field name="scale" or="MD_Resolution"
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution[gmd:MD_Resolution/gmd:equivalentScale]"/>
           <action type="add"
@@ -859,45 +896,6 @@
               </snippet>
             </template>
           </action>
-
-        <field name="pointOfContact"
-            notDisplayedIfMissing="true"
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact"/>
-
-          <action type="add"
-                  btnLabel="addPointOfContact"
-                  or="pointOfContact"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:pointOfContact>
-                  <gmd:CI_ResponsibleParty>
-                    <gmd:organisationName>
-                      <gco:CharacterString />
-                    </gmd:organisationName>
-                    <gmd:contactInfo>
-                      <gmd:CI_Contact>
-                        <gmd:address>
-                          <gmd:CI_Address>
-                            <gmd:electronicMailAddress>
-                              <gco:CharacterString />
-                            </gmd:electronicMailAddress>
-                          </gmd:CI_Address>
-                        </gmd:address>
-                      </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    <gmd:role>
-                      <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
-                    </gmd:role>
-                  </gmd:CI_ResponsibleParty>
-                </gmd:pointOfContact>
-              </snippet>
-            </template>
-          </action>
-
-        <field
-            xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/
-              gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox"/>
 
         </section>
 
@@ -1770,7 +1768,7 @@
                  xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_Constraints]"/>
 
           <action type="add"
-                  btnLabel="addResourceConstraints"
+                  btnLabel="addUseLimitation"
                   name="useLimitation" or="resourceConstraints"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
                   if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints)=0">
