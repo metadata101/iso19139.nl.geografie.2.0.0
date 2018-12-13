@@ -594,7 +594,8 @@
     <!-- ======================================= -->
     <!-- =========== default =================== -->
     <!-- ======================================= -->
-    <view name="default" default="true" hideTimeInCalendar="true" upAndDownControlHidden="true" displayTooltips="true" displayTooltipsMode="icon">
+    <view name="Basis"
+      default="true" hideTimeInCalendar="true" upAndDownControlHidden="true" displayTooltips="true" displayTooltipsMode="icon">
       <sidePanel>
         <directive data-gn-validation-report=""/>
         <directive data-gn-suggestion-list=""/>
@@ -605,7 +606,8 @@
         <text ref="viewTitle"/>
         <text ref="viewDescription"/>
 
-        <directive data-gn-onlinesrc-list=""/>
+        <directive data-gn-onlinesrc-list=""
+          types="thumbnail|onlinesrc|service|fcat"/>
 
         <section name="Basis">
 
@@ -1114,7 +1116,8 @@
 
 
     <view
-        name="dutchprofile" hideTimeInCalendar="true" upAndDownControlHidden="true"
+        name="dutchprofile"
+        hideTimeInCalendar="true" upAndDownControlHidden="true"
         displayTooltips="true" displayTooltipsMode="icon" >
 
       <sidePanel>
@@ -1127,7 +1130,8 @@
         <text ref="dutchProfileTitle"/>
         <text ref="dutchProfileDescription"/>
 
-        <directive data-gn-onlinesrc-list=""/>
+        <directive data-gn-onlinesrc-list=""
+          types="thumbnail|onlinesrc|service|fcat"/>
 
         <section name="dataIdentificatie">
 
@@ -2158,6 +2162,7 @@
           <!--    5.23 Niveau kwaliteitsbeschrijving -->
           <field
             xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope"/>
+
           <action type="add"
                   btnLabel="addQualityLevel"
                   if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode) = 0"
@@ -2175,35 +2180,6 @@
               </snippet>
             </template>
           </action>
-
-            <!--    5.23 Niveau kwaliteitsbeschrijving -->
-          <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope"/>
-          <action type="add"
-                  btnLabel="addQualityLevel"
-                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode) = 0"
-                  name="DQ_Scope" or="DQ_Scope"
-                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope">
-            <template>
-              <snippet>
-                <gmd:DQ_Scope>
-                  <gmd:level>
-                    <gmd:MD_ScopeCode
-                      codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"
-                      codeListValue="dataset"/>
-                  </gmd:level>
-                  <gmd:levelDescription>
-                  <gmd:MD_ScopeDescription>
-
-                  </gmd:MD_ScopeDescription>
-                  </gmd:levelDescription>
-                </gmd:DQ_Scope>
-              </snippet>
-            </template>
-          </action>
-
-
-
 
           <!--   5.24 Algemene beschrijving herkomst .. -->
           <field xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:statement" del="."/>
@@ -2811,7 +2787,9 @@
 
     </view>
 
-    <view name="advanced"  hideTimeInCalendar="true" displayTooltips="true" displayTooltipsMode="icon">
+    <view name="advanced"
+      upAndDownControlHidden="true" hideTimeInCalendar="true"
+      displayTooltips="true" displayTooltipsMode="icon">
       <sidePanel>
         <directive data-gn-validation-report=""/>
         <directive data-gn-suggestion-list=""/>
@@ -2835,7 +2813,8 @@
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
 
-        <directive data-gn-onlinesrc-list=""/>
+        <directive data-gn-onlinesrc-list=""
+          types="thumbnail|onlinesrc|service|fcat"/>
 
         <section xpath="/gmd:MD_Metadata/gmd:distributionInfo" or="distributionInfo"
                  in="/gmd:MD_Metadata"/>
@@ -2942,7 +2921,8 @@
       <text ref="xmlViewTitle"/>
       <text ref="xmlViewDescription"/>
 
-      <!--<directive data-gn-onlinesrc-list=""/>-->
+      <!--<directive data-gn-onlinesrc-list=""
+          types="thumbnail|onlinesrc|service|fcat"/>-->
 
       <tab id="xml" default="true"/>
     </view>
