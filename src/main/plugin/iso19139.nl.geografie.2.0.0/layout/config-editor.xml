@@ -73,18 +73,22 @@
     <for name="gmd:CI_Date" use="data-gn-date-picker">
       <directiveAttributes data-hide-time="true"/>
     </for>
-    <for name="gml:beginPosition" use="data-gn-date-picker">
-      <directiveAttributes data-hide-time="false"/>
-    </for>
-    <for name="gml:endPosition" use="data-gn-date-picker">
-      <directiveAttributes data-hide-time="false"/>
-    </for>
-
+    <for name="gml:beginPosition" use="data-gn-date-picker"/>
+    <for name="gml:endPosition" use="data-gn-date-picker"/>
 
     <for name="gmd:protocol"
       use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="external.theme.protocols"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+    </for>
+
+<for name="gmd:report" addDirective="data-gn-directory-entry-selector" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result">
+      <directiveAttributes
+        data-template-add-action="true"
+        data-search-action="true"
+        data-popup-action="false"
+        data-filter='{"_root": "gmd:DQ_DomainConsistency"}'
+        data-template-type="report"/>
     </for>
 
     <!-- gmx:FileName/@src attribute -->
@@ -215,11 +219,11 @@
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
-    <for name="gmd:title" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title"
+    <!--<for name="gmd:title" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title"
          use="data-gn-keyword-picker">
       <directiveAttributes data-thesaurus-key="external.theme.domainspecifications"
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
-    </for>
+    </for>-->
 
     <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints"
          use="data-gn-keyword-picker">
@@ -2213,10 +2217,12 @@
           </action>
 
           <!--   5.33 Conformiteitindicatie met de specificatie  -->
-          <field name="DQ_ConformanceResult" or="report"
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency]"/>
+          <field name="conformanceStatement"
+                 xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency]"
+                 or="report"
+                 in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality"/>
 
-          <action type="add"
+          <!--<action type="add"
                   btnLabel="addConformance"
                   name="conformanceStatement"
                   or="report"
@@ -2258,7 +2264,7 @@
                 </gmd:report>
               </snippet>
             </template>
-          </action>
+          </action>-->
 
           <!--    5.34 Verklaring.. -->
           <!--      5.35 Specificatie  -->
