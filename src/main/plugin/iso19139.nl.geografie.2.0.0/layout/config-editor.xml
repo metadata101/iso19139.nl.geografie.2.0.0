@@ -74,10 +74,10 @@
       <directiveAttributes data-hide-time="true"/>
     </for>
     <for name="gml:beginPosition" use="data-gn-date-picker">
-      <directiveAttributes data-hide-time="true"/>
+      <directiveAttributes data-hide-time="false"/>
     </for>
     <for name="gml:endPosition" use="data-gn-date-picker">
-      <directiveAttributes data-hide-time="true"/>
+      <directiveAttributes data-hide-time="false"/>
     </for>
 
 
@@ -780,12 +780,12 @@
 
 
         <field name="pointOfContact"
-            notDisplayedIfMissing="true"
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact"/>
 
           <action type="add"
                   btnLabel="addPointOfContact"
                   or="pointOfContact"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact)=0"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
@@ -1033,6 +1033,7 @@
 
           <action type="add" name="metadataPointOfContact"
                   btnLabel="addPointOfContact"
+                  if="count(gmd:MD_Metadata/gmd:contact)=0"
                   or="contact" in="/gmd:MD_Metadata">
             <template>
               <snippet>

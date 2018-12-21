@@ -2124,168 +2124,46 @@
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
   </codelist>
-  <!-- ==================================================== -->
-  <codelist name="srv:DCPList">
+
+   <codelist name="gco:nilReason">
     <entry>
-      <description>DCP is XML</description>
-      <code>XML</code>
-      <label>XML</label>
+      <code>missing</code>
+      <label>Missing</label>
     </entry>
     <entry>
-      <description>DCP is CORBA</description>
-      <code>CORBA</code>
-      <label>CORBA</label>
+      <code>inapplicable</code>
+      <label>Inapplicable</label>
     </entry>
     <entry>
-      <description>DCP is JAVA</description>
-      <code>JAVA</code>
-      <label>JAVA</label>
+      <code>template</code>
+      <label>Template</label>
     </entry>
     <entry>
-      <description>DCP is COM</description>
-      <code>COM</code>
-      <label>COM</label>
+      <code>unknown</code>
+      <label>Unknown</label>
     </entry>
     <entry>
-      <description>DCP is SQL</description>
-      <code>SQL</code>
-      <label>SQL</label>
-    </entry>
-    <entry>
-      <description>DCP is WebServices</description>
-      <code>WebServices</code>
-      <label>WebServices</label>
-    </entry>
-    <entry>
-      <code>httpGet</code>
-      <label>httpGet</label>
-      <description>Vraagt een representatie van de specifieke resource, door middel van een URL
-        codering of naam/waarde paar.
-      </description>
-    </entry>
-    <entry>
-      <code>httpPost</code>
-      <label>httpPost</label>
-      <description>Verzend gebruikersdata naar de ge&#239;dentificeerde resource. De data is
-        opgenomen in de "request".
-      </description>
-    </entry>
-    <entry>
-      <code>httpSoap</code>
-      <label>httpSoap</label>
-      <description>Verzend gebruikersdata naar de ge&#239;dentificeerde resource over httpPost. De
-        data is opgenomen
-        in de "request". Deze "request" is een "SOAP request".
-      </description>
+      <code>withheld</code>
+      <label>With held</label>
     </entry>
   </codelist>
-  <!--=== CouplingType from ISO19119 ===-->
-  <codelist name="srv:SV_CouplingType">
+
+  <codelist name="indeterminatePosition">
     <entry>
-      <code>tight</code>
-      <label>tight</label>
-      <description>Een service instance die gekoppeld is met een specifieke dataset of dataset
-        serie. Service metadata dienen zowel de service als geografische dataset te beschrijven
-        (door middel van ISO
-        19115).
-      </description>
+      <code>after</code>
+      <label>After</label>
     </entry>
     <entry>
-      <code>mixed</code>
-      <label>mixed</label>
-      <description>Een service instance die gekoppeld is met een specifieke dataset of dataset
-        serie. Service metadata dienen zowel de service als geografische dataset te beschrijven
-        (door middel van ISO
-        19115). Daarnaast kan deze service instance ook gebruikt worden met externe data (data die
-        niet wordt beschreven door de operatesOn klasse).
-      </description>
+      <code>before</code>
+      <label>Before</label>
     </entry>
     <entry>
-      <code>loose</code>
-      <label>loose</label>
-      <description>Een service instance die niet gekoppeld is met een specifieke dataset of dataset
-        serie.
-        Looselycoupled services zouden een associatie kunnen hebben met een datatype door de
-        serviceType definitie. Metadata voor data wordt niet geleverd in de service metadata.
-      </description>
-    </entry>
-  </codelist>
-  <!-- ==================================================== -->
-  <!-- ==================================================== -->
-  <codelist name="srv:SV_ServiceType">
-    <entry>
-      <code>OGC:CSW</code>
-      <label>OGC:CSW</label>
-      <description>Web Catalogue Service</description>
+      <code>now</code>
+      <label>Now</label>
     </entry>
     <entry>
-      <code>OGC:WMS</code>
-      <label>OGC:WMS</label>
-      <description>Web Map Service</description>
-    </entry>
-    <entry>
-      <code>OGC:WFS</code>
-      <label>OGC:WFS</label>
-      <description>Web Feature Service</description>
-    </entry>
-    <entry>
-      <code>OGC:WCS</code>
-      <label>OGC:WCS</label>
-      <description>Web Coverage Service</description>
-    </entry>
-    <entry>
-      <code>OGC:WCTS</code>
-      <label>OGC:WCTS</label>
-      <description>Web Coordinate Transformation Service</description>
-    </entry>
-    <entry>
-      <code>OGC:WPS</code>
-      <label>OGC:WPS</label>
-      <description>Web Processing Service</description>
-    </entry>
-    <entry>
-      <code>UKST</code>
-      <label>UKST</label>
-      <description>Unknown Service Type</description>
-    </entry>
-    <entry>
-      <code>OGC:WMC</code>
-      <label>OGC:WMC</label>
-      <description>Web Map Context</description>
-    </entry>
-    <entry>
-      <code>OGC:GML</code>
-      <label>OGC:GML</label>
-      <description>Geography Markup Language</description>
-    </entry>
-    <entry>
-      <code>OGC:KML</code>
-      <label>OGC:KML</label>
-      <description>Keyhole Mark-up Language</description>
-    </entry>
-    <entry>
-      <code>website</code>
-      <label>website</label>
-      <description>website</description>
-    </entry>
-    <entry>
-      <code>download</code>
-      <label>download</label>
-      <description>download</description>
-    </entry>
-  </codelist>
-  <codelist name="srv:SV_ParameterDirection">
-    <entry>
-      <code>in</code>
-      <label>Input</label>
-    </entry>
-    <entry>
-      <code>out</code>
-      <label>Output</label>
-    </entry>
-    <entry>
-      <code>in/out</code>
-      <label>Input/output</label>
+      <code>unknown</code>
+      <label>Unknown</label>
     </entry>
   </codelist>
 </codelists>
