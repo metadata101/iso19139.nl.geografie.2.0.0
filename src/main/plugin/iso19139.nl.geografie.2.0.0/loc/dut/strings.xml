@@ -221,8 +221,8 @@
   <xmlViewTitle><h3>XML weergave</h3></xmlViewTitle>
   <xmlViewDescription><div>In deze weergave worden alle ingevulde elementen getoond in XML.</div></xmlViewDescription>
 
-  <dutchprofile>Nederlands profiel</dutchprofile>
-  <dutchprofile2>Nederlands profiel2</dutchprofile2>
+  <dutchprofile>Optionele elementen</dutchprofile>
+  <dutchprofile2>Optionele elementen</dutchprofile2>
   <dataIdentificatie>Identificatie</dataIdentificatie>
   <distributorContact>Contact informatie</distributorContact>
 
@@ -366,8 +366,8 @@
   <restrictions>Restricties en beperkingen</restrictions>
   <addParentIdentifier>Voeg parent toe</addParentIdentifier>
 
-  <Basis>Basis elementen</Basis>
-  <Extra>Extra elementen</Extra>
+  <Basis>Basis</Basis>
+  <Extra>Extra</Extra>
   <qos>Service kwaliteit</qos>
   <addQOS>Voeg service kwaliteit toe</addQOS>
 
