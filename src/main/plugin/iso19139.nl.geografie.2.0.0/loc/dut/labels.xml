@@ -643,7 +643,7 @@
     <description>Niveau (dataset of serie) waar de kwaliteitsbeschrijving betrekking op heeft.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:features" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:DQ_Scope.levelDescription/gmd:MD_ScopeDescription/gmd:features">
+  <element name="gmd:features" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:DQ_Scope/levelDescription/gmd:MD_ScopeDescription/gmd:features">
     <label>Features</label>
     <description>Naam van de ruimtelijke object types</description>
   </element>
@@ -786,6 +786,12 @@
     <condition>mandatory</condition>
   </element>
   <!-- ==================================================== -->
+  <element name="gmd:hierarchyLevelName" context="/gmd:MD_Metadata/gmd:hierarchyLevelName">
+    <label>Hiërarchisch niveau naam</label>
+    <description>Naam van het hiërarchisch niveau waar de metadata betrekking op heeft. Verplicht als Hiërarchisch niveau niet gelijk is aan dataset</description>
+    <help_link>http://wiki.geonovum.nl/index.php/2.4.4_Hi%C3%ABrarchieniveau naam</help_link>
+    <condition>C</condition>
+  </element>
   <element name="gmd:hierarchyLevelName" context="/gmd:MD_Metadata/gmd:hierarchyLevelName">
     <label>Hiërarchisch niveau naam</label>
     <description>Naam van het hiërarchisch niveau waar de metadata betrekking op heeft. Verplicht als Hiërarchisch niveau niet gelijk is aan dataset</description>

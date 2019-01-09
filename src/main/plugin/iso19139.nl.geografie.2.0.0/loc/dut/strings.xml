@@ -145,7 +145,6 @@
   <addCrs7409>ETRS89-GRS80-EVRS</addCrs7409>
 
   <!-- String for INSPIRE SDS tab -->
-
   <inspire_sds_cc1>Conformance class 1: invocable</inspire_sds_cc1>
   <inspire_sds_cc2>Conformance class 2: interoperable</inspire_sds_cc2>
   <inspire_sds_cc3>Conformance class 3: harmonized</inspire_sds_cc3>
@@ -173,11 +172,11 @@
     reported in the metadata: Availability, Performance and Capacity. This button will add the
     missing criteria.
   </sds-add-qualityofserviceHelp>
-  <qos_measure>Measure:</qos_measure>
+  <qos_measure>Maat:</qos_measure>
   <qos_uom>UOM</qos_uom>
-  <qos_description>Description</qos_description>
-  <qos_value>Value</qos_value>
-  <sds-section-crs>Coordinate reference system</sds-section-crs>
+  <qos_description>Omschrijving</qos_description>
+  <qos_value>Waarde</qos_value>
+  <sds-section-crs>Coordinaat referentie systeem</sds-section-crs>
 
   <sds-fix-category>Fix the Category element</sds-fix-category>
   <sds-fix-categoryHelp>(Rec1) Replace gco:CharacterString with gmx:Anchor in the description
@@ -210,10 +209,10 @@
   <!-- New strings added for the AngularJS editor -->
   <!-- View and tabs -->
   <viewTitle><h3>Nederlands profiel voor Datasets &amp; Series 2.0 - Basis</h3></viewTitle>
-  <viewDescription><div>Het basis formulier kan gebruikt worden voor het bewerken van metadata van Nederlandstalige datasets die gebaseerd zijn op het Rijksdriehoekstelsel. Dit formulier toont een beperkte set van elementen en doet een aantal aannames. Voor het bewerken van alle elementen uit het Nederlands profiel gebruikt u het formulier met titel "Nederlands profiel" (via de weergave knop met het "oogje" aan de rechter zijkant).</div></viewDescription>
+  <viewDescription><div>Het basis formulier kan gebruikt worden voor het bewerken van metadata van Nederlandstalige datasets die gebaseerd zijn op het Rijksdriehoekstelsel. Dit formulier toont een beperkte set van elementen en doet een aantal aannames. Voor het bewerken van alle elementen uit het Nederlands profiel gebruikt u het formulier met titel "Optionele &amp; conditionele elementen" (via de weergave knop met het "oogje" aan de rechter zijkant).</div></viewDescription>
 
-  <dutchProfileTitle><h3>Nederlands profiel voor Datasets &amp; Series 2.0 - Optionele elementen</h3></dutchProfileTitle>
-  <dutchProfileDescription><div>In deze weergave worden ook optionele elementen van het Nederlands profiel voor datasets en series getoond.</div></dutchProfileDescription>
+  <dutchProfileTitle><h3>Nederlands profiel voor Datasets &amp; Series 2.0 - Optionele &amp; conditionele elementen</h3></dutchProfileTitle>
+  <dutchProfileDescription><div>In deze weergave worden ook optionele en conditionele elementen van het Nederlands profiel voor datasets en series getoond.</div></dutchProfileDescription>
 
   <fullViewTitle><h3>Volledige iso19139 weergave</h3></fullViewTitle>
   <fullViewDescription><div>De volledige weergave toont alle ISO elementen.</div></fullViewDescription>
@@ -322,7 +321,7 @@
   <addDistribution>Distributie toevoegen</addDistribution>
   <addDistributionFormat>Distributie formaat toevoegen</addDistributionFormat>
   <addHierarchy>Hiërarchisch niveau toevoegen</addHierarchy>
-  <addhierarchyLevelName>Beschrijving hiërarchisch niveau toevoegen</addhierarchyLevelName>
+  <addhierarchyLevelName>Naam hiërarchisch niveau toevoegen</addhierarchyLevelName>
   <addDistributionOrderProcess>Distributie bestelproces toevoegen</addDistributionOrderProcess>
   <addTemporalExtent>Temporeel element toevoegen</addTemporalExtent>
   <addDistributor>Distributeur toevoegen</addDistributor>
@@ -384,5 +383,7 @@
 <CompletenessOmission>Compleetheid</CompletenessOmission>
 <AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid</AbsoluteExternalPositionalAccuracy>
 <ProcessStep>Bewerkings stap</ProcessStep>
+<addQualityScope>Niveau kwaliteitsbeschrijving toevoegen</addQualityScope>
+<addQualityScopeDesc>Beschrijving niveau kwaliteitsbeschrijving toevoegen</addQualityScopeDesc>
 
 </strings>

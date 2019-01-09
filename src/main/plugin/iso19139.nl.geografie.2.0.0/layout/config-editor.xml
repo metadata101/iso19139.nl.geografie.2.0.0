@@ -82,15 +82,6 @@
                            data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
-<for name="gmd:report" addDirective="data-gn-directory-entry-selector" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result">
-      <directiveAttributes
-        data-template-add-action="true"
-        data-search-action="true"
-        data-popup-action="false"
-        data-filter='{"_root": "gmd:DQ_DomainConsistency"}'
-        data-template-type="report"/>
-    </for>
-
     <!-- gmx:FileName/@src attribute -->
     <for name="src" use="data-gn-logo-selector"/>
 
@@ -143,7 +134,7 @@
         data-search-action="true"
         data-popup-action="true"
         data-template-type="contact"
-        data-insert-modes=""
+        data-insert-modes="text"
         data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"/>
     </for>
     <for name="gmd:pointOfContact" addDirective="data-gn-directory-entry-selector">
@@ -152,7 +143,7 @@
         data-search-action="true"
         data-popup-action="true"
         data-template-type="contact"
-        data-insert-modes=""
+        data-insert-modes="text"
         data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"/>
     </for>
     <for name="gmd:distributorContact" addDirective="data-gn-directory-entry-selector">
@@ -161,7 +152,7 @@
         data-search-action="true"
         data-popup-action="true"
         data-template-type="contact"
-        data-insert-modes=""
+        data-insert-modes="text"
         data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"/>
     </for>
     <for name="gmd:processor" addDirective="data-gn-directory-entry-selector">
@@ -170,7 +161,7 @@
         data-search-action="true"
         data-popup-action="true"
         data-template-type="contact"
-        data-insert-modes=""
+        data-insert-modes="text"
         data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"/>
     </for>
     <for name="gmd:citedResponsibleParty" addDirective="data-gn-directory-entry-selector">
@@ -179,19 +170,18 @@
         data-search-action="true"
         data-popup-action="true"
         data-template-type="contact"
-        data-insert-modes=""
+        data-insert-modes="text"
         data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"/>
     </for>
-    <!-- TODO: Review Dutch schemas - For 1.3 this was not defined
-   <for name="gmd:report" addDirective="data-gn-directory-entry-selector">
-     <directiveAttributes
-       data-template-add-action="true"
-       data-search-action="true"
-       data-popup-action="true"
-       data-filter='{"_root": "gmd:DQ_DomainConsistency"}'
-       data-insert-modes=""
-       data-template-type="report"/>
-   </for>-->
+    <for name="gmd:report" addDirective="data-gn-directory-entry-selector" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result">
+      <directiveAttributes
+        data-template-add-action="true"
+        data-search-action="true"
+        data-popup-action="false"
+        data-filter='{"_root": "gmd:DQ_DomainConsistency"}'
+        data-template-type="report"
+        data-insert-modes="text" />
+    </for>
 
 
     <for name="gmd:descriptiveKeywords" addDirective="data-gn-thesaurus-selector">
@@ -738,7 +728,7 @@
                  xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_Constraints]"/>
 
           <action type="add"
-                  btnLabel="adduseLimitation"
+                  btnLabel="addUseLimitation"
                   name="useLimitation" or="resourceConstraints" forceLabel="true"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
                   if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints)=0">
@@ -761,9 +751,24 @@
           </field>
 
           <action type="add"
+                  btnLabel="addOtherConstraints"
+                  name="otherConstraints" or="otherConstraints"
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:otherConstraints) &lt; 2">
+            <template>
+              <snippet>
+                    <gmd:otherConstraints>
+                      <gmx:Anchor xlink:href=""></gmx:Anchor>
+                    </gmd:otherConstraints>
+              </snippet>
+            </template>
+          </action>
+
+          <action type="add"
                   btnLabel="addLegalAccessConstraints"
                   name="legalAccessConstraints" or="resourceConstraints" forceLabel="true"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints)=0">
             <template>
               <snippet>
                 <gmd:resourceConstraints>
@@ -882,7 +887,7 @@
 
           <action type="add" del="."
                   btnLabel="addReferenceSystem"
-                  if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier) &lt; 2"
+                  if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier) = 0"
                   or="referenceSystemInfo"
                   in="/gmd:MD_Metadata">
             <template>
@@ -976,8 +981,6 @@
 
         </section>
 
-
-
         <section name="metadata">
 
           <field xpath="/gmd:MD_Metadata/gmd:language" in="/gmd:MD_Metadata"/>
@@ -1011,22 +1014,6 @@
                     codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
                     codeListValue="dataset"/>
                 </gmd:hierarchyLevel>
-              </snippet>
-            </template>
-          </action>
-
-          <field
-            xpath="/gmd:MD_Metadata/gmd:hierarchyLevelName" removable="true" />
-          <action type="add"
-                  btnLabel="addhierarchyLevelName"
-                  if="count(gmd:MD_Metadata/gmd:hierarchyLevelName)=0"
-                  name="hierarchyLevelName" or="hierarchyLevelName"
-                  in="/gmd:MD_Metadata">
-            <template>
-              <snippet>
-                <gmd:hierarchyLevelName>
-                  <gco:CharacterString></gco:CharacterString>
-                </gmd:hierarchyLevelName>
               </snippet>
             </template>
           </action>
@@ -1870,7 +1857,8 @@
           <action type="add"
                   btnLabel="addOtherConstraints"
                   name="otherConstraints" or="otherConstraints"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints">
+                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:otherConstraints) &lt; 2">
             <template>
               <snippet>
                     <gmd:otherConstraints>
@@ -2206,10 +2194,10 @@
           </action>
           <!--    5.23 Niveau kwaliteitsbeschrijving -->
           <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope"/>
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level"/>
 
           <action type="add"
-                  btnLabel="addQualityLevel"
+                  btnLabel="addQualityScope"
                   if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode) = 0"
                   name="DQ_Scope" or="DQ_Scope"
                   in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope">
@@ -2222,6 +2210,40 @@
                       codeListValue="dataset"/>
                   </gmd:level>
                 </gmd:DQ_Scope>
+              </snippet>
+            </template>
+          </action>
+
+          <!--    5.23 Beschrijving scope kwaliteitsbeschrijving -->
+          <field name="levelDescription"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:levelDescription" templateModeOnly="true"
+
+                 del=".">
+            <template>
+              <values>
+                <key label="title" tooltip="title"
+                     xpath="gmd:features/@title">
+                </key>
+              </values>
+              <snippet>
+                <gmd:levelDescription>
+                    <gmd:features xlink:title="{{title}}" />
+                  </gmd:levelDescription>
+              </snippet>
+            </template>
+
+            </field>
+
+          <action type="add"
+                  btnLabel="addQualityScopeDesc"
+                  name="levelDescription" or="levelDescription"
+                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:levelDescription)=0"
+                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope">
+            <template>
+              <snippet>
+                  <gmd:levelDescription>
+                    <gmd:features xlink:title="" />
+                  </gmd:levelDescription>
               </snippet>
             </template>
           </action>
@@ -2261,95 +2283,6 @@
                  xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency]"
                  or="report"
                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality"/>
-
-          <!--<action type="add"
-                  btnLabel="addConformance"
-                  name="conformanceStatement"
-                  or="report"
-                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
-            <template>
-              <snippet>
-                <gmd:report>
-                  <gmd:DQ_DomainConsistency>
-                    <gmd:result>
-                      <gmd:DQ_ConformanceResult>
-                        <gmd:specification>
-                          <gmd:CI_Citation>
-                            <gmd:title>
-                              <gco:CharacterString></gco:CharacterString>
-                            </gmd:title>
-                            <gmd:date>
-                              <gmd:CI_Date>
-                                <gmd:date>
-                                  <gco:Date></gco:Date>
-                                </gmd:date>
-                                <gmd:dateType>
-                                  <gmd:CI_DateTypeCode
-                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
-                                    codeListValue="publication"/>
-                                </gmd:dateType>
-                              </gmd:CI_Date>
-                            </gmd:date>
-                          </gmd:CI_Citation>
-                        </gmd:specification>
-                        <gmd:explanation>
-                          <gco:CharacterString></gco:CharacterString>
-                        </gmd:explanation>
-                        <gmd:pass>
-                          <gco:Boolean></gco:Boolean>
-                        </gmd:pass>
-                      </gmd:DQ_ConformanceResult>
-                    </gmd:result>
-                  </gmd:DQ_DomainConsistency>
-                </gmd:report>
-              </snippet>
-            </template>
-          </action>-->
-
-          <!--    5.34 Verklaring.. -->
-          <!--      5.35 Specificatie  -->
-          <!--           5.36 Specificatie datum .. -->
-          <!--      5.37 Specificatie datum type ... -->
-          <!--     5.38 Type waarde .. -->
-
-          <!--   QOS  -->
-          <field
-            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_ConceptualConsistency]" />
-
-          <action type="add"
-                  btnLabel="addQOS"
-                  name="ConceptualConsistency"
-                  or="report"
-                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
-            <template>
-              <snippet>
-                <gmd:report>
-                  <gmd:DQ_ConceptualConsistency>
-                  <gmd:nameOfMeasure>
-                   <gmx:Anchor
-                   xlink:href="http://inspire.ec.europa.eu/metadatacodelist/QualityOfServiceCriteriaCode/performance">performance</gmx:Anchor>
-                   </gmd:nameOfMeasure>
-                   <gmd:measureDescription>
-                   <gco:CharacterString/>
-                   </gmd:measureDescription>
-                   <gmd:result>
-                   <gmd:DQ_QuantitativeResult>
-                   <gmd:valueUnit>
-                    <gml:BaseUnit gml:id="id-0">
-                       <gml:identifier codeSpace="http://www.opengis.net/def"/>
-                       <gml:unitsSystem><gco:CharacterString/></gml:unitsSystem>
-                     </gml:BaseUnit>
-                   </gmd:valueUnit>
-                   <gmd:value>
-                   <gco:Record xsi:type="xs:double"/>
-                   </gmd:value>
-                   </gmd:DQ_QuantitativeResult>
-                   </gmd:result>
-                   </gmd:DQ_ConceptualConsistency>
-                </gmd:report>
-              </snippet>
-            </template>
-          </action>
 
           <field name="DQ_CompletenessOmission" or="report"
             xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_CompletenessOmission]"></field>
