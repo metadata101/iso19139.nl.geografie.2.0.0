@@ -2221,13 +2221,13 @@
                  del=".">
             <template>
               <values>
-                <key label="title" tooltip="title"
-                     xpath="gmd:features/@title">
+                <key label="levelDescription" tooltip="gmd:features"
+                     xpath="gmd:features/@xlink:title">
                 </key>
               </values>
               <snippet>
                 <gmd:levelDescription>
-                    <gmd:features xlink:title="{{title}}" />
+                    <gmd:features xlink:title="{{levelDescription}}" />
                   </gmd:levelDescription>
               </snippet>
             </template>

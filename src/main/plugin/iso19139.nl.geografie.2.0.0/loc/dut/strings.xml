@@ -385,5 +385,5 @@
 <ProcessStep>Bewerkings stap</ProcessStep>
 <addQualityScope>Niveau kwaliteitsbeschrijving toevoegen</addQualityScope>
 <addQualityScopeDesc>Beschrijving niveau kwaliteitsbeschrijving toevoegen</addQualityScopeDesc>
-
+<levelDescription>Beschrijving niveau kwaliteitsbeschrijving</levelDescription>
 </strings>
