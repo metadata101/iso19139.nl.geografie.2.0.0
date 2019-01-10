@@ -835,7 +835,7 @@
             xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution[gmd:MD_Resolution/gmd:equivalentScale]"/>
           <action type="add"
                   btnLabel="addScale"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale) &lt; 2"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale) = 0"
                   name="equivalentScale" or="spatialResolution"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
@@ -862,7 +862,7 @@
           <action type="add"
                   btnLabel="addResolution"
                   name="distance" or="spatialResolution"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance) &lt; 2"
+                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance) = 0"
                   in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
@@ -2231,7 +2231,6 @@
                   </gmd:levelDescription>
               </snippet>
             </template>
-
             </field>
 
           <action type="add"
@@ -2279,10 +2278,9 @@
           </action>
 
           <!--   5.33 Conformiteitindicatie met de specificatie  -->
-          <field name="conformanceStatement"
+          <field name="conformanceStatement" or="report"
                  xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency]"
-                 or="report"
-                 in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality"/>
+                 />
 
           <field name="DQ_CompletenessOmission" or="report"
             xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_CompletenessOmission]"></field>
@@ -3013,11 +3011,10 @@
              xpath="gmd:identificationInfo/*/
                       gmd:resourceConstraints/gmd:MD_LegalConstraints/
                         gmd:otherConstraints"
-             use="textarea"
              insertMode="gn_create"
              removable="true">
         <template>
-          <![CDATA[<gco:CharacterString xmlns:gco='http://www.isotc211.org/2005/gco'>{{value}}</gco:CharacterString>]]></template>
+          <![CDATA[<gmx:Anchor xlink:href="">{{value}}</gmx:Anchor>]]></template>
       </field>
     </section>
 

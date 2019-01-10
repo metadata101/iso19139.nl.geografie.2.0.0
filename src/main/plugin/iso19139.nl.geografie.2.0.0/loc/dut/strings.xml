@@ -30,7 +30,7 @@
   <mdContactInfo>Metadata contact</mdContactInfo>
   <refDate>Referentie datum</refDate>
   <temporalRef>Temporele informatie</temporalRef>
-  <constraintInfo>Toegang restrictie informatie</constraintInfo>
+  <constraintInfo>Toegangs beperkingen</constraintInfo>
 
   <!-- New strings added for the AngularJS editor -->
   <!-- View and tabs -->
@@ -60,7 +60,7 @@
   <referenceSystemInfo>Ref. systeem</referenceSystemInfo>
   <contentInfo>Inhoud</contentInfo>
   <portrayalCatalogueInfo>Weergave</portrayalCatalogueInfo>
-  <metadataConstraints>Md. restricties</metadataConstraints>
+  <metadataConstraints>Md. beperkingen</metadataConstraints>
   <metadataMaintenance>Md. ouderhoud</metadataMaintenance>
   <applicationSchemaInfo>Schema info</applicationSchemaInfo>
   <noThesaurusName>Trefwoorden</noThesaurusName>
@@ -92,11 +92,11 @@
   <useConstraints>Gebruiks beperkingen</useConstraints>
 
   <legalUseLimitation>Juridische gebruiks limitatie</legalUseLimitation>
-  <addLegalUseLimitation>Limitatie toevoegen</addLegalUseLimitation>
-  <legalAccessConstraints>Juridische toegangs restricties</legalAccessConstraints>
-  <addLegalAccessConstraints>Restrictie toevoegen</addLegalAccessConstraints>
+  <addLegalUseLimitation>Juridische gebruiks limitatie toevoegen</addLegalUseLimitation>
+  <legalAccessConstraints>Juridische toegangs beperkingen</legalAccessConstraints>
+  <addLegalAccessConstraints>Juridische toegangs beperking toevoegen</addLegalAccessConstraints>
   <legalUseConstraints>Juridische gebruiks beperking</legalUseConstraints>
-  <addLegalUseConstraints>Restrictie toevoegen</addLegalUseConstraints>
+  <addLegalUseConstraints>Juridische gebruiks beperking toevoegen</addLegalUseConstraints>
 
   <add-resource-id>Compute resource identifier</add-resource-id>
   <add-resource-idHelp>Compose the resource identifier using the catalog URL and the metadata
@@ -104,6 +104,7 @@
   </add-resource-idHelp>
   <add-extent-from-geokeywords>Compute extent from keyword</add-extent-from-geokeywords>
   <addGeographicIdentifier>Identifier geografisch gebied</addGeographicIdentifier>
+  <addGeographicBoundingBox>Dekking toevoegen</addGeographicBoundingBox>
   <addVerticalExtent>Verticale dekking toevoegen</addVerticalExtent>
   <add-extent-from-geokeywordsHelp>Analyze each keyword of type place and add matching extent.
   </add-extent-from-geokeywordsHelp>
@@ -323,7 +324,7 @@
   <addHierarchy>Hiërarchisch niveau toevoegen</addHierarchy>
   <addhierarchyLevelName>Naam hiërarchisch niveau toevoegen</addhierarchyLevelName>
   <addDistributionOrderProcess>Distributie bestelproces toevoegen</addDistributionOrderProcess>
-  <addTemporalExtent>Temporeel element toevoegen</addTemporalExtent>
+  <addTemporalExtent>Temporele dekking toevoegen</addTemporalExtent>
   <addDistributor>Distributeur toevoegen</addDistributor>
   <addCharacterSet>Karakterset toevoegen</addCharacterSet>
   <AddProcessStep>Voeg bewerkingsstap toe</AddProcessStep>
@@ -362,7 +363,7 @@
   <securityConstraints>Veiligheids beperkingen</securityConstraints>
   <addReferenceSystem>Referentie systeem toevoegen</addReferenceSystem>
 
-  <restrictions>Restricties en beperkingen</restrictions>
+  <restrictions>Beperkingen</restrictions>
   <addParentIdentifier>Voeg parent toe</addParentIdentifier>
 
   <Basis>Basis</Basis>

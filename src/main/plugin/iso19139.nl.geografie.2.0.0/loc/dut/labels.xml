@@ -792,12 +792,7 @@
     <help_link>http://wiki.geonovum.nl/index.php/2.4.4_Hi%C3%ABrarchieniveau naam</help_link>
     <condition>C</condition>
   </element>
-  <element name="gmd:hierarchyLevelName" context="/gmd:MD_Metadata/gmd:hierarchyLevelName">
-    <label>Hiërarchisch niveau naam</label>
-    <description>Naam van het hiërarchisch niveau waar de metadata betrekking op heeft. Verplicht als Hiërarchisch niveau niet gelijk is aan dataset</description>
-    <help_link>http://wiki.geonovum.nl/index.php/2.4.4_Hi%C3%ABrarchieniveau naam</help_link>
-    <condition>C</condition>
-  </element>
+
   <!-- ==================================================== -->
   <element name="gmd:identificationInfo" context="/gmd:MD_Metadata/gmd:identificationInfo">
     <label>Identificatie informatie</label>
@@ -1848,6 +1843,11 @@
   <element name="gml:BaseUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit">
     <label>Basis eenheid</label>
     <description/>
+  </element>
+
+  <element name="gmx:Anchor">
+    <label>Anker</label>
+    <description>URL naar meer informatie</description>
   </element>
 
   <element name="gmx:MX_ScopeCode">
