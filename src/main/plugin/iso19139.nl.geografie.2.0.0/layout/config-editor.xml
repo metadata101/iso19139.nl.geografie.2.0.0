@@ -370,20 +370,6 @@
         <col del=".."/>
       </row>
     </table>
-    <table for="gmd:CI_OnlineResource">
-      <header>
-        <col label="gmd:protocol"/>
-        <col label="gmd:linkage"/>
-        <col label="gmd:name"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:protocol"/>
-        <col xpath="gmd:linkage"/>
-        <col xpath="gmd:name"/>
-        <col del=".."/>
-      </row>
-    </table>
     <table for="gmd:MD_Format">
       <header>
         <col label="gmd:name"/>
@@ -454,117 +440,6 @@
       </row>
     </table>
 
-    <table for="gmd:DQ_ConformanceResult" label="ConformanceResult">
-      <header>
-        <col label="gmd:title"/>
-        <col label="gmd:date"/>
-        <col label="gmd:explanation"/>
-        <col label="gmd:pass"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:specification/gmd:CI_Citation/gmd:title"/>
-        <col xpath="gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date"/>
-        <col xpath="gmd:explanation"/>
-        <col xpath="gmd:pass"/>
-        <col del=".."/>
-      </row>
-    </table>
-
-    <table for="gmd:DQ_DomainConsistency" label="DomainConsistency">
-      <header>
-        <col label="gmd:title"/>
-        <col label="gmd:date"/>
-        <col label="gmd:explanation"/>
-        <col label="gmd:pass"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title"/>
-        <col xpath="gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date"/>
-        <col xpath="gmd:result/gmd:DQ_ConformanceResult/gmd:explanation"/>
-        <col xpath="gmd:result/gmd:DQ_ConformanceResult/gmd:pass"/>
-        <col del=".."/>
-      </row>
-    </table>
-
-    <table for="gmd:DQ_ConceptualConsistency" label="qos">
-      <header>
-        <col label="gmd:nameOfMeasure"/>
-        <col label="gmd:measureDescription"/>
-        <col label="gml:identifier"/>
-        <col label="gml:unitsSystem"/>
-        <col label="gmd:value"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:nameOfMeasure"/>
-        <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
-        <col del=".."/>
-      </row>
-    </table>
-
-    <table for="gmd:DQ_TopologicalConsistency" label="TopologicalConsistency">
-      <header>
-        <col label="gmd:nameOfMeasure"/>
-        <col label="gmd:measureDescription"/>
-        <col label="gml:identifier"/>
-        <col label="gml:unitsSystem"/>
-        <col label="gmd:value"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:nameOfMeasure"/>
-        <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
-        <col del=".."/>
-      </row>
-    </table>
-
-
-    <table for="gmd:DQ_CompletenessOmission" label="CompletenessOmission">
-      <header>
-        <col label="gmd:nameOfMeasure"/>
-        <col label="gmd:measureDescription"/>
-        <col label="gml:identifier"/>
-        <col label="gml:unitsSystem"/>
-        <col label="gmd:value"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:nameOfMeasure"/>
-        <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
-        <col del=".."/>
-      </row>
-    </table>
-
-    <table for="gmd:DQ_AbsoluteExternalPositionalAccuracy" label="AbsoluteExternalPositionalAccuracy">
-      <header>
-        <col label="gmd:nameOfMeasure"/>
-        <col label="gmd:measureDescription"/>
-        <col label="gml:identifier"/>
-        <col label="gml:unitsSystem"/>
-        <col label="gmd:value"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:nameOfMeasure"/>
-        <col xpath="gmd:measureDescription"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem"/>
-        <col xpath="gmd:result/gmd:DQ_QuantitativeResult/gmd:value"/>
-        <col del=".."/>
-      </row>
-    </table>
-
     <table for="gmd:LI_ProcessStep" label="ProcessStep">
       <header>
         <col label="gmd:description"/>
@@ -601,7 +476,7 @@
         <text ref="viewDescription"/>
 
         <directive data-gn-onlinesrc-list=""
-          types="thumbnail|onlinesrc|service|fcat"/>
+          types="thumbnail|onlinesrc|parent|fcat"/>
 
         <section name="Basis">
 
@@ -1123,7 +998,7 @@
         <text ref="dutchProfileDescription"/>
 
         <directive data-gn-onlinesrc-list=""
-          types="thumbnail|onlinesrc|service|fcat"/>
+          types="thumbnail|onlinesrc|parent|fcat"/>
 
         <section name="dataIdentificatie">
 
@@ -1822,33 +1697,6 @@
           </action>
 
 </section>
-<section name="legalUseLimitation">
-
-          <!-- use constraints -->
-          <field name="legalUseLimitation" or="resourceConstraints"
-                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:useLimitation]"/>
-
-          <action type="add"
-                  btnLabel="addLegaluseLimitation"
-                  name="legalUseLimitation" or="resourceConstraints"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
-            <template>
-              <snippet>
-                <gmd:resourceConstraints>
-                  <gmd:MD_LegalConstraints>
-                    <gmd:useLimitation>
-                      <gco:CharacterString/>
-                    </gmd:useLimitation>
-                    <gmd:otherConstraints>
-                      <gmx:Anchor xlink:href=""></gmx:Anchor>
-                    </gmd:otherConstraints>
-                  </gmd:MD_LegalConstraints>
-                </gmd:resourceConstraints>
-              </snippet>
-            </template>
-          </action>
-
-</section>
 <section name="legalAccessConstraints">
           <!-- access constraints -->
           <field name="legalAccessConstraints" or="resourceConstraints"
@@ -2278,9 +2126,10 @@
           </action>
 
           <!--   5.33 Conformiteitindicatie met de specificatie  -->
-          <field name="conformanceStatement" or="report"
+          <field name="conformanceStatement"
                  xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency]"
-                 />
+                 or="report"
+                 in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality"/>
 
           <field name="DQ_CompletenessOmission" or="report"
             xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_CompletenessOmission]"></field>
@@ -2432,7 +2281,6 @@
           </action>
 
           <!-- 85. li-source -->
-
           <field removable="true" del="."
                  xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:source"></field>
 
@@ -2542,7 +2390,8 @@
           <action type="add"
                   btnLabel="addHierarchy"
                   or="hierarchyLevel"
-                  in="/gmd:MD_Metadata" >
+                  in="/gmd:MD_Metadata"
+                  if="count(gmd:MD_Metadata/gmd:hierarchyLevel)=0" >
             <template>
               <snippet>
                 <gmd:hierarchyLevel>
@@ -2559,6 +2408,7 @@
           <action type="add"
                   btnLabel="addhierarchyLevelName"
                   name="hierarchyLevelName" or="hierarchyLevelName"
+                  if="count(gmd:MD_Metadata/gmd:hierarchyLevelName)=0"
                   in="/gmd:MD_Metadata">
             <template>
               <snippet>
@@ -2738,8 +2588,6 @@
         <for name="gmd:processor"/>
         <for name="gmd:topicCategory"/>
         <for name="gmd:distributionFormat"/>
-        <for name="gmd:report"/>
-        <for name="gmd:result"/>
         <for name="gmd:resourceConstraints"/>
       </flatModeExceptions>
 
@@ -2792,7 +2640,7 @@
         <text ref="fullViewDescription"/>
 
         <directive data-gn-onlinesrc-list=""
-          types="thumbnail|onlinesrc|service|fcat"/>
+          types="thumbnail|onlinesrc|parent|fcat"/>
 
         <section xpath="/gmd:MD_Metadata/gmd:distributionInfo" or="distributionInfo"
                  in="/gmd:MD_Metadata"/>

@@ -209,20 +209,20 @@
 
   <!-- New strings added for the AngularJS editor -->
   <!-- View and tabs -->
-  <viewTitle><h3>Nederlands profiel voor Datasets &amp; Series 2.0 - Basis</h3></viewTitle>
-  <viewDescription><div>Het basis formulier kan gebruikt worden voor het bewerken van metadata van Nederlandstalige datasets die gebaseerd zijn op het Rijksdriehoekstelsel. Dit formulier toont een beperkte set van elementen en doet een aantal aannames. Voor het bewerken van alle elementen uit het Nederlands profiel gebruikt u het formulier met titel "Optionele &amp; conditionele elementen" (via de weergave knop met het "oogje" aan de rechter zijkant).</div></viewDescription>
+  <viewTitle><h3>Nederlands profiel voor Geografie 2.0 - Basis</h3></viewTitle>
+  <viewDescription><div>Het basis formulier kan gebruikt worden voor het bewerken van metadata van Nederlandstalige datasets die gebaseerd zijn op het Rijksdriehoekstelsel. Dit formulier toont een beperkte set van elementen en doet een aantal aannames. Voor het bewerken van alle elementen uit het Nederlands profiel gebruikt u het formulier met titel Nederlands Profiel (via de weergave knop met het "oogje" aan de rechter zijkant).</div></viewDescription>
 
-  <dutchProfileTitle><h3>Nederlands profiel voor Datasets &amp; Series 2.0 - Optionele &amp; conditionele elementen</h3></dutchProfileTitle>
+  <dutchProfileTitle><h3>Nederlands profiel voor Geografie 2.0 - Optionele &amp; conditionele elementen</h3></dutchProfileTitle>
   <dutchProfileDescription><div>In deze weergave worden ook optionele en conditionele elementen van het Nederlands profiel voor datasets en series getoond.</div></dutchProfileDescription>
 
-  <fullViewTitle><h3>Volledige iso19139 weergave</h3></fullViewTitle>
+  <fullViewTitle><h3>Nederlands profiel voor Geografie 2.0 - Volledige iso19139</h3></fullViewTitle>
   <fullViewDescription><div>De volledige weergave toont alle ISO elementen.</div></fullViewDescription>
 
   <xmlViewTitle><h3>XML weergave</h3></xmlViewTitle>
   <xmlViewDescription><div>In deze weergave worden alle ingevulde elementen getoond in XML.</div></xmlViewDescription>
 
-  <dutchprofile>Optionele elementen</dutchprofile>
-  <dutchprofile2>Optionele elementen</dutchprofile2>
+  <dutchprofile>Nederlands profiel</dutchprofile>
+  <dutchprofile2>Nederlands profiel</dutchprofile2>
   <dataIdentificatie>Identificatie</dataIdentificatie>
   <distributorContact>Contact informatie</distributorContact>
 
