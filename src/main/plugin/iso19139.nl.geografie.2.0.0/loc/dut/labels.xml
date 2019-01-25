@@ -1186,8 +1186,9 @@
     <label>Inwinnende organisatie</label>
     <description>Naam van de organisatie die de brongegevens heeft ingewonnen.</description>
   </element>
-  <element name="gmd:otherConstraints" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints">
+  <element name="gmd:otherConstraints">
     <label>Overige beperkingen</label>
+     <btnLabel>Overige beperking toevoegen</btnLabel>
     <description>Andere restricties of beperkingen. Dit veld is te gebruiken om de URL naar de licentie van Public domain, Creative Commons of Geo Gedeeld in te vullen. </description>
   </element>
   <!-- ==================================================== -->

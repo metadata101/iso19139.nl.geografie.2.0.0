@@ -502,7 +502,7 @@
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords" or="descriptiveKeywords" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"/>
 
           <!-- constraints -->
-          <field name="useLimitation" or="resourceConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_Constraints]"/>
+          <field name="useLimitation" del=".." or="resourceConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_Constraints]"/>
 
           <action type="add" btnLabel="addUseLimitation" name="useLimitation" or="resourceConstraints" forceLabel="true" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints)=0">
             <template>
@@ -519,10 +519,11 @@
           </action>
 
           <!-- legal access constraints -->
-          <field name="legalAccessConstraints" or="resourceConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]">
+          <field name="legalAccessConstraints" del=".." xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]">
           </field>
 
-          <action type="add" btnLabel="addOtherConstraints" name="otherConstraints" or="otherConstraints" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:otherConstraints) &lt; 2">
+          <action type="add" btnLabel="addOtherConstraints" name="otherConstraints" or="otherConstraints" 
+            in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints" >
             <template>
               <snippet>
                 <gmd:otherConstraints>
@@ -532,7 +533,9 @@
             </template>
           </action>
 
-          <action type="add" btnLabel="addLegalAccessConstraints" name="legalAccessConstraints" or="resourceConstraints" forceLabel="true" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints)=0">
+          <action type="add" btnLabel="addLegalAccessConstraints" name="legalAccessConstraints" or="resourceConstraints" forceLabel="true" 
+          in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification" 
+          if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints)=0">
             <template>
               <snippet>
                 <gmd:resourceConstraints>
@@ -765,6 +768,7 @@
       <!-- Elements that should not use the "flat" mode -->
       <flatModeExceptions>
         <for name="gmd:descriptiveKeywords"/>
+        <for name="gmd:otherConstraints"/>
         <for name="gmd:keyword"/>
         <for name="gmd:spatialResolution"/>
         <for name="gmd:pointOfContact"/>
@@ -1409,7 +1413,8 @@
           <!-- access constraints -->
           <field name="legalAccessConstraints" or="resourceConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]"/>
 
-          <action type="add" btnLabel="addOtherConstraints" name="otherConstraints" or="otherConstraints" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:otherConstraints) &lt; 2">
+          <action type="add" btnLabel="addOtherConstraints" name="otherConstraints" or="otherConstraints" 
+          in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints">
             <template>
               <snippet>
                 <gmd:otherConstraints>
