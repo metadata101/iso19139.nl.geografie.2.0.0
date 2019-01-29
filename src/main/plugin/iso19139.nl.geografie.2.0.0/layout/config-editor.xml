@@ -1800,25 +1800,25 @@
           <!--   5.33 Conformiteitindicatie met de specificatie  -->
           <field name="conformanceStatement" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_DomainConsistency]" or="report" in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality"/>
 
-          <field name="DQ_CompletenessOmission" or="report" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_CompletenessOmission]"></field>
+          <!-- volledigheid -->
+          <field name="DQ_CompletenessOmission" or="report"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result"></field>
 
-          <action type="add" btnLabel="Add_DQ_CompletenessOmission" if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult) = 0" name="DQ_CompletenessOmission" or="report" in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
+          <action type="add"
+                  btnLabel="Add_DQ_CompletenessOmission"
+                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission) = 0"
+                  name="DQ_CompletenessOmission" or="report"
+                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
             <template>
               <snippet>
                 <gmd:report>
                   <gmd:DQ_CompletenessOmission>
-                    <gmd:nameOfMeasure>
-                      <gco:CharacterString/>
-                    </gmd:nameOfMeasure>
-                    <gmd:measureDescription>
-                      <gco:CharacterString/>
-                    </gmd:measureDescription>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
                         <gmd:valueUnit>
                           <gml:BaseUnit gml:id="id-1">
-                            <gml:identifier codeSpace="http://www.opengis.net/def"/>
-                            <gml:unitsSystem/>
+                             <gml:identifier codeSpace="http://www.opengis.net/def"/>
+                             <gml:unitsSystem/>
                           </gml:BaseUnit>
                         </gmd:valueUnit>
                         <gmd:value>
@@ -1833,27 +1833,24 @@
           </action>
 
           <!--    5.39 Topologische samenhang . -->
-          <field name="DQ_TopologicalConsistency" or="report" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_TopologicalConsistency]"></field>
+          <field name="DQ_TopologicalConsistency" or="report"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result"></field>
 
-          <action type="add" btnLabel="Add_DQ_TopologicalConsistency" name="DQ_TopologicalConsistency" or="report" in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
+          <action type="add"
+                  btnLabel="Add_DQ_TopologicalConsistency"
+                  name="DQ_TopologicalConsistency" or="report"
+                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency) = 0"
+                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
             <template>
               <snippet>
                 <gmd:report>
                   <gmd:DQ_TopologicalConsistency>
-                    <gmd:nameOfMeasure>
-                      <gco:CharacterString/>
-                    </gmd:nameOfMeasure>
-                    <gmd:measureDescription>
-                      <gco:CharacterString/>
-                    </gmd:measureDescription>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
                         <gmd:valueUnit>
                           <gml:BaseUnit gml:id="id">
-                            <gml:identifier codeSpace="http://www.opengis.net/def"/>
-                            <gml:unitsSystem>
-                              <gco:CharacterString/>
-                            </gml:unitsSystem>
+                             <gml:identifier codeSpace="http://www.opengis.net/def"/>
+                             <gml:unitsSystem><gco:CharacterString/></gml:unitsSystem>
                           </gml:BaseUnit>
                         </gmd:valueUnit>
                         <gmd:value>
@@ -1867,27 +1864,24 @@
             </template>
           </action>
 
-          <field name="DQ_AbsoluteExternalPositionalAccuracy" or="report" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report[gmd:DQ_AbsoluteExternalPositionalAccuracy]"></field>
+          <field name="DQ_AbsoluteExternalPositionalAccuracy" or="report"
+            xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result"></field>
 
-          <action type="add" btnLabel="Add_DQ_AbsoluteExternalPositionalAccuracy" if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult) = 0" name="DQ_AbsoluteExternalPositionalAccuracy" or="report" in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
+          <action type="add"
+                  btnLabel="Add_DQ_AbsoluteExternalPositionalAccuracy"
+                  if="count(gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy) = 0"
+                  name="DQ_AbsoluteExternalPositionalAccuracy" or="report"
+                  in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality">
             <template>
               <snippet>
                 <gmd:report>
                   <gmd:DQ_AbsoluteExternalPositionalAccuracy>
-                    <gmd:nameOfMeasure>
-                      <gco:CharacterString/>
-                    </gmd:nameOfMeasure>
-                    <gmd:measureDescription>
-                      <gco:CharacterString/>
-                    </gmd:measureDescription>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
                         <gmd:valueUnit>
                           <gml:BaseUnit gml:id="id-2">
-                            <gml:identifier codeSpace="http://www.opengis.net/def"/>
-                            <gml:unitsSystem>
-                              <gco:CharacterString/>
-                            </gml:unitsSystem>
+                             <gml:identifier codeSpace="http://www.opengis.net/def"/>
+                             <gml:unitsSystem><gco:CharacterString/></gml:unitsSystem>
                           </gml:BaseUnit>
                         </gmd:valueUnit>
                         <gmd:value>

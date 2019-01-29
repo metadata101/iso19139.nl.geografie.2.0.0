@@ -1707,6 +1707,52 @@
     <label>Afstand</label>
     <description></description>
   </element>
+  
+  <!-- ==================================================== -->
+  <!-- === Other labels //FIXME -->
+  <!-- ==================================================== -->
+  <!-- ==================================================== -->
+  <!-- ==================================================== -->
+  <element name="codeSpace" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier/@codeSpace">
+    <label>Organisatie die de meeteenheid beheert</label>
+    <description>Organisatie die de meeteenheid beheert</description>
+  </element>
+  <element name="codeSpace" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier/@codeSpace">
+    <label>Organisatie die de meeteenheid beheert</label>
+    <description>Organisatie die de meeteenheid beheert</description>
+  </element>
+  <element name="codeSpace" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier/@codeSpace">
+    <label>Organisatie die de meeteenheid beheert</label>
+    <description>Organisatie die de meeteenheid beheert</description>
+    <help_link>http://wiki.geonovum.nl/index.php/Topologische samenhang</help_link>
+    <condition>C</condition>
+  </element>
+  <!-- ==================================================== -->
+  <element name="uom" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/gco:Distance/@uom">
+    <label>Eenheid</label>
+    <description>De eenheid van het coordinaatsysteem, bijvoorbeeld 'm'</description>
+  </element>
+ 
+  <!-- ========================  GCO namespace ============================ -->
+  <element name="gco:Record" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:value/gco:Record">
+    <label>Compleetheid</label>
+    <description>Omschrijving in hoeverre een dataset compleet is, of anders gezegd, een inschatting van wat er nog ontbreekt.</description>
+  </element>
+  <element name="gco:Record" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:value/gco:Record">
+    <label>Geometrische nauwkeurigheid</label>
+    <description>Afwijking van de x- en y-coÃ¶rdinaten ten opzichte van de werkelijke plaats op aarde.</description>
+  </element>
+  <element name="gco:Record" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:value/gco:Record">
+    <label>Topologische samenhang</label>
+    <description>juistheid van de topologische kenmerkenvan de dataset, Verplicht voor INSPIRE als voor netwerken de aansluiting van hartlijnen niet is verzekerd. In dat geval moet de Connectivity tolerance parameter vastgelegd worden om automatische creatie van hartlijn topologie mogelijk te maken</description>
+    <help_link>http://wiki.geonovum.nl/index.php/Topologische samenhang</help_link>
+    <condition>C</condition>
+  </element>
+  <element name="gco:LocalName" context="/gmd:MD_Metadata/gmd:contentInfo/gmd:MD_FeatureCatalogueDescription/gmd:featureTypes/gco:LocalName">
+    <label>FeatureTypes</label>
+    <description>Featuretypes uit de featurecatalog die in de dataset voorkomen.</description>
+  </element>
+
   <!-- ==================================================== -->
   <!-- === GML namespace -->
   <!-- ==================================================== -->
@@ -1737,36 +1783,18 @@
     <help_link>http://wiki.geonovum.nl/index.php/Topologische samenhang</help_link>
     <condition>C</condition>
   </element>
-  <!-- ==================================================== -->
-  <!-- === Other labels //FIXME -->
-  <!-- ==================================================== -->
-  <!-- ==================================================== -->
-  <!-- ==================================================== -->
-  <element name="codeSpace" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier/@codeSpace">
-    <label>Organisatie die de meeteenheid beheert</label>
-    <description>Organisatie die de meeteenheid beheert</description>
+  <element name="gml:BaseUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit">
+    <label>Basis eenheid</label>
+    <description/>
   </element>
-  <element name="codeSpace" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier/@codeSpace">
-    <label>Organisatie die de meeteenheid beheert</label>
-    <description>Organisatie die de meeteenheid beheert</description>
+  <element name="gml:BaseUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit">
+    <label>Basis eenheid</label>
+    <description/>
   </element>
-  <element name="codeSpace" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier/@codeSpace">
-    <label>Organisatie die de meeteenheid beheert</label>
-    <description>Organisatie die de meeteenheid beheert</description>
-    <help_link>http://wiki.geonovum.nl/index.php/Topologische samenhang</help_link>
-    <condition>C</condition>
-  </element>
-  <!-- ==================================================== -->
-  <element name="uom" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/gco:Distance/@uom">
+   <element name="gml:uom">
     <label>Eenheid</label>
     <description>De eenheid van het coordinaatsysteem, bijvoorbeeld 'm'</description>
   </element>
-  <element name="gml:uom">
-    <label>Eenheid</label>
-    <description>De eenheid van het coordinaatsysteem, bijvoorbeeld 'm'</description>
-  </element>
-  <!-- ==================================================== -->
-  <!-- Thijs: TODO: how to make distinction between begin- and enddate in defaultview? -->
   <element name="gml:beginPosition" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition">
     <label>Begindatum</label>
     <description>Begindatum (YYYY-MM-DD).</description>
@@ -1775,20 +1803,6 @@
   <element name="gml:endPosition" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition">
     <label>Einddatum</label>
     <description>Einddatum (YYYY-MM-DD).</description>
-    <condition>C</condition>
-  </element>
-  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
-    <label>Identificatie van Compleetheid</label>
-    <description></description>
-  </element>
-  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
-    <label>Identificatie van Geometrische nauwkeurigheid</label>
-    <description/>
-  </element>
-  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
-    <label>Identificatie van Topologische samenhang</label>
-    <description>Verplicht voor INSPIRE als voor netwerken de aansluiting van hartlijnen niet is verzekerd. In dat geval moet de Connectivity tolerance parameter vastgelegd worden om automatische creatie van hartlijn topologie mogelijk te maken</description>
-    <help_link>http://wiki.geonovum.nl/index.php/Topologische samenhang</help_link>
     <condition>C</condition>
   </element>
 
@@ -1808,48 +1822,45 @@
     <description/>
   </element>
   <!-- ==================================================== -->
+  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
+    <label>Identificatie van de Meeteenheid</label>
+    <description>Identificatie van de eenheid in het systeem</description>
+  </element>
+  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
+    <label>Identificatie van de Meeteenheid</label>
+    <description>Identificatie van de eenheid in het systeem</description>
+  </element>
+  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
+    <label>Identificatie van de Meeteenheid</label>
+    <description>Identificatie van de eenheid in het systeem</description>
+  </element>
+
+  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_ConceptualConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
+    <label>Identificatie van de Meeteenheid</label>
+    <description>Identificatie van de eenheid in het systeem</description>
+  </element>
+
+  
+  <element name="gml:unitsSystem" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_ConceptualConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem">
+    <label>Eenheden systeem</label>
+    <description>Indien  geen numerieke waarde wordt ingevuld, dient de waarde 'tekst' ingevuld te worden.</description>
+  </element>
   <element name="gml:unitsSystem" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem">
-    <label>De meeteenheid </label>
+    <label>Eenheden systeem</label>
     <description>Indien  geen numerieke waarde wordt ingevuld, dient de waarde 'tekst' ingevuld te worden.</description>
   </element>
   <element name="gml:unitsSystem" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem">
-    <label>De meeteenheid </label>
+    <label>Eenheden systeem</label>
     <description>Indien  geen numerieke waarde wordt ingevuld, dient de waarde 'tekst' ingevuld te worden.</description>
   </element>
   <element name="gml:unitsSystem" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem">
-    <label>De meeteenheid</label>
+    <label>Eenheden systeem</label>
     <description>Indien  geen numerieke waarde wordt ingevuld, dient de waarde 'tekst' ingevuld te worden.Verplicht voor INSPIRE als voor netwerken de aansluiting van hartlijnen niet is verzekerd. In dat geval moet de Connectivity tolerance parameter vastgelegd worden om automatische creatie van hartlijn topologie mogelijk te maken</description>
     <help_link>http://wiki.geonovum.nl/index.php/Topologische samenhang</help_link>
     <condition>C</condition>
   </element>
-  <!-- ==================================================== -->
-  <element name="gco:Record" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:value/gco:Record">
-    <label>Compleetheid</label>
-    <description>Omschrijving in hoeverre een dataset compleet is, of anders gezegd, een inschatting van wat er nog ontbreekt.</description>
-  </element>
-  <element name="gco:Record" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:value/gco:Record">
-    <label>Geometrische nauwkeurigheid</label>
-    <description>Afwijking van de x- en y-coÃ¶rdinaten ten opzichte van de werkelijke plaats op aarde.</description>
-  </element>
-  <element name="gco:Record" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:value/gco:Record">
-    <label>Topologische samenhang</label>
-    <description>juistheid van de topologische kenmerkenvan de dataset, Verplicht voor INSPIRE als voor netwerken de aansluiting van hartlijnen niet is verzekerd. In dat geval moet de Connectivity tolerance parameter vastgelegd worden om automatische creatie van hartlijn topologie mogelijk te maken</description>
-    <help_link>http://wiki.geonovum.nl/index.php/Topologische samenhang</help_link>
-    <condition>C</condition>
-  </element>
-  <element name="gco:LocalName" context="/gmd:MD_Metadata/gmd:contentInfo/gmd:MD_FeatureCatalogueDescription/gmd:featureTypes/gco:LocalName">
-    <label>FeatureTypes</label>
-    <description>Featuretypes uit de featurecatalog die in de dataset voorkomen.</description>
-  </element>
-  <!-- ==================================================== -->
-  <element name="gml:BaseUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit">
-    <label>Basis eenheid</label>
-    <description/>
-  </element>
-  <element name="gml:BaseUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit">
-    <label>Basis eenheid</label>
-    <description/>
-  </element>
+
+
 
   <element name="gmx:Anchor">
     <label>Anker</label>
@@ -1860,6 +1871,8 @@
     <label>Scope code</label>
     <description>Code die de scope van het beschreven element aangeeft</description>
   </element>
+
+
   <element name="Required">
     <label>Verplichte elementen</label>
     <description></description>
