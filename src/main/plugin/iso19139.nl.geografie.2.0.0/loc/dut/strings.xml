@@ -105,7 +105,7 @@
   <add-extent-from-geokeywords>Compute extent from keyword</add-extent-from-geokeywords>
   <addGeographicIdentifier>Identifier geografisch gebied</addGeographicIdentifier>
   <addGeographicBoundingBox>Dekking toevoegen</addGeographicBoundingBox>
-  <addVerticalExtent>Verticale dekking toevoegen</addVerticalExtent>
+  <addVerticalExtent>Verticale spreiding toevoegen</addVerticalExtent>
   <add-extent-from-geokeywordsHelp>Analyze each keyword of type place and add matching extent.
   </add-extent-from-geokeywordsHelp>
   <classificationSection>Classification of data and services</classificationSection>
@@ -314,7 +314,7 @@
   <addPurpose>Doel toevoegen</addPurpose>
   <addSupplementalInformation>Extra informatie toevoegen</addSupplementalInformation>
   <addEdition>Versie toevoegen</addEdition>
-  <addExtentDescription>Beschrijving temporele extent toevoegen</addExtentDescription>
+  <addExtentDescription>Beschrijving inhoudelijke geldigheid toevoegen</addExtentDescription>
   <Add_Quality>Kwaliteitsindicatie toevoegen</Add_Quality>
   <AddSource>Bron en inwinning toevoegen</AddSource>
   <addSeries>Series toevoegen</addSeries>
@@ -324,7 +324,7 @@
   <addHierarchy>Hiërarchisch niveau toevoegen</addHierarchy>
   <addhierarchyLevelName>Naam hiërarchisch niveau toevoegen</addhierarchyLevelName>
   <addDistributionOrderProcess>Distributie bestelproces toevoegen</addDistributionOrderProcess>
-  <addTemporalExtent>Temporele dekking toevoegen</addTemporalExtent>
+  <addTemporalExtent>Inhoudelijke geldigheid toevoegen</addTemporalExtent>
   <addDistributor>Distributeur toevoegen</addDistributor>
   <addCharacterSet>Karakterset toevoegen</addCharacterSet>
   <AddProcessStep>Voeg bewerkingsstap toe</AddProcessStep>
@@ -332,7 +332,7 @@
   <addScale>Toepassings schaal toevoegen</addScale>
 
   <conformanceStatement>Conformiteits indicatie</conformanceStatement>
-  <ExtentDescription>Omschrijving temporele dekking</ExtentDescription>
+  <ExtentDescription>Omschrijving inhoudelijke geldigheid</ExtentDescription>
   <DsCharacterSet>Karakterset dataset</DsCharacterSet>
 
   <encoding>Distributie formaat</encoding>
@@ -387,4 +387,5 @@
 <addQualityScope>Niveau kwaliteitsbeschrijving toevoegen</addQualityScope>
 <addQualityScopeDesc>Beschrijving niveau kwaliteitsbeschrijving toevoegen</addQualityScopeDesc>
 <levelDescription>Beschrijving niveau kwaliteitsbeschrijving</levelDescription>
+
 </strings>

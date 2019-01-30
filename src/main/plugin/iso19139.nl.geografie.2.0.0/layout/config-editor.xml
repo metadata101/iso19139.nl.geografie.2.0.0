@@ -193,7 +193,6 @@
     <!-- TODO: Disabled in Dutch schema -->
     <!--<name>gmd:EX_VerticalExtent</name>-->
     <name>gmd:MD_Distributor</name>
-    <name>gmd:metadataConstraints</name>
     <name>gmd:aggregationInfo</name>
     <name>gmd:processStep</name>
     <name>gmd:lineage</name>
@@ -203,7 +202,6 @@
     <name>gmd:axisDimensionProperties</name>
     <name>gmd:identifier</name>
     <name>gmd:topicCategory</name>
-
     <!-- TODO: Review Specific for Dutch schema-->
     <name>gmd:verticalElement</name>
 
@@ -1291,7 +1289,6 @@
             </template>
           </action>
 
-          <!--   vertical bounds
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement"/>
 
           <action type="add" btnLabel="addVerticalExtent" or="extent" name="verticalElement" forceLabel="true" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement)=0">
@@ -1307,18 +1304,13 @@
                           <gmd:maximumValue>
                              <gco:Real/>
                           </gmd:maximumValue>
-                          <gmd:verticalCRS>
-                            <gml:VerticalCRS gml:id="vertical">
-                              <gml:identifier codeSpace="http://www.opengis.net/def/crs/EPSG/0/"/>
-                            </gml:VerticalCRS>
-                          </gmd:verticalCRS>
                        </gmd:EX_VerticalExtent>
                     </gmd:verticalElement>
                   </gmd:EX_Extent>
                 </gmd:extent>
               </snippet>
             </template>
-          </action>-->
+          </action>
 
           <!-- temporele dekking -->
           <field name="temporalRangeSection" templateModeOnly="true" notDisplayedIfMissing="true" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification) > 0">
