@@ -145,7 +145,7 @@
   <!-- ==================================================== -->
   <element name="gmd:accessConstraints" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints">
     <label>(Juridische) toegangsrestricties</label>
-    <description>Toegangseisen die er zorg voor dragen dat privacy of intellectueel eigendom gewaarborgd zijn. Als er overige beperkingen worden opgenomen, dient hier de waarde 'anders' gekozen te worden</description>
+    <description>Toegangseisen die er zorg voor dragen dat privacy of intellectueel eigendom gewaarborgd zijn. Als er overige beperkingen worden opgenomen, dient hier de waarde 'anders' gekozen te worden. &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties' target='_blank'&gt;Lees verder&lt;/a&gt;</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.33_Juridische_toegangsrestricties</help_link>
     <condition>C</condition>
   </element>
@@ -370,7 +370,7 @@
   </element>
   <element name="gmd:code" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code">
     <label>Unieke Identifier van de bron</label>
-    <description>De unieke Identifier van de bron bevat de waarde (veelal een UUID) die de dataset uniek identificeert.</description>
+    <description>De unieke Identifier van de bron bevat de waarde (veelal een UUID) die de dataset uniek identificeert. &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron' target='_blank'&gt;example&lt;/a&gt;</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.8_Unieke_Identifier_van_de_bron</help_link>
     <condition>mandatory</condition>
   </element>
@@ -530,7 +530,7 @@
   <!-- ==================================================== -->
   <element name="gmd:description" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:description">
     <label>Beschrijving temporele dekking</label>
-    <description>Inhoudelijke geldigheid van de data, gespecificeerd als een periode.</description>
+    <description>temporele dekking van de data, gespecificeerd als een periode.</description>
   </element>
   <element name="gmd:description" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep/gmd:LI_ProcessStep/gmd:description">
     <label>Beschrijving uitgevoerde bewerkingen</label>
@@ -626,7 +626,7 @@
   <!-- ==================================================== -->
   <element name="gmd:DQ_DomainConsistency" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency">
     <label>Domein consistentie</label>
-    <description>Informatie over de specificatie (INSPIRE) of het informatiemodel van de dataset.</description>
+    <description>Informatie over de specificatie (INSPIRE) of het informatiemodel van de dataset. &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#conformiteit-indicatie-met-de-specificatie' target='_blank'&gt;Lees verder&lt;/a&gt;</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:DQ_QuantitativeResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result">
@@ -704,8 +704,8 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:EX_TemporalExtent" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent">
-    <label>Temporele dekking</label>
-    <description>Inhoudelijke geldigheid van de data, gespecificeerd naar begin- en einddatum.</description>
+    <label>temporele dekking</label>
+    <description>temporele dekking van de data, gespecificeerd naar begin- en einddatum.</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:EX_VerticalExtent" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:EX_VerticalExtent">
@@ -725,8 +725,8 @@
     <description>Informatie over de ruimtelijke, verticale en temporele dekking van de dataset.</description>
   </element>
   <element name="gmd:extent" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent">
-    <label>Temporele dekking</label>
-    <description>Inhoudelijke geldigheid van de data, gespecificeerd naar begin- en einddatum.</description>
+    <label>temporele dekking</label>
+    <description>temporele dekking van de data, gespecificeerd naar begin- en einddatum.</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.19_Temporele_dekking</help_link>
   </element>
   <element name="gmd:extent">
@@ -824,6 +824,7 @@
   <!-- ==================================================== -->
   <element name="gmd:keyword" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword">
     <label>Trefwoord</label>
+    <btnLabel>Trefwoord toevoegen</btnLabel>
     <description>In het algemeen gebruikte term(en) of geformaliseerde zin(nen) om een onderwerp te beschrijven.</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.11_Trefwoord</help_link>
     <condition>mandatory</condition>
@@ -856,7 +857,8 @@
   <!-- ==================================================== -->
   <element name="gmd:LI_Lineage" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage">
     <label>Herkomst</label>
-    <description>Informatie over de herkomst (methodiek en bronnen) van de data.</description>
+    <description>Informatie over de herkomst (methodiek en bronnen) van de data. &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#algemene-beschrijving-herkomst' target='_blank'&gt;Lees verder&lt;/a&gt;
+    </description>
   </element>
 
   <!-- ==================================================== -->
@@ -1252,10 +1254,12 @@
   <!-- ==================================================== -->
   <element name="gmd:processor" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep/gmd:LI_ProcessStep/gmd:processor">
     <label>Producent</label>
+    <btnLabel>Producent toevoegen</btnLabel>
     <description>Personen of organisaties die betrokken zijn bij deze stap in het proces.</description>
   </element>
   <element name="gmd:processor" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:source/gmd:LI_Source/gmd:sourceStep/gmd:LI_ProcessStep/gmd:processor">
     <label>Inwinner</label>
+    <btnLabel>Inwinner toevoegen</btnLabel>
     <description>Personen of organisaties die betrokken zijn bij deze stap in het proces.</description>
   </element>
   <!-- ==================================================== -->
@@ -1489,7 +1493,7 @@
   <!-- ==================================================== -->
   <element name="gmd:statement" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:statement">
     <label>Algemene beschrijving herkomst</label>
-    <description>Algemene beschrijving of opmerking, betreffende de geschiedenis van de bron.</description>
+    <description>Algemene beschrijving of opmerking, betreffende de geschiedenis van de bron. &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#algemene-beschrijving-herkomst' target='_blank'&gt;Lees verder&lt;/a&gt;</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.23_Algemene_beschrijving_herkomst</help_link>
     <condition>mandatory</condition>
   </element>
@@ -1507,7 +1511,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:temporalElement" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement">
-    <label>Temporele dekking</label>
+    <label>temporele dekking</label>
     <description>Informatie over de temporele dekking van de gegevens.</description>
   </element>
   <!-- ==================================================== -->
@@ -1576,11 +1580,19 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:useLimitation" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints/gmd:useLimitation">
-    <label>Gebruiksbeperkingen</label>
+    <label>Gebruiks beperkingen</label>
     <description>Toepassingen waarvoor de data niet geschikt is.</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.36_Gebruiksbeperkingen</help_link>
     <condition>mandatory</condition>
   </element>
+  <element name="gmd:useLimitation" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:useLimitation">
+		<label>(Juridische) gebruiks beperking</label>
+		<description>Juridische beperkingen op de geschiktheid van deze data.</description>
+	</element>
+  <element name="gmd:useLimitation" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_SecurityConstraints/gmd:useLimitation">
+		<label>(Veiligheids) gebruiks beperkingen</label>
+		<description>Veiligheids beperkingen op de geschiktheid van deze data.</description>
+	</element>
   <!-- ==================================================== -->
   <element name="gmd:userContactInfo" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceSpecificUsage/gmd:MD_Usage/gmd:userContactInfo">
     <label>Organisatie welke gebruik maakt van de data</label>
@@ -1762,12 +1774,12 @@
     <description>Identificatie</description>
   </element>
   <element name="gml:TimeInstant" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:TimePeriodTypeCHOICE_ELEMENT2/gml:begin/gml:TimeInstant">
-    <label>Temporele dekking begindatum</label>
-    <description>Inhoudelijke geldigheid van de data, gespecificeerd naar begin- en einddatum.</description>
+    <label>temporele dekking begindatum</label>
+    <description>temporele dekking van de data, gespecificeerd naar begin- en einddatum.</description>
   </element>
   <element name="gml:TimeInstant" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:TimePeriodTypeCHOICE_ELEMENT3/gml:end/gml:TimeInstant">
-    <label>Temporele dekking einddatum</label>
-    <description>Inhoudelijke geldigheid van de data, gespecificeerd naar begin- en einddatum.</description>
+    <label>temporele dekking einddatum</label>
+    <description>temporele dekking van de data, gespecificeerd naar begin- en einddatum.</description>
   </element>
   <element name="gml:id" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/@gml:id">
     <label>Compleetheid</label>

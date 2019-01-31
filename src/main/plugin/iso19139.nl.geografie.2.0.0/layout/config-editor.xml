@@ -356,6 +356,40 @@
       </row>
     </table>
 
+<!--
+
+gmd:CI_OnlineResource>
+                     <gmd:linkage>
+                        <gmd:URL/>
+                     </gmd:linkage>
+                     <gmd:protocol gco:nilReason="missing">
+                        <gco:CharacterString/>
+                     </gmd:protocol>
+                     <gmd:name gco:nilReason="missing">
+                        <gco:CharacterString
+
+-->
+
+    <table for="gmd:Online" label="Online">
+      <header>
+        <col label="name"/>
+        <col label="url"/>
+        <col label="protocol"/>
+        <col label="description"/>
+        <col label="function"/>
+        <col label=""/>
+        <col/>
+      </header>
+      <row>
+        <col xpath="gmd:CI_OnlineResource/gmd:name" />
+        <col xpath="gmd:CI_OnlineResource/gmd:linkage/gmd:URL" />
+        <col xpath="gmd:CI_OnlineResource/gmd:protocol" />
+        <col xpath="gmd:CI_OnlineResource/gmd:description" />
+        <col xpath="gmd:CI_OnlineResource/gmd:function" />
+        <col del=".."/>
+      </row>
+    </table>
+
     <table for="gmd:MD_SecurityConstraints" label="MD_SecurityConstraints">
       <header>
         <col label="gmd:useLimitation"/>
@@ -1320,12 +1354,9 @@
                       but this will make the XSLT formatter fails. Using // to access the element in both case. -->
                 <key label="beginPosition" xpath="gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod//gml:beginPosition" use="gn-date-picker" tooltip="gmd:extent|gmd:EX_TemporalExtent">
                   <directiveAttributes data-tag-name="gml:beginPosition" data-indeterminate-position="eval#gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/*/gml:beginPosition/@indeterminatePosition"/>
-
                 </key>
                 <key label="endPosition" xpath="gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod//gml:endPosition" use="gn-date-picker" tooltip="gmd:extent|gmd:EX_TemporalExtent">
                   <directiveAttributes data-tag-name="gml:endPosition" data-indeterminate-position="eval#gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/*/gml:endPosition/@indeterminatePosition"/>
-
-
                 </key>
               </values>
               <snippet>
@@ -1498,6 +1529,8 @@
               </snippet>
             </template>
           </action>
+
+          <field name="distribution" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine" del="." />
 
           <!-- Naam distributie formaat . -->
           <field name="distributionFormat" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat" del="." />
@@ -1808,7 +1841,7 @@
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
                         <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="id-1">
+                          <gml:BaseUnit gml:id="">
                              <gml:identifier codeSpace="http://www.opengis.net/def"/>
                              <gml:unitsSystem/>
                           </gml:BaseUnit>
@@ -1840,7 +1873,7 @@
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
                         <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="id">
+                          <gml:BaseUnit gml:id="">
                              <gml:identifier codeSpace="http://www.opengis.net/def"/>
                              <gml:unitsSystem><gco:CharacterString/></gml:unitsSystem>
                           </gml:BaseUnit>
@@ -1871,7 +1904,7 @@
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
                         <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="id-2">
+                          <gml:BaseUnit gml:id="">
                              <gml:identifier codeSpace="http://www.opengis.net/def"/>
                              <gml:unitsSystem><gco:CharacterString/></gml:unitsSystem>
                           </gml:BaseUnit>
@@ -2175,15 +2208,19 @@
 
 
           <!--    5.56 locale -->
-          <field xpath="/gmd:MD_Metadata/gmd:locale/gmd:PT_Locale"/>
-          <action type="add" btnLabel="addLocale" or="metadataLocale" in="/gmd:MD_Metadata">
+          <field xpath="/gmd:MD_Metadata/gmd:locale" in="/gmd:MD_Metadata"/>
+
+          <action type="add" btnLabel="addLocale" name="locale" or="locale" in="/gmd:MD_Metadata">
             <template>
               <snippet>
                 <gmd:locale>
                   <gmd:PT_Locale>
                     <gmd:languageCode>
-                      <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="dut">Nederlands</gmd:LanguageCode>
+                      <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue=""></gmd:LanguageCode>
                     </gmd:languageCode>
+                    <gmd:characterEncoding>
+                      <gmd:MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8"/>
+                    </gmd:characterEncoding>
                   </gmd:PT_Locale>
                 </gmd:locale>
               </snippet>
