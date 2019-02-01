@@ -191,4 +191,43 @@
 
   <xsl:template match="*[@xmlns:gn='http://www.fao.org/geonetwork']/@xmlns:gn|@xmlns:geonet='http://www.fao.org/geonetwork']/@xmlns:geonet" /> -->
 
+
+  <xsl:template match="gmd:MD_DataIdentification" priority="200">
+    <xsl:copy>
+      <xsl:copy-of select="@*" />
+
+      <xsl:apply-templates select="gmd:citation" />
+      <xsl:apply-templates select="gmd:abstract" />
+      <xsl:apply-templates select="gmd:purpose" />
+      <xsl:apply-templates select="gmd:credit" />
+      <xsl:apply-templates select="gmd:status" />
+      <xsl:apply-templates select="gmd:pointOfContact" />
+      <xsl:apply-templates select="gmd:resourceMaintenance" />
+      <xsl:apply-templates select="gmd:graphicOverview" />
+      <xsl:apply-templates select="gmd:resourceFormat" />
+      <xsl:apply-templates select="gmd:descriptiveKeywords" />
+      <xsl:apply-templates select="gmd:resourceSpecificUsage" />
+
+      <!-- Order resource constraints. Related schematron validations depends on the order of the constraints
+          - gmd:MD_Constraints
+          - gmd:MD_LegalConstraints
+          - gmd:MD_SecurityConstraints
+      -->
+      <xsl:apply-templates select="gmd:resourceConstraints[gmd:MD_Constraints]" />
+      <xsl:apply-templates select="gmd:resourceConstraints[gmd:MD_LegalConstraints]" />
+      <xsl:apply-templates select="gmd:resourceConstraints[gmd:MD_SecurityConstraints]" />
+
+      <xsl:apply-templates select="gmd:aggregationInfo" />
+      <xsl:apply-templates select="gmd:spatialRepresentationType" />
+      <xsl:apply-templates select="gmd:spatialResolution" />
+      <xsl:apply-templates select="gmd:language" />
+      <xsl:apply-templates select="gmd:characterSet" />
+      <xsl:apply-templates select="gmd:topicCategory" />
+      <xsl:apply-templates select="gmd:environmentDescription" />
+      <xsl:apply-templates select="gmd:extent" />
+      <xsl:apply-templates select="gmd:supplementalInformation" />
+    </xsl:copy>
+  </xsl:template>
+
+
 </xsl:stylesheet>
