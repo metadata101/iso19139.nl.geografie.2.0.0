@@ -236,7 +236,7 @@
   <endPosition>Tot</endPosition>
   <inspireTheme>INSPIRE Thema</inspireTheme>
   <topicCategory>Onderwerp</topicCategory>
-  <conformity>Conformiteits indicatie</conformity>
+  <conformity>Conformiteitindicatie met de specificatie</conformity>
   <thisIsASeries>Series</thisIsASeries>
   <thisIsADataset>Dataset</thisIsADataset>
 
@@ -331,7 +331,7 @@
   <addResolution>Resolutie toevoegen</addResolution>
   <addScale>Toepassings schaal toevoegen</addScale>
 
-  <conformanceStatement>Conformiteits indicatie</conformanceStatement>
+  <conformanceStatement>Conformiteitindicatie met de specificatie</conformanceStatement>
   <ExtentDescription>Omschrijving temporele dekking</ExtentDescription>
   <DsCharacterSet>Karakterset dataset</DsCharacterSet>
 

@@ -1773,7 +1773,8 @@ gmd:CI_OnlineResource>
           </action>
 
           <!--    5.23 Beschrijving scope kwaliteitsbeschrijving -->
-          <field name="levelDescription" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:levelDescription" templateModeOnly="true" del=".">
+          <field name="levelDescription" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:levelDescription" 
+          templateModeOnly="true" notDisplayedIfMissing="true" del=".">
             <template>
               <values>
                 <key label="levelDescription" tooltip="gmd:features" xpath="gmd:features/@xlink:title">
