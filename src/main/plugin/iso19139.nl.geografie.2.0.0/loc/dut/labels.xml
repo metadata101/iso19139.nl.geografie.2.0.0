@@ -78,7 +78,7 @@
     <condition>mandatory</condition>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:distributionOrderProcess" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributor/gmd:MD_Distributor/gmd:distributionOrderProcess">
+  <element name="gmd:distributionOrderProcess" >
     <label>Distributie bestelproces</label>
     <description>Distributie bestelproces</description>
   </element>
@@ -143,7 +143,7 @@
     <condition>mandatory</condition>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:accessConstraints" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints">
+  <element name="gmd:accessConstraints">
     <label>(Juridische) toegangsrestricties</label>
     <description>Toegangseisen die er zorg voor dragen dat privacy of intellectueel eigendom gewaarborgd zijn. Als er overige beperkingen worden opgenomen, dient hier de waarde 'anders' gekozen te worden. &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties' target='_blank'&gt;Lees verder&lt;/a&gt;</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.33_Juridische_toegangsrestricties</help_link>
@@ -579,7 +579,7 @@
     <condition>verplicht</condition>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:DQ_AbsoluteExternalPositionalAccuracy" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy">
+  <element name="gmd:DQ_AbsoluteExternalPositionalAccuracy" >
     <label>Geometrische nauwkeurigheid</label>
     <description>Beschrijving van de geometrische nauwkeurigheid.</description>
   </element>
@@ -592,7 +592,7 @@
     <description></description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:DQ_CompletenessOmission" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission">
+  <element name="gmd:DQ_CompletenessOmission">
     <label>Compleetheid</label>
     <description>Data welke niet aanwezig is in de dataset zoals beschreven in het toepassingsgebied.</description>
   </element>
@@ -624,7 +624,7 @@
     <description>Informatie over de kwaliteit van de data op het niveau (dataset of serie) waar de kwaliteitsbeschrijving betrekking op heeft.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:DQ_DomainConsistency" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency">
+  <element name="gmd:DQ_DomainConsistency" >
     <label>Domein consistentie</label>
     <description>Informatie over de specificatie (INSPIRE) of het informatiemodel van de dataset. &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#conformiteit-indicatie-met-de-specificatie' target='_blank'&gt;Lees verder&lt;/a&gt;</description>
   </element>
@@ -983,9 +983,15 @@
     <description>In het algemeen gebruikte woorden of geformaliseerde zinnen om het onderwerp te beschrijven.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:MD_LegalConstraints" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints">
+  <element name="gmd:MD_LegalConstraints" >
     <label>Juridische beperkingen</label>
     <description>Restricties en juridische voorwaarden die van toepassing zijn op zowel het gebruik van als de toegang tot de data.</description>
+  </element>
+
+  <element name="gmd:MD_Constraints">
+    <label>Beperkingen</label>
+    <description>Beperkingen die voor de bron gelden</description>
+
   </element>
   <!-- ==================================================== -->
   <element name="gmd:MD_MaintenanceFrequencyCode" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceMaintenance/gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency/gmd:MD_MaintenanceFrequencyCode">
@@ -1052,7 +1058,7 @@
     <description>Code toepassingsgebied.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:MD_SecurityConstraints" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_SecurityConstraints">
+  <element name="gmd:MD_SecurityConstraints">
     <label>Veiligheidsrestricties </label>
     <description>Restricties op de dataset met betrekking tot het onderwerp (nationale) veiligheid.</description>
   </element>
@@ -1576,6 +1582,7 @@
   <!-- ==================================================== -->
   <element name="gmd:useConstraints" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:useConstraints">
     <label>(Juridische) gebruiksrestricties</label>
+    <btnLabel>(Juridische) gebruiksrestrictie toevoegen</btnLabel>
     <description>Gebruikseisen die er zorg voor dragen dat privacy of intellectueel eigendom gewaarborgd zijn en elke andere speciale beperking(en) voor het verkrijgen van de metadata of data.</description>
   </element>
   <!-- ==================================================== -->
