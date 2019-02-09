@@ -28,6 +28,7 @@
                 xmlns:gmx="http://www.isotc211.org/2005/gmx"
                 xmlns:gml="http://www.opengis.net/gml"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:tr="java:org.fao.geonet.api.records.formatters.SchemaLocalizations"
                 xmlns:gn-fn-render="http://geonetwork-opensource.org/xsl/functions/render"
                 xmlns:gn-fn-metadata="http://geonetwork-opensource.org/xsl/functions/metadata"
@@ -230,14 +231,13 @@
 
 
 
-
   <!-- Most of the elements are ... -->
   <xsl:template mode="render-field"
                 match="*[gco:Integer|gco:Decimal|
        gco:Boolean|gco:Real|gco:Measure|gco:Length|gco:Distance|
        gco:Angle|gmx:FileName|
        gco:Scale|gco:Record|gco:RecordType|gmx:MimeFileType|gmd:URL|
-       gco:LocalName|gmd:PT_FreeText|gml:beginPosition|gml:endPosition|
+       gco:LocalName|gmd:PT_FreeText|
        gco:Date|gco:DateTime|*/@codeListValue]"
                 priority="50">
     <xsl:param name="fieldName" select="''" as="xs:string"/>
@@ -258,7 +258,7 @@
   </xsl:template>
 
   <xsl:template mode="render-field"
-                match="*[gco:CharacterString]"
+                match="*[gco:CharacterString]|gml:beginPosition[. != '']|gml:endPosition[. != '']"
                 priority="50">
     <xsl:param name="fieldName" select="''" as="xs:string"/>
 
@@ -576,9 +576,14 @@
   </xsl:template>
 
 
-  <!-- Display thesaurus name and the list of keywords -->
+  <!-- Display thesaurus name and the list of keywords if at least one keyword is set -->
   <xsl:template mode="render-field"
-                match="gmd:descriptiveKeywords[*/gmd:thesaurusName/gmd:CI_Citation/gmd:title]"
+                match="gmd:descriptiveKeywords[*/gmd:thesaurusName/gmd:CI_Citation/gmd:title and
+                count(*/gmd:keyword/*[. != '']) = 0]"
+                priority="100"/>
+  <xsl:template mode="render-field"
+                match="gmd:descriptiveKeywords[*/gmd:thesaurusName/gmd:CI_Citation/gmd:title and
+                count(*/gmd:keyword/*[. != '']) > 0]"
                 priority="100">
     <dl class="gn-keyword">
       <dt>
@@ -593,12 +598,12 @@
       <dd>
         <div>
           <ul>
-            <li>
-              <xsl:for-each select="*/gmd:keyword">
+            <xsl:for-each select="*/gmd:keyword">
+              <li>
                 <xsl:apply-templates mode="render-value"
-                                     select="."/><xsl:if test="position() != last()">, </xsl:if>
-              </xsl:for-each>
-            </li>
+                                     select="."/>
+              </li>
+            </xsl:for-each>
           </ul>
         </div>
       </dd>
@@ -620,12 +625,12 @@
       <dd>
         <div>
           <ul>
-            <li>
-              <xsl:for-each select="*/gmd:keyword">
+            <xsl:for-each select="*/gmd:keyword">
+              <li>
                 <xsl:apply-templates mode="render-value"
-                                     select="."/><xsl:if test="position() != last()">, </xsl:if>
-              </xsl:for-each>
-            </li>
+                                     select="."/>
+              </li>
+            </xsl:for-each>
           </ul>
         </div>
       </dd>
@@ -772,6 +777,22 @@
      </xsl:call-template>
   </xsl:template>
 
+
+  <xsl:template mode="render-value"
+                match="*[gmx:Anchor]">
+
+    <xsl:variable name="txt">
+      <xsl:apply-templates mode="localised" select=".">
+        <xsl:with-param name="langId" select="$langId"/>
+      </xsl:apply-templates>
+    </xsl:variable>
+
+    <a href="{gmx:Anchor/@xlink:href}">
+      <xsl:value-of select="$txt"/>
+    </a>
+  </xsl:template>
+
+
   <xsl:template mode="render-value"
                 match="gco:Integer|gco:Decimal|
        gco:Boolean|gco:Real|gco:Measure|gco:Length|gco:Distance|gco:Angle|gmx:FileName|
@@ -800,6 +821,24 @@
     <xsl:if test="@uom">
       &#160;<xsl:value-of select="@uom"/>
     </xsl:if>
+  </xsl:template>
+
+  <!-- filename -->
+  <xsl:template mode="render-value"
+                match="gmx:FileName[@src != '']">
+    <xsl:variable name="href" select="@src"/>
+    <xsl:variable name="label" select="."/>
+
+    <xsl:choose>
+      <xsl:when test="matches($href, $imageExtensionsRegex, 'i')">
+        <img src="{$href}" title="{$label}" alt="{$label}"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <a href="{$href}">
+          <xsl:value-of select="$label"/>&#160;
+        </a>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <!-- ... URL -->
