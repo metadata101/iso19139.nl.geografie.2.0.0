@@ -76,7 +76,10 @@
     <for name="gml:endPosition" use="data-gn-date-picker"/>
 
     <for name="gmd:protocol" use="data-gn-keyword-picker">
-      <directiveAttributes data-thesaurus-key="external.theme.protocols" data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+      <directiveAttributes 
+        data-thesaurus-key="external.theme.protocols" 
+        data-thesaurus-orderById="true"
+        data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
     <!-- gmx:FileName/@src attribute -->
@@ -147,7 +150,10 @@
     </for>
 
     <for name="gmd:name" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name" use="data-gn-keyword-picker">
-      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeuapplicationschema-applicationschema" data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+      <directiveAttributes 
+        data-thesaurus-key="external.theme.httpinspireeceuropaeuapplicationschema-applicationschema" 
+        data-thesaurus-orderById="true"
+        data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
     <!--<for name="gmd:title" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title" use="data-gn-keyword-picker">
@@ -155,7 +161,10 @@
     </for>-->
 
     <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints" use="data-gn-keyword-picker">
-      <directiveAttributes data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess" data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+      <directiveAttributes 
+        data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess" 
+        data-thesaurus-orderById="true"
+        data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
   </fields>
@@ -1264,7 +1273,10 @@ gmd:CI_OnlineResource>
 
           <!--     5.27 Code referentiesysteem ... -->
           <field name="rsIdentifier" use="data-gn-keyword-picker" xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code" del="../../../..">
-            <directiveAttributes data-thesaurus-key="external.theme.projections" data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+            <directiveAttributes 
+              data-thesaurus-key="external.theme.projections"
+              data-thesaurus-orderById="true" 
+              data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
           </field>
           <action type="add" del="." btnLabel="addReferenceSystem" or="referenceSystemInfo" if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier) &lt; 2" in="/gmd:MD_Metadata">
             <template>
