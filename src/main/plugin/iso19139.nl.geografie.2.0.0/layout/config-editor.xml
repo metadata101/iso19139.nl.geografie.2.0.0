@@ -2250,72 +2250,60 @@ gmd:CI_OnlineResource>
 
 
       <tab id="identificationInfo" default="true">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
-        <section xpath="/gmd:MD_Metadata/gmd:spatialRepresentationInfo" or="spatialRepresentationInfo" in="/gmd:MD_Metadata"/>
-
-
-        <section xpath="/gmd:MD_Metadata/gmd:identificationInfo" or="identificationInfo" in="/gmd:MD_Metadata"/>
+        <section xpath="/gmd:MD_Metadata/gmd:identificationInfo" or="identificationInfo"
+                 in="/gmd:MD_Metadata"/>
       </tab>
       <tab id="distributionInfo">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
-        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|parent|fcat"/>
-
-        <section xpath="/gmd:MD_Metadata/gmd:distributionInfo" or="distributionInfo" in="/gmd:MD_Metadata"/>
+        <section xpath="/gmd:MD_Metadata/gmd:distributionInfo" or="distributionInfo"
+                 in="/gmd:MD_Metadata"/>
       </tab>
       <tab id="dataQualityInfo">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
-        <section xpath="/gmd:MD_Metadata/gmd:dataQualityInfo" or="dataQualityInfo" in="/gmd:MD_Metadata"/>
+        <section xpath="/gmd:MD_Metadata/gmd:dataQualityInfo" or="dataQualityInfo"
+                 in="/gmd:MD_Metadata"/>
       </tab>
       <tab id="spatialRepresentationInfo">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
-        <section xpath="/gmd:MD_Metadata/gmd:spatialRepresentationInfo" or="spatialRepresentationInfo" in="/gmd:MD_Metadata"/>
+        <section xpath="/gmd:MD_Metadata/gmd:spatialRepresentationInfo"
+                 or="spatialRepresentationInfo" in="/gmd:MD_Metadata"/>
       </tab>
       <tab id="referenceSystemInfo">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
-        <section xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo" or="referenceSystemInfo" in="/gmd:MD_Metadata"/>
+        <section xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo" or="referenceSystemInfo"
+                 in="/gmd:MD_Metadata"/>
       </tab>
       <tab id="contentInfo" toggle="true">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
         <section xpath="/gmd:MD_Metadata/gmd:contentInfo" or="contentInfo" in="/gmd:MD_Metadata"/>
       </tab>
       <tab id="portrayalCatalogueInfo" toggle="true">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
-        <section xpath="/gmd:MD_Metadata/gmd:portrayalCatalogueInfo" or="portrayalCatalogueInfo" in="/gmd:MD_Metadata"/>
+        <section xpath="/gmd:MD_Metadata/gmd:portrayalCatalogueInfo" or="portrayalCatalogueInfo"
+                 in="/gmd:MD_Metadata"/>
       </tab>
       <tab id="metadata">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
         <section name="metadata">
           <field xpath="/gmd:MD_Metadata/gmd:fileIdentifier"/>
           <field xpath="/gmd:MD_Metadata/gmd:language" or="language" in="/gmd:MD_Metadata"/>
           <field xpath="/gmd:MD_Metadata/gmd:locale" or="locale" in="/gmd:MD_Metadata"/>
           <field xpath="/gmd:MD_Metadata/gmd:characterSet"/>
-          <field xpath="/gmd:MD_Metadata/gmd:parentIdentifier" or="parentIdentifier" in="/gmd:MD_Metadata"/>
-          <field xpath="/gmd:MD_Metadata/gmd:hierarchyLevel" or="hierarchyLevel" in="/gmd:MD_Metadata"/>
-          <field xpath="/gmd:MD_Metadata/gmd:hierarchyLevelName" or="hierarchyLevelName" in="/gmd:MD_Metadata"/>
+          <field xpath="/gmd:MD_Metadata/gmd:parentIdentifier" or="parentIdentifier"
+                 in="/gmd:MD_Metadata"/>
+          <field xpath="/gmd:MD_Metadata/gmd:hierarchyLevel" or="hierarchyLevel"
+                 in="/gmd:MD_Metadata"/>
+          <field xpath="/gmd:MD_Metadata/gmd:hierarchyLevelName" or="hierarchyLevelName"
+                 in="/gmd:MD_Metadata"/>
           <field xpath="/gmd:MD_Metadata/gmd:dateStamp"/>
           <field xpath="/gmd:MD_Metadata/gmd:metadataStandardName"/>
           <field xpath="/gmd:MD_Metadata/gmd:metadataStandardVersion"/>
@@ -2329,25 +2317,22 @@ gmd:CI_OnlineResource>
         </section>
       </tab>
       <tab id="metadataConstraints" toggle="true">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
-        <section xpath="/gmd:MD_Metadata/gmd:metadataConstraints" or="metadataConstraints" in="/gmd:MD_Metadata"/>
+        <section xpath="/gmd:MD_Metadata/gmd:metadataConstraints" or="metadataConstraints"
+                 in="/gmd:MD_Metadata"/>
       </tab>
       <tab id="metadataMaintenance" toggle="true">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
-        <section xpath="/gmd:MD_Metadata/gmd:metadataMaintenance" or="metadataMaintenance" in="/gmd:MD_Metadata"/>
+        <section xpath="/gmd:MD_Metadata/gmd:metadataMaintenance" or="metadataMaintenance"
+                 in="/gmd:MD_Metadata"/>
       </tab>
       <tab id="applicationSchemaInfo" toggle="true">
-
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-
-        <section xpath="/gmd:MD_Metadata/gmd:applicationSchemaInfo" or="applicationSchemaInfo" in="/gmd:MD_Metadata"/>
+        <section xpath="/gmd:MD_Metadata/gmd:applicationSchemaInfo" or="applicationSchemaInfo"
+                 in="/gmd:MD_Metadata"/>
       </tab>
     </view>
 
