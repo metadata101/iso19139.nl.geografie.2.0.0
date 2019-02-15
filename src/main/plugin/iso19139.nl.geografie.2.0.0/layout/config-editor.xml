@@ -405,6 +405,7 @@ gmd:CI_OnlineResource>
         <col label="gmd:dateTime"/>
         <col label="gmd:organisationName"/>
         <col label="gmd:electronicMailAddress"/>
+        <col label="gmd:role"/>
         <col/>
       </header>
       <row>
@@ -412,6 +413,7 @@ gmd:CI_OnlineResource>
         <col xpath="gmd:dateTime"/>
         <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:organisationName"/>
         <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:address/gmd:CI_Address/gmd:electronicMailAddress" />
+        <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:role"/>
       </row>
     </table>
 
@@ -1537,7 +1539,7 @@ gmd:CI_OnlineResource>
 
 
           <!-- distributeur -->
-          <field name="distributorContact" templateModeOnly="true" notDisplayedIfMissing="true" removable="true" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributor/gmd:MD_Distributor/gmd:distributorContact" del="." if="count(gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution) > 0">
+          <field name="distributorContact" templateModeOnly="true" notDisplayedIfMissing="true" removable="true" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributor/gmd:MD_Distributor/gmd:distributorContact" del="../.." if="count(gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution) > 0">
 
             <template>
               <values readonlyIf="count(@xlink:href) > 0">
