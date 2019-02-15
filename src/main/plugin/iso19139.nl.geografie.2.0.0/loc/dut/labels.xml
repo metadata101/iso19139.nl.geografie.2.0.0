@@ -147,7 +147,7 @@
     <label>(Juridische) toegangsrestricties</label>
     <description>Toegangseisen die er zorg voor dragen dat privacy of intellectueel eigendom gewaarborgd zijn. Als er overige beperkingen worden opgenomen, dient hier de waarde 'anders' gekozen te worden. &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties' target='_blank'&gt;Lees verder&lt;/a&gt;</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.33_Juridische_toegangsrestricties</help_link>
-    <condition>C</condition>
+    <condition>mandatory</condition>
   </element>
 
   <!-- ==================================================== -->
@@ -879,6 +879,7 @@
   <element name="gmd:lineage" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage">
     <label>Herkomst</label>
     <description>Informatie over de herkomst (methodiek en bronnen) van de data.</description>
+    <condition>mandatory</condition>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:linkage" context="/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage">
@@ -1196,8 +1197,9 @@
   </element>
   <element name="gmd:otherConstraints">
     <label>Overige beperkingen</label>
-     <btnLabel>Overige beperking toevoegen</btnLabel>
+    <btnLabel>Overige beperking toevoegen</btnLabel>
     <description>Andere restricties of beperkingen. Dit veld is te gebruiken om de URL naar de licentie van Public domain, Creative Commons of Geo Gedeeld in te vullen. </description>
+    <condition>mandatory</condition>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:parentIdentifier" context="/gmd:MD_Metadata/gmd:parentIdentifier">
@@ -1853,13 +1855,10 @@
     <label>Identificatie van de Meeteenheid</label>
     <description>Identificatie van de eenheid in het systeem</description>
   </element>
-
   <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_ConceptualConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
     <label>Identificatie van de Meeteenheid</label>
     <description>Identificatie van de eenheid in het systeem</description>
   </element>
-
-  
   <element name="gml:unitsSystem" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_ConceptualConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem">
     <label>Eenheden systeem</label>
     <description>Indien  geen numerieke waarde wordt ingevuld, dient de waarde 'tekst' ingevuld te worden.</description>
