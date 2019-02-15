@@ -399,25 +399,6 @@ gmd:CI_OnlineResource>
       </row>
     </table>
 
-    <table for="gmd:MD_SecurityConstraints" label="MD_SecurityConstraints">
-      <header>
-        <col label="gmd:useLimitation"/>
-        <col label="gmd:classification"/>
-        <col label="gmd:userNote"/>
-        <col label="gmd:classificationSystem"/>
-        <col label="gmd:handlingDescription"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:useLimitation"/>
-        <col xpath="gmd:classification"/>
-        <col xpath="gmd:userNote"/>
-        <col xpath="gmd:classificationSystem"/>
-        <col xpath="gmd:handlingDescription"/>
-        <col del=".."/>
-      </row>
-    </table>
-
     <table for="gmd:LI_ProcessStep" label="ProcessStep">
       <header>
         <col label="gmd:description"/>
@@ -1469,21 +1450,12 @@ gmd:CI_OnlineResource>
               <snippet>
                 <gmd:resourceConstraints>
                   <gmd:MD_SecurityConstraints>
-                    <gmd:useLimitation>
-                      <gco:CharacterString/>
-                    </gmd:useLimitation>
                     <gmd:classification>
                       <gmd:MD_ClassificationCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ClassificationCode" codeListValue=""/>
                     </gmd:classification>
                     <gmd:userNote>
                       <gco:CharacterString/>
                     </gmd:userNote>
-                    <gmd:classificationSystem>
-                      <gco:CharacterString/>
-                    </gmd:classificationSystem>
-                    <gmd:handlingDescription>
-                      <gco:CharacterString/>
-                    </gmd:handlingDescription>
                   </gmd:MD_SecurityConstraints>
                 </gmd:resourceConstraints>
               </snippet>
