@@ -354,7 +354,7 @@
       </row>
     </table> -->
 
-    <table for="gmd:MD_Constraints" label="MD_Constraints">
+ <!--   <table for="gmd:MD_Constraints" label="MD_Constraints">
       <header>
         <col label="gmd:useLimitation"/>
         <col/>
@@ -365,7 +365,7 @@
       </row>
     </table>
 
-<!--
+
 
 gmd:CI_OnlineResource>
                      <gmd:linkage>
@@ -414,6 +414,7 @@ gmd:CI_OnlineResource>
         <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:organisationName"/>
         <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:address/gmd:CI_Address/gmd:electronicMailAddress" />
         <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:role"/>
+        <col del=".."/>
       </row>
     </table>
 
@@ -1872,7 +1873,7 @@ gmd:CI_OnlineResource>
 
           <!-- 84. Li-processstep-->
 
-          <field xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep"></field>
+          <field xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep" del="."></field>
 
           <action type="add" btnLabel="AddProcessStep" or="processStep" in="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage">
             <template>

@@ -606,7 +606,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:DQ_ConformanceResult" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult">
-    <label>Conformiteitindicatie met de specificatie</label>
+    <label>Conformiteit indicatie met de specificatie</label>
     <description>Resultaat conformiteit met de specificatie.</description>
   </element>
 
@@ -1208,7 +1208,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:pass" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:pass">
-    <label>Conformiteitindicatie</label>
+    <label>Conformiteit indicatie met de specificatie</label>
     <description>Indicatie van conformiteit met de specificatie. Het is alleen verplicht als de dataset een INSPIRE bron is of als de informatie is gemodelleerd volgens een specifiek informatie model.</description>
     <help_link>http://wiki.geonovum.nl/index.php/2.4.28_Conformiteitindicatie_met_de_specificatie</help_link>
     <condition>C</condition>
@@ -1940,7 +1940,7 @@
   </element>
 
   <element name="conformity">
-    <label>Conformiteitindicatie</label>
+    <label>Conformiteit indicatie met de specificatie</label>
     <description></description>
   </element>
 </labels>
