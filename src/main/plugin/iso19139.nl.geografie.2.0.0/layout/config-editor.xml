@@ -913,9 +913,7 @@ gmd:CI_OnlineResource>
                     <gmd:maintenanceAndUpdateFrequency>
                       <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml" codeListValue="{{maintenanceAndUpdateFrequency}}"></gmd:MD_MaintenanceFrequencyCode>
                     </gmd:maintenanceAndUpdateFrequency>
-                    <gmd:dateOfNextUpdate>
-                      <gco:Date>{{dateOfNextUpdate}}</gco:Date>
-                    </gmd:dateOfNextUpdate>
+                    <gmd:dateOfNextUpdate>{{dateOfNextUpdate}}</gmd:dateOfNextUpdate>
                   </gmd:MD_MaintenanceInformation>
                 </gmd:resourceMaintenance>
               </snippet>
