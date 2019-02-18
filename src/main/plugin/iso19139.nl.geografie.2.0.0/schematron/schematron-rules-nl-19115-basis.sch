@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 	<sch:ns uri="http://www.isotc211.org/2005/gmd" prefix="gmd"/>
 	<sch:ns uri="http://www.isotc211.org/2005/gco" prefix="gco"/>
@@ -327,7 +327,7 @@
 			</sch:report>
 
 			<!-- Thijs Brentjens: nieuwe controle op codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties -->
-			<sch:assert id="Overige_beperkingen_en_codelijst_Datalicenties" etf_name="Overige beperkingen en codelijst Datalicenties" test="not($accessConstraints_value = 'otherRestrictions') or ($accessConstraints_value = 'otherRestrictions' and $otherConstraintIsCodelistdatalicense)">Als het element juridische toegangsrestricties de waarde otherRestrictions bevat dient een link uit de codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties naar de licentie en de bijbehorende beschrijving opgenomen te worden. Opgenomen informatie: <sch:value-of select="$otherConstraint1"/> met licentie:<sch:value-of select="$otherConstraintURI1/@xlink:href"/> <sch:value-of select="$otherConstraint2"/> en <sch:value-of select="$otherConstraint2"/> <sch:value-of select="$otherConstraintURI2/@xlink:href"/> <sch:value-of select="$otherConstraint1"/></sch:assert>
+			<sch:assert id="Overige_beperkingen_en_codelijst_Datalicenties" etf_name="Overige beperkingen en codelijst Datalicenties" test="not($accessConstraints_value = 'otherRestrictions') or ($accessConstraints_value = 'otherRestrictions' and $otherConstraintIsCodelistdatalicense)">Als het element juridische toegangsrestricties de waarde otherRestrictions bevat dient een link uit de codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties naar de licentie en de bijbehorende beschrijving opgenomen te worden. Opgenomen informatie: <sch:value-of select="$otherConstraint1"/> met licentie:<sch:value-of select="normalize-space($otherConstraintURI1/@xlink:href)"/> <sch:value-of select="$otherConstraint2"/> en <sch:value-of select="$otherConstraint2"/> <sch:value-of select="normalize-space($otherConstraintURI2/@xlink:href)"/> <sch:value-of select="$otherConstraint1"/></sch:assert>
 
 			<!-- <sch:report id="Datalicenties_info" etf_name="Datalicenties info" test="not($accessConstraints_value = 'otherRestrictions') and not($accessConstraints_value = 'otherRestrictions' and $otherConstraintIsCodelistdatalicense)"><sch:value-of select="$otherConstraint1"/> met licentie:<sch:value-of select="$otherConstraintURI1/@xlink:href"/><sch:value-of select="$otherConstraint2"/> en <sch:value-of select="$otherConstraint2"/> <sch:value-of select="$otherConstraintURI2/@xlink:href"/><sch:value-of select="$otherConstraint1"/></sch:report> -->
 
