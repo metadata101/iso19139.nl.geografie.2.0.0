@@ -314,20 +314,7 @@
         <col del=".."/>
       </row>
     </table>
-    <table for="gmd:MD_Format">
-      <header>
-        <col label="gmd:name"/>
-        <col label="gmd:version"/>
-        <col label="gmd:specification"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:name"/>
-        <col xpath="gmd:version"/>
-        <col xpath="gmd:specification"/>
-        <col del=".."/>
-      </row>
-    </table>
+   
     <table for="gmd:PT_Locale">
       <header>
         <col label="gmd:languageCode"/>
@@ -340,44 +327,6 @@
         <col del=".."/>
       </row>
     </table>
-
-    <!--  <table for="gmd:MD_LegalConstraints" label="MD_LegalConstraints">
-      <header>
-        <col label="gmd:MD_Constraints"/>
-        <col label="gmd:otherConstraints"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="*[name()='gmd:useLimitation' or name()='gmd:accessConstraints' or name()='gmd:useConstraints']"/>
-        <col xpath="gmd:otherConstraints"/>
-        <col del=".."/>
-      </row>
-    </table> -->
-
- <!--   <table for="gmd:MD_Constraints" label="MD_Constraints">
-      <header>
-        <col label="gmd:useLimitation"/>
-        <col/>
-      </header>
-      <row>
-        <col xpath="gmd:useLimitation"/>
-        <col del=".."/>
-      </row>
-    </table>
-
-
-
-gmd:CI_OnlineResource>
-                     <gmd:linkage>
-                        <gmd:URL/>
-                     </gmd:linkage>
-                     <gmd:protocol gco:nilReason="missing">
-                        <gco:CharacterString/>
-                     </gmd:protocol>
-                     <gmd:name gco:nilReason="missing">
-                        <gco:CharacterString
-
--->
 
     <table for="gmd:Online" label="Online">
       <header>
@@ -1478,41 +1427,9 @@ gmd:CI_OnlineResource>
             </template>
           </action>
 
-          <field name="distribution" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine" del="." />
-
           <!-- Naam distributie formaat . -->
           <field name="distributionFormat" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat" del="." />
-          <!--<template>
-              <values>
-                <key label="format" xpath="gmd:MD_Format/gmd:name/gco:CharacterString" tooltip="gmd:name|gmd:MD_Format">
-                  <helper name="gmd:name" context="gmd:MD_Format"/>
-                </key>
-                <key label="format_version" xpath="gmd:MD_Format/gmd:version/gco:CharacterString"/>
-                <key label="format_specification" xpath="gmd:MD_Format/gmd:specification/gco:CharacterString">
-                  <helper name="gmd:specification" context="gmd:MD_Format"/>
-                </key>
-              </values>
-              <snippet>
-                <gmd:distributionFormat>
-                  <gmd:MD_Format>
-                    <gmd:name>
-                      <gco:CharacterString>{{format}}</gco:CharacterString>
-                    </gmd:name>
-                    <gmd:version>
-                      <gco:CharacterString>{{format_version}}</gco:CharacterString>
-                    </gmd:version>
-                    <gn:copy select="gmd:amendmentNumber"/>
-                    <gmd:specification>
-                      <gco:CharacterString>{{format_specification}}</gco:CharacterString>
-                    </gmd:specification>
-                    <gn:copy select="gmd:fileDecompressionTechnique"/>
-                    <gn:copy select="gmd:formatDistributor"/>
-                  </gmd:MD_Format>
-                </gmd:distributionFormat>
-              </snippet>
-            </template>
-          </field>-->
-
+          
           <action type="add" btnLabel="addDistributionFormat" name="distributionFormat" or="distributionFormat" in="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution">
             <template>
               <snippet>
