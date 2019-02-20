@@ -50,9 +50,12 @@
 
   <!-- Starting point -->
   <xsl:template match="/">
+
+    <xsl:variable name="globalResourceUrl" select="replace(/root/resourceUrl, 'schema=iso19139.nl.geografie.2.0.0&amp;', '')" />
+
     <html>
       <head>
-        <link rel='stylesheet' href='{/root/resourceUrl}highlightjs.css' />
+        <link rel='stylesheet' href='{$globalResourceUrl}highlightjs.css' />
       </head>
       <body>
       <pre>
@@ -60,7 +63,7 @@
           <xsl:copy-of select="saxon:serialize(/root/gmd:MD_Metadata, 'default-serialize-mode')"/>
         </code>
       </pre>
-        <script src="{/root/resourceUrl}highlight-json-xml.js">//script</script>
+        <script src="{$globalResourceUrl}highlight-json-xml.js">//script</script>
         <script>
           hljs.initHighlightingOnLoad();
         </script>
