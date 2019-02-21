@@ -476,7 +476,7 @@
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords" or="descriptiveKeywords" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"/>
 
           <!-- constraints -->
-          <field name="useLimitation" del=".." or="resourceConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_Constraints]"/>
+          <field name="useLimitation" del="." or="resourceConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_Constraints]"/>
 
           <action type="add" btnLabel="addUseLimitation" name="useLimitation" or="resourceConstraints" forceLabel="true" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints)=0">
             <template>
@@ -493,7 +493,7 @@
           </action>
 
           <!-- legal access constraints -->
-          <field name="legalAccessConstraints" del=".." xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]">
+          <field name="legalAccessConstraints" del="." xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]">
           </field>
 
           <action type="add" btnLabel="addOtherConstraints" name="otherConstraints" or="otherConstraints" 
