@@ -375,21 +375,26 @@
   <qos>Service kwaliteit</qos>
   <addQOS>Voeg service kwaliteit toe</addQOS>
 
-<!-- missing-->
-<scale>Schaal</scale>
-<MD_SecurityConstraints>Beveiligings beperkingen</MD_SecurityConstraints>
-<distributionFormat>Distributie formaat</distributionFormat>
-<DQ_ConformanceResult>Conformiteit</DQ_ConformanceResult>
-<addLegaluseConstraints>Juridische gebruiks beperkingen toevoegen</addLegaluseConstraints>
+  <!-- missing-->
+  <scale>Schaal</scale>
+  <MD_SecurityConstraints>Beveiligings beperkingen</MD_SecurityConstraints>
+  <distributionFormat>Distributie formaat</distributionFormat>
+  <DQ_ConformanceResult>Conformiteit</DQ_ConformanceResult>
+  <addLegaluseConstraints>Juridische gebruiks beperkingen toevoegen</addLegaluseConstraints>
 
-<ConformanceResult>Conformiteit</ConformanceResult>
-<DomainConsistency>Conformiteit met een domein specificatie</DomainConsistency>
-<TopologicalConsistency>Topologische samenhang</TopologicalConsistency>
-<CompletenessOmission>Compleetheid</CompletenessOmission>
-<AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid</AbsoluteExternalPositionalAccuracy>
-<ProcessStep>Bewerkings stap</ProcessStep>
-<addQualityScope>Niveau kwaliteitsbeschrijving toevoegen</addQualityScope>
-<addQualityScopeDesc>Beschrijving niveau kwaliteitsbeschrijving toevoegen</addQualityScopeDesc>
-<levelDescription>Beschrijving niveau kwaliteitsbeschrijving</levelDescription>
+  <ConformanceResult>Conformiteit</ConformanceResult>
+  <DomainConsistency>Conformiteit met een domein specificatie</DomainConsistency>
+  <TopologicalConsistency>Topologische samenhang</TopologicalConsistency>
+  <CompletenessOmission>Compleetheid</CompletenessOmission>
+  <AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid</AbsoluteExternalPositionalAccuracy>
+  <ProcessStep>Bewerkings stap</ProcessStep>
+  <addQualityScope>Niveau kwaliteitsbeschrijving toevoegen</addQualityScope>
+  <addQualityScopeDesc>Beschrijving niveau kwaliteitsbeschrijving toevoegen</addQualityScopeDesc>
+  <levelDescription>Beschrijving niveau kwaliteitsbeschrijving</levelDescription>
+
+  <nameOfMeasure>Indicator</nameOfMeasure>
+  <measureDescription>Omschrijving indicator</measureDescription>
+  <valueUnit>Eenheid</valueUnit>
+  <unitsSystem>Eenheden systeem</unitsSystem>
 
 </strings>

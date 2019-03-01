@@ -1843,42 +1843,26 @@
     <description/>
   </element>
   <!-- ==================================================== -->
-  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
-    <label>Identificatie van de Meeteenheid</label>
+  <element name="gml:identifier">
+    <label>Meeteenheid</label>
     <description>Identificatie van de eenheid in het systeem</description>
+    <helper>
+      <option value="unity">Aantal</option>
+      <option value="Percentage">Percentage</option>
+      <option value="ampere">Ampere</option>
+      <option value="candela">Candela</option>
+      <option value="kilogram">Kilogram</option>
+      <option value="metre">Meter</option>
+      <option value="second">Seconde</option>
+      <option value="mole">Mol</option>
+      <option value="kelvin">Graden Kelvin</option>
+      <option value="celsius">Graden Celsius</option>
+    </helper>
   </element>
-  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
-    <label>Identificatie van de Meeteenheid</label>
-    <description>Identificatie van de eenheid in het systeem</description>
-  </element>
-  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
-    <label>Identificatie van de Meeteenheid</label>
-    <description>Identificatie van de eenheid in het systeem</description>
-  </element>
-  <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_ConceptualConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
-    <label>Identificatie van de Meeteenheid</label>
-    <description>Identificatie van de eenheid in het systeem</description>
-  </element>
-  <element name="gml:unitsSystem" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_ConceptualConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem">
+  <element name="gml:unitsSystem">
     <label>Eenheden systeem</label>
-    <description>Indien  geen numerieke waarde wordt ingevuld, dient de waarde 'tekst' ingevuld te worden.</description>
+    <description>Systeem waarin de meeteenheid vastgelegd is. Indien  geen numerieke waarde wordt ingevuld, dient de waarde 'tekst' ingevuld te worden.</description>
   </element>
-  <element name="gml:unitsSystem" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem">
-    <label>Eenheden systeem</label>
-    <description>Indien  geen numerieke waarde wordt ingevuld, dient de waarde 'tekst' ingevuld te worden.</description>
-  </element>
-  <element name="gml:unitsSystem" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem">
-    <label>Eenheden systeem</label>
-    <description>Indien  geen numerieke waarde wordt ingevuld, dient de waarde 'tekst' ingevuld te worden.</description>
-  </element>
-  <element name="gml:unitsSystem" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem">
-    <label>Eenheden systeem</label>
-    <description>Indien  geen numerieke waarde wordt ingevuld, dient de waarde 'tekst' ingevuld te worden.Verplicht voor INSPIRE als voor netwerken de aansluiting van hartlijnen niet is verzekerd. In dat geval moet de Connectivity tolerance parameter vastgelegd worden om automatische creatie van hartlijn topologie mogelijk te maken</description>
-    <help_link>http://wiki.geonovum.nl/index.php/Topologische samenhang</help_link>
-    <condition>C</condition>
-  </element>
-
-
 
   <element name="gmx:Anchor">
     <label>Anker</label>
@@ -1889,7 +1873,6 @@
     <label>Scope code</label>
     <description>Code die de scope van het beschreven element aangeeft</description>
   </element>
-
 
   <element name="Required">
     <label>Verplichte elementen</label>
