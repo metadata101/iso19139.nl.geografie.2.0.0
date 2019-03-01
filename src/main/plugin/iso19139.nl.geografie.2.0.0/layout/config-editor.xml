@@ -79,6 +79,7 @@
       <directiveAttributes 
         data-thesaurus-key="external.theme.protocols" 
         data-thesaurus-orderById="true"
+        data-display-definition="true"
         data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
@@ -149,10 +150,13 @@
           concat('-', substring-after(text()[. != ''], 'geonetwork.thesaurus.')), ',')"/>
     </for>
 
-    <for name="gmd:name" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name" use="data-gn-keyword-picker">
+    <for name="gmd:name" 
+    xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name" 
+    use="data-gn-keyword-picker">
       <directiveAttributes 
         data-thesaurus-key="external.theme.httpinspireeceuropaeuapplicationschema-applicationschema" 
         data-thesaurus-orderById="true"
+        data-display-definition="true"
         data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
@@ -160,10 +164,13 @@
       <directiveAttributes data-thesaurus-key="external.theme.domainspecifications" data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>-->
 
-    <for name="gmd:otherConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints" use="data-gn-keyword-picker">
+    <for name="gmd:otherConstraints" 
+      xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints" 
+      use="data-gn-keyword-picker">
       <directiveAttributes 
         data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess" 
         data-thesaurus-orderById="true"
+        data-display-definition="true"
         data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
 
