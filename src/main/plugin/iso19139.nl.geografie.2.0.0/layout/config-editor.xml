@@ -78,7 +78,7 @@
     <for name="gmd:protocol" use="data-gn-keyword-picker">
       <directiveAttributes 
         data-thesaurus-key="external.theme.protocols" 
-        data-thesaurus-order-by-id="true"
+        data-order-by-id="true"
         data-display-definition="true"
         data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
@@ -155,7 +155,7 @@
     use="data-gn-keyword-picker">
       <directiveAttributes 
         data-thesaurus-key="external.theme.httpinspireeceuropaeuapplicationschema-applicationschema" 
-        data-thesaurus-order-by-id="true"
+        data-order-by-id="true"
         data-display-definition="true"
         data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
@@ -169,7 +169,7 @@
       use="data-gn-keyword-picker">
       <directiveAttributes 
         data-thesaurus-key="external.theme.httpinspireeceuropaeumetadatacodelistLimitationsOnPublicAccess-LimitationsOnPublicAccess" 
-        data-thesaurus-order-by-id="true"
+        data-order-by-id="true"
         data-display-definition="true"
         data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
@@ -1213,7 +1213,7 @@
           <field name="rsIdentifier" use="data-gn-keyword-picker" xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code" del="../../../..">
             <directiveAttributes 
               data-thesaurus-key="external.theme.projections"
-              data-thesaurus-order-by-id="true" 
+              data-order-by-id="true" 
               data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
           </field>
           <action type="add" del="." btnLabel="addReferenceSystem" or="referenceSystemInfo" if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier) &lt; 2" in="/gmd:MD_Metadata">
