@@ -37,6 +37,7 @@
   <!-- New strings added for the AngularJS editor -->
   <!-- View and tabs -->
   <advanced>Full</advanced>
+  <dutchprofile>Dutch profile</dutchprofile>
   <default>Simple</default>
   <simple>Simple</simple>
   <inspire>INSPIRE</inspire>
