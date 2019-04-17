@@ -309,9 +309,9 @@
     <table for="gmd:CI_ResponsibleParty">
       <header>
         <!-- TODO: Add label from strings.xml / label with context-->
-        <col label="gmd:organisationName"/>
-        <col label="gmd:electronicMailAddress"/>
-        <col label="gmd:role"/>
+        <col label="gmd:organisationName" class="gn-required"/>
+        <col label="gmd:electronicMailAddress" class="gn-required"/>
+        <col label="gmd:role" class="gn-required"/>
         <col/>
       </header>
       <row>
@@ -338,10 +338,8 @@
     <table for="gmd:Online" label="Online">
       <header>
         <col label="name"/>
-        <col label="url"/>
-        <col label="protocol"/>
-        <col label="description"/>
-        <col label="function"/>
+        <col label="url" class="gn-required"/>
+        <col label="protocol" class="gn-required"/>
         <col label=""/>
         <col/>
       </header>
@@ -349,8 +347,6 @@
         <col xpath="gmd:CI_OnlineResource/gmd:name" />
         <col xpath="gmd:CI_OnlineResource/gmd:linkage/gmd:URL" />
         <col xpath="gmd:CI_OnlineResource/gmd:protocol" />
-        <col xpath="gmd:CI_OnlineResource/gmd:description" />
-        <col xpath="gmd:CI_OnlineResource/gmd:function" />
         <col del=".."/>
       </row>
     </table>
