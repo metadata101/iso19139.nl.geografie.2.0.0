@@ -1002,7 +1002,7 @@
   <!-- ==================================================== -->
   <element name="gmd:MD_Metadata" context="/gmd:MD_Metadata">
     <label>Metadata</label>
-    <description>Rootentiteit van de metadata over een data of service.</description>
+    <description>Root entiteit van de metadata over een data of service.</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:MD_ProgressCode" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:status/gmd:MD_ProgressCode">
@@ -1282,6 +1282,8 @@
     <helper>
       <option value="" title="separator">-- AccessPoints --</option>
       <option type="accessPoint"
+        id="http://www.opengeospatial.org/standards/csw" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
+      <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wms" value="OGC:WMS" title="Web Map service">WMS</option>
       <option type="accessPoint"
        id="http://www.opengeospatial.org/standards/wmts" value="OGC:WMTS" group="22" title="Web Mapping Tiling Service">WMTS</option>
@@ -1290,29 +1292,14 @@
       <option type="accessPoint"
        id="http://www.opengeospatial.org/standards/wcs" value="OGC:WCS" group="22" title="Web Coverage Service">WCS</option>
       <option type="accessPoint"
-        value="INSPIRE Atom" title="INSPIRE Atom Feed met links naar datasets">Atom Feed</option>
-      <option type="accessPoint" value="landingpage" title="Een webpagina die toegang geeft tot de dataset of overige informatie bevat">Webpagina</option>
-      <option type="accessPoint" value="application" title="Een (web) applicatie die rechtstreeks toegang geeft tot de dataset">Web applicatie</option>
-      <option type="accessPoint" value="dataset" title="Referentie naar een locale dataset locatie">
-        Locale dataset referentie
-      </option>
-      <option type="accessPoint"
-          id="http://www.opengeospatial.org/standards/wps"
-          value="OGC:WPS" title="Web Processing Service">WPS</option>
-      <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/sos" value="OGC:SOS" title="Sensor Observation Service">SOS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/sensorthings" value="OGC:SensorThings" title="SensorThings API">SensorThings API</option>
-      <option type="accessPoint"
-        id="https://github.com/OAI/OpenAPI-Specification" value="OAS" title="Open API Specification">Open API Specification</option>
-      <option type="accessPoint"
-        id="https://www.w3.org/TR/rdf-sparql-query" value="W3C:SPARQL" title="SPARQL Query Language for RDF">SPARQL</option>
-      <option type="accessPoint"
-        id="https://www.oasis-open.org/committees/odata" value="OASIS:OData" title="OData">OData</option>
-      <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/csw" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
+        value="INSPIRE Atom" title="INSPIRE Atom Feed met links naar datasets">Atom Feed</option>
       <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wcts" value="OGC:WCTS" title="Web Coordinate Transformation">WCTS</option>
+      <option type="accessPoint"
+        id="http://www.opengeospatial.org/standards/wps"
+        value="OGC:WPS" title="Web Processing Service">WPS</option>
       <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wfs-g" value="OGC:WFS-G" title="WFS Gazzetteer service">WFS-G</option>
       <option type="accessPoint"
@@ -1322,15 +1309,28 @@
       <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wns" value="OGC:WNS" title="Web Notification Service">WNS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#ds" value="OGC:ODS" title="OpenLS Directory Service">OpenLS DS</option>
+        id="http://www.opengeospatial.org/standards/ols#ODS" value="OGC:ODS" title="OpenLS Directory Service">OpenLS DS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#gs" value="OGC:OGS" title="OpenLS Gateway Service">OpenLS GS</option>
+        id="http://www.opengeospatial.org/standards/ols#OGS" value="OGC:OGS" title="OpenLS Gateway Service">OpenLS GS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#us" value="OGC:OUS" title="OpenLS Utility Service">OpenLS US</option>
+        id="http://www.opengeospatial.org/standards/ols#OUS" value="OGC:OUS" title="OpenLS Utility Service">OpenLS US</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#ps" value="OGC:OPS" title="OpenLS Presentation Service">OpenLS PS</option>
+        id="http://www.opengeospatial.org/standards/ols#OPS" value="OGC:OPS" title="OpenLS Presentation Service">OpenLS PS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#rs" value="OGC:ORS" title="OpenLS Route Service">OpenLS RS</option>
+        id="http://www.opengeospatial.org/standards/ols#ORS" value="OGC:ORS" title="OpenLS Route Service">OpenLS RS</option>
+      <option type="accessPoint"
+        id="http://www.opengeospatial.org/standards/sensorthings" value="OGC:SensorThings" title="SensorThings API">SensorThings API</option>
+      <option type="accessPoint"
+        id="https://www.w3.org/TR/rdf-sparql-query" value="W3C:SPARQL" title="SPARQL Query Language for RDF">SPARQL</option>
+      <option type="accessPoint"
+        id="https://github.com/OAI/OpenAPI-Specification" value="OAS" title="Open API Specification">Open API Specification</option>
+      <option type="accessPoint"
+        id="https://www.oasis-open.org/committees/odata" value="OASIS:OData" title="OData">OData</option>
+      <option type="accessPoint" value="landingpage" title="Een webpagina die toegang geeft tot de dataset of overige informatie bevat">Webpagina</option>
+      <option type="accessPoint" value="application" title="Een (web) applicatie die rechtstreeks toegang geeft tot de dataset">Web applicatie</option>
+      <option type="accessPoint" value="dataset" title="Referentie naar een locale dataset locatie">
+        Locale dataset referentie
+      </option>
       <option type="accessPoint"
          value="UKST" title="Onbekend Service Type"> Onbekend Service Type</option>
 <!-- endpoints -->

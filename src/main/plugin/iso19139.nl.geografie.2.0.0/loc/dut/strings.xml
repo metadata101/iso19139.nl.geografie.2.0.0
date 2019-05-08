@@ -167,12 +167,7 @@
   <conformity_linkage>Tech spec URL</conformity_linkage>
 
 
-  <sds-section-qos>Quality of Service</sds-section-qos>
-  <sds-add-qualityofservice>Add missing Quality of Service criteria</sds-add-qualityofservice>
-  <sds-add-qualityofserviceHelp>INSPIRE SDS requires three quality of service criteria to be
-    reported in the metadata: Availability, Performance and Capacity. This button will add the
-    missing criteria.
-  </sds-add-qualityofserviceHelp>
+  <sds-section-qos>Service kwaliteit</sds-section-qos>
   <qos_measure>Maat:</qos_measure>
   <qos_uom>UOM</qos_uom>
   <qos_description>Omschrijving</qos_description>
@@ -372,8 +367,6 @@
 
   <Basis>Basis</Basis>
   <Extra>Extra</Extra>
-  <qos>Service kwaliteit</qos>
-  <addQOS>Voeg service kwaliteit toe</addQOS>
 
   <!-- missing-->
   <scale>Schaal</scale>
