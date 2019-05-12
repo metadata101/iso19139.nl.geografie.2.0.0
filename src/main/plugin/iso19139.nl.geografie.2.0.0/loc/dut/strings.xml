@@ -275,21 +275,20 @@
   <purpose>Doel van vervaardiging</purpose>
   <supplementalInformation>Extra informatie</supplementalInformation>
   <edition>Versie</edition>
-
-
-  <DQ_CompletenessOmission>Compleetheid</DQ_CompletenessOmission>
-
+ 
   <ResourceCharacterset>Karakterset resource</ResourceCharacterset>
   <DescriptionTemporalExtent>Omschrijving temporele geldigheid</DescriptionTemporalExtent>
 
-  <DQ_AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid</DQ_AbsoluteExternalPositionalAccuracy>
-
   <DQ_TopologicalConsistency>Topologische samenhang</DQ_TopologicalConsistency>
   <DQ_TopologicalConsistencyDesc>Verplicht voor INSPIRE als voor netwerken de aansluiting van hartlijnen niet is verzekerd. In dat geval moet de Connectivity tolerance parameter vastgelegd worden om automatische creatie van hartlijn topologie mogelijk te maken</DQ_TopologicalConsistencyDesc>
-
   <Add_DQ_TopologicalConsistency>Topologische samenhang toevoegen</Add_DQ_TopologicalConsistency>
+
   <Add_DQ_AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid toevoegen</Add_DQ_AbsoluteExternalPositionalAccuracy>
+  <DQ_AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid</DQ_AbsoluteExternalPositionalAccuracy>
+
   <Add_DQ_CompletenessOmission>Compleetheid toevoegen</Add_DQ_CompletenessOmission>
+  <DQ_CompletenessOmission>Compleetheid</DQ_CompletenessOmission>
+
   <addIdentifier>Identificatie toevoegen</addIdentifier>
   <addStatus>Status toevoegen</addStatus>
   <addLanguage>Taal toevoegen</addLanguage>

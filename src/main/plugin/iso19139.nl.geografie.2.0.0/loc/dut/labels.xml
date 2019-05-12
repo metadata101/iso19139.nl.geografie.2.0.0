@@ -1603,35 +1603,9 @@
     <description>Toelichting op de veiligheidsrestricties.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:value" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:value">
-    <label>Compleetheid</label>
-    <description>Omschrijving in hoeverre een dataset compleet is, of anders gezegd, een inschatting van wat er nog ontbreekt.</description>
-  </element>
-  <element name="gmd:value" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:value">
-    <label>Geometrische nauwkeurigheid</label>
-    <description>Afwijking van de x- en ycoordinaten ten opzichte van de werkelijke plaats op aarde.</description>
-  </element>
   <element name="gmd:value">
     <label>Waarde</label>
-    <description></description>
-  </element>
-  <!-- ==================================================== -->
-  <element name="gmd:valueUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit">
-    <label>Waarde eenheid</label>
-    <description>Indien bij Compleetheid geen numerieke waarde wordt ingevuld, dient de waarde: tekst ingevuld te worden.</description>
-  </element>
-  <element name="gmd:valueUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit">
-    <label>Waarde eenheid</label>
-    <description>Indien bij Geometrische nauwkeurigheid geen numerieke waarde wordt ingevuld, dient de waarde: tekst ingevuld te worden.</description>
-  </element>
-  <element name="gmd:valueUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit">
-    <label>Waarde eenheid</label>
-    <description>Indien bij Topologische samenhang geen numerieke waarde wordt ingevuld, dient de waarde: tekst ingevuld te worden.</description>
-  </element>
-  <element name="gmd:valueUnit">
-    <label>Waarde eenheid</label>
-    <description>Waarde eenheid om data kwaliteit te rapporteren</description>
-    <condition>mandatory</condition>
+    <description>Vastgestelde waarde die de mate van kwaliteit vastlegd</description>
   </element>
 
   <!-- ==================================================== -->
