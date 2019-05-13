@@ -134,6 +134,13 @@
             </gmd:MD_Keywords>
          </gmd:descriptiveKeywords>
          <gmd:resourceConstraints>
+            <gmd:MD_Constraints>
+               <gmd:useLimitation>
+                  <gco:CharacterString></gco:CharacterString>
+               </gmd:useLimitation>
+            </gmd:MD_Constraints>
+         </gmd:resourceConstraints>
+         <gmd:resourceConstraints> 
 		  <gmd:MD_LegalConstraints>
 		    <gmd:accessConstraints>
 		      <gmd:MD_RestrictionCode
@@ -146,10 +153,8 @@
 
 		      </gmx:Anchor>
 		    </gmd:otherConstraints>
-
 		  </gmd:MD_LegalConstraints>
 		</gmd:resourceConstraints>
-
          <gmd:spatialResolution>
             <gmd:MD_Resolution>
                <gmd:equivalentScale>
