@@ -70,7 +70,7 @@
          <gmd:citation>
             <gmd:CI_Citation>
                <gmd:title>
-                  <gco:CharacterString>Template iso19139.nl.geografie.2.0.0</gco:CharacterString>
+                  <gco:CharacterString>Template Nederlands metadata profiel op ISO 19115 voor geografie 2.0.0</gco:CharacterString>
                </gmd:title>
                <gmd:date>
                   <gmd:CI_Date>
