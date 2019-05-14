@@ -120,7 +120,11 @@
   </element>
   <element name="gmd:URL" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL">
     <label>URL voor online toegang tot de bron</label>
-    <description>Valide URL voor online toegang tot (informatie over) de bron. Neem hier de WMS/WFS/WCS URL op naar de service die deze dataset ontsluit. </description>
+    <description>
+      Geef een valide URL voor online toegang tot een service, specifieke onderdelen van een service of een directe download van de dataset.
+      Als er een service is dan daarvan in ieder geval de URL geven die informatie geeft over de service inclusief zijn endPoints. Dat kan bijvoorbeeld een capabilities of WSDL document zijn. Dit noemen we een accesspoint.
+      Daarnaast kunnen ook URL’s worden opgenomen waarmee bijvoorbeeld rechtstreeks een dataset in een specifiek mediatype gedownload wordt. Dit noemen we endpoints. &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#url' target='_blank'&gt;Lees verder&lt;\a&gt;.
+    </description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:verticalCRS" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement/gmd:EX_VerticalExtent/gmd:verticalCRS">
@@ -142,9 +146,9 @@
   <element name="gmd:accessConstraints">
     <label>(Juridische) toegangsrestricties</label>
     <description>
-    (Juridische) toegangsrestricties zal in de meeste gevallen de waarde "anders" hebben, als het de waarde anders heeft, 
-    dient het metadata element overige beperkingen ingevuld worden. 
-    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties' target='_blank'&gt;Lees verder&lt;/a&gt;</description>
+      (Juridische) toegangsrestricties zal in de meeste gevallen de waarde "anders" hebben, als het de waarde anders
+      heeft, dan kan het metadata element overige beperkingen ingevuld worden.
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties' target='_blank'&gt;Lees verder&lt;/a&gt;.</description>
     <condition>mandatory</condition>
   </element>
 
@@ -362,9 +366,9 @@
   <element name="gmd:code" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
     <label>Code referentiesysteem</label>
     <description>
-    Het referentiesysteem wordt met een URI (die ook de code bevat) opgenomen. Voor RD is dat 
-    &lt;a href='http://www.opengis.net/def/crs/EPSG/0/28992' target='i'&gt;http://www.opengis.net/def/crs/EPSG/0/28992&lt;/a&gt;, 
-    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem' target='i'&gt;Lees verder&lt;/a&gt;
+      Het referentiesysteem wordt met een URI (die ook de code bevat) opgenomen. Voor RD is dat
+    &lt;a href='http://www.opengis.net/def/crs/EPSG/0/28992' target='_blank'&gt;http://www.opengis.net/def/crs/EPSG/0/28992&lt;/a&gt;,
+    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem' target='_blank'&gt;Lees verder&lt;/a&gt;.
     </description>
     <condition>mandatory</condition>
   </element>
@@ -374,8 +378,8 @@
     In dit element wordt de waarde die een dataset uniek identificeert opgenomen. Er wordt sterk geadviseerd om gebruik 
     te maken van een anchor met een verwijzing naar een URI, voor INSPIRE datasets is het gebruik van een URI verplicht. 
     Deze identifer moet  geldig en beschikbaar blijven voor de gehele beschikbaarheidstermijn van de  dataset. 
-    Lees verder over &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron' target='i'&gt;string elementen&lt;/&gt; 
-    en &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen' target='i'&gt;string elementen&lt;/&gt;
+    Lees verder over &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron' target='blank'&gt;string elementen&lt;/&gt;
+    en &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen' target='blank'&gt;string elementen&lt;/&gt;
     </description>
     <condition>mandatory</condition>
   </element>
@@ -794,7 +798,7 @@
   <!-- ==================================================== -->
   <element name="gmd:identifier" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier">
     <label>Unieke identifier van de bron</label>
-    <description>In dit element wordt de waarde die een dataset uniek identificeert opgenomen. Er wordt sterk geadviseerd om gebruik te maken van een anchor met een verwijzing naar een URI, voor INSPIRE datasets is het gebruik van een URI verplicht. Deze identifer moet  geldig en beschikbaar blijven voor de gehele beschikbaarheidstermijn van de  dataset. Lees verder https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron  en https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen</description>
+    <description>In dit element wordt de waarde die een dataset uniek identificeert opgenomen. Er wordt sterk geadviseerd om gebruik te maken van een anchor met een verwijzing naar een URI, voor INSPIRE datasets is het gebruik van een URI verplicht. Deze identifier moet geldig en beschikbaar blijven voor de gehele beschikbaarheidstermijn van de dataset. Lees verder &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron' target='_blank'&gt;unieke identifier van de bron&lt;/a&gt; en &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen' target='_blank'&gt;string elementen&lt;/a&gt;.</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:individualName" context="/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:individualName">
@@ -880,9 +884,17 @@
   </element>
   <element name="gmd:linkage" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage">
     <label>URL voor online toegang tot bron</label>
-    <description>Valide URL voor online toegang tot (informatie over) de bron. Neem hier de WMS/WFS/WCS URL op naar de service die deze dataset ontsluit. </description>
-    
+    <description>
+      Deze elementengroep kan meerdere keren voorkomen, bijvoorbeeld als link naar een direct downloadbaar bestand, WMS, WFS en specifieke lagen of featurtypes in de services.
+    </description>
   </element>
+
+  <!-- ==================================================== -->
+  <element name="gmd:applicationProfile">
+    <label>Applicatieprofiel</label>
+    <description>Naam van een toepassingsprofiel dat kan worden gebruikt met de online bron</description>
+  </element>
+
   <!-- ==================================================== -->
   <element name="gmd:maintenanceAndUpdateFrequency" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceMaintenance/gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency">
     <label>Herzieningsfrequentie</label>
@@ -967,10 +979,10 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:MD_LegalConstraints" >
-    <label>Juridische beperkingen</label>
+    <label>Juridische toegangs beperkingen</label>
     <description>
       Het is verplicht voorwaarden voor toegang en gebruik op te nemen in één Juridische toegangs beperkingen element groep, bestaande uit (Juridische) toegangsrestricties en overige beperkingen. Deze kan met de plus knop worden toegevoegd.
-      Daarnaast is het verplicht een waarde op te nemen voor beperkingen op publieke toegang in één ander, een tweede,  Juridische toegangs beperkingen element groep, bestaande uit (Juridische) toegangsrestricties en overige beperkingen.
+      Daarnaast is het verplicht een waarde op te nemen voor beperkingen op publieke toegang in één andere, een tweede, Juridische toegangs beperkingen element groep, bestaande uit (Juridische) toegangsrestricties en overige beperkingen.
     </description>
   </element>
 
@@ -1121,9 +1133,8 @@
     <label>Naam</label>
     <description>
     Neem in dit element de layername uit WMS of WCS, identifier uit WMTS, de featureType name uit WFS of Dataset Feed Title uit Atom op.
-    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam' target='i'&gt;Lees verder&lt;/a&gt;
+    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam' target='_blank'&gt;Lees verder&lt;/a&gt;.
     </description>
-    
   </element>
   <element name="gmd:name" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:offLine/gmd:MD_Medium/gmd:name">
     <label>Naam medium</label>
@@ -1177,14 +1188,15 @@
     <label>Overige beperkingen</label>
     <btnLabel>Overige beperking toevoegen</btnLabel>
     <description>
-      De voorwaarden voor toegang en gebruik op basis van een link naar de licentie.  In codelijst 
-      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties' target='i'>Data Licenties&lt;/a&gt;
-      zijn de beschrijvingen en de bijbehorende link naar de mogelijke licenties opgenomen. 
-      Voor INSPIRE wordt er in een tweede Overige beperkingen element als er geen beperkingen zijn of deze niet bekend zijn, ook een waarde uit codelijst 
-      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelijst-INSPIRE-ConditionsApplyingToAccessAndUse' target='i'>Conditions Applying To Access And Use&lt;/a&gt; 
-      opgenomen. Daarnaast wordt voor de tweede elementgroep (Juridische toegangs beperkingen) in dit element de beperkingen op publieke toegang met een waarde uit codelijst 
-      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelijst-INSPIRE-LimitationsOnPublicAccess' target='i'>Limitations On Public Access&lt;/a&gt; opgenomen. 
-      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#overige-beperkingen' target='i'>Lees verder&lt;/a&gt;
+      Hierin wordt voor één elementgroep (Juridische toegangs beperkingen) in dit element de voorwaarden voor toegang en gebruik met een link naar de licentie en de bijbehorende beschrijving opgenomen.
+      In codelijst
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties' target='i'>DataLicenties&lt;/a&gt;
+      zijn de beschrijvingen en de bijbehorende link naar de mogelijke licenties opgenomen.
+
+      Daarnaast wordt voor de tweede elementgroep (Juridische toegangs beperkingen) in dit element de beperkingen op publieke toegang met een waarde uit
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelijst-INSPIRE-LimitationsOnPublicAccess' target='_blank'>codelijst LimitationsOnPublicAccess&lt;/a&gt; opgenomen. Lees hier meer over
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#overige-beperkingen' target='_blank'>overige beperkingen&lt;/a&gt; en
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen'&gt;string elementen&lt;/a&gt; meer.
     </description>
     <condition>mandatory</condition>
   </element>
@@ -1265,9 +1277,7 @@
   <element name="gmd:description" alias="description" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:description">
     <label>Omschrijving</label>
     <description>
-    Als de URL van het type 'endPoint' is, wordt dat hier aangegeven dat het een endPoint is met een 
-    waarde uit een waarde uit de codelijst &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelist-INSPIRE-OnLineDescriptionCode' target='i'&gt;OnLine Description Code&lt;/a&gt;. 
-    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#description' target='i'&gt;Lees verder&lt;/a&gt;
+      Als de URL van het type 'endPoint' is opgegeven wordt dat hier aangegeven dat het een endPoint is met een waarde uit een waarde uit de &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelist-INSPIRE-OnLineDescriptionCode' target='_blank'&gt;codelijst OnLineDescriptionCode&lt;/a&gt;.
     </description>
   </element>
   
@@ -1275,9 +1285,9 @@
   <element name="gmd:protocol" alias="protocol">
     <label>Protocol</label>
     <description>
-    Als de URL een 'endPoint' betreft dan dient een waarde geselecteerd te worden uit de codelijst &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-mediatypes' target='i'&gt;MediaType&lt;/a&gt;.
-    Als de URL een 'accessPoint' betreft, dient een waarde geselecteerd te worden uit de codelijst &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-protocol' target='i'&gt;Protocol&lt;/a&gt;. 
-    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol' target='i'&gt;Lees verder&lt;/a&gt;
+    Als de URL een 'endPoint' betreft dan dient een waarde geselecteerd te worden uit de codelijst &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-mediatypes' target='_blank'&gt;MediaType&lt;/a&gt;.
+    Als de URL een 'accessPoint' betreft, dient een waarde geselecteerd te worden uit de codelijst &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-protocol' target='_blank'&gt;Protocol&lt;/a&gt;.
+    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol' target='_blank'&gt;Lees verder&lt;/a&gt;.
     </description>
     <helper>
       <option value="" title="separator">-- AccessPoints --</option>
