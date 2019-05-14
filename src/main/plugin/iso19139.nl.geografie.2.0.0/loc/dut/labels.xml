@@ -387,7 +387,7 @@
     <label>Identifier Geografisch gebied</label>
     <description>
       Referentie naar een geografisch gebied dat de spreiding van de data aangeeft. 
-      Gebruik bij voorkeur een waarde uit &lt;a href='https://standaarden.overheid.nl/owms/4.0/doc/waardelijsten' target='i'&gt;OWMS waardelijsten&lt;/&gt;.
+      Gebruik bij voorkeur een waarde uit &lt;a href='https://standaarden.overheid.nl/owms/4.0/doc/waardelijsten' target='blank'&gt;OWMS waardelijsten&lt;/&gt;.
     </description>
   </element>
   <!-- ==================================================== -->
@@ -1190,7 +1190,7 @@
     <description>
       Hierin wordt voor één elementgroep (Juridische toegangs beperkingen) in dit element de voorwaarden voor toegang en gebruik met een link naar de licentie en de bijbehorende beschrijving opgenomen.
       In codelijst
-      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties' target='i'>DataLicenties&lt;/a&gt;
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties' target='_blank'>DataLicenties&lt;/a&gt;
       zijn de beschrijvingen en de bijbehorende link naar de mogelijke licenties opgenomen.
 
       Daarnaast wordt voor de tweede elementgroep (Juridische toegangs beperkingen) in dit element de beperkingen op publieke toegang met een waarde uit
