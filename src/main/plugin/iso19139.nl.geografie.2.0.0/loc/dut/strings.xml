@@ -383,10 +383,13 @@
   <addQualityScope>Niveau kwaliteitsbeschrijving toevoegen</addQualityScope>
   <addQualityScopeDesc>Beschrijving niveau kwaliteitsbeschrijving toevoegen</addQualityScopeDesc>
   <levelDescription>Beschrijving niveau kwaliteitsbeschrijving</levelDescription>
+  <levelLink>Link naar featuretype</levelLink>
+  <levelLinkDesc>Link naar meer informatie over het feature type</levelLinkDesc>
+  <levelDescriptionDesc>Vul hier de featuretypen in waar deze kwaliteitsindicatie op van toepassing is</levelDescriptionDesc>
 
   <nameOfMeasure>Indicator</nameOfMeasure>
   <measureDescription>Omschrijving indicator</measureDescription>
   <valueUnit>Eenheid</valueUnit>
   <unitsSystem>Eenheden systeem</unitsSystem>
-
+  <addLocale>Landinstelling toevoegen</addLocale>
 </strings>

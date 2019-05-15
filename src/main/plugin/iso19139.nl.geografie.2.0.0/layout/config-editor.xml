@@ -1648,12 +1648,13 @@
           templateModeOnly="true" notDisplayedIfMissing="true" del=".">
             <template>
               <values>
-                <key label="levelDescription" tooltip="gmd:features" xpath="gmd:features/@xlink:title">
-                </key>
+                <key label="levelDescription" required="true" tooltip="levelDescriptionDesc" xpath="gmd:features/@xlink:title"></key>
               </values>
               <snippet>
                 <gmd:levelDescription>
-                  <gmd:features xlink:title="{{levelDescription}}" />
+                  <gmd:MD_ScopeDescription>
+                    <gmd:features xlink:title="{{levelDescription}}" />
+                  <gmd:MD_ScopeDescription>
                 </gmd:levelDescription>
               </snippet>
             </template>
