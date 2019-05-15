@@ -56,6 +56,8 @@
     <for name="gco:Boolean" use="checkbox"/>
 
     <for name="gmd:code" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code" use="data-gn-anchor-switcher"/>
+    <for name="gmd:specification" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:specification" use="data-gn-anchor-switcher"/>
+    
     <for name="gmd:supplementalInformation" use="data-gn-anchor-switcher"/>
     <for name="gmd:organisationName" use="data-gn-anchor-switcher"/>
 
@@ -154,7 +156,7 @@
     xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name" 
     use="data-gn-keyword-picker">
       <directiveAttributes 
-        data-thesaurus-key="external.theme.httpinspireeceuropaeuapplicationschema-applicationschema" 
+        data-thesaurus-key="external.theme.httpinspireeceuropaeumediatypes-media-types" 
         data-order-by-id="true"
         data-display-definition="true"
         data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
@@ -1654,7 +1656,7 @@
                 <gmd:levelDescription>
                   <gmd:MD_ScopeDescription>
                     <gmd:features xlink:title="{{levelDescription}}" />
-                  <gmd:MD_ScopeDescription>
+                  </gmd:MD_ScopeDescription>
                 </gmd:levelDescription>
               </snippet>
             </template>
