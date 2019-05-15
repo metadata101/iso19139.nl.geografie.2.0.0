@@ -29,8 +29,34 @@
                 xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:geonet="http://www.fao.org/geonetwork"
+                xmlns:java="java:org.fao.geonet.util.XslUtil"
                 version="2.0" exclude-result-prefixes="#all">
   <xsl:import href="../iso19139/update-fixed-info.xsl"/>
+
+  <!-- Add codelist labels -->
+  <xsl:template match="gmd:LanguageCode[@codeListValue]" priority="20">
+    <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/">
+      <xsl:apply-templates select="@*[name(.)!='codeList']"/>
+
+      <xsl:value-of select="java:getIsoLanguageLabel(@codeListValue, $mainLanguage)" />
+    </gmd:LanguageCode>
+  </xsl:template>
+
+
+  <xsl:template match="gmd:*[@codeListValue]"  priority="20">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+      <xsl:attribute name="codeList">
+        <xsl:value-of
+          select="concat('http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#',local-name(.))"/>
+      </xsl:attribute>
+
+      <xsl:if test="string(@codeListValue)">
+      <xsl:value-of select="java:getCodelistTranslation(name(), string(@codeListValue), string($mainLanguage))"/>
+      </xsl:if>
+    </xsl:copy>
+  </xsl:template>
+
 
   <!-- Dutch profile uses gco:Date instead of gco:DateTime -->
   <xsl:template match="gmd:dateStamp" priority="99">
