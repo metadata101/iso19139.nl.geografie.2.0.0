@@ -781,12 +781,12 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:hierarchyLevelName" context="/gmd:MD_Metadata/gmd:hierarchyLevelName">
-    <label>Hiërarchisch niveau naam</label>
+    <label>Naam hiërarchisch niveau</label>
     <description>Naam van het hiërarchisch niveau waar de metadata betrekking op heeft. Verplicht als Hiërarchisch niveau niet gelijk is aan dataset</description>
     
   </element>
   <element name="gmd:hierarchyLevelName" context="/gmd:MD_Metadata/gmd:hierarchyLevelName">
-    <label>Hiërarchisch niveau naam</label>
+    <label>Naam hiërarchisch niveau</label>
     <description>Naam van het hiërarchisch niveau waar de metadata betrekking op heeft. Verplicht als Hiërarchisch niveau niet gelijk is aan dataset</description>
     
   </element>
