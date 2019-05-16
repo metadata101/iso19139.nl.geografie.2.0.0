@@ -37,10 +37,25 @@
   <xsl:include href="layout-custom-fields.xsl"/>
   <xsl:include href="utility-tpl.xsl"/>
 
+  <!-- Use custom schema codelists -->
+  <xsl:template mode="mode-iso19139.nl.geografie.2.0.0"
+                match="*[*/@codeList]">
+    <xsl:param name="schema" select="$schema" required="no"/>
+    <xsl:param name="labels" select="$labels" required="no"/>
+
+    <xsl:apply-templates mode="mode-iso19139" select=".">
+      <xsl:with-param name="schema" select="$schema"/>
+      <xsl:with-param name="labels" select="$labels"/>
+      <xsl:with-param name="codelists" select="$codelists"/><!-- Will be the profile codelist -->
+    </xsl:apply-templates>
+  </xsl:template>
+
   <!-- Visit all XML tree recursively -->
   <xsl:template mode="mode-iso19139.nl.geografie.2.0.0" match="*|@*">
     <xsl:param name="schema" select="$schema" required="no"/>
     <xsl:param name="labels" select="$labels" required="no"/>
+
+    <xsl:message><xsl:value-of select="name()" /></xsl:message>
 
     <xsl:apply-templates mode="mode-iso19139" select=".">
       <xsl:with-param name="schema" select="$schema"/>

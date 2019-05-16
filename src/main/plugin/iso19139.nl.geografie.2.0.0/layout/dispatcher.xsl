@@ -52,7 +52,7 @@
     <xsl:param name="refToDelete" as="node()?" required="no"/>
     <xsl:param name="config" as="node()?" required="no"/>
 
-    <xsl:apply-templates mode="mode-iso19139" select="$base">
+    <xsl:apply-templates mode="mode-iso19139.nl.geografie.2.0.0" select="$base">
       <xsl:with-param name="overrideLabel" select="$overrideLabel"/>
       <xsl:with-param name="refToDelete" select="$refToDelete"/>
       <xsl:with-param name="config" select="$config"/>
