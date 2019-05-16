@@ -426,6 +426,14 @@
     <label>Data kwaliteitsbeschrijving</label>
     <description>Informatie over de kwaliteit van de dataset.</description>
   </element>
+  <element name="gmd:nameOfMeasure">
+    <label>Indicator</label>
+    <description>Naam van de gemeten indicator</description>
+  </element>
+  <element name="gmd:measureDescription" id="102.0">
+    <label>Omschrijving indicator</label>
+    <description>Beschrijf hoe de indicator gemeten wordt</description>
+  </element>
   <!-- ==================================================== -->
   <element name="gmd:date" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date">
     <label>Datum</label>
@@ -527,7 +535,6 @@
   <element name="gmd:denominator" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator">
     <label>Toepassingsschaal</label>
     <description>De beoogde schaal waarop de dataset waarheidsgetrouw gebruikt mag worden. Dit moet een positief numeriek getal zijn. '1:' niet mogelijk. Een interval is mogelijk. U kunt dit element dupliceren en de beginwaarde in het eerste element en de eindwaarde in het tweede element invullen. Toepassingsschaal moet ingevuld worden voor vectordata. Voor rasterdata laat u dit element leeg en vult u het element Resolutie in.</description>
-    
   </element>
   <!-- ==================================================== -->
   <element name="gmd:description" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:description">
