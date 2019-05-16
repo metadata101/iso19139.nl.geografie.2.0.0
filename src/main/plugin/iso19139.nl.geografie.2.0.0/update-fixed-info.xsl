@@ -34,7 +34,9 @@
   <xsl:import href="../iso19139/update-fixed-info.xsl"/>
 
   <!-- Add codelist labels -->
-  <xsl:template match="gmd:LanguageCode[@codeListValue]" priority="200">
+  <xsl:template match="gmd:LanguageCode[@codeListValue]" priority="220">
+
+    <xsl:message>LANGUAGE CODE</xsl:message>
     <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/">
       <xsl:apply-templates select="@*[name(.)!='codeList']"/>
 
