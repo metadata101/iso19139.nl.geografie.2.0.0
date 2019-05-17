@@ -1562,7 +1562,7 @@
       <description>information applies to a feature</description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-    <entry>
+    <entry hideInEditMode="true">
       <code>featureType</code>
       <label>featureType</label>
       <description>information applies to a feature type</description>

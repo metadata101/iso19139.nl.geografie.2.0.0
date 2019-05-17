@@ -16,10 +16,10 @@
   </gmd:language>
   <gmd:characterSet>
     <gmd:MD_CharacterSetCode codeListValue="utf8"
-                             codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_CharacterSetCode"/>
+                             codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode"/>
   </gmd:characterSet>
   <gmd:hierarchyLevel>
-    <gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ScopeCode"
+    <gmd:MD_ScopeCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
                       codeListValue="dataset"/>
   </gmd:hierarchyLevel>
   <gmd:contact>
@@ -40,7 +40,7 @@
       </gmd:contactInfo>
       <gmd:role>
         <gmd:CI_RoleCode codeListValue="pointOfContact"
-                         codeList="http://www.isotc211.org/2005/resources/codeList.xml#CI_RoleCode"/>
+                         codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
       </gmd:role>
     </gmd:CI_ResponsibleParty>
   </gmd:contact>
@@ -58,7 +58,7 @@
       <gmd:referenceSystemIdentifier>
         <gmd:RS_Identifier>
           <gmd:code>
-            <gmx:Anchor xlink:href="http://www.opengis.net/def/crs/EPSG/0/28992">Rijks Driehoeksstelse</gmx:Anchor>
+            <gmx:Anchor xlink:href="http://www.opengis.net/def/crs/EPSG/0/28992">Rijks Driehoeksstelsel</gmx:Anchor>
           </gmd:code>
         </gmd:RS_Identifier>
       </gmd:referenceSystemIdentifier>
@@ -79,7 +79,7 @@
               </gmd:date>
               <gmd:dateType>
                 <gmd:CI_DateTypeCode codeListValue=""
-                                     codeList="http://www.isotc211.org/2005/resources/codeList.xml#CI_DateTypeCode"/>
+                                     codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"/>
               </gmd:dateType>
             </gmd:CI_Date>
           </gmd:date>
@@ -99,7 +99,7 @@
       </gmd:abstract>
       <gmd:status>
         <gmd:MD_ProgressCode codeListValue=""
-                             codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ProgressCode"/>
+                             codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#MD_ProgressCode"/>
       </gmd:status>
       <gmd:pointOfContact>
         <gmd:CI_ResponsibleParty>
@@ -121,7 +121,7 @@
           </gmd:contactInfo>
           <gmd:role>
             <gmd:CI_RoleCode codeListValue=""
-                             codeList="http://www.isotc211.org/2005/resources/codeList.xml#CI_RoleCode"/>
+                             codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
           </gmd:role>
         </gmd:CI_ResponsibleParty>
       </gmd:pointOfContact>
@@ -145,12 +145,10 @@
           <gmd:accessConstraints>
             <gmd:MD_RestrictionCode
               codeListValue="otherRestrictions"
-              codeList="http://www.isotc211.org/2005/resources/
-		          Codelist/gmxCodelists.xml#MD_RestrictionCode"/>
+              codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml"/>
           </gmd:accessConstraints>
           <gmd:otherConstraints>
             <gmx:Anchor xlink:href="">
-
             </gmx:Anchor>
           </gmd:otherConstraints>
         </gmd:MD_LegalConstraints>
@@ -167,12 +165,12 @@
         </gmd:MD_Resolution>
       </gmd:spatialResolution>
       <gmd:language>
-        <gmd:LanguageCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#LanguageCode"
+        <gmd:LanguageCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#LanguageCode"
                           codeListValue="dut"/>
       </gmd:language>
       <gmd:characterSet>
         <gmd:MD_CharacterSetCode codeListValue="utf8"
-                                 codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_CharacterSetCode"/>
+                                 codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode"/>
       </gmd:characterSet>
       <gmd:topicCategory>
         <gmd:MD_TopicCategoryCode></gmd:MD_TopicCategoryCode>
@@ -205,7 +203,7 @@
         <gmd:DQ_Scope>
           <gmd:level>
             <gmd:MD_ScopeCode codeListValue=""
-                              codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ScopeCode"/>
+                              codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"/>
           </gmd:level>
         </gmd:DQ_Scope>
       </gmd:scope>

@@ -364,7 +364,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:code" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
-    <label>Code referentiesysteem</label>
+    <label>Code referentie systeem</label>
     <description>
       Het referentiesysteem wordt met een URI (die ook de code bevat) opgenomen. Voor RD is dat
     &lt;a href='http://www.opengis.net/def/crs/EPSG/0/28992' target='_blank'&gt;http://www.opengis.net/def/crs/EPSG/0/28992&lt;/a&gt;,
@@ -533,7 +533,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:denominator" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator">
-    <label>Toepassingsschaal</label>
+    <label>Toepassings schaal</label>
     <description>De beoogde schaal waarop de dataset waarheidsgetrouw gebruikt mag worden. Dit moet een positief numeriek getal zijn. '1:' niet mogelijk. Een interval is mogelijk. U kunt dit element dupliceren en de beginwaarde in het eerste element en de eindwaarde in het tweede element invullen. Toepassingsschaal moet ingevuld worden voor vectordata. Voor rasterdata laat u dit element leeg en vult u het element Resolutie in.</description>
   </element>
   <!-- ==================================================== -->
@@ -688,7 +688,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:equivalentScale" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale">
-    <label>Toepassingsschaal</label>
+    <label>Toepassings schaal</label>
     <description>De beoogde schaal waarop de dataset waarheidsgetrouw gebruikt mag worden. Dit moet een positief numeriek getal zijn. '1:' niet mogelijk. Een interval is mogelijk. U kunt dit element dupliceren en de beginwaarde in het eerste element en de eindwaarde in het tweede element invullen. Toepassingsschaal moet ingevuld worden voor vectordata. Voor rasterdata laat u dit element leeg en vult u het element Resolutie in.</description>
   </element>
   <!-- ==================================================== -->
@@ -845,7 +845,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:level" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level">
-    <label>Niveau kwaliteitsbeschrijving</label>
+    <label>Niveau kwaliteits beschrijving</label>
     <description>Niveau (dataset of serie) waar de kwaliteitsbeschrijving betrekking op heeft.</description>
     <condition>mandatory</condition>
   </element>
@@ -972,7 +972,7 @@
     <description>Unieke identifier van de bron.</description>
   </element>
   <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement/gmd:EX_VerticalExtent/gml:VerticalCRS/gml:identifier">
-    <label>verticaal ruimtelijk referentiesysteem</label>
+    <label>verticaal ruimtelijk referentie systeem</label>
     <description>Identificatie van het verticaal ruimtelijk referentiesysteem</description>
   </element>
   <element name="gmd:MD_Identifier" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier">
@@ -1031,7 +1031,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:MD_ReferenceSystem" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem">
-    <label>Referentiesysteem</label>
+    <label>Referentie systeem</label>
     <description>Informatie over het referentiesysteem waarin de data is opgeslagen. De twee secties kunnen gebruikt worden voor de invoer van het horizontale en het verticale referentiesysteem.</description>
   </element>
   <!-- ==================================================== -->
@@ -1395,12 +1395,12 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:referenceSystemIdentifier" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier">
-    <label>Referentiesysteem</label>
+    <label>Referentie systeem</label>
     <description>Informatie over het referentiesysteem. Eerst voert u het horizontale referentiesysteem in en vervolgens het verticale referentiesysteem.</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:referenceSystemInfo" context="/gmd:MD_Metadata/gmd:referenceSystemInfo">
-    <label>Referentiesysteem informatie</label>
+    <label>Referentie systeem informatie</label>
     <description>Beschrijving van de referentiesystemen welke van toepassing zijn op de dataset. </description>
   </element>
   <!-- ==================================================== -->
@@ -1461,7 +1461,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:RS_Identifier" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier">
-    <label>Referentiesysteem</label>
+    <label>Referentie systeem</label>
     <description>Gegevens van het referentiesysteem.</description>
   </element>
   <!-- ==================================================== -->
