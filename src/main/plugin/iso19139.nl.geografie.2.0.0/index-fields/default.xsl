@@ -537,13 +537,13 @@
         <xsl:for-each select="*/gmd:otherConstraints">
 
           <xsl:variable name="otherConstrCS" select="gco:CharacterString"/>
-          <xsl:variable name="otherConstrAnchor" select="./gmx:Anchor/@xlink:href"/>
+          <xsl:variable name="otherConstrAnchor" select="./gmx:Anchor"/>
           <!-- gmd:OtherConstraints can contain a gco:CharacterString or a gmx:Anchor -->
           <xsl:choose>
-            <xsl:when test="./gco:CharacterString">
+            <xsl:when test="$otherConstrCS">
               <Field name="otherConstr" string="{normalize-space(string($otherConstrCS))}" store="true" index="true"/>
             </xsl:when>
-            <xsl:when test="./gmx:Anchor">
+            <xsl:when test="$otherConstrAnchor">
               <Field name="otherConstr" string="{normalize-space(string($otherConstrAnchor/@xlink:href))}" store="true" index="true"/>
             </xsl:when>
           </xsl:choose>
