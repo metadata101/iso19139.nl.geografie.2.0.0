@@ -781,22 +781,18 @@
     <description>Een afbeelding welke de inhoud van de dataset weergeeft .</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:hierarchyLevel" context="/gmd:MD_Metadata/gmd:hierarchyLevel">
+  <element name="gmd:hierarchyLevel">
     <label>Hiërarchisch niveau</label>
     <description>Hiërarchisch niveau waar de metadata betrekking op heeft.</description>
     <condition>mandatory</condition>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:hierarchyLevelName" context="/gmd:MD_Metadata/gmd:hierarchyLevelName">
+  <element name="gmd:hierarchyLevelName">
     <label>Naam hiërarchisch niveau</label>
     <description>Naam van het hiërarchisch niveau waar de metadata betrekking op heeft. Verplicht als Hiërarchisch niveau niet gelijk is aan dataset</description>
-    
+    <help_link>https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#hi%C3%ABrarchieniveaunaam</help_link>
   </element>
-  <element name="gmd:hierarchyLevelName" context="/gmd:MD_Metadata/gmd:hierarchyLevelName">
-    <label>Naam hiërarchisch niveau</label>
-    <description>Naam van het hiërarchisch niveau waar de metadata betrekking op heeft. Verplicht als Hiërarchisch niveau niet gelijk is aan dataset</description>
-    
-  </element>
+
   <!-- ==================================================== -->
   <element name="gmd:identificationInfo" context="/gmd:MD_Metadata/gmd:identificationInfo">
     <label>Identificatie informatie</label>
