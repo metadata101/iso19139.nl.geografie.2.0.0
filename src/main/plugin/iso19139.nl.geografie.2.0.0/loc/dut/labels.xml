@@ -144,7 +144,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:accessConstraints">
-    <label>(Juridische) toegangsrestricties</label>
+    <label>(Juridische) toegangs restricties</label>
     <description>
       (Juridische) toegangsrestricties zal in de meeste gevallen de waarde "anders" hebben, als het de waarde anders
       heeft, dan kan het metadata element overige beperkingen ingevuld worden.
@@ -423,7 +423,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:dataQualityInfo" context="/gmd:MD_Metadata/gmd:dataQualityInfo">
-    <label>Data kwaliteitsbeschrijving</label>
+    <label>Data kwaliteits beschrijving</label>
     <description>Informatie over de kwaliteit van de dataset.</description>
   </element>
   <element name="gmd:nameOfMeasure">

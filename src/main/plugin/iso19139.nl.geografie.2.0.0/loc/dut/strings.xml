@@ -381,8 +381,8 @@
   <AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid</AbsoluteExternalPositionalAccuracy>
   <ProcessStep>Bewerkings stap</ProcessStep>
   <addQualityScope>Niveau kwaliteits beschrijving toevoegen</addQualityScope>
-  <addQualityScopeDesc>Beschrijving niveau kwaliteitsbeschrijving toevoegen</addQualityScopeDesc>
-  <levelDescription>Beschrijving niveau kwaliteitsbeschrijving</levelDescription>
+  <addQualityScopeDesc>Beschrijving niveau kwaliteits beschrijving toevoegen</addQualityScopeDesc>
+  <levelDescription>Beschrijving niveau kwaliteits beschrijving</levelDescription>
   <levelLink>Link naar featuretype</levelLink>
   <levelLinkDesc>Link naar meer informatie over het feature type</levelLinkDesc>
   <levelDescriptionDesc>Vul hier de featuretypen in waar deze kwaliteitsindicatie op van toepassing is</levelDescriptionDesc>
