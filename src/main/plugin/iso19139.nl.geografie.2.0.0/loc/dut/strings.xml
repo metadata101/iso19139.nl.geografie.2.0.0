@@ -298,6 +298,7 @@
   <addDate>Datum toevoegen</addDate>
   <addLineage>Herkomst toevoegen</addLineage>
   <addUseLimitation>Gebruiks beperkingen toevoegen</addUseLimitation>
+  <addOtherConstraints>Overige beperkingen toevoegen</addOtherConstraints>
   <addLegalConstraints>Juridische beperkingen toevoegen</addLegalConstraints>
   <addSecurityConstraints>Veiligheids beperkingen toevoegen</addSecurityConstraints>
   <addResourceConstraints>Bron beperkingen toevoegen</addResourceConstraints>
