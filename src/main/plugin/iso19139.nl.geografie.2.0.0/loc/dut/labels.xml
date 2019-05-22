@@ -1824,18 +1824,6 @@
   <element name="gml:identifier">
     <label>Meeteenheid</label>
     <description>Identificatie van de eenheid in het systeem</description>
-    <helper>
-      <option value="unity">Aantal</option>
-      <option value="Percentage">Percentage</option>
-      <option value="ampere">Ampere</option>
-      <option value="candela">Candela</option>
-      <option value="kilogram">Kilogram</option>
-      <option value="metre">Meter</option>
-      <option value="second">Seconde</option>
-      <option value="mole">Mol</option>
-      <option value="kelvin">Graden Kelvin</option>
-      <option value="celsius">Graden Celsius</option>
-    </helper>
   </element>
   <element name="gml:unitsSystem">
     <label>Eenheden systeem</label>
@@ -1902,5 +1890,19 @@
   <element name="conformity">
     <label>Conformiteit indicatie met de specificatie</label>
     <description></description>
+  </element>
+    <element name="valueUnitHref">
+    <label>Valueunit Definition</label>
+    <helper>
+      <option value="urn:ogc:def:uom:OGC::percent">Procent</option>
+      <option value="http://www.opengis.net/def/uom/SI/second">Seconde</option>
+      <option value="http://www.opengis.net/def/uom/SI/ampere">Ampere</option>
+      <option value="http://www.opengis.net/def/uom/SI/candela">Candela</option>	
+      <option value="http://www.opengis.net/def/uom/SI/kelvin	">Kelvin</option>
+      <option value="http://www.opengis.net/def/uom/SI/kilogram">Kilo</option>	
+      <option value="http://www.opengis.net/def/uom/SI/metre">Meter</option>	
+      <option value="http://www.opengis.net/def/uom/SI/mole">Mol</option>	
+      <option value="http://www.opengis.net/def/uom/OGC/1.0/unity">Eenheden</option>
+    </helper>
   </element>
 </labels>

@@ -391,6 +391,7 @@
   <nameOfMeasure>Indicator</nameOfMeasure>
   <measureDescription>Omschrijving indicator</measureDescription>
   <valueUnit>Eenheid</valueUnit>
+  <value>Waarde</value>
   <unitsSystem>Eenheden systeem</unitsSystem>
   <addLocale>Landinstelling toevoegen</addLocale>
 </strings>
