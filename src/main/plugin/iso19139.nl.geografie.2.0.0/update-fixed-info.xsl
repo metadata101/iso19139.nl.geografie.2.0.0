@@ -36,7 +36,7 @@
   <!-- Add codelist labels -->
   <xsl:template match="gmd:LanguageCode[@codeListValue]" priority="220">
 
-    <xsl:message>LANGUAGE CODE</xsl:message>
+
     <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/">
       <xsl:apply-templates select="@*[name(.)!='codeList']"/>
 
@@ -146,12 +146,7 @@
 
       <!-- gmd:description -->
       <xsl:choose>
-        <!-- Access points -->
-        <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WMS', 'OGC:WMTS', 'OGC:WFS', 'OGC:WCS', 'INSPIRE Atom',
-          'landingpage', 'application', 'dataset', 'OGC:WPS', 'OGC:SOS',
-          'OGC:SensorThings', 'OAS', 'W3C:SPARQL', 'OASIS:OData', 'OGC:CSW',
-          'OGC:WCTS', 'OGC:WFS-G', 'OGC:SPS', 'OGC:SAS', 'OGC:WNS', 'OGC:ODS', 'OGC:OGS', 'OGC:OUS', 'OGC:OPS', 'OGC:ORS', 'UKST'))">
-
+        <xsl:when test="gmd:description/*/text() = 'accessPoint'">
           <gmd:description>
             <gmx:Anchor
               xlink:href="http://inspire.ec.europa.eu/metadata-codelist/OnLineDescriptionCode/accessPoint">
@@ -159,14 +154,45 @@
           </gmd:description>
         </xsl:when>
 
-        <!-- End points -->
-        <xsl:when test="geonet:contains-any-of($protocol, ('gml', 'geojson', 'gpkg', 'tiff', 'kml', 'csv', 'zip',
-          'wmc', 'json', 'jsonld', 'rdf-xml', 'xml', 'png', 'gif', 'jp2', 'mapbox-vector-tile', 'UKMT'))">
+        <xsl:when test="gmd:description/*/text() = 'endPoint'">
           <gmd:description>
             <gmx:Anchor
               xlink:href="http://inspire.ec.europa.eu/metadata-codelist/OnLineDescriptionCode/endPoint">
               endPoint</gmx:Anchor>
           </gmd:description>
+        </xsl:when>
+
+        <!-- Empty: check the protocol -->
+        <xsl:when test="not(string(gmd:description/*/text()))">
+          <xsl:choose>
+            <!-- Access points -->
+            <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WMS', 'OGC:WMTS', 'OGC:WFS', 'OGC:WCS', 'INSPIRE Atom',
+          'landingpage', 'application', 'dataset', 'OGC:WPS', 'OGC:SOS',
+          'OGC:SensorThings', 'OAS', 'W3C:SPARQL', 'OASIS:OData', 'OGC:CSW',
+          'OGC:WCTS', 'OGC:WFS-G', 'OGC:SPS', 'OGC:SAS', 'OGC:WNS', 'OGC:ODS', 'OGC:OGS', 'OGC:OUS', 'OGC:OPS', 'OGC:ORS', 'UKST'))">
+
+              <gmd:description>
+                <gmx:Anchor
+                  xlink:href="http://inspire.ec.europa.eu/metadata-codelist/OnLineDescriptionCode/accessPoint">
+                  accessPoint</gmx:Anchor>
+              </gmd:description>
+            </xsl:when>
+
+            <!-- End points -->
+            <xsl:when test="geonet:contains-any-of($protocol, ('gml', 'geojson', 'gpkg', 'tiff', 'kml', 'csv', 'zip',
+          'wmc', 'json', 'jsonld', 'rdf-xml', 'xml', 'png', 'gif', 'jp2', 'mapbox-vector-tile', 'UKMT'))">
+              <gmd:description>
+                <gmx:Anchor
+                  xlink:href="http://inspire.ec.europa.eu/metadata-codelist/OnLineDescriptionCode/endPoint">
+                  endPoint</gmx:Anchor>
+              </gmd:description>
+            </xsl:when>
+
+            <!-- Other cases: copy current gmd:description element -->
+            <xsl:otherwise>
+              <xsl:apply-templates select="gmd:description" />
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
 
         <!-- Other cases: copy current gmd:description element -->
@@ -254,20 +280,6 @@
       <xsl:apply-templates select="gmd:environmentDescription" />
       <xsl:apply-templates select="gmd:extent" />
       <xsl:apply-templates select="gmd:supplementalInformation" />
-    </xsl:copy>
-  </xsl:template>
-
-    <xsl:template match="gmd:*[@codeListValue]"  priority="201">
-    <xsl:copy>
-      <xsl:apply-templates select="@*"/>
-      <xsl:attribute name="codeList">
-        <xsl:value-of
-          select="concat('http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#',local-name(.))"/>
-      </xsl:attribute>
-
-      <xsl:if test="string(@codeListValue)">
-        <xsl:value-of select="java:getCodelistTranslation(name(), string(@codeListValue), string($mainLanguage))"/>
-      </xsl:if>
     </xsl:copy>
   </xsl:template>
 

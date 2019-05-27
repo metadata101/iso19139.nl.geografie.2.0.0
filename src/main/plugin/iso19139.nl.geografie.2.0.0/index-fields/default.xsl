@@ -877,7 +877,7 @@
           </xsl:variable>
           <xsl:variable name="linkage" select="gmd:linkage/gmd:URL"/>
           <xsl:variable name="title" select="normalize-space(gmd:name/gco:CharacterString|gmd:name/gmx:MimeFileType)"/>
-          <xsl:variable name="desc" select="normalize-space(gmd:description/gco:CharacterString)"/>
+          <xsl:variable name="desc" select="normalize-space(gmd:description/gmx:Anchor/text())"/>
           <xsl:variable name="protocol" select="normalize-space(gmd:protocol/gco:CharacterString)"/>
           <xsl:variable name="mimetype"
                         select="geonet:protocolMimeType($linkage, $protocol, gmd:name/gmx:MimeFileType/@type)"/>
