@@ -50,6 +50,8 @@
 
   -->
 
+  <!-- Override the default view to display by default -->
+  <xsl:param name="view" select="'dutchprofile'"/>
 
   <!-- Load the editor configuration to be able
   to render the different views -->
