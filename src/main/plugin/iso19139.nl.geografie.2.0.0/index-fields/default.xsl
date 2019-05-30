@@ -39,6 +39,7 @@
 
   <xsl:include href="../../iso19139/convert/functions.xsl"/>
   <xsl:include href="../../../xsl/utils-fn.xsl"/>
+  <xsl:include href="index-utils-fn.xsl"/>
   <xsl:include href="../../iso19139/index-fields/inspire-util.xsl"/>
 
   <!-- This file defines what parts of the metadata are indexed by Lucene
@@ -831,29 +832,51 @@
       </xsl:for-each>
     </xsl:for-each>
 
+
+    <xsl:variable name="protocolText" select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString|gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gmx:Anchor/text()" />
     <xsl:if test="gmd:hierarchyLevel/gmd:MD_ScopeCode/@codeListValue='dataset'
           and
             (not (
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'download')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'dataset')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'WFS')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'WCS')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'CSW')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'SOS')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'INSPIRE Atom')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'WMTS')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'WMS')]
+              contains($protocolText, 'WFS') or
+              contains($protocolText, 'WCS') or
+              contains($protocolText, 'INSPIRE Atom') or
+              contains($protocolText, 'OGC:SensorThings') or
+              contains($protocolText, 'OASIS:OData') or
+              contains($protocolText, 'W3C:SPARQL') or
+              contains($protocolText, 'OAS') or
+              contains($protocolText, 'gml') or
+              contains($protocolText, 'kml') or
+              contains($protocolText, 'geojson') or
+              contains($protocolText, 'gpkg') or
+              contains($protocolText, 'json') or
+              contains($protocolText, 'jsonld') or
+              contains($protocolText, 'rdf-xml') or
+              contains($protocolText, 'xml') or
+              contains($protocolText, 'zip') or
+              contains($protocolText, 'jp2') or
+              contains($protocolText, 'tiff') or
+              contains($protocolText, 'csv')
               )
               and not (
-              //srv:serviceType/gco:LocalName[contains(., 'download')] or
-              //srv:serviceType/gco:LocalName[contains(., 'dataset')] or
               //srv:serviceType/gco:LocalName[contains(., 'WFS')] or
               //srv:serviceType/gco:LocalName[contains(., 'WCS')] or
-              //srv:serviceType/gco:LocalName[contains(., 'CSW')] or
-              //srv:serviceType/gco:LocalName[contains(., 'SOS')] or
               //srv:serviceType/gco:LocalName[contains(., 'INSPIRE Atom')] or
-              //srv:serviceType/gco:LocalName[contains(., 'WMTS')] or
-              //srv:serviceType/gco:LocalName[contains(., 'WMS')]
+              //srv:serviceType/gco:LocalName[contains(., 'OGC:SensorThings')] or
+              //srv:serviceType/gco:LocalName[contains(., 'OASIS:OData')] or
+              //srv:serviceType/gco:LocalName[contains(., 'W3C:SPARQL')] or
+              //srv:serviceType/gco:LocalName[contains(., 'OAS')] or
+              //srv:serviceType/gco:LocalName[contains(., 'gml')] or
+              //srv:serviceType/gco:LocalName[contains(., 'kml')] or
+              //srv:serviceType/gco:LocalName[contains(., 'geojson')] or
+              //srv:serviceType/gco:LocalName[contains(., 'gpkg')] or
+              //srv:serviceType/gco:LocalName[contains(., 'json')] or
+              //srv:serviceType/gco:LocalName[contains(., 'jsonld')] or
+              //srv:serviceType/gco:LocalName[contains(., 'rdf-xml')] or
+              //srv:serviceType/gco:LocalName[contains(., 'xml')] or
+              //srv:serviceType/gco:LocalName[contains(., 'zip')] or
+              //srv:serviceType/gco:LocalName[contains(., 'jp2')] or
+              //srv:serviceType/gco:LocalName[contains(., 'tiff')] or
+              //srv:serviceType/gco:LocalName[contains(., 'csv')]
               )
             )">
       <Field name="nodynamicdownload" string="true" store="false" index="true"/>
@@ -870,7 +893,7 @@
 
       <!-- index online protocol -->
       <xsl:for-each select="gmd:transferOptions/gmd:MD_DigitalTransferOptions">
-        <xsl:variable name="tPosition" select="position()"></xsl:variable>
+        <xsl:variable name="tPosition" select="position()" />
         <xsl:for-each select="gmd:onLine/gmd:CI_OnlineResource[gmd:linkage/gmd:URL!='']">
           <xsl:variable name="download_check">
             <xsl:text>&amp;fname=&amp;access</xsl:text>
@@ -878,9 +901,9 @@
           <xsl:variable name="linkage" select="gmd:linkage/gmd:URL"/>
           <xsl:variable name="title" select="normalize-space(gmd:name/gco:CharacterString|gmd:name/gmx:MimeFileType)"/>
           <xsl:variable name="desc" select="normalize-space(gmd:description/gmx:Anchor/text())"/>
-          <xsl:variable name="protocol" select="normalize-space(gmd:protocol/gco:CharacterString)"/>
+          <xsl:variable name="protocol" select="normalize-space(gmd:protocol/gco:CharacterString|gmd:protocol/gmx:Anchor/text())"/>
           <xsl:variable name="mimetype"
-                        select="geonet:protocolMimeType($linkage, $protocol, gmd:name/gmx:MimeFileType/@type)"/>
+                        select="geonet:protocolMimeType_iso19139.nl.geografie.2.0.0($linkage, $protocol, gmd:name/gmx:MimeFileType/@type)"/>
 
           <!-- If the linkage points to WMS service and no protocol specified, manage as protocol OGC:WMS -->
           <xsl:variable name="wmsLinkNoProtocol"
@@ -896,8 +919,8 @@
           <!-- ignore empty downloads -->
           <xsl:if test="string($linkage)!='' and not(contains($linkage,$download_check))">
             <xsl:variable name="protocols"
-                          select="'|OGC:CSW|OGC:WMS|OGC:WMTS|OGC:WFS|OGC:WCS|OGC:WCTS|OGC:WPS|OGC:WMC|OGC:GPKG|OGC:OWS-C|OGC:KML|OGC:GML|OGC:WFS-G|OGC:SOS|OGC:SPS|OGC:SAS|OGC:WNS|OGC:ODS|OGC:OGS|OGC:OUS|OGC:OPS|OGC:ORS|INSPIRE Atom|UKST|SPARQL|download|website|'"/>
-            <xsl:if test="contains($protocols,concat('|',string($protocol),'|'))">
+                          select="'|OGC:CSW|OGC:WMS|OGC:WMTS|OGC:WFS|OGC:WCS|OGC:SOS|INSPIRE Atom|OGC:WCTS|OGC:WPS|OGC:WFS-G|OGC:SPS|OGC:SAS|OGC:WNS|OGC:ODS|OGC:OGS|OGC:OUS|OGC:OPS|OGC:ORS|OGC:SensorThings|W3C:SPARQL|OASIS:OData|OAS|landingpage|application|dataset|UKST|'"/>
+            <xsl:if test="contains($protocols, concat('|', string($protocol), '|'))">
               <Field name="protocol" string="{string($protocol)}" store="true" index="true"/>
             </xsl:if>
           </xsl:if>
@@ -910,13 +933,22 @@
             <Field name="mimetype" string="{$mimetype}" store="true" index="true"/>
           </xsl:if>
 
-          <xsl:if test="contains($protocol, 'WWW:DOWNLOAD')">
+
+          <!-- downloadable protocols -->
+          <xsl:variable name="downloadableProtocols" select="'|OGC:WFS|OGC:WCS|OGC:SOS|INSPIRE Atom|OASIS:OData|OGC:SensorThings|W3C:SPARQL|OAS|'"/>
+          <xsl:if
+            test="contains($downloadableProtocols, concat('|', $protocol, '|')) or $wfsLinkNoProtocol or $wcsLinkNoProtocol">
             <Field name="download" string="true" store="false" index="true"/>
           </xsl:if>
 
+          <!-- media type downloadable protocols -->
+          <!-- see https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-mediatypes -->
+          <!-- All media types in the above link are downloadable except PNG, GIF, mapbox-vector-tile, they are links -->
+          <xsl:variable name="downloadableMediaTypes" select="'|gml|kml|geojson|gpkg|json|jsonld|rdf-xml|xml|zip|jp2|tiff|csv|'" />
           <xsl:if
-            test="contains($protocol, 'OGC:WFS') or contains($protocol, 'OGC:WCS') or contains($protocol, 'OGC:SOS') or contains($protocol, 'INSPIRE Atom') or $wfsLinkNoProtocol or $wcsLinkNoProtocol">
+            test="contains($downloadableMediaTypes,concat('|',string($protocol),'|'))">
             <Field name="download" string="true" store="false" index="true"/>
+
           </xsl:if>
 
           <xsl:if
@@ -1060,28 +1092,7 @@
                   count(gmd:hierarchyLevel[gmd:MD_ScopeCode/@codeListValue='dataset']) > 0 or
                   count(gmd:hierarchyLevel) = 0"/>
 
-    <xsl:variable name="isMapDigital" select="count(gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/
-                        gmd:presentationForm[gmd:CI_PresentationFormCode/@codeListValue = 'mapDigital']) > 0"/>
-    <xsl:variable name="isStatic" select="count(gmd:distributionInfo/gmd:MD_Distribution/
-                        gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString[contains(., 'PDF') or contains(., 'PNG') or contains(., 'JPEG')]) > 0"/>
-    <xsl:variable name="isInteractive" select="count(gmd:distributionInfo/gmd:MD_Distribution/
-                        gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString[contains(., 'OGC:WMC') or contains(., 'OGC:OWS-C')]) > 0"/>
-    <xsl:variable name="isPublishedWithWMCProtocol" select="count(gmd:distributionInfo/gmd:MD_Distribution/
-                        gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol[starts-with(gco:CharacterString, 'OGC:WMC')]) > 0"/>
-
     <xsl:choose>
-      <!--<xsl:when test="$isDataset and $isMapDigital and
-                      ($isStatic or $isInteractive or $isPublishedWithWMCProtocol)">
-           <Field name="type" string="map" store="true" index="true"/>
-          <xsl:choose>
-              <xsl:when test="$isStatic">
-                 <Field name="type" string="staticMap" store="true" index="true"/>
-              </xsl:when>
-              <xsl:when test="$isInteractive or $isPublishedWithWMCProtocol">
-                  <Field name="type" string="interactiveMap" store="true" index="true"/>
-              </xsl:when>
-          </xsl:choose>
-      </xsl:when>-->
       <xsl:when test="$isDataset">
         <Field name="type" string="dataset" store="true" index="true"/>
       </xsl:when>
