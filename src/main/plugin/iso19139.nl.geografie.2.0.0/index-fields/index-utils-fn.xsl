@@ -32,11 +32,7 @@
           <xsl:when test="$protocol='mapbox-vector-tile'">application/vnd.mapbox-vector-tile</xsl:when>
           <xsl:when test="starts-with($protocol,'OGC:WMS')">application/vnd.ogc.wms_xml</xsl:when>
           <xsl:when test="$protocol='ESRI:AIMS-'">application/vnd.esri.arcims_axl</xsl:when>
-          <xsl:when test="$protocol!=''">
-            <xsl:value-of select="$protocol"/>
-          </xsl:when>
-          <!-- fall back to the default content type -->
-          <xsl:otherwise>text/plain</xsl:otherwise>
+          <xsl:otherwise><xsl:value-of select="$protocol"/></xsl:otherwise>
         </xsl:choose>
       </xsl:when>
 
@@ -62,7 +58,8 @@
           <xsl:otherwise>text/plain</xsl:otherwise>
         </xsl:choose>
       </xsl:when>
-
+      <!-- fall back to the default content type -->
+      <xsl:otherwise>text/plain</xsl:otherwise>
     </xsl:choose>
 
 
