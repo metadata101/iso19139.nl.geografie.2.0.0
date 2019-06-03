@@ -1583,12 +1583,12 @@
                   <gmd:fees>
                     <gco:CharacterString>{{fees}}</gco:CharacterString>
                   </gmd:fees>
-                  <gmd:turnaround>
-                    <gco:CharacterString>{{turnaround}}</gco:CharacterString>
-                  </gmd:turnaround>
                   <gmd:orderingInstructions>
                     <gco:CharacterString>{{orderingInstructions}}</gco:CharacterString>
                   </gmd:orderingInstructions>
+                  <gmd:turnaround>
+                    <gco:CharacterString>{{turnaround}}</gco:CharacterString>
+                  </gmd:turnaround>
                 </gmd:MD_StandardOrderProcess>
                 </gmd:distributionOrderProcess>
               </snippet>
@@ -1603,12 +1603,12 @@
                     <gmd:fees>
                       <gco:CharacterString></gco:CharacterString>
                     </gmd:fees>
-                    <gmd:turnaround>
-                      <gco:CharacterString></gco:CharacterString>
-                    </gmd:turnaround>
                     <gmd:orderingInstructions>
                       <gco:CharacterString></gco:CharacterString>
                     </gmd:orderingInstructions>
+                    <gmd:turnaround>
+                      <gco:CharacterString></gco:CharacterString>
+                    </gmd:turnaround>
                   </gmd:MD_StandardOrderProcess>
                 </gmd:distributionOrderProcess>
               </snippet>
