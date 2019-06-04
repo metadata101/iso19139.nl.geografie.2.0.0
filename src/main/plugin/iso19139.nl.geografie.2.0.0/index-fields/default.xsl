@@ -833,7 +833,14 @@
     </xsl:for-each>
 
 
-    <xsl:variable name="protocolText" select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString|gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gmx:Anchor/text()" />
+
+    <xsl:variable name="protocolText">
+      <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/*/text()">
+        <xsl:value-of select="."/>
+        <xsl:if test="position() != last()"><xsl:text>,</xsl:text></xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+
     <xsl:if test="gmd:hierarchyLevel/gmd:MD_ScopeCode/@codeListValue='dataset'
           and
             (not (
@@ -856,27 +863,6 @@
               contains($protocolText, 'jp2') or
               contains($protocolText, 'tiff') or
               contains($protocolText, 'csv')
-              )
-              and not (
-              //srv:serviceType/gco:LocalName[contains(., 'WFS')] or
-              //srv:serviceType/gco:LocalName[contains(., 'WCS')] or
-              //srv:serviceType/gco:LocalName[contains(., 'INSPIRE Atom')] or
-              //srv:serviceType/gco:LocalName[contains(., 'OGC:SensorThings')] or
-              //srv:serviceType/gco:LocalName[contains(., 'OASIS:OData')] or
-              //srv:serviceType/gco:LocalName[contains(., 'W3C:SPARQL')] or
-              //srv:serviceType/gco:LocalName[contains(., 'OAS')] or
-              //srv:serviceType/gco:LocalName[contains(., 'gml')] or
-              //srv:serviceType/gco:LocalName[contains(., 'kml')] or
-              //srv:serviceType/gco:LocalName[contains(., 'geojson')] or
-              //srv:serviceType/gco:LocalName[contains(., 'gpkg')] or
-              //srv:serviceType/gco:LocalName[contains(., 'json')] or
-              //srv:serviceType/gco:LocalName[contains(., 'jsonld')] or
-              //srv:serviceType/gco:LocalName[contains(., 'rdf-xml')] or
-              //srv:serviceType/gco:LocalName[contains(., 'xml')] or
-              //srv:serviceType/gco:LocalName[contains(., 'zip')] or
-              //srv:serviceType/gco:LocalName[contains(., 'jp2')] or
-              //srv:serviceType/gco:LocalName[contains(., 'tiff')] or
-              //srv:serviceType/gco:LocalName[contains(., 'csv')]
               )
             )">
       <Field name="nodynamicdownload" string="true" store="false" index="true"/>
