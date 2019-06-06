@@ -1317,7 +1317,7 @@
                     <gmd:temporalElement>
                       <gmd:EX_TemporalExtent>
                         <gmd:extent>
-                          <gml:TimePeriod id="">
+                          <gml:TimePeriod gml:id="">
                             <gml:beginPosition></gml:beginPosition>
                             <gml:endPosition></gml:endPosition>
                           </gml:TimePeriod>
