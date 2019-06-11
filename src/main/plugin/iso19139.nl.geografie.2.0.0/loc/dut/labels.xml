@@ -790,7 +790,7 @@
   <element name="gmd:hierarchyLevelName">
     <label>Naam hiërarchisch niveau</label>
     <description>Naam van het hiërarchisch niveau waar de metadata betrekking op heeft. Verplicht als Hiërarchisch niveau niet gelijk is aan dataset</description>
-    <condition>mandatory</condition>
+
     <help_link>https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#hi%C3%ABrarchieniveaunaam</help_link>
   </element>
 
