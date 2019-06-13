@@ -201,10 +201,10 @@
     <name>gmd:contentInfo</name>
     <name>gmd:distributionFormat</name>
     <!--<name>gmd:referenceSystemInfo</name>
-    <name>gmd:spatialResolution</name>-->
+    <name>gmd:spatialResolution</name>
     <name>gmd:offLine</name>
     <name>gmd:onLine</name>
-    <name>gmd:address</name>
+    <name>gmd:address</name>-->
     <name>gmd:projection</name>
     <name>gmd:ellipsoid</name>
     <name>gmd:attributes</name>
@@ -220,8 +220,8 @@
     <name>gml:verticalCS</name>
     <name>gml:verticalDatum</name>
     <name>gmd:axisDimensionProperties</name>
-    <name>gmd:identifier</name>
-    <name>gmd:topicCategory</name>
+    <!--<name>gmd:identifier</name>
+    <name>gmd:topicCategory</name>-->
     <!-- TODO: Review Specific for Dutch schema-->
     <name>gmd:verticalElement</name>
 
@@ -313,9 +313,9 @@
     <table for="gmd:CI_ResponsibleParty">
       <header>
         <!-- TODO: Add label from strings.xml / label with context-->
-        <col label="gmd:organisationName" class="gn-required"/>
-        <col label="gmd:electronicMailAddress" class="gn-required"/>
-        <col label="gmd:role" class="gn-required"/>
+        <col label="organisationName" class="gn-required"/>
+        <col label="electronicMailAddress" class="gn-required"/>
+        <col label="role" class="gn-required"/>
         <col/>
       </header>
       <row>
@@ -328,8 +328,8 @@
    
     <table for="gmd:PT_Locale">
       <header>
-        <col label="gmd:languageCode"/>
-        <col label="gmd:characterEncoding"/>
+        <col label="languageCode"/>
+        <col label="characterEncoding"/>
         <col/>
       </header>
       <row>
@@ -357,11 +357,11 @@
 
     <table for="gmd:LI_ProcessStep" label="ProcessStep">
       <header>
-        <col label="gmd:description"/>
-        <col label="gmd:dateTime"/>
-        <col label="gmd:organisationName"/>
-        <col label="gmd:electronicMailAddress"/>
-        <col label="gmd:role"/>
+        <col label="description"/>
+        <col label="dateTime"/>
+        <col label="organisationName"/>
+        <col label="electronicMailAddress"/>
+        <col label="role"/>
         <col/>
       </header>
       <row>
@@ -607,8 +607,16 @@
             </template>
           </action>
 
-          <field name="referenceSystemIdentifier" or="code" use="data-gn-keyword-picker" xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code" del="../../../..">
-            <directiveAttributes data-thesaurus-key="external.theme.projections" data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+          <field name="referenceSystemIdentifier" 
+            or="code" 
+            use="data-gn-keyword-picker" 
+            xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code" 
+            del="../../../..">
+            <directiveAttributes 
+              data-thesaurus-key="external.theme.projections" 
+              data-order-by-id="true"
+              data-display-definition="true"
+              data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
           </field>
 
           <action type="add" del="." btnLabel="addReferenceSystem" if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier) = 0" or="referenceSystemInfo" in="/gmd:MD_Metadata">
