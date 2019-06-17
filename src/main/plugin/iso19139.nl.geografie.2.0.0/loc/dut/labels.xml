@@ -1667,6 +1667,11 @@
     <description>Een hyperlink waarop meer informatie over dit item te vinden is.</description>
   </element>
 
+  <element name="xlink:title">
+    <label>Titel</label>
+    <description>Een titel die de link beschrijft</description>
+  </element>
+
   <!-- ==================================================== -->
   <!-- === GCO namespace                                    -->
   <!-- ==================================================== -->
