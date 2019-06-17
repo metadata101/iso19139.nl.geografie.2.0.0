@@ -61,8 +61,10 @@
     <for name="gmd:keyword" use="data-gn-anchor-switcher"/>
 
     <for name="gmd:supplementalInformation" use="data-gn-anchor-switcher"/>
-    <for name="gmd:organisationName" use="data-gn-anchor-switcher"/>
-
+    <for name="gmd:organisationName" use="data-gn-keyword-picker">
+                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
+                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+    </for>
     <!-- TODO: Specific in Dutch schema - data-hide-time -->
     <for name="gco:Date" use="data-gn-date-picker">
       <directiveAttributes data-hide-time="true"/>
@@ -1017,7 +1019,19 @@
             <template>
               <values readonlyIf="count(@xlink:href) > 0">
                 <key label="individualName" tooltip="gmd:individualName" xpath="gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
-                <key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
+                <!--<key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>-->
+                <key label="organisationName"
+                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName"
+                     use="data-gn-keyword-picker"
+                     tooltip="gmd:organisationName">
+                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
+                                       data-template-field="true"
+                                       data-template-field-element="gco:CharacterString"
+                                       data-template-field-element-with-concept-id="gmx:Anchor"
+                                       data-template-field-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/*/text()"
+                                       data-template-field-concept-id-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor/@xlink:href"
+                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+                </key>
                 <key label="positionName" tooltip="gmd:positionName" xpath="gmd:CI_ResponsibleParty/gmd:positionName/gco:CharacterString"/>
                 <key label="voice" tooltip="gmd:voice" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
                 <key label="facsimile" tooltip="gmd:facsimile" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:facsimile/gco:CharacterString"/>
@@ -1038,9 +1052,7 @@
                     <gmd:individualName>
                       <gco:CharacterString>{{individualName}}</gco:CharacterString>
                     </gmd:individualName>
-                    <gmd:organisationName>
-                      <gco:CharacterString>{{organisationName}}</gco:CharacterString>
-                    </gmd:organisationName>
+                    <gmd:organisationName>{{organisationName}}</gmd:organisationName>
                     <gmd:positionName>
                       <gco:CharacterString>{{positionName}}</gco:CharacterString>
                     </gmd:positionName>
@@ -1478,7 +1490,19 @@
             <template>
               <values readonlyIf="count(@xlink:href) > 0">
                 <key label="individualName" tooltip="gmd:individualName" xpath="gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
-                <key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
+                <!--<key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>-->
+                <key label="organisationName"
+                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName"
+                     use="data-gn-keyword-picker"
+                     tooltip="gmd:organisationName">
+                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
+                                       data-template-field="true"
+                                       data-template-field-element="gco:CharacterString"
+                                       data-template-field-element-with-concept-id="gmx:Anchor"
+                                       data-template-field-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/*/text()"
+                                       data-template-field-concept-id-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor/@xlink:href"
+                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+                </key>
                 <key label="positionName" tooltip="gmd:positionName" xpath="gmd:CI_ResponsibleParty/gmd:positionName/gco:CharacterString"/>
                 <key label="voice" tooltip="gmd:voice" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
                 <key label="facsimile" tooltip="gmd:facsimile" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:facsimile/gco:CharacterString"/>
@@ -1499,9 +1523,7 @@
                     <gmd:individualName>
                       <gco:CharacterString>{{individualName}}</gco:CharacterString>
                     </gmd:individualName>
-                    <gmd:organisationName>
-                      <gco:CharacterString>{{organisationName}}</gco:CharacterString>
-                    </gmd:organisationName>
+                    <gmd:organisationName>{{organisationName}}</gmd:organisationName>
                     <gmd:positionName>
                       <gco:CharacterString>{{positionName}}</gco:CharacterString>
                     </gmd:positionName>
@@ -2023,7 +2045,19 @@
             <template>
               <values readonlyIf="count(@xlink:href) > 0">
                 <key label="individualName" tooltip="gmd:individualName" xpath="gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
-                <key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
+                <!--<key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>-->
+                <key label="organisationName"
+                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName"
+                     use="data-gn-keyword-picker"
+                     tooltip="gmd:organisationName">
+                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
+                                       data-template-field="true"
+                                       data-template-field-element="gco:CharacterString"
+                                       data-template-field-element-with-concept-id="gmx:Anchor"
+                                       data-template-field-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/*/text()"
+                                       data-template-field-concept-id-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor/@xlink:href"
+                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+                </key>
                 <key label="positionName" tooltip="gmd:positionName" xpath="gmd:CI_ResponsibleParty/gmd:positionName/gco:CharacterString"/>
                 <key label="voice" tooltip="gmd:voice" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
                 <key label="facsimile" tooltip="gmd:facsimile" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:facsimile/gco:CharacterString"/>
@@ -2044,9 +2078,7 @@
                     <gmd:individualName>
                       <gco:CharacterString>{{individualName}}</gco:CharacterString>
                     </gmd:individualName>
-                    <gmd:organisationName>
-                      <gco:CharacterString>{{organisationName}}</gco:CharacterString>
-                    </gmd:organisationName>
+                    <gmd:organisationName>{{organisationName}}</gmd:organisationName>
                     <gmd:positionName>
                       <gco:CharacterString>{{positionName}}</gco:CharacterString>
                     </gmd:positionName>
