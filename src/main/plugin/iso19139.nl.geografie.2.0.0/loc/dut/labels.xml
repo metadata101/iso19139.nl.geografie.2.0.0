@@ -1130,7 +1130,7 @@
   </element>
   <element name="gmd:specification" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:specification">
     <label>Specificatie distributie formaat</label>
-    <description>Specificatie van het distributie formaat. Indien het een INSPIRE dataset is dient de specificatie van het distributie formaat opgenomen te worden.</description>
+    <description>Specificatie van het distributie formaat. Het is verplicht als de dataset een geharmoniseerde INSPIRE bron is.</description>
     
   </element>
   <element name="gmd:name" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name">

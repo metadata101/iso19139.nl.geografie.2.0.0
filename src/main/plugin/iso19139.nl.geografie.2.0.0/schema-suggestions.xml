@@ -75,17 +75,21 @@
     <suggest name="gmd:description"/>
   </field>
 
-  <!-- Add a distribution format / INSPIRE requirement
-    <field name="gmd:distributionInfo">
-        <suggest name="gmd:MD_Distribution"/>
-    </field>
-    <field name="gmd:MD_Distribution">
-        <suggest name="gmd:distributionFormat"/>
-        <suggest name="gmd:transferOptions"/>
-    </field>
-    <field name="gmd:distributionFormat">
-        <suggest name="gmd:MD_Format"/>
-        </field> -->
+  <!-- Add a distribution format / INSPIRE requirement -->
+  <field name="gmd:distributionInfo">
+      <suggest name="gmd:MD_Distribution"/>
+  </field>
+  <field name="gmd:MD_Distribution">
+      <suggest name="gmd:distributionFormat"/>
+  </field>
+  <field name="gmd:distributionFormat">
+      <suggest name="gmd:MD_Format"/>
+  </field> 
+  <field name="gmd:MD_Format">
+      <suggest name="gmd:name"/>
+      <suggest name="version"/>
+      <suggest name="specification"/>
+  </field> 
 
   <field name="gmd:transferOptions">
     <suggest name="gmd:MD_DigitalTransferOptions"/>
