@@ -868,7 +868,7 @@
     <description>Informatie over de brongegevens die zijn gebruikt om de beschreven dataset te produceren.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:lineage" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage">
+  <element name="gmd:lineage">
     <label>Herkomst</label>
     <description>Informatie over de herkomst (methodiek en bronnen) van de data.</description>
     <condition>mandatory</condition>
