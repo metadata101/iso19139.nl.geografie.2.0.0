@@ -394,7 +394,7 @@
         <text ref="viewTitle"/>
         <text ref="viewDescription"/>
 
-        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|parent|fcat"/>
+        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|parent|fcats|sibling|associated"/>
 
         <section name="Basis">
 
@@ -800,7 +800,7 @@
         <text ref="dutchProfileTitle"/>
         <text ref="dutchProfileDescription"/>
 
-        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|parent|fcat"/>
+        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|parent|fcats|sibling|associated"/>
 
         <section name="dataIdentificatie">
 
@@ -2254,7 +2254,7 @@
       <tab id="identificationInfo" default="true">
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|dataset"/>
+        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|dataset|fcats|sibling|associated"/>
         <section xpath="/gmd:MD_Metadata/gmd:identificationInfo" or="identificationInfo"
                  in="/gmd:MD_Metadata"/>
       </tab>
