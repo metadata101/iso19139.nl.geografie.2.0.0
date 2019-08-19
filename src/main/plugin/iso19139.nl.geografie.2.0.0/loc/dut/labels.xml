@@ -854,14 +854,11 @@
   </element>
 
   <!-- ==================================================== -->
-  <element name="gmd:LI_ProcessStep" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep/gmd:LI_ProcessStep">
+  <element name="gmd:LI_ProcessStep">
     <label>Uitgevoerde bewerking</label>
-    <description>Informatie over een specifieke stap in het proces waarmee de data tot stand is gekomen.</description>
+    <description>Informatie over een specifieke stap in het proces waarmee de data tot stand is gekomen of bewerkt.</description>
   </element>
-  <element name="gmd:LI_ProcessStep" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:source/gmd:LI_Source/gmd:sourceStep/gmd:LI_ProcessStep">
-    <label>Uitgevoerde bewerking</label>
-    <description>Informatie over een specifieke stap in het proces waarmee de data tot stand is gekomen.</description>
-  </element>
+
   <!-- ==================================================== -->
   <element name="gmd:LI_Source" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:source/gmd:LI_Source">
     <label>Bron</label>
@@ -1272,9 +1269,9 @@
     <description>Personen of organisaties die betrokken zijn bij deze stap in het proces.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:processStep" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep">
+  <element name="gmd:processStep">
     <label>Uitgevoerde bewerking</label>
-    <description>Informatie over een bewerking in het proces waarmee de dataset tot stand is gekomen.</description>
+    <description>Informatie over een bewerking in het proces waarmee de dataset tot stand is gekomen of bewerkt.</description>
   </element>
   
 <!-- ==================================================== -->
