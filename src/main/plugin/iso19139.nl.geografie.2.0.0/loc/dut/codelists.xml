@@ -302,35 +302,32 @@
   <codelist name="gmd:DS_AssociationTypeCode" alias="associationType">
     <entry>
       <code>crossReference</code>
-      <label>crossReference</label>
-      <description>reference from one dataset to another</description>
+      <label>Kruis verwijzing</label>
+      <description>Referentie van een dataset naar een andere</description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>largerWorkCitation</code>
-      <label>largerWorkCitation</label>
-      <description>reference to a master dataset of which this one is a part</description>
+      <label>Citatie uit een groter werk</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>partOfSeamlessDatabase</code>
-      <label>partOfSeamlessDatabase</label>
-      <description>part of the same structured set of data held in a computer</description>
+      <label>Deel van een naadloze database</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>source</code>
-      <label>source</label>
-      <description>mapping and charting information from which the dataset content
-        originates
-      </description>
+      <label>Bron</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>stereoMate</code>
-      <label>stereoMate</label>
-      <description>part of a set of imagery that when used together, provides three-dimensional
-        images
+      <label>Stereo mate</label>
+      <description>Deel van een set afbeeldingen die samen een 3D beeld vormen
       </description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -339,92 +336,92 @@
   <codelist name="gmd:DS_InitiativeTypeCode" alias="initiativeType">
     <entry>
       <code>campaign</code>
-      <label>campaign</label>
-      <description>series of organized planned actions</description>
+      <label>Campagne</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>collection</code>
-      <label>collection</label>
+      <label>Collectie</label>
       <description>accumulation of datasets assembled for a specific purpose</description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>exercise</code>
-      <label>exercise</label>
-      <description>specific performance of a function or group of functions</description>
+      <label>Opdracht</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>experiment</code>
-      <label>experiment</label>
-      <description>process designed to find if something is effective or valid</description>
+      <label>Experiment</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>investigation</code>
-      <label>investigation</label>
-      <description>search or systematic inquiry</description>
+      <label>Onderzoek</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>mission</code>
-      <label>mission</label>
-      <description>specific operation of a data collection system</description>
+      <label>Missie</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>sensor</code>
-      <label>sensor</label>
-      <description>device or piece of equipment which detects or records</description>
+      <label>Sensor</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>operation</code>
-      <label>operation</label>
-      <description>action that is part of a series of actions</description>
+      <label>Operatie</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>platform</code>
-      <label>platform</label>
-      <description>vehicle or other support base that holds a sensor</description>
+      <label>Platform</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>process</code>
-      <label>process</label>
-      <description>method of doing something involving a number of steps</description>
+      <label>Proces</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>program</code>
-      <label>program</label>
-      <description>specific planned activity</description>
+      <label>Programma</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>project</code>
-      <label>project</label>
-      <description>organized undertaking, research, or development</description>
+      <label>Project</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>study</code>
-      <label>study</label>
-      <description>examination or investigation</description>
+      <label>Studie</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>task</code>
-      <label>task</label>
-      <description>piece of work</description>
+      <label>Taak</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
       <code>trial</code>
-      <label>trial</label>
-      <description>process of testing to discover or demonstrate something</description>
+      <label>Proef</label>
+      <description></description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
   </codelist>
