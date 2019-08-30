@@ -37,13 +37,6 @@
 
 		<sch:rule id="Algemene_metadata_regels" etf_name="Algemene metadata regels"  context="/gmd:MD_Metadata">
 
-		<!-- schemalocatie controleren, overeenkomstig inspire en nl profiel -->
-
-			<sch:assert id="Schema_locatie" etf_name="Schema locatie" test="contains(normalize-space(@xsi:schemaLocation), 'http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd')">Het ISO 19139 XML document mist een verplichte schema locatie. De schema locatie http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd moet aanwezig zijn.
-			</sch:assert>
-			<sch:report id="Schema_locatie_info" etf_name="Schema locatie info" test="contains(normalize-space(@xsi:schemaLocation), 'http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd')">Het ISO 19139 XML document bevat de schema locatie http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd
-			</sch:report>
-
 		<!--  fileIdentifier for report https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#metadata-unieke-identifier -->
 			<sch:let name="fileIdentifier" value="normalize-space(gmd:fileIdentifier/gco:CharacterString)"/>
             		<!-- Taal van de metadata https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#taal-van-de-metadata
@@ -286,7 +279,7 @@
 
 			<!-- Thesaurus alleen voor INSPIRE, Ruimtelijke Dekking -->
 			<sch:assert id="Thesaurus_ISO_nr_360" etf_name="Thesaurus (ISO nr. 360)" test="$thesaurus_INSPIRE_Exsists">Thesaurus (ISO nr. 360) voor INSPIRE ontbreekt</sch:assert>
-			<sch:assert id="Thesaurus_spatialscope_ISO_nr_360" etf_name="Thesaurus spatialscope (ISO nr. 360)" test="$thesaurus_INSPIRE_spatialscope_Exsists">Thesaurus (ISO nr. 360) voor ruimtelijke dekking INSPIRE ontbreekt</sch:assert>
+			<sch:assert id="Thesaurus_spatialscope_ISO_nr_360" etf_name="Thesaurus spatialscope (ISO nr. 360)" test="$thesaurus_INSPIRE_spatialscope_Exsists">Thesaurus (ISO nr. 360) voor ruimtelijke dekking INSPIRE ontbreekt. Zie de invulinstructie voor Trefwoorden over ruimtelijke dekking op de INSPIRE wiki https://wiki.geonovum.nl/index.php?title=Invulinstructie voor meer informatie.</sch:assert>
 			<!-- eind Thesaurus alleen voor INSPIRE-->
 
 			<!-- 5.2.4 Unieke Identifier van de bron https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron -->
@@ -375,7 +368,11 @@
 
 			<sch:assert id="Code_referentiesysteem_ISO_nr_207" etf_name="Code referentiesysteem (ISO nr. 207)" test="$referenceSystemInfo">Code referentiesysteem (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem) ontbreekt</sch:assert>
 
-			<sch:assert id="Distributie_formaat_INSPIRE_harmon" etf_name="INSPIRE geharmoniseerd distributie formaat" test="not($harmonised_dataset='true') or ($harmonised_dataset='true' and $distributonFormatName)">Voor INSPIRE geharmoniseerde data is naam, versie en specificatie van het distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat) verplicht (boolean: <sch:value-of select="$harmonised_dataset"/>).</sch:assert>
+			<!-- <sch:assert id="Distributie_formaat_INSPIRE_harmon" etf_name="INSPIRE geharmoniseerd distributie formaat" test="not($harmonised_dataset='true') or ($harmonised_dataset='true' and $distributonFormatName)">Voor INSPIRE geharmoniseerde data is naam, versie en specificatie van het distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat) verplicht.</sch:assert> -->
+
+			<sch:assert id="Distributie_formaat_INSPIRE" etf_name="INSPIRE distributie formaat" test="$distributonFormatName">Voor INSPIRE data is naam, versie en specificatie van het distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat) verplicht.</sch:assert>
+
+
 
 	  <!-- Thijs: om fouten in de validator te voorkomen als er metadata is aangeleverd met meerdere blokken dataQualityInfo (de NGR editor kan dit soort fouten veroorzaken), gebruik altijd alleen het eerste blok. Doe dit bij alle elementen gmd:dataQualityInfo -->
 		<!-- alle regels over elementen binnen gmd:dataQualityInfo -->
@@ -393,6 +390,9 @@
 			<sch:assert id="Niveau_kwaliteitsbeschrijving_ISO_nr139" etf_name="Niveau kwaliteitsbeschrijving (ISO nr.139)" test="$level">Niveau kwaliteitsbeschrijving (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#niveau-kwaliteitsbeschrijving) ontbreekt</sch:assert>
 			<sch:report id="Niveau_kwaliteitsbeschrijving_ISO_nr139_info" etf_name="Niveau kwaliteitsbeschrijving (ISO nr.139) info" test="$level">Niveau kwaliteitsbeschrijving (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#niveau-kwaliteitsbeschrijving): <sch:value-of select="$level"/>
 			</sch:report>
+
+
+			<sch:assert id="INSPIRE_verordening" etf_name="INSPIRE Verordening" test="$conformity_Spec_Title_Exsists">Specificatie (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie) mist de verplichte waarde voor INSPIRE datasets. Voor INSPIRE datasets in specificatie opnemen: VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens</sch:assert>
 
 		</sch:rule>
 
@@ -481,8 +481,9 @@
 		<!-- Specificatie title, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie
 	 	TODO: check of URI ook bij andere tests voor conformity_SpecTitle nodig is, of dat het zo volstaat -->
 			<sch:let name="conformity_SpecTitle" value="normalize-space(string-join(gmd:specification/gmd:CI_Citation/gmd:title[./gco:CharacterString or ./gmx:Anchor]//text(), ''))"/>
-			<sch:let name="conformity_SpecTitleString" value="normalize-space(gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString)"/>
-			<sch:let name="conformity_SpecTitleURI" value="normalize-space(gmd:specification/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href)"/>
+			<!-- <sch:let name="conformity_SpecTitleString" value="normalize-space(gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString)"/> -->
+			<!-- <sch:let name="conformity_SpecTitleURI" value="normalize-space(gmd:specification/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href)"/> -->
+
 		<!-- Verklaring https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verklaring -->
 			<sch:let name="conformity_Explanation" value="normalize-space(gmd:explanation/gco:CharacterString)"/>
 
@@ -503,7 +504,8 @@
 		<!-- Specificatie alleen voor INSPIRE-->
 		<!-- 5.2.35 Specificatie is vereist: https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie
 		Voor INSPIRE altijd vereist, dus voorbehoud van de thesaurus weglaten. -->
-			<sch:assert id="INSPIRE_Specificatie_ISO_nr_360" etf_name="INSPIRE Specificatie (ISO nr. 360)" test="$conformity_SpecTitle">Specificatie (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie) mist de verplichte waarde voor INSPIRE datasets. Voor INSPIRE datasets in specificatie opnemen: VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens</sch:assert>
+
+			<sch:assert id="INSPIRE_Specificatie_ISO_nr_360" etf_name="INSPIRE Specificatie (ISO nr. 360)" test="$conformity_SpecTitle">Specificatie (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie) ontbreekt.</sch:assert>
 
 			<sch:assert id="INSPIRE_Verklaring_ISO_nr_131" etf_name="INSPIRE Verklaring (ISO nr. 131)" test="$conformity_Explanation">Verklaring (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verklaring) ontbreekt.</sch:assert>
 			<sch:assert id="INSPIRE_Specificatie_datum_ISO_nr_394" etf_name="INSPIRE Specificatie datum (ISO nr. 394" test="$conformity_Date">Specificatie datum (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatiedatum) ontbreekt.</sch:assert>
@@ -515,7 +517,7 @@
 		</sch:rule>
 
 		<!-- alle regels over elementen binnen distributionInfo: alleen verplicht voor geharmoniseerde data -->
-		<sch:rule id="INSPIRE_geharmoniseerde_data_distributieformaat" etf_name="INSPIRE geharmoniseerde data distributieformaat" context="//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format">
+		<sch:rule id="INSPIRE_data_distributieformaat" etf_name="INSPIRE data distributieformaat" context="//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format">
 			<!-- TODO: hoe bepalen of metadata over geharmoniseerde data gaat? -->
 			<!-- alle regels over elementen binnen distributionInfo -->
 
@@ -529,14 +531,14 @@
 			<!-- Anchor, maar alleen voor INSPIRE geharmoniseerd verplicht  -->
 				<sch:report id="Naam_distributie_formaat_ISO_nr_285_info" etf_name="Naam distributie formaat (ISO nr. 285) info" test="$distributionFormatName">Naam distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat): <sch:value-of select="$distributionFormatName"/>
 				</sch:report>
-			<sch:assert id="Naam_distributie_formaat_ISO_nr_285" etf_name="Naam distributie formaat (ISO nr. 285)" test="not($harmonised_dataset='true') or ($harmonised_dataset='true' and $distributionFormatName)">Naam distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat) ontbreekt</sch:assert>
+			<sch:assert id="Naam_distributie_formaat_ISO_nr_285" etf_name="Naam distributie formaat (ISO nr. 285)" test="$distributionFormatName">Naam distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat) ontbreekt</sch:assert>
 				<!-- Versie distributie formaat, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#versie-distributie-formaat -->
-			<sch:assert id="Versie_distributie_formaat_ISO_nr_286" etf_name="Versie distributie formaat (ISO nr. 286)" test="not($harmonised_dataset='true') or ($harmonised_dataset='true' and $distributionFormatVersion)">Versie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#versie-distributie-formaat) ontbreekt</sch:assert>
+			<sch:assert id="Versie_distributie_formaat_ISO_nr_286" etf_name="Versie distributie formaat (ISO nr. 286)" test="$distributionFormatVersion">Versie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#versie-distributie-formaat) ontbreekt</sch:assert>
 				<sch:report id="Versie_distributie_formaat_ISO_nr_286_info" etf_name="Versie distributie formaat (ISO nr. 286) info" test="$distributionFormatVersion">Versie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#versie-distributie-formaat): <sch:value-of select="$distributionFormatVersion"/>
 				</sch:report>
 			<!-- Specificatie distributie formaat https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie-distributie-formaat -->
 			<!-- Anchor, maar alleen voor INSPIRE geharmoniseerd verplicht  -->
-			<sch:assert id="Specificatie_distributie_formaat_ISO_nr_288" etf_name="Specificatie distributie formaat (ISO nr. 288)" test="not($harmonised_dataset='true') or ($harmonised_dataset='true' and $distributionFormatSpecification)">Specificatie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie-distributie-formaat) ontbreekt</sch:assert>
+			<sch:assert id="Specificatie_distributie_formaat_ISO_nr_288" etf_name="Specificatie distributie formaat (ISO nr. 288)" test="$distributionFormatSpecification">Specificatie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie-distributie-formaat) ontbreekt</sch:assert>
 				<sch:report id="Specificatie_distributie_formaat_ISO_nr_288_info" etf_name="Specificatie distributie formaat (ISO nr. 288) info" test="$distributionFormatSpecification">Specificatie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie-distributie-formaat): <sch:value-of select="$distributionFormatSpecification"/>
 				</sch:report>
 
@@ -688,6 +690,44 @@ Er moeten keywords uit de GEMET - INSPIRE themes thesaurus komen. Gevonden keywo
 		   <sch:let name="quote" value="&quot;'&quot;"/>
 		   <sch:assert id="INSPIRE_spatialscope_Trefwoorden_ISO_nr_53" etf_name="INSPIRE spatialscope Trefwoorden (ISO nr. 53)" test="((normalize-space(current())='Nationaal') or (normalize-space(current())='Regionaal') or (normalize-space(current())='Lokaal') )">
 		   Er moeten keywords uit de INSPIRE ruimtelijke dekking codelijst komen. Gevonden keywords: <sch:value-of select="./*[../gco:CharacterString or ../gmx:Anchor]"/></sch:assert>
+
+		</sch:rule>
+
+
+		<sch:rule id="Waarschuwingen_-_INSPIRE_dataservice_koppeling" etf_name="Waarschuwingen - INSPIRE dataservice koppeling" context="//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions">
+
+			<sch:let name="nrOnLine_Protocol_Without_Description" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[not(./gmd:description)])"/>
+
+			<sch:assert id="Omschrijving_verplicht_voor_een_URL" etf_name="Omschrijving accessPoint of endPoint is verplicht voor een URL" test="$nrOnLine_Protocol_Without_Description = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat alle distributie URLs een omschrijving (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#description) hebben. Voor <sch:value-of select="$nrOnLine_Protocol_Without_Description"/> URL(s) ontbreekt echter een omschrijving. Zie de URLs: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL[not(../../gmd:description)], ', '))"/>.
+		    </sch:assert>
+
+			<sch:let name="nr_onLine_Description_with_CharacterStrings" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:description/gco:CharacterString)"/>
+
+			<sch:assert id="Anchor_verplicht_voor_omschrijving" etf_name="Anchor verplicht voor element omschrijving accessPoint of endPoint" test="$nr_onLine_Description_with_CharacterStrings = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat in het element omschrijving van een URL (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#description) in een Anchor is opgenomen. Voor <sch:value-of select="$nr_onLine_Description_with_CharacterStrings"/> URL(s) is de omschrijving in een CharacterString opgenomen. Zie de omschrijvingen: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:description/gco:CharacterString, ', '))"/>.</sch:assert>
+
+			<!-- Protocol moet altijd opgegeven zijn. Iets andere test dan eerdere test op protocol en URL, daarin wordt tegen een specifieke codelijst getest. Voor de INSPIRE dataset service koppeling kan die codelijst anders worden, dus deze test controleert alleen of er een element protocol is opgegeven -->
+			<sch:let name="nrOnLine_URL_Without_Protocol" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[not(./gmd:protocol)])"/>
+			<sch:assert id="Protocol_verplicht_voor_een_URL" etf_name="Protocol verplicht voor een URL" test="$nrOnLine_URL_Without_Protocol = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat alle distributie URLs een protocol (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol) hebben. Voor <sch:value-of select="$nrOnLine_URL_Without_Protocol"/> URL(s) ontbreekt echter een protocol. Zie de URLs: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL[not(../../gmd:protocol)], ', '))"/>.
+		    </sch:assert>
+
+			<!-- protocol moet een anchor zijn, altijd verplicht.  -->
+			<sch:let name="nrOnLine_Protocol_not_Anchor" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol[not(./gmx:Anchor)])"/>
+
+			<sch:assert id="Protocol_moet_altijd_een_Anchor_zijn" etf_name="Anchor verplicht voor protocol" test="$nrOnLine_Protocol_not_Anchor = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat het element protocol (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol) via een Anchor is beschreven. Voor <sch:value-of select="$nrOnLine_Protocol_not_Anchor"/> element(en) is dat niet het geval. Zie de protocol elementen: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol[not(./gmx:Anchor)], ', '))"/>.
+		    </sch:assert>
+
+
+			<!-- applicatieprofiel: moet er minimaal eentje aanwezig zijn, voor een omschrijving=accesspoint
+			NB: aanname: alleen gebruik Anchors
+			-->
+
+			<!-- Use a schematron var to do the filtering (with a contains function) in the next step . Because if the xlink:href attribute is spread over multiple lines (so cntains a line ending, which is valid), the filter won't work if the value is used directly. wWthout http:// for this value,because of schematron syntax  -->
+			<sch:let name="accessPointUri" value="inspire.ec.europa.eu/metadata-codelist/OnLineDescriptionCode/accessPoint"/>
+
+			<sch:let name="nr_onLine_ApplicationProfile" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[contains(gmd:description/gmx:Anchor/@xlink:href, $accessPointUri)]/gmd:applicationProfile/gmx:Anchor[normalize-space(@xlink:href) = 'http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view' or normalize-space(@xlink:href) = 'http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download'])"/>
+
+			<sch:assert id="Minimaal_applicationProfile_View_Download" etf_name="Er is minimaal een applicationProfile opgegeven voor een View en Download service" test="$nr_onLine_ApplicationProfile &gt; 1">Voor de INSPIRE dataservice koppeling is het verplicht dat tenminste voor een View en Download service het applicatie profiel is opgegeven, met een waarde uit de codelijst ServiceType (http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/). Het applicatie profiel moet opgegeven zijn via een Anchor.
+			</sch:assert>
 
 		</sch:rule>
 	</sch:pattern>
