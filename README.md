@@ -1,6 +1,6 @@
 # Dutch profile for datasets v2 schema plugin
 
-Dutch profile for datasets v2 (iso19139.nl.geografie.2.0.0)
+Dutch profile for datasets v2 (iso19139.nl.geografie.2.0.0).
 
 ## Installing the plugin
 

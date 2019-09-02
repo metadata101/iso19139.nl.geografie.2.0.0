@@ -937,7 +937,7 @@
                 <xsl:for-each select="gmd:name/gco:CharacterString">
                   <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:title>
                 </xsl:for-each>
-                <xsl:for-each select="gmd:description/gco:CharacterString">
+                <xsl:for-each select="gmd:description/(gco:CharacterString|gmx:Anchor)">
                   <dct:description xml:lang="{$MetadataLanguage}"><xsl:value-of select="."/></dct:description>
                 </xsl:for-each>
               </xsl:variable>
@@ -1505,7 +1505,7 @@
     <xsl:param name="ResourceType"/>
     <xsl:choose>
       <xsl:when test="$ResourceType = 'dataset' or $ResourceType = 'series'">
-        <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="../gmd:description/gco:CharacterString"/></dct:title>
+        <dct:title xml:lang="{$MetadataLanguage}"><xsl:value-of select="../gmd:description/(gco:CharacterString|gmx:Anchor)"/></dct:title>
         <dcat:accessURL rdf:resource="{gmd:URL}"/>
      </xsl:when>
 <!--

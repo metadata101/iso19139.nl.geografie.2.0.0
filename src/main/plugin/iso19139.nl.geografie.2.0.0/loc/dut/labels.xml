@@ -120,7 +120,11 @@
   </element>
   <element name="gmd:URL" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL">
     <label>URL voor online toegang tot de bron</label>
-    <description>Valide URL voor online toegang tot (informatie over) de bron. Neem hier de WMS/WFS/WCS URL op naar de service die deze dataset ontsluit. </description>
+    <description>
+      Geef een valide URL voor online toegang tot een service, specifieke onderdelen van een service of een directe download van de dataset.
+      Als er een service is dan daarvan in ieder geval de URL geven die informatie geeft over de service inclusief zijn endPoints. Dat kan bijvoorbeeld een capabilities of WSDL document zijn. Dit noemen we een accesspoint.
+      Daarnaast kunnen ook URL’s worden opgenomen waarmee bijvoorbeeld rechtstreeks een dataset in een specifiek mediatype gedownload wordt. Dit noemen we endpoints. &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#url' target='_blank'&gt;Lees verder&lt;\a&gt;.
+    </description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:verticalCRS" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement/gmd:EX_VerticalExtent/gmd:verticalCRS">
@@ -140,11 +144,11 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:accessConstraints">
-    <label>(Juridische) toegangsrestricties</label>
+    <label>(Juridische) toegangs restricties</label>
     <description>
-    (Juridische) toegangsrestricties zal in de meeste gevallen de waarde "anders" hebben, als het de waarde anders heeft, 
-    dient het metadata element overige beperkingen ingevuld worden. 
-    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties' target='_blank'&gt;Lees verder&lt;/a&gt;</description>
+      (Juridische) toegangsrestricties zal in de meeste gevallen de waarde "anders" hebben, als het de waarde anders
+      heeft, dan kan het metadata element overige beperkingen ingevuld worden.
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties' target='_blank'&gt;Lees verder&lt;/a&gt;.</description>
     <condition>mandatory</condition>
   </element>
 
@@ -360,11 +364,11 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:code" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
-    <label>Code referentiesysteem</label>
+    <label>Code referentie systeem</label>
     <description>
-    Het referentiesysteem wordt met een URI (die ook de code bevat) opgenomen. Voor RD is dat 
-    &lt;a href='http://www.opengis.net/def/crs/EPSG/0/28992' target='i'&gt;http://www.opengis.net/def/crs/EPSG/0/28992&lt;/a&gt;, 
-    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem' target='i'&gt;Lees verder&lt;/a&gt;
+      Het referentiesysteem wordt met een URI (die ook de code bevat) opgenomen. Voor RD is dat
+    &lt;a href='http://www.opengis.net/def/crs/EPSG/0/28992' target='_blank'&gt;http://www.opengis.net/def/crs/EPSG/0/28992&lt;/a&gt;,
+    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem' target='_blank'&gt;Lees verder&lt;/a&gt;.
     </description>
     <condition>mandatory</condition>
   </element>
@@ -374,8 +378,8 @@
     In dit element wordt de waarde die een dataset uniek identificeert opgenomen. Er wordt sterk geadviseerd om gebruik 
     te maken van een anchor met een verwijzing naar een URI, voor INSPIRE datasets is het gebruik van een URI verplicht. 
     Deze identifer moet  geldig en beschikbaar blijven voor de gehele beschikbaarheidstermijn van de  dataset. 
-    Lees verder over &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron' target='i'&gt;string elementen&lt;/&gt; 
-    en &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen' target='i'&gt;string elementen&lt;/&gt;
+    Lees verder over &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron' target='blank'&gt;string elementen&lt;/&gt;
+    en &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen' target='blank'&gt;string elementen&lt;/&gt;
     </description>
     <condition>mandatory</condition>
   </element>
@@ -383,7 +387,7 @@
     <label>Identifier Geografisch gebied</label>
     <description>
       Referentie naar een geografisch gebied dat de spreiding van de data aangeeft. 
-      Gebruik bij voorkeur een waarde uit &lt;a href='https://standaarden.overheid.nl/owms/4.0/doc/waardelijsten' target='i'&gt;OWMS waardelijsten&lt;/&gt;.
+      Gebruik bij voorkeur een waarde uit &lt;a href='https://standaarden.overheid.nl/owms/4.0/doc/waardelijsten' target='blank'&gt;OWMS waardelijsten&lt;/&gt;.
     </description>
   </element>
   <!-- ==================================================== -->
@@ -419,8 +423,16 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:dataQualityInfo" context="/gmd:MD_Metadata/gmd:dataQualityInfo">
-    <label>Data kwaliteitsbeschrijving</label>
+    <label>Data kwaliteits beschrijving</label>
     <description>Informatie over de kwaliteit van de dataset.</description>
+  </element>
+  <element name="gmd:nameOfMeasure">
+    <label>Indicator</label>
+    <description>Naam van de gemeten indicator</description>
+  </element>
+  <element name="gmd:measureDescription" id="102.0">
+    <label>Omschrijving indicator</label>
+    <description>Beschrijf hoe de indicator gemeten wordt</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:date" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date">
@@ -521,9 +533,8 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:denominator" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator">
-    <label>Toepassingsschaal</label>
+    <label>Toepassings schaal</label>
     <description>De beoogde schaal waarop de dataset waarheidsgetrouw gebruikt mag worden. Dit moet een positief numeriek getal zijn. '1:' niet mogelijk. Een interval is mogelijk. U kunt dit element dupliceren en de beginwaarde in het eerste element en de eindwaarde in het tweede element invullen. Toepassingsschaal moet ingevuld worden voor vectordata. Voor rasterdata laat u dit element leeg en vult u het element Resolutie in.</description>
-    
   </element>
   <!-- ==================================================== -->
   <element name="gmd:description" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:description">
@@ -677,7 +688,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:equivalentScale" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale">
-    <label>Toepassingsschaal</label>
+    <label>Toepassings schaal</label>
     <description>De beoogde schaal waarop de dataset waarheidsgetrouw gebruikt mag worden. Dit moet een positief numeriek getal zijn. '1:' niet mogelijk. Een interval is mogelijk. U kunt dit element dupliceren en de beginwaarde in het eerste element en de eindwaarde in het tweede element invullen. Toepassingsschaal moet ingevuld worden voor vectordata. Voor rasterdata laat u dit element leeg en vult u het element Resolutie in.</description>
   </element>
   <!-- ==================================================== -->
@@ -770,22 +781,19 @@
     <description>Een afbeelding welke de inhoud van de dataset weergeeft .</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:hierarchyLevel" context="/gmd:MD_Metadata/gmd:hierarchyLevel">
+  <element name="gmd:hierarchyLevel">
     <label>Hiërarchisch niveau</label>
     <description>Hiërarchisch niveau waar de metadata betrekking op heeft.</description>
     <condition>mandatory</condition>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:hierarchyLevelName" context="/gmd:MD_Metadata/gmd:hierarchyLevelName">
-    <label>Hiërarchisch niveau naam</label>
+  <element name="gmd:hierarchyLevelName">
+    <label>Naam hiërarchisch niveau</label>
     <description>Naam van het hiërarchisch niveau waar de metadata betrekking op heeft. Verplicht als Hiërarchisch niveau niet gelijk is aan dataset</description>
-    
+
+    <help_link>https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#hi%C3%ABrarchieniveaunaam</help_link>
   </element>
-  <element name="gmd:hierarchyLevelName" context="/gmd:MD_Metadata/gmd:hierarchyLevelName">
-    <label>Hiërarchisch niveau naam</label>
-    <description>Naam van het hiërarchisch niveau waar de metadata betrekking op heeft. Verplicht als Hiërarchisch niveau niet gelijk is aan dataset</description>
-    
-  </element>
+
   <!-- ==================================================== -->
   <element name="gmd:identificationInfo" context="/gmd:MD_Metadata/gmd:identificationInfo">
     <label>Identificatie informatie</label>
@@ -794,7 +802,7 @@
   <!-- ==================================================== -->
   <element name="gmd:identifier" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier">
     <label>Unieke identifier van de bron</label>
-    <description>In dit element wordt de waarde die een dataset uniek identificeert opgenomen. Er wordt sterk geadviseerd om gebruik te maken van een anchor met een verwijzing naar een URI, voor INSPIRE datasets is het gebruik van een URI verplicht. Deze identifer moet  geldig en beschikbaar blijven voor de gehele beschikbaarheidstermijn van de  dataset. Lees verder https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron  en https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen</description>
+    <description>In dit element wordt de waarde die een dataset uniek identificeert opgenomen. Er wordt sterk geadviseerd om gebruik te maken van een anchor met een verwijzing naar een URI, voor INSPIRE datasets is het gebruik van een URI verplicht. Deze identifier moet geldig en beschikbaar blijven voor de gehele beschikbaarheidstermijn van de dataset. Lees verder &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron' target='_blank'&gt;unieke identifier van de bron&lt;/a&gt; en &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen' target='_blank'&gt;string elementen&lt;/a&gt;.</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:individualName" context="/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:individualName">
@@ -834,7 +842,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:level" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level">
-    <label>Niveau kwaliteitsbeschrijving</label>
+    <label>Niveau kwaliteits beschrijving</label>
     <description>Niveau (dataset of serie) waar de kwaliteitsbeschrijving betrekking op heeft.</description>
     <condition>mandatory</condition>
   </element>
@@ -846,21 +854,18 @@
   </element>
 
   <!-- ==================================================== -->
-  <element name="gmd:LI_ProcessStep" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep/gmd:LI_ProcessStep">
-    <label>Processtap</label>
-    <description>Informatie over een specifieke stap in het proces waarmee de data tot stand is gekomen.</description>
+  <element name="gmd:LI_ProcessStep">
+    <label>Uitgevoerde bewerking</label>
+    <description>Informatie over een specifieke stap in het proces waarmee de data tot stand is gekomen of bewerkt.</description>
   </element>
-  <element name="gmd:LI_ProcessStep" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:source/gmd:LI_Source/gmd:sourceStep/gmd:LI_ProcessStep">
-    <label>Processtap</label>
-    <description>Informatie over een specifieke stap in het proces waarmee de data tot stand is gekomen.</description>
-  </element>
+
   <!-- ==================================================== -->
   <element name="gmd:LI_Source" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:source/gmd:LI_Source">
     <label>Bron</label>
     <description>Informatie over de brongegevens die zijn gebruikt om de beschreven dataset te produceren.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:lineage" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage">
+  <element name="gmd:lineage">
     <label>Herkomst</label>
     <description>Informatie over de herkomst (methodiek en bronnen) van de data.</description>
     <condition>mandatory</condition>
@@ -880,9 +885,17 @@
   </element>
   <element name="gmd:linkage" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage">
     <label>URL voor online toegang tot bron</label>
-    <description>Valide URL voor online toegang tot (informatie over) de bron. Neem hier de WMS/WFS/WCS URL op naar de service die deze dataset ontsluit. </description>
-    
+    <description>
+      Deze elementengroep kan meerdere keren voorkomen, bijvoorbeeld als link naar een direct downloadbaar bestand, WMS, WFS en specifieke lagen of featurtypes in de services.
+    </description>
   </element>
+
+  <!-- ==================================================== -->
+  <element name="gmd:applicationProfile">
+    <label>Applicatieprofiel</label>
+    <description>Naam van een toepassingsprofiel dat kan worden gebruikt met de online bron</description>
+  </element>
+
   <!-- ==================================================== -->
   <element name="gmd:maintenanceAndUpdateFrequency" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceMaintenance/gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency">
     <label>Herzieningsfrequentie</label>
@@ -953,7 +966,7 @@
     <description>Unieke identifier van de bron.</description>
   </element>
   <element name="gml:identifier" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:verticalElement/gmd:EX_VerticalExtent/gml:VerticalCRS/gml:identifier">
-    <label>verticaal ruimtelijk referentiesysteem</label>
+    <label>verticaal ruimtelijk referentie systeem</label>
     <description>Identificatie van het verticaal ruimtelijk referentiesysteem</description>
   </element>
   <element name="gmd:MD_Identifier" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier">
@@ -967,10 +980,10 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:MD_LegalConstraints" >
-    <label>Juridische beperkingen</label>
+    <label>Juridische toegangs beperkingen</label>
     <description>
       Het is verplicht voorwaarden voor toegang en gebruik op te nemen in één Juridische toegangs beperkingen element groep, bestaande uit (Juridische) toegangsrestricties en overige beperkingen. Deze kan met de plus knop worden toegevoegd.
-      Daarnaast is het verplicht een waarde op te nemen voor beperkingen op publieke toegang in één ander, een tweede,  Juridische toegangs beperkingen element groep, bestaande uit (Juridische) toegangsrestricties en overige beperkingen.
+      Daarnaast is het verplicht een waarde op te nemen voor beperkingen op publieke toegang in één andere, een tweede, Juridische toegangs beperkingen element groep, bestaande uit (Juridische) toegangsrestricties en overige beperkingen.
     </description>
   </element>
 
@@ -1002,7 +1015,7 @@
   <!-- ==================================================== -->
   <element name="gmd:MD_Metadata" context="/gmd:MD_Metadata">
     <label>Metadata</label>
-    <description>Rootentiteit van de metadata over een data of service.</description>
+    <description>Root entiteit van de metadata over een data of service.</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:MD_ProgressCode" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:status/gmd:MD_ProgressCode">
@@ -1012,7 +1025,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:MD_ReferenceSystem" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem">
-    <label>Referentiesysteem</label>
+    <label>Referentie systeem</label>
     <description>Informatie over het referentiesysteem waarin de data is opgeslagen. De twee secties kunnen gebruikt worden voor de invoer van het horizontale en het verticale referentiesysteem.</description>
   </element>
   <!-- ==================================================== -->
@@ -1114,16 +1127,15 @@
   </element>
   <element name="gmd:specification" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:specification">
     <label>Specificatie distributie formaat</label>
-    <description>Specificatie van het distributie formaat. Indien het een INSPIRE dataset is dient de specificatie van het distributie formaat opgenomen te worden.</description>
+    <description>Specificatie van het distributie formaat. Het is verplicht als de dataset een geharmoniseerde INSPIRE bron is.</description>
     
   </element>
   <element name="gmd:name" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name">
     <label>Naam</label>
     <description>
     Neem in dit element de layername uit WMS of WCS, identifier uit WMTS, de featureType name uit WFS of Dataset Feed Title uit Atom op.
-    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam' target='i'&gt;Lees verder&lt;/a&gt;
+    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam' target='_blank'&gt;Lees verder&lt;/a&gt;.
     </description>
-    
   </element>
   <element name="gmd:name" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:offLine/gmd:MD_Medium/gmd:name">
     <label>Naam medium</label>
@@ -1177,14 +1189,15 @@
     <label>Overige beperkingen</label>
     <btnLabel>Overige beperking toevoegen</btnLabel>
     <description>
-      De voorwaarden voor toegang en gebruik op basis van een link naar de licentie.  In codelijst 
-      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties' target='i'>Data Licenties&lt;/a&gt;
-      zijn de beschrijvingen en de bijbehorende link naar de mogelijke licenties opgenomen. 
-      Voor INSPIRE wordt er in een tweede Overige beperkingen element als er geen beperkingen zijn of deze niet bekend zijn, ook een waarde uit codelijst 
-      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelijst-INSPIRE-ConditionsApplyingToAccessAndUse' target='i'>Conditions Applying To Access And Use&lt;/a&gt; 
-      opgenomen. Daarnaast wordt voor de tweede elementgroep (Juridische toegangs beperkingen) in dit element de beperkingen op publieke toegang met een waarde uit codelijst 
-      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelijst-INSPIRE-LimitationsOnPublicAccess' target='i'>Limitations On Public Access&lt;/a&gt; opgenomen. 
-      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#overige-beperkingen' target='i'>Lees verder&lt;/a&gt;
+      Hierin wordt voor één elementgroep (Juridische toegangs beperkingen) in dit element de voorwaarden voor toegang en gebruik met een link naar de licentie en de bijbehorende beschrijving opgenomen.
+      In codelijst
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties' target='_blank'>DataLicenties&lt;/a&gt;
+      zijn de beschrijvingen en de bijbehorende link naar de mogelijke licenties opgenomen.
+
+      Daarnaast wordt voor de tweede elementgroep (Juridische toegangs beperkingen) in dit element de beperkingen op publieke toegang met een waarde uit
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelijst-INSPIRE-LimitationsOnPublicAccess' target='_blank'>codelijst LimitationsOnPublicAccess&lt;/a&gt; opgenomen. Lees hier meer over
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#overige-beperkingen' target='_blank'>overige beperkingen&lt;/a&gt; en
+      &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen'&gt;string elementen&lt;/a&gt; meer.
     </description>
     <condition>mandatory</condition>
   </element>
@@ -1256,18 +1269,16 @@
     <description>Personen of organisaties die betrokken zijn bij deze stap in het proces.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:processStep" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep">
+  <element name="gmd:processStep">
     <label>Uitgevoerde bewerking</label>
-    <description>Informatie over een bewerking in het proces waarmee de dataset tot stand is gekomen.</description>
+    <description>Informatie over een bewerking in het proces waarmee de dataset tot stand is gekomen of bewerkt.</description>
   </element>
   
 <!-- ==================================================== -->
   <element name="gmd:description" alias="description" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:description">
     <label>Omschrijving</label>
     <description>
-    Als de URL van het type 'endPoint' is, wordt dat hier aangegeven dat het een endPoint is met een 
-    waarde uit een waarde uit de codelijst &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelist-INSPIRE-OnLineDescriptionCode' target='i'&gt;OnLine Description Code&lt;/a&gt;. 
-    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#description' target='i'&gt;Lees verder&lt;/a&gt;
+      Als de URL van het type 'endPoint' is opgegeven wordt dat hier aangegeven dat het een endPoint is met een waarde uit een waarde uit de &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelist-INSPIRE-OnLineDescriptionCode' target='_blank'&gt;codelijst OnLineDescriptionCode&lt;/a&gt;.
     </description>
   </element>
   
@@ -1275,12 +1286,14 @@
   <element name="gmd:protocol" alias="protocol">
     <label>Protocol</label>
     <description>
-    Als de URL een 'endPoint' betreft dan dient een waarde geselecteerd te worden uit de codelijst &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-mediatypes' target='i'&gt;MediaType&lt;/a&gt;.
-    Als de URL een 'accessPoint' betreft, dient een waarde geselecteerd te worden uit de codelijst &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-protocol' target='i'&gt;Protocol&lt;/a&gt;. 
-    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol' target='i'&gt;Lees verder&lt;/a&gt;
+    Als de URL een 'endPoint' betreft dan dient een waarde geselecteerd te worden uit de codelijst &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-mediatypes' target='_blank'&gt;MediaType&lt;/a&gt;.
+    Als de URL een 'accessPoint' betreft, dient een waarde geselecteerd te worden uit de codelijst &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-protocol' target='_blank'&gt;Protocol&lt;/a&gt;.
+    &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol' target='_blank'&gt;Lees verder&lt;/a&gt;.
     </description>
     <helper>
       <option value="" title="separator">-- AccessPoints --</option>
+      <option type="accessPoint"
+        id="http://www.opengeospatial.org/standards/csw" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
       <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wms" value="OGC:WMS" title="Web Map service">WMS</option>
       <option type="accessPoint"
@@ -1290,29 +1303,14 @@
       <option type="accessPoint"
        id="http://www.opengeospatial.org/standards/wcs" value="OGC:WCS" group="22" title="Web Coverage Service">WCS</option>
       <option type="accessPoint"
-        value="INSPIRE Atom" title="INSPIRE Atom Feed met links naar datasets">Atom Feed</option>
-      <option type="accessPoint" value="landingpage" title="Een webpagina die toegang geeft tot de dataset of overige informatie bevat">Webpagina</option>
-      <option type="accessPoint" value="application" title="Een (web) applicatie die rechtstreeks toegang geeft tot de dataset">Web applicatie</option>
-      <option type="accessPoint" value="dataset" title="Referentie naar een locale dataset locatie">
-        Locale dataset referentie
-      </option>
-      <option type="accessPoint"
-          id="http://www.opengeospatial.org/standards/wps"
-          value="OGC:WPS" title="Web Processing Service">WPS</option>
-      <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/sos" value="OGC:SOS" title="Sensor Observation Service">SOS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/sensorthings" value="OGC:SensorThings" title="SensorThings API">SensorThings API</option>
-      <option type="accessPoint"
-        id="https://github.com/OAI/OpenAPI-Specification" value="OAS" title="Open API Specification">Open API Specification</option>
-      <option type="accessPoint"
-        id="https://www.w3.org/TR/rdf-sparql-query" value="W3C:SPARQL" title="SPARQL Query Language for RDF">SPARQL</option>
-      <option type="accessPoint"
-        id="https://www.oasis-open.org/committees/odata" value="OASIS:OData" title="OData">OData</option>
-      <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/csw" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
+        value="INSPIRE Atom" title="INSPIRE Atom Feed met links naar datasets">Atom Feed</option>
       <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wcts" value="OGC:WCTS" title="Web Coordinate Transformation">WCTS</option>
+      <option type="accessPoint"
+        id="http://www.opengeospatial.org/standards/wps"
+        value="OGC:WPS" title="Web Processing Service">WPS</option>
       <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wfs-g" value="OGC:WFS-G" title="WFS Gazzetteer service">WFS-G</option>
       <option type="accessPoint"
@@ -1322,15 +1320,28 @@
       <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wns" value="OGC:WNS" title="Web Notification Service">WNS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#ds" value="OGC:ODS" title="OpenLS Directory Service">OpenLS DS</option>
+        id="http://www.opengeospatial.org/standards/ols#ODS" value="OGC:ODS" title="OpenLS Directory Service">OpenLS DS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#gs" value="OGC:OGS" title="OpenLS Gateway Service">OpenLS GS</option>
+        id="http://www.opengeospatial.org/standards/ols#OGS" value="OGC:OGS" title="OpenLS Gateway Service">OpenLS GS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#us" value="OGC:OUS" title="OpenLS Utility Service">OpenLS US</option>
+        id="http://www.opengeospatial.org/standards/ols#OUS" value="OGC:OUS" title="OpenLS Utility Service">OpenLS US</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#ps" value="OGC:OPS" title="OpenLS Presentation Service">OpenLS PS</option>
+        id="http://www.opengeospatial.org/standards/ols#OPS" value="OGC:OPS" title="OpenLS Presentation Service">OpenLS PS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#rs" value="OGC:ORS" title="OpenLS Route Service">OpenLS RS</option>
+        id="http://www.opengeospatial.org/standards/ols#ORS" value="OGC:ORS" title="OpenLS Route Service">OpenLS RS</option>
+      <option type="accessPoint"
+        id="http://www.opengeospatial.org/standards/sensorthings" value="OGC:SensorThings" title="SensorThings API">SensorThings API</option>
+      <option type="accessPoint"
+        id="https://www.w3.org/TR/rdf-sparql-query" value="W3C:SPARQL" title="SPARQL Query Language for RDF">SPARQL</option>
+      <option type="accessPoint"
+        id="https://github.com/OAI/OpenAPI-Specification" value="OAS" title="Open API Specification">Open API Specification</option>
+      <option type="accessPoint"
+        id="https://www.oasis-open.org/committees/odata" value="OASIS:OData" title="OData">OData</option>
+      <option type="accessPoint" value="landingpage" title="Een webpagina die toegang geeft tot de dataset of overige informatie bevat">Webpagina</option>
+      <option type="accessPoint" value="application" title="Een (web) applicatie die rechtstreeks toegang geeft tot de dataset">Web applicatie</option>
+      <option type="accessPoint" value="dataset" title="Referentie naar een locale dataset locatie">
+        Locale dataset referentie
+      </option>
       <option type="accessPoint"
          value="UKST" title="Onbekend Service Type"> Onbekend Service Type</option>
 <!-- endpoints -->
@@ -1378,12 +1389,12 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:referenceSystemIdentifier" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier">
-    <label>Referentiesysteem</label>
+    <label>Referentie systeem</label>
     <description>Informatie over het referentiesysteem. Eerst voert u het horizontale referentiesysteem in en vervolgens het verticale referentiesysteem.</description>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:referenceSystemInfo" context="/gmd:MD_Metadata/gmd:referenceSystemInfo">
-    <label>Referentiesysteem informatie</label>
+    <label>Referentie systeem informatie</label>
     <description>Beschrijving van de referentiesystemen welke van toepassing zijn op de dataset. </description>
   </element>
   <!-- ==================================================== -->
@@ -1444,7 +1455,7 @@
   </element>
   <!-- ==================================================== -->
   <element name="gmd:RS_Identifier" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier">
-    <label>Referentiesysteem</label>
+    <label>Referentie systeem</label>
     <description>Gegevens van het referentiesysteem.</description>
   </element>
   <!-- ==================================================== -->
@@ -1603,35 +1614,9 @@
     <description>Toelichting op de veiligheidsrestricties.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:value" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:value">
-    <label>Compleetheid</label>
-    <description>Omschrijving in hoeverre een dataset compleet is, of anders gezegd, een inschatting van wat er nog ontbreekt.</description>
-  </element>
-  <element name="gmd:value" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:value">
-    <label>Geometrische nauwkeurigheid</label>
-    <description>Afwijking van de x- en ycoordinaten ten opzichte van de werkelijke plaats op aarde.</description>
-  </element>
   <element name="gmd:value">
     <label>Waarde</label>
-    <description></description>
-  </element>
-  <!-- ==================================================== -->
-  <element name="gmd:valueUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit">
-    <label>Waarde eenheid</label>
-    <description>Indien bij Compleetheid geen numerieke waarde wordt ingevuld, dient de waarde: tekst ingevuld te worden.</description>
-  </element>
-  <element name="gmd:valueUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit">
-    <label>Waarde eenheid</label>
-    <description>Indien bij Geometrische nauwkeurigheid geen numerieke waarde wordt ingevuld, dient de waarde: tekst ingevuld te worden.</description>
-  </element>
-  <element name="gmd:valueUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit">
-    <label>Waarde eenheid</label>
-    <description>Indien bij Topologische samenhang geen numerieke waarde wordt ingevuld, dient de waarde: tekst ingevuld te worden.</description>
-  </element>
-  <element name="gmd:valueUnit">
-    <label>Waarde eenheid</label>
-    <description>Waarde eenheid om data kwaliteit te rapporteren</description>
-    <condition>mandatory</condition>
+    <description>Vastgestelde waarde die de mate van kwaliteit vastlegd</description>
   </element>
 
   <!-- ==================================================== -->
@@ -1677,6 +1662,11 @@
   <element name="xlink:href">
     <label>URL Verwijzing</label>
     <description>Een hyperlink waarop meer informatie over dit item te vinden is.</description>
+  </element>
+
+  <element name="xlink:title">
+    <label>Titel</label>
+    <description>Een titel die de link beschrijft</description>
   </element>
 
   <!-- ==================================================== -->
@@ -1837,18 +1827,6 @@
   <element name="gml:identifier">
     <label>Meeteenheid</label>
     <description>Identificatie van de eenheid in het systeem</description>
-    <helper>
-      <option value="unity">Aantal</option>
-      <option value="Percentage">Percentage</option>
-      <option value="ampere">Ampere</option>
-      <option value="candela">Candela</option>
-      <option value="kilogram">Kilogram</option>
-      <option value="metre">Meter</option>
-      <option value="second">Seconde</option>
-      <option value="mole">Mol</option>
-      <option value="kelvin">Graden Kelvin</option>
-      <option value="celsius">Graden Celsius</option>
-    </helper>
   </element>
   <element name="gml:unitsSystem">
     <label>Eenheden systeem</label>
@@ -1915,5 +1893,19 @@
   <element name="conformity">
     <label>Conformiteit indicatie met de specificatie</label>
     <description></description>
+  </element>
+    <element name="valueUnitHref">
+    <label>Valueunit Definition</label>
+    <helper>
+      <option value="urn:ogc:def:uom:OGC::percent">Procent</option>
+      <option value="http://www.opengis.net/def/uom/SI/second">Seconde</option>
+      <option value="http://www.opengis.net/def/uom/SI/ampere">Ampere</option>
+      <option value="http://www.opengis.net/def/uom/SI/candela">Candela</option>	
+      <option value="http://www.opengis.net/def/uom/SI/kelvin	">Kelvin</option>
+      <option value="http://www.opengis.net/def/uom/SI/kilogram">Kilo</option>	
+      <option value="http://www.opengis.net/def/uom/SI/metre">Meter</option>	
+      <option value="http://www.opengis.net/def/uom/SI/mole">Mol</option>	
+      <option value="http://www.opengis.net/def/uom/OGC/1.0/unity">Eenheden</option>
+    </helper>
   </element>
 </labels>

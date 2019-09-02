@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 	<sch:ns uri="http://www.isotc211.org/2005/gmd" prefix="gmd"/>
 	<sch:ns uri="http://www.isotc211.org/2005/gco" prefix="gco"/>
@@ -23,6 +23,7 @@
 		<sch:let name="thesaurus4" value="normalize-space(string-join(/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords[4]/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title[gco:CharacterString or gmx:Anchor]//text(), ''))"/>
 		<sch:let name="thesaurus" value="concat(string($thesaurus1),string($thesaurus2),string($thesaurus3),string($thesaurus4))"/>
 		<sch:let name="thesaurus_INSPIRE_Exsists" value="contains($thesaurus,'GEMET - INSPIRE themes, version 1.0')"/>
+		<sch:let name="thesaurus_INSPIRE_spatialscope_Exsists" value="contains($thesaurus,'Ruimtelijke dekking')"/>
 		<sch:let name="conformity_Spec_Title1" value="normalize-space(string-join(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[1]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title[gco:CharacterString or gmx:Anchor]//text(), ''))"/>
 		<sch:let name="conformity_Spec_Title2" value="normalize-space(string-join(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[2]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title[gco:CharacterString or gmx:Anchor]//text(), ''))"/>
 		<sch:let name="conformity_Spec_Title3" value="normalize-space(string-join(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[3]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title[gco:CharacterString or gmx:Anchor]//text(), ''))"/>
@@ -32,16 +33,9 @@
 
 		<sch:let name="harmonised_dataset" value="normalize-space(//gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult[./gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString= 'VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens' or ./gmd:specification/gmd:CI_Citation/gmd:title/gmx:Anchor = 'VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens']/gmd:pass/gco:Boolean)"/>
 
-		<sch:let name="distributonFormatName" value= "normalize-space(string-join(//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name[gco:CharacterString or gmx:Anchor]//text(), '')))"/>
+		<sch:let name="distributonFormatName" value= "normalize-space(string-join(//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name[gco:CharacterString or gmx:Anchor]//text(), ''))"/>
 
 		<sch:rule id="Algemene_metadata_regels" etf_name="Algemene metadata regels"  context="/gmd:MD_Metadata">
-
-		<!-- schemalocatie controleren, overeenkomstig inspire en nl profiel -->
-
-			<sch:assert id="Schema_locatie" etf_name="Schema locatie" test="contains(normalize-space(@xsi:schemaLocation), 'http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd')">Het ISO 19139 XML document mist een verplichte schema locatie. De schema locatie http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd moet aanwezig zijn.
-			</sch:assert>
-			<sch:report id="Schema_locatie_info" etf_name="Schema locatie info" test="contains(normalize-space(@xsi:schemaLocation), 'http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd')">Het ISO 19139 XML document bevat de schema locatie http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd
-			</sch:report>
 
 		<!--  fileIdentifier for report https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#metadata-unieke-identifier -->
 			<sch:let name="fileIdentifier" value="normalize-space(gmd:fileIdentifier/gco:CharacterString)"/>
@@ -155,7 +149,7 @@
 
 		<!-- 5.2.4 Unieke Identifier van de bron, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron -->
 			<!-- <sch:let name="identifierAll" value="normalize-space(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code[./gco:CharacterString or ./gmx:Anchor/]/*)"/> -->
-			<sch:let name="identifierString" value="normalize-space(string-join(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code[./gco:CharacterString or ./gmx:Anchor]//text, ''))"/>
+			<sch:let name="identifierString" value="normalize-space(string-join(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code[./gco:CharacterString or ./gmx:Anchor]//text(), ''))"/>
 
 			<!-- Het gebuik van een URI is conditioneel, het is verplicht voor INSPIRE datasets. -->
 			<sch:let name="identifierURI" value="normalize-space(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gmx:Anchor/@xlink:href)"/>
@@ -191,17 +185,20 @@
 			<sch:let name="otherConstraint2" value="normalize-space(string-join(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints[2][gco:CharacterString or gmx:Anchor/@xlink:href]//text(), ''))"/>
 
 			<sch:let name="otherConstraints" value="concat($otherConstraint1,$otherConstraint2)"/>
+			<sch:let name="otherConstraintsCharacterString" value="normalize-space(string-join(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints/gco:CharacterString, ', '))"/>
 
-			<!-- TODO: is dit altijd het 2e blok resourceConstraints ? of per definitie het blok waarin NIET de codelijst http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess zit? -->
+			<!-- Aanname: dit is altijd het 2e blok resourceConstraints. Of per definitie het blok waarin NIET de codelijst? http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess zit? -->
 			<sch:let name="otherConstraintURI1" value="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints[1]/gmx:Anchor"/>
 			<sch:let name="otherConstraintURI2" value="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints[2]/gmx:Anchor"/>
 
 			<!-- Nota bene: een ander extra blok voor de codelijst LimitationsOnPublicAccess -->
 			<sch:let name="otherConstraintURILimitationsOnPublicAccess" value="gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints[1]/gmx:Anchor[contains(@xlink:href, 'http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess')]/@xlink:href"/>
 
+			<sch:let name="nrMDLegalConstraints" value="count(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints)"/>
+
 			<!-- Thijs Brentjens add the URI to the test as well -->
 			<!-- Moet van de codelijst de waarde of de beschrijving gebruikt worden? Op basis van de inhoud van kolom beschrijving vermoed ik dat het die is (maar bij andere codelijsten was het juist de kolom waarde) Voor nu wel de waarde laten staan omdat hiermee onderscheid te maken is.
-			-->			
+			-->
 			<sch:let name="otherConstraintIsCodelistdatalicense" value="($otherConstraint1='Geen beperkingen' and (contains($otherConstraintURI1/@xlink:href,'://creativecommons.org/publicdomain/mark/') or contains($otherConstraint2,'://creativecommons.org/publicdomain/mark/'))) or ($otherConstraint1='Geen beperkingen' and (contains($otherConstraintURI1/@xlink:href,'://creativecommons.org/publicdomain/zero/') or contains($otherConstraint2,'://creativecommons.org/publicdomain/zero/'))) or (contains($otherConstraint1,'Naamsvermelding verplicht, ') and (contains($otherConstraintURI1/@xlink:href,'://creativecommons.org/licenses/by/') or contains($otherConstraint2,'://creativecommons.org/licenses/by/'))) or (contains($otherConstraint1, 'Gelijk Delen, Naamsvermelding verplicht, ') and (contains($otherConstraintURI1/@xlink:href,'://creativecommons.org/licenses/by-sa/') or contains($otherConstraint2,'://creativecommons.org/licenses/by-sa/'))) or (contains($otherConstraint1, 'Niet Commercieel, Naamsvermelding verplicht, ') and (contains($otherConstraintURI1/@xlink:href,'://creativecommons.org/licenses/by-nc/') or contains($otherConstraint2,'://creativecommons.org/licenses/by-nc/'))) or (contains($otherConstraint1, 'Niet Commercieel, Gelijk Delen, Naamsvermelding verplicht, ') and (contains($otherConstraintURI1/@xlink:href,'://creativecommons.org/licenses/by-nc-sa/') or contains($otherConstraint2,'://creativecommons.org/licenses/by-nc-sa/'))) or (contains($otherConstraint1, 'Geen Afgeleide Werken, Naamsvermelding verplicht, ') and (contains($otherConstraintURI1/@xlink:href,'://creativecommons.org/licenses/by-nd/') or contains($otherConstraint2,'://creativecommons.org/licenses/by-nd/'))) or (contains($otherConstraint1, 'Niet Commercieel, Geen Afgeleide Werken, Naamsvermelding verplicht, ') and (contains($otherConstraintURI1/@xlink:href,'://creativecommons.org/licenses/by-nc-nd/') or contains($otherConstraint2,'://creativecommons.org/licenses/by-nc-nd/'))) or ($otherConstraint1='Geo Gedeeld licentie' and (starts-with($otherConstraintURI1/@xlink:href,'http') or starts-with($otherConstraint2,'http')) ) or ($otherConstraint2='Geen beperkingen' and (contains($otherConstraintURI2/@xlink:href,'://creativecommons.org/publicdomain/mark/') or contains($otherConstraint1,'://creativecommons.org/publicdomain/mark/'))) or ($otherConstraint2='Geen beperkingen' and (contains($otherConstraintURI2/@xlink:href,'://creativecommons.org/publicdomain/zero/') or contains($otherConstraint1,'://creativecommons.org/publicdomain/zero/'))) or (contains($otherConstraint2, 'Naamsvermelding verplicht, ') and (contains($otherConstraintURI2/@xlink:href,'://creativecommons.org/licenses/by/') or contains($otherConstraint1,'://creativecommons.org/licenses/by/')) ) or (contains($otherConstraint2, 'Gelijk Delen, Naamsvermelding verplicht, ') and (contains($otherConstraintURI2/@xlink:href,'://creativecommons.org/licenses/by-sa/') or contains($otherConstraint1,'://creativecommons.org/licenses/by-sa/'))) or (contains($otherConstraint2, 'Niet Commercieel, Naamsvermelding verplicht, ') and (contains($otherConstraintURI2/@xlink:href,'://creativecommons.org/licenses/by-nc/') or contains($otherConstraint1,'://creativecommons.org/licenses/by-nc/'))) or (contains($otherConstraint2, 'Niet Commercieel, Gelijk Delen, Naamsvermelding verplicht, ') and (contains($otherConstraintURI2/@xlink:href,'://creativecommons.org/licenses/by-nc-sa/') or contains($otherConstraint1,'://creativecommons.org/licenses/by-nc-sa/'))) or (contains($otherConstraint2, 'Geen Afgeleide Werken, Naamsvermelding verplicht, ') and (contains($otherConstraintURI2/@xlink:href,'://creativecommons.org/licenses/by-nd/') or contains($otherConstraint1,'://creativecommons.org/licenses/by-nd/'))) or (contains($otherConstraint2, 'Niet Commercieel, Geen Afgeleide Werken, Naamsvermelding verplicht, ') and (contains($otherConstraintURI2/@xlink:href,'://creativecommons.org/licenses/by-nc-nd/') or contains($otherConstraint1,'://creativecommons.org/licenses/by-nc-nd/'))) or ($otherConstraint2='Geo Gedeeld licentie' and (starts-with($otherConstraintURI2/@xlink:href,'http') or starts-with($otherConstraint1,'http')))" />
 
 			<sch:let name="noConditionsDatalicense" value="($otherConstraint1='Geen beperkingen' and (contains($otherConstraintURI1/@xlink:href,'://creativecommons.org/publicdomain/mark/') or contains($otherConstraint2,'://creativecommons.org/publicdomain/mark/'))) or ($otherConstraint1='Geen beperkingen' and (contains($otherConstraintURI1/@xlink:href,'://creativecommons.org/publicdomain/zero/') or contains($otherConstraint2,'://creativecommons.org/publicdomain/zero/'))) or ($otherConstraint2='Geen beperkingen' and (contains($otherConstraintURI2/@xlink:href,'://creativecommons.org/publicdomain/mark/') or contains($otherConstraint1,'://creativecommons.org/publicdomain/mark/'))) or ($otherConstraint2='Geen beperkingen' and (contains($otherConstraintURI2/@xlink:href,'://creativecommons.org/publicdomain/zero/') or contains($otherConstraint1,'://creativecommons.org/publicdomain/zero/')))"/>
@@ -280,13 +277,14 @@
 			<sch:report id="Trefwoorden_ISO_nr_53_info" etf_name="Trefwoorden (ISO nr. 53) info" test="$keyword">Tenminste 1 trefwoord (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#trefwoord) is gevonden (<sch:value-of select="$keyword"/>)
 			</sch:report>
 
-			<!-- Thesaurus alleen voor INSPIRE-->
+			<!-- Thesaurus alleen voor INSPIRE, Ruimtelijke Dekking -->
 			<sch:assert id="Thesaurus_ISO_nr_360" etf_name="Thesaurus (ISO nr. 360)" test="$thesaurus_INSPIRE_Exsists">Thesaurus (ISO nr. 360) voor INSPIRE ontbreekt</sch:assert>
+			<sch:assert id="Thesaurus_spatialscope_ISO_nr_360" etf_name="Thesaurus spatialscope (ISO nr. 360)" test="$thesaurus_INSPIRE_spatialscope_Exsists">Thesaurus (ISO nr. 360) voor ruimtelijke dekking INSPIRE ontbreekt. Zie de invulinstructie voor Trefwoorden over ruimtelijke dekking op de INSPIRE wiki https://wiki.geonovum.nl/index.php?title=Invulinstructie voor meer informatie.</sch:assert>
 			<!-- eind Thesaurus alleen voor INSPIRE-->
 
 			<!-- 5.2.4 Unieke Identifier van de bron https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron -->
-			<sch:assert id="Unieke_Identifier_van_de_bron_ISO_nr_207" etf_name="Unieke Identifier van de bron (ISO nr. 207)" test="$identifierURI">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron) ontbreekt. Voor INSPIRE is een URI verplicht.</sch:assert>
-			<sch:report id="Unieke_Identifier_van_de_bron_ISO_nr_207_info" etf_name="Unieke Identifier van de bron (ISO nr. 207) info" test="$identifierURI">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron): <sch:value-of select="$identifierURI"/>
+			<sch:assert id="Unieke_Identifier_van_de_bron_ISO_nr_207" etf_name="Unieke Identifier van de bron (ISO nr. 207)" test="starts-with($identifierURI, 'http')">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron) ontbreekt. Voor INSPIRE is een URI verplicht. Opgegeven identifier: <sch:value-of select="$identifierURI"/>.</sch:assert>
+			<sch:report id="Unieke_Identifier_van_de_bron_ISO_nr_207_info" etf_name="Unieke Identifier van de bron (ISO nr. 207) info" test="starts-with($identifierURI, 'http')">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron): <sch:value-of select="$identifierURI"/>
 			</sch:report>
 
 			<!-- conditioneel: dus niet op testen als assertion -->
@@ -335,17 +333,17 @@
 			<sch:report id="Juridische_toegangsrestricties_ISO_nr_70_info" etf_name="(Juridische) toegangsrestricties (ISO nr. 70) info"  test="$accessConstraints_value">(Juridische) toegangsrestricties (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties) aanwezig: <sch:value-of select="$accessConstraints_value"/>
 			</sch:report>
 
-			<!-- Thijs Brentjens: nieuwe controle op codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties -->
-			<sch:assert id="Overige_beperkingen_en_codelijst_Datalicenties" etf_name="Overige beperkingen en codelijst Datalicenties" test="not($accessConstraints_value = 'otherRestrictions') or ($accessConstraints_value = 'otherRestrictions' and $otherConstraintIsCodelistdatalicense)">Als het element juridische toegangsrestricties de waarde otherRestrictions bevat dient een link uit de codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties naar de licentie en de bijbehorende beschrijving opgenomen te worden. Opgenomen informatie: <sch:value-of select="$otherConstraint1"/> met licentie: <sch:value-of select="normalize-space($otherConstraintURI1/@xlink:href)"/> <sch:value-of select="$otherConstraint2"/> en <sch:value-of select="$otherConstraint2"/> <sch:value-of select="normalize-space($otherConstraintURI2/@xlink:href)"/> <sch:value-of select="$otherConstraint1"/></sch:assert>
+			<sch:assert id="Overige_beperkingen_en_codelijst_Datalicenties" etf_name="Overige beperkingen en codelijst Datalicenties" test="not($accessConstraints_value = 'otherRestrictions') or ($accessConstraints_value = 'otherRestrictions' and $otherConstraintIsCodelistdatalicense)">Als het element juridische toegangsrestricties de waarde otherRestrictions bevat dient een link uit de codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties naar de licentie en de bijbehorende beschrijving opgenomen te worden. Opgenomen informatie:&#160;<sch:value-of select="$otherConstraint1"/>&#160;met licentie:&#160;<sch:value-of select="normalize-space($otherConstraintURI1/@xlink:href)"/>&#160;<sch:value-of select="$otherConstraint2"/>&#160;en&#160;<sch:value-of select="$otherConstraint2"/>&#160;<sch:value-of select="normalize-space($otherConstraintURI2/@xlink:href)"/>&#160;<sch:value-of select="$otherConstraint1"/></sch:assert>
 
 			<!-- Voor INSPIRE moet accessConstraints_value aanwezig zijn -->
 			<sch:assert id="Juridische_toegangsrestricties_verplicht_met_'otherRestrictions'_aanwezig" etf_name="Juridische toegangsrestricties verplicht met 'otherRestrictions' aanwezig" test="$accessConstraints_value">Het element Juridische toegangsrestricties met de waarde 'otherRestrictions' is niet aanwezig, maar is wel verplicht voor INSPIRE  (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties).</sch:assert>
 
 			<!-- 5.2.17 Voor INSPIRE moet 2 maal MD_LegalConstraints aanwezig zijn -->
-			<sch:assert id="Juridische_toegangsrestricties:_het_element__MD_LegalConstraints_moet_2_maal_aanwezig_zijn" etf_name="Juridische toegangsrestricties: het element  MD_LegalConstraints moet 2 maal aanwezig zijn" test="$otherConstraint1 and $otherConstraint2">Het element MD_LegalConstraints moet 2 maal aanwezig zijn, maar is dat niet (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties).</sch:assert>
+			<sch:assert id="Juridische_toegangsrestricties:_het_element__MD_LegalConstraints_moet_2_maal_aanwezig_zijn" etf_name="Juridische toegangsrestricties: het element MD_LegalConstraints moet 2 maal aanwezig zijn" test="$nrMDLegalConstraints = 2">Het element MD_LegalConstraints moet 2 maal aanwezig zijn, maar is dat niet (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties).</sch:assert>
 
 			<!-- 5.2.18 Voor INSPIRE is het gebruik van URIs verplicht -->
-			<sch:assert id="Overige_beperkingen:_verplicht_gebruik_van_Anchors_voor_INSPIRE" etf_name="Overige beperkingen: verplicht gebruik van Anchors voor INSPIRE" test="$otherConstraintURI1 and $otherConstraintURI2">Overige beperkingen: voor INSPIRE is het verplicht om een Anchor te gebruiken met URIs, maar dat is niet het geval (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#overige-beperkingen).</sch:assert>
+			<!-- Rapporteer de otherConstraints elementen waarbij dat niet het geval is -->
+			<sch:assert id="Overige_beperkingen:_verplicht_gebruik_van_Anchors_voor_INSPIRE" etf_name="Overige beperkingen: verplicht gebruik van Anchors voor INSPIRE" test="string-length($otherConstraintsCharacterString) = 0">Overige beperkingen: voor INSPIRE is het verplicht om een Anchor te gebruiken met URIs, maar dat is niet het geval (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#overige-beperkingen). De volgende waarden voor Overige beperkingen staan niet in een Anchor: <sch:value-of select="$otherConstraintsCharacterString"/>.</sch:assert>
 
 			<!-- 5.2.18 verplicht gebruik van een waarde uit LimitationsOnPublicAccess -->
 			<sch:assert id="Overige_beperkingen:_verplicht_gebruik_van_een_waarde_uit_LimitationsOnPublicAccess_voor_INSPIRE" etf_name="Overige beperkingen: verplicht gebruik van een waarde uit LimitationsOnPublicAccess voor INSPIRE" test="$otherConstraintIsLimitationsOnPublicAccess">Overige beperkingen: voor INSPIRE is het verplicht om een waarde uit de codelijst LimitationsOnPublicAccess op te nemen via een Anchor (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#overige-beperkingen en https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelijst-INSPIRE-LimitationsOnPublicAccess).</sch:assert>
@@ -370,7 +368,11 @@
 
 			<sch:assert id="Code_referentiesysteem_ISO_nr_207" etf_name="Code referentiesysteem (ISO nr. 207)" test="$referenceSystemInfo">Code referentiesysteem (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem) ontbreekt</sch:assert>
 
-			<sch:assert id="Distributie_formaat_INSPIRE_harmon" etf_name="INSPIRE geharmoniseerd distributie formaat" test="not($harmonised_dataset='true') or ($harmonised_dataset='true' and $distributonFormatName)">Voor INSPIRE geharmoniseerde data is het distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat) verplicht (boolean: <sch:value-of select="$harmonised_dataset"/>).</sch:assert>
+			<!-- <sch:assert id="Distributie_formaat_INSPIRE_harmon" etf_name="INSPIRE geharmoniseerd distributie formaat" test="not($harmonised_dataset='true') or ($harmonised_dataset='true' and $distributonFormatName)">Voor INSPIRE geharmoniseerde data is naam, versie en specificatie van het distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat) verplicht.</sch:assert> -->
+
+			<sch:assert id="Distributie_formaat_INSPIRE" etf_name="INSPIRE distributie formaat" test="$distributonFormatName">Voor INSPIRE data is naam, versie en specificatie van het distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat) verplicht.</sch:assert>
+
+
 
 	  <!-- Thijs: om fouten in de validator te voorkomen als er metadata is aangeleverd met meerdere blokken dataQualityInfo (de NGR editor kan dit soort fouten veroorzaken), gebruik altijd alleen het eerste blok. Doe dit bij alle elementen gmd:dataQualityInfo -->
 		<!-- alle regels over elementen binnen gmd:dataQualityInfo -->
@@ -388,6 +390,9 @@
 			<sch:assert id="Niveau_kwaliteitsbeschrijving_ISO_nr139" etf_name="Niveau kwaliteitsbeschrijving (ISO nr.139)" test="$level">Niveau kwaliteitsbeschrijving (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#niveau-kwaliteitsbeschrijving) ontbreekt</sch:assert>
 			<sch:report id="Niveau_kwaliteitsbeschrijving_ISO_nr139_info" etf_name="Niveau kwaliteitsbeschrijving (ISO nr.139) info" test="$level">Niveau kwaliteitsbeschrijving (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#niveau-kwaliteitsbeschrijving): <sch:value-of select="$level"/>
 			</sch:report>
+
+
+			<sch:assert id="INSPIRE_verordening" etf_name="INSPIRE Verordening" test="$conformity_Spec_Title_Exsists">Specificatie (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie) mist de verplichte waarde voor INSPIRE datasets. Voor INSPIRE datasets in specificatie opnemen: VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens</sch:assert>
 
 		</sch:rule>
 
@@ -476,8 +481,9 @@
 		<!-- Specificatie title, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie
 	 	TODO: check of URI ook bij andere tests voor conformity_SpecTitle nodig is, of dat het zo volstaat -->
 			<sch:let name="conformity_SpecTitle" value="normalize-space(string-join(gmd:specification/gmd:CI_Citation/gmd:title[./gco:CharacterString or ./gmx:Anchor]//text(), ''))"/>
-			<sch:let name="conformity_SpecTitleString" value="normalize-space(gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString)"/>
-			<sch:let name="conformity_SpecTitleURI" value="normalize-space(gmd:specification/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href)"/>
+			<!-- <sch:let name="conformity_SpecTitleString" value="normalize-space(gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString)"/> -->
+			<!-- <sch:let name="conformity_SpecTitleURI" value="normalize-space(gmd:specification/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href)"/> -->
+
 		<!-- Verklaring https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verklaring -->
 			<sch:let name="conformity_Explanation" value="normalize-space(gmd:explanation/gco:CharacterString)"/>
 
@@ -498,7 +504,8 @@
 		<!-- Specificatie alleen voor INSPIRE-->
 		<!-- 5.2.35 Specificatie is vereist: https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie
 		Voor INSPIRE altijd vereist, dus voorbehoud van de thesaurus weglaten. -->
-			<sch:assert id="INSPIRE_Specificatie_ISO_nr_360" etf_name="INSPIRE Specificatie (ISO nr. 360)" test="$conformity_SpecTitle">Specificatie (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie) mist de verplichte waarde voor INSPIRE datasets. Voor INSPIRE datasets in specificatie opnemen: VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens</sch:assert>
+
+			<sch:assert id="INSPIRE_Specificatie_ISO_nr_360" etf_name="INSPIRE Specificatie (ISO nr. 360)" test="$conformity_SpecTitle">Specificatie (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie) ontbreekt.</sch:assert>
 
 			<sch:assert id="INSPIRE_Verklaring_ISO_nr_131" etf_name="INSPIRE Verklaring (ISO nr. 131)" test="$conformity_Explanation">Verklaring (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verklaring) ontbreekt.</sch:assert>
 			<sch:assert id="INSPIRE_Specificatie_datum_ISO_nr_394" etf_name="INSPIRE Specificatie datum (ISO nr. 394" test="$conformity_Date">Specificatie datum (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatiedatum) ontbreekt.</sch:assert>
@@ -510,28 +517,28 @@
 		</sch:rule>
 
 		<!-- alle regels over elementen binnen distributionInfo: alleen verplicht voor geharmoniseerde data -->
-		<sch:rule id="INSPIRE_geharmoniseerde_data_distributieformaat" etf_name="INSPIRE geharmoniseerde data distributieformaat" context="//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format">
+		<sch:rule id="INSPIRE_data_distributieformaat" etf_name="INSPIRE data distributieformaat" context="//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format">
 			<!-- TODO: hoe bepalen of metadata over geharmoniseerde data gaat? -->
 			<!-- alle regels over elementen binnen distributionInfo -->
 
 			<!-- TODO: requirement dat spec_title_exists and conformity pass -->
-				<sch:let name="distributionFormatName" value="normalize-space(string-join(gmd:name[gco:CharacterString or gmx:Anchor]//text(), '')))"/>
+				<sch:let name="distributionFormatName" value="normalize-space(string-join(gmd:name[gco:CharacterString or gmx:Anchor]//text(), ''))"/>
 				<sch:let name="distributionFormatVersion" value="normalize-space(gmd:version/gco:CharacterString)"/>
 				<!-- INSPIRE Anchor -->
-				<sch:let name="distributionFormatSpecification" value="normalize-space(string-join(gmd:specification[gco:CharacterString or gmx:Anchor]//text(), '')))"/>
+				<sch:let name="distributionFormatSpecification" value="normalize-space(string-join(gmd:specification[gco:CharacterString or gmx:Anchor]//text(), ''))"/>
 
 			<!-- Naam distributie formaat, distributie format voor INSPIRE geharmoniseerd https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat -->
 			<!-- Anchor, maar alleen voor INSPIRE geharmoniseerd verplicht  -->
 				<sch:report id="Naam_distributie_formaat_ISO_nr_285_info" etf_name="Naam distributie formaat (ISO nr. 285) info" test="$distributionFormatName">Naam distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat): <sch:value-of select="$distributionFormatName"/>
 				</sch:report>
-				<sch:assert id="Naam_distributie_formaat_ISO_nr_285" etf_name="Naam distributie formaat (ISO nr. 285)" test="$distributionFormatName">Naam distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat) ontbreekt</sch:assert>
+			<sch:assert id="Naam_distributie_formaat_ISO_nr_285" etf_name="Naam distributie formaat (ISO nr. 285)" test="$distributionFormatName">Naam distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat) ontbreekt</sch:assert>
 				<!-- Versie distributie formaat, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#versie-distributie-formaat -->
-				<sch:assert id="Versie_distributie_formaat_ISO_nr_286" etf_name="Versie distributie formaat (ISO nr. 286)" test="$distributionFormatVersion">Versie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#versie-distributie-formaat) ontbreekt</sch:assert>
+			<sch:assert id="Versie_distributie_formaat_ISO_nr_286" etf_name="Versie distributie formaat (ISO nr. 286)" test="$distributionFormatVersion">Versie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#versie-distributie-formaat) ontbreekt</sch:assert>
 				<sch:report id="Versie_distributie_formaat_ISO_nr_286_info" etf_name="Versie distributie formaat (ISO nr. 286) info" test="$distributionFormatVersion">Versie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#versie-distributie-formaat): <sch:value-of select="$distributionFormatVersion"/>
 				</sch:report>
 			<!-- Specificatie distributie formaat https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie-distributie-formaat -->
 			<!-- Anchor, maar alleen voor INSPIRE geharmoniseerd verplicht  -->
-				<sch:assert id="Specificatie_distributie_formaat_ISO_nr_288" etf_name="Specificatie distributie formaat (ISO nr. 288)" test="$distributionFormatSpecification">Specificatie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie-distributie-formaat) ontbreekt</sch:assert>
+			<sch:assert id="Specificatie_distributie_formaat_ISO_nr_288" etf_name="Specificatie distributie formaat (ISO nr. 288)" test="$distributionFormatSpecification">Specificatie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie-distributie-formaat) ontbreekt</sch:assert>
 				<sch:report id="Specificatie_distributie_formaat_ISO_nr_288_info" etf_name="Specificatie distributie formaat (ISO nr. 288) info" test="$distributionFormatSpecification">Specificatie distributie formaat (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie-distributie-formaat): <sch:value-of select="$distributionFormatSpecification"/>
 				</sch:report>
 
@@ -583,6 +590,8 @@
 			<sch:assert id="Code_referentiesysteem_ISO_nr_207_2" etf_name="Code referentiesysteem (ISO nr. 207)" test="$referenceSystemInfo_CodeString or $referenceSystemInfo_CodeURI">Code referentiesysteem (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem) ontbreekt</sch:assert>
 			<sch:report id="Code_referentiesysteem_ISO_nr_207_info" etf_name="Code referentiesysteem (ISO nr. 207) info" test="$referenceSystemInfo_CodeString or $referenceSystemInfo_CodeURI">Code referentiesysteem (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem): <sch:value-of select="$referenceSystemInfo_CodeString"/> <sch:value-of select="$referenceSystemInfo_CodeURI"/>
 			</sch:report>
+
+			<sch:assert id="Code_referentiesysteem_ISO_nr_207_is_een_URI" etf_name="Code referentiesysteem (ISO nr. 207) is een URI" test="starts-with($referenceSystemInfo_CodeString,'http') or starts-with($referenceSystemInfo_CodeURI,'http')">Code referentiesysteem (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem) moet een URI zijn, maar is dat niet. Opgegeven waarde: <sch:value-of select="$referenceSystemInfo_CodeString"/> <sch:value-of select="$referenceSystemInfo_CodeURI"/></sch:assert>
 
 		</sch:rule>
 
@@ -666,18 +675,60 @@
 		         or (normalize-space(current())='Vervoersnetwerken')
 		         or (normalize-space(current())='Zeegebieden'))">
 Er moeten keywords uit de GEMET - INSPIRE themes thesaurus komen. Gevonden keywords: <sch:value-of select="./*[../gco:CharacterString or ../gmx:Anchor]"/></sch:assert>
+		<!--  voor externe thesaurus
+		-->
+		<!--
+		   <sch:assert id="INSPIRE_thesaurus_Trefwoorden_ISO_nr_53" etf_name="INSPIRE thesaurus Trefwoorden (ISO nr. 53)" test="$gemet-nl//skos:prefLabel[normalize-space(text()) = normalize-space(current())]">Keywords [<sch:value-of select="$gemet-nl//skos:prefLabel "/>]   moeten uit GEMET- INSPIRE themes thesaurus komen. gevonden keywords: <sch:value-of select="."/></sch:assert>
+		-->
 
 		<!--eind  Controlled originating vocabulary -  -->
+	</sch:rule>
 
+		<sch:rule id="INSPIRE_Thesaurus_spatialscope_trefwoorden" etf_name="INSPIRE Thesaurus spatialscope trefwoorden" context="//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords[normalize-space(gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title/gco:CharacterString) = 'Ruimtelijke dekking' or gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href ='http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/']/gmd:MD_Keywords/gmd:keyword">
 
-		 <!--  voor externe thesaurus
- 		-->
-		 <!--
-     		<sch:assert id="INSPIRE_thesaurus_Trefwoorden_ISO_nr_53" etf_name="INSPIRE thesaurus Trefwoorden (ISO nr. 53)" test="$gemet-nl//skos:prefLabel[normalize-space(text()) = normalize-space(current())]">Keywords [<sch:value-of select="$gemet-nl//skos:prefLabel "/>]   moeten uit GEMET- INSPIRE themes thesaurus komen. gevonden keywords: <sch:value-of select="."/></sch:assert>
-		 -->
+		   <!-- Controlled originating vocabulary -->
+		   <sch:let name="quote" value="&quot;'&quot;"/>
+		   <sch:assert id="INSPIRE_spatialscope_Trefwoorden_ISO_nr_53" etf_name="INSPIRE spatialscope Trefwoorden (ISO nr. 53)" test="((normalize-space(current())='Nationaal') or (normalize-space(current())='Regionaal') or (normalize-space(current())='Lokaal') )">
+		   Er moeten keywords uit de INSPIRE ruimtelijke dekking codelijst komen. Gevonden keywords: <sch:value-of select="./*[../gco:CharacterString or ../gmx:Anchor]"/></sch:assert>
 
 		</sch:rule>
 
 
+		<sch:rule id="Waarschuwingen_-_INSPIRE_dataservice_koppeling" etf_name="Waarschuwingen - INSPIRE dataservice koppeling" context="//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions">
+
+			<sch:let name="nrOnLine_Protocol_Without_Description" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[not(./gmd:description)])"/>
+
+			<sch:assert id="Omschrijving_verplicht_voor_een_URL" etf_name="Omschrijving accessPoint of endPoint is verplicht voor een URL" test="$nrOnLine_Protocol_Without_Description = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat alle distributie URLs een omschrijving (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#description) hebben. Voor <sch:value-of select="$nrOnLine_Protocol_Without_Description"/> URL(s) ontbreekt echter een omschrijving. Zie de URLs: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL[not(../../gmd:description)], ', '))"/>.
+		    </sch:assert>
+
+			<sch:let name="nr_onLine_Description_with_CharacterStrings" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:description/gco:CharacterString)"/>
+
+			<sch:assert id="Anchor_verplicht_voor_omschrijving" etf_name="Anchor verplicht voor element omschrijving accessPoint of endPoint" test="$nr_onLine_Description_with_CharacterStrings = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat in het element omschrijving van een URL (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#description) in een Anchor is opgenomen. Voor <sch:value-of select="$nr_onLine_Description_with_CharacterStrings"/> URL(s) is de omschrijving in een CharacterString opgenomen. Zie de omschrijvingen: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:description/gco:CharacterString, ', '))"/>.</sch:assert>
+
+			<!-- Protocol moet altijd opgegeven zijn. Iets andere test dan eerdere test op protocol en URL, daarin wordt tegen een specifieke codelijst getest. Voor de INSPIRE dataset service koppeling kan die codelijst anders worden, dus deze test controleert alleen of er een element protocol is opgegeven -->
+			<sch:let name="nrOnLine_URL_Without_Protocol" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[not(./gmd:protocol)])"/>
+			<sch:assert id="Protocol_verplicht_voor_een_URL" etf_name="Protocol verplicht voor een URL" test="$nrOnLine_URL_Without_Protocol = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat alle distributie URLs een protocol (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol) hebben. Voor <sch:value-of select="$nrOnLine_URL_Without_Protocol"/> URL(s) ontbreekt echter een protocol. Zie de URLs: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL[not(../../gmd:protocol)], ', '))"/>.
+		    </sch:assert>
+
+			<!-- protocol moet een anchor zijn, altijd verplicht.  -->
+			<sch:let name="nrOnLine_Protocol_not_Anchor" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol[not(./gmx:Anchor)])"/>
+
+			<sch:assert id="Protocol_moet_altijd_een_Anchor_zijn" etf_name="Anchor verplicht voor protocol" test="$nrOnLine_Protocol_not_Anchor = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat het element protocol (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol) via een Anchor is beschreven. Voor <sch:value-of select="$nrOnLine_Protocol_not_Anchor"/> element(en) is dat niet het geval. Zie de protocol elementen: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol[not(./gmx:Anchor)], ', '))"/>.
+		    </sch:assert>
+
+
+			<!-- applicatieprofiel: moet er minimaal eentje aanwezig zijn, voor een omschrijving=accesspoint
+			NB: aanname: alleen gebruik Anchors
+			-->
+
+			<!-- Use a schematron var to do the filtering (with a contains function) in the next step . Because if the xlink:href attribute is spread over multiple lines (so cntains a line ending, which is valid), the filter won't work if the value is used directly. wWthout http:// for this value,because of schematron syntax  -->
+			<sch:let name="accessPointUri" value="inspire.ec.europa.eu/metadata-codelist/OnLineDescriptionCode/accessPoint"/>
+
+			<sch:let name="nr_onLine_ApplicationProfile" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[contains(gmd:description/gmx:Anchor/@xlink:href, $accessPointUri)]/gmd:applicationProfile/gmx:Anchor[normalize-space(@xlink:href) = 'http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view' or normalize-space(@xlink:href) = 'http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download'])"/>
+
+			<sch:assert id="Minimaal_applicationProfile_View_Download" etf_name="Er is minimaal een applicationProfile opgegeven voor een View en Download service" test="$nr_onLine_ApplicationProfile &gt; 1">Voor de INSPIRE dataservice koppeling is het verplicht dat tenminste voor een View en Download service het applicatie profiel is opgegeven, met een waarde uit de codelijst ServiceType (http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/). Het applicatie profiel moet opgegeven zijn via een Anchor.
+			</sch:assert>
+
+		</sch:rule>
 	</sch:pattern>
 </sch:schema>

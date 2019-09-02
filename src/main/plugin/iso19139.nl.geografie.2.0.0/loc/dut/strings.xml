@@ -167,12 +167,7 @@
   <conformity_linkage>Tech spec URL</conformity_linkage>
 
 
-  <sds-section-qos>Quality of Service</sds-section-qos>
-  <sds-add-qualityofservice>Add missing Quality of Service criteria</sds-add-qualityofservice>
-  <sds-add-qualityofserviceHelp>INSPIRE SDS requires three quality of service criteria to be
-    reported in the metadata: Availability, Performance and Capacity. This button will add the
-    missing criteria.
-  </sds-add-qualityofserviceHelp>
+  <sds-section-qos>Service kwaliteit</sds-section-qos>
   <qos_measure>Maat:</qos_measure>
   <qos_uom>UOM</qos_uom>
   <qos_description>Omschrijving</qos_description>
@@ -240,7 +235,7 @@
   <endPosition>Tot</endPosition>
   <inspireTheme>INSPIRE Thema</inspireTheme>
   <topicCategory>Onderwerp</topicCategory>
-  <conformity>Conformiteitindicatie met de specificatie</conformity>
+  <conformity>Conformiteit indicatie met de specificatie</conformity>
   <thisIsASeries>Series</thisIsASeries>
   <thisIsADataset>Dataset</thisIsADataset>
 
@@ -271,7 +266,7 @@
   <metadataStandardVersion>Standaard versie</metadataStandardVersion>
 
   <spatialRepresentationType>Ruimtelijk schema</spatialRepresentationType>
-  <qualityScope>Niveau kwaliteitsbeschrijving</qualityScope>
+  <qualityScope>Niveau kwaliteits beschrijving</qualityScope>
 
   <useLimitation>Gebruiks beperkingen</useLimitation>
   <accessConstraints>Toegangsbeperkingen</accessConstraints>
@@ -280,21 +275,20 @@
   <purpose>Doel van vervaardiging</purpose>
   <supplementalInformation>Extra informatie</supplementalInformation>
   <edition>Versie</edition>
-
-
-  <DQ_CompletenessOmission>Compleetheid</DQ_CompletenessOmission>
-
+ 
   <ResourceCharacterset>Karakterset resource</ResourceCharacterset>
   <DescriptionTemporalExtent>Omschrijving temporele geldigheid</DescriptionTemporalExtent>
 
-  <DQ_AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid</DQ_AbsoluteExternalPositionalAccuracy>
-
   <DQ_TopologicalConsistency>Topologische samenhang</DQ_TopologicalConsistency>
   <DQ_TopologicalConsistencyDesc>Verplicht voor INSPIRE als voor netwerken de aansluiting van hartlijnen niet is verzekerd. In dat geval moet de Connectivity tolerance parameter vastgelegd worden om automatische creatie van hartlijn topologie mogelijk te maken</DQ_TopologicalConsistencyDesc>
-
   <Add_DQ_TopologicalConsistency>Topologische samenhang toevoegen</Add_DQ_TopologicalConsistency>
+
   <Add_DQ_AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid toevoegen</Add_DQ_AbsoluteExternalPositionalAccuracy>
+  <DQ_AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid</DQ_AbsoluteExternalPositionalAccuracy>
+
   <Add_DQ_CompletenessOmission>Compleetheid toevoegen</Add_DQ_CompletenessOmission>
+  <DQ_CompletenessOmission>Compleetheid</DQ_CompletenessOmission>
+
   <addIdentifier>Identificatie toevoegen</addIdentifier>
   <addStatus>Status toevoegen</addStatus>
   <addLanguage>Taal toevoegen</addLanguage>
@@ -304,6 +298,7 @@
   <addDate>Datum toevoegen</addDate>
   <addLineage>Herkomst toevoegen</addLineage>
   <addUseLimitation>Gebruiks beperkingen toevoegen</addUseLimitation>
+  <addOtherConstraints>Overige beperkingen toevoegen</addOtherConstraints>
   <addLegalConstraints>Juridische beperkingen toevoegen</addLegalConstraints>
   <addSecurityConstraints>Veiligheids beperkingen toevoegen</addSecurityConstraints>
   <addResourceConstraints>Bron beperkingen toevoegen</addResourceConstraints>
@@ -335,7 +330,7 @@
   <addResolution>Resolutie toevoegen</addResolution>
   <addScale>Toepassings schaal toevoegen</addScale>
 
-  <conformanceStatement>Conformiteitindicatie met de specificatie</conformanceStatement>
+  <conformanceStatement>Conformiteit indicatie met de specificatie</conformanceStatement>
   <ExtentDescription>Omschrijving temporele dekking</ExtentDescription>
   <DsCharacterSet>Karakterset dataset</DsCharacterSet>
 
@@ -372,8 +367,6 @@
 
   <Basis>Basis</Basis>
   <Extra>Extra</Extra>
-  <qos>Service kwaliteit</qos>
-  <addQOS>Voeg service kwaliteit toe</addQOS>
 
   <!-- missing-->
   <scale>Schaal</scale>
@@ -388,13 +381,17 @@
   <CompletenessOmission>Compleetheid</CompletenessOmission>
   <AbsoluteExternalPositionalAccuracy>Geometrische nauwkeurigheid</AbsoluteExternalPositionalAccuracy>
   <ProcessStep>Bewerkings stap</ProcessStep>
-  <addQualityScope>Niveau kwaliteitsbeschrijving toevoegen</addQualityScope>
-  <addQualityScopeDesc>Beschrijving niveau kwaliteitsbeschrijving toevoegen</addQualityScopeDesc>
-  <levelDescription>Beschrijving niveau kwaliteitsbeschrijving</levelDescription>
+  <addQualityScope>Niveau kwaliteits beschrijving toevoegen</addQualityScope>
+  <addQualityScopeDesc>Beschrijving niveau kwaliteits beschrijving toevoegen</addQualityScopeDesc>
+  <levelDescription>Beschrijving niveau kwaliteits beschrijving</levelDescription>
+  <levelLink>Link naar featuretype</levelLink>
+  <levelLinkDesc>Link naar meer informatie over het feature type</levelLinkDesc>
+  <levelDescriptionDesc>Vul hier de featuretypen in waar deze kwaliteitsindicatie op van toepassing is</levelDescriptionDesc>
 
   <nameOfMeasure>Indicator</nameOfMeasure>
   <measureDescription>Omschrijving indicator</measureDescription>
   <valueUnit>Eenheid</valueUnit>
+  <value>Waarde</value>
   <unitsSystem>Eenheden systeem</unitsSystem>
-
+  <addLocale>Landinstelling toevoegen</addLocale>
 </strings>

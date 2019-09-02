@@ -56,9 +56,15 @@
     <for name="gco:Boolean" use="checkbox"/>
 
     <for name="gmd:code" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code" use="data-gn-anchor-switcher"/>
-    <for name="gmd:supplementalInformation" use="data-gn-anchor-switcher"/>
-    <for name="gmd:organisationName" use="data-gn-anchor-switcher"/>
+    <for name="gmd:specification" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:specification" use="data-gn-anchor-switcher"/>
+    <for name="gmd:title" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:specification/gmd:CI_Citation/gmd:title" use="data-gn-anchor-switcher"/>
+    <for name="gmd:keyword" use="data-gn-anchor-switcher"/>
 
+    <for name="gmd:supplementalInformation" use="data-gn-anchor-switcher"/>
+    <for name="gmd:organisationName" use="data-gn-keyword-picker">
+                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
+                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+    </for>
     <!-- TODO: Specific in Dutch schema - data-hide-time -->
     <for name="gco:Date" use="data-gn-date-picker">
       <directiveAttributes data-hide-time="true"/>
@@ -147,14 +153,14 @@
       -->
       <directiveAttributes data-include="xpath::string-join(gmd:MD_Metadata/gmd:identificationInfo
           //gmd:thesaurusName/*/gmd:identifier/*/gmd:code/gmx:Anchor/
-          concat('-', substring-after(text()[. != ''], 'geonetwork.thesaurus.')), ',')"/>
+          concat('-', substring-after(text()[. != ''], 'geonetwork.thesaurus.')), ',')" data-transformation="to-iso19139-keyword-with-anchor"/>
     </for>
 
     <for name="gmd:name" 
     xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name" 
     use="data-gn-keyword-picker">
       <directiveAttributes 
-        data-thesaurus-key="external.theme.httpinspireeceuropaeuapplicationschema-applicationschema" 
+        data-thesaurus-key="external.theme.httpinspireeceuropaeumediatypes-media-types" 
         data-order-by-id="true"
         data-display-definition="true"
         data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
@@ -197,10 +203,10 @@
     <name>gmd:contentInfo</name>
     <name>gmd:distributionFormat</name>
     <!--<name>gmd:referenceSystemInfo</name>
-    <name>gmd:spatialResolution</name>-->
+    <name>gmd:spatialResolution</name>
     <name>gmd:offLine</name>
     <name>gmd:onLine</name>
-    <name>gmd:address</name>
+    <name>gmd:address</name>-->
     <name>gmd:projection</name>
     <name>gmd:ellipsoid</name>
     <name>gmd:attributes</name>
@@ -216,8 +222,8 @@
     <name>gml:verticalCS</name>
     <name>gml:verticalDatum</name>
     <name>gmd:axisDimensionProperties</name>
-    <name>gmd:identifier</name>
-    <name>gmd:topicCategory</name>
+    <!--<name>gmd:identifier</name>
+    <name>gmd:topicCategory</name>-->
     <!-- TODO: Review Specific for Dutch schema-->
     <name>gmd:verticalElement</name>
 
@@ -309,9 +315,9 @@
     <table for="gmd:CI_ResponsibleParty">
       <header>
         <!-- TODO: Add label from strings.xml / label with context-->
-        <col label="gmd:organisationName" class="gn-required"/>
-        <col label="gmd:electronicMailAddress" class="gn-required"/>
-        <col label="gmd:role" class="gn-required"/>
+        <col label="organisationName" class="gn-required"/>
+        <col label="electronicMailAddress" class="gn-required"/>
+        <col label="role" class="gn-required"/>
         <col/>
       </header>
       <row>
@@ -324,8 +330,8 @@
    
     <table for="gmd:PT_Locale">
       <header>
-        <col label="gmd:languageCode"/>
-        <col label="gmd:characterEncoding"/>
+        <col label="languageCode"/>
+        <col label="characterEncoding"/>
         <col/>
       </header>
       <row>
@@ -353,11 +359,11 @@
 
     <table for="gmd:LI_ProcessStep" label="ProcessStep">
       <header>
-        <col label="gmd:description"/>
-        <col label="gmd:dateTime"/>
-        <col label="gmd:organisationName"/>
-        <col label="gmd:electronicMailAddress"/>
-        <col label="gmd:role"/>
+        <col label="description"/>
+        <col label="dateTime"/>
+        <col label="organisationName"/>
+        <col label="electronicMailAddress"/>
+        <col label="role"/>
         <col/>
       </header>
       <row>
@@ -388,7 +394,7 @@
         <text ref="viewTitle"/>
         <text ref="viewDescription"/>
 
-        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|parent|fcat"/>
+        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|parent|fcats|sibling|associated"/>
 
         <section name="Basis">
 
@@ -415,7 +421,7 @@
                       <gco:Date>2000-01-01</gco:Date>
                     </gmd:date>
                     <gmd:dateType>
-                      <gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#CI_DateTypeCode" codeListValue="revision"/>
+                      <gmd:CI_DateTypeCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision"/>
                     </gmd:dateType>
                   </gmd:CI_Date>
                 </gmd:date>
@@ -499,8 +505,8 @@
           <field name="legalAccessConstraints" del="." xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]">
           </field>
 
-          <action type="add" btnLabel="addOtherConstraints" name="otherConstraints" or="otherConstraints" 
-            in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints" >
+          <action type="add" btnLabel="addOtherConstraints" name="otherConstraints" or="otherConstraints"
+            in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints" >
             <template>
               <snippet>
                 <gmd:otherConstraints>
@@ -518,7 +524,7 @@
                 <gmd:resourceConstraints>
                   <gmd:MD_LegalConstraints>
                     <gmd:accessConstraints>
-                      <gmd:MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode" codeListValue="otherRestrictions"/>
+                      <gmd:MD_RestrictionCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml" codeListValue="otherRestrictions"/>
                     </gmd:accessConstraints>
                     <gmd:otherConstraints>
                       <gmx:Anchor xlink:href=""></gmx:Anchor>
@@ -603,8 +609,16 @@
             </template>
           </action>
 
-          <field name="referenceSystemIdentifier" or="code" use="data-gn-keyword-picker" xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code" del="../../../..">
-            <directiveAttributes data-thesaurus-key="external.theme.projections" data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+          <field name="referenceSystemIdentifier" 
+            or="code" 
+            use="data-gn-keyword-picker" 
+            xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code" 
+            del="../../../..">
+            <directiveAttributes 
+              data-thesaurus-key="external.theme.projections" 
+              data-order-by-id="true"
+              data-display-definition="true"
+              data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
           </field>
 
           <action type="add" del="." btnLabel="addReferenceSystem" if="count(gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier) = 0" or="referenceSystemInfo" in="/gmd:MD_Metadata">
@@ -786,7 +800,7 @@
         <text ref="dutchProfileTitle"/>
         <text ref="dutchProfileDescription"/>
 
-        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|parent|fcat"/>
+        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|parent|fcats|sibling|associated"/>
 
         <section name="dataIdentificatie">
 
@@ -828,7 +842,7 @@
                       <gco:Date/>
                     </gmd:date>
                     <gmd:dateType>
-                      <gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#CI_DateTypeCode" codeListValue=""/>
+                      <gmd:CI_DateTypeCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue=""/>
                     </gmd:dateType>
                   </gmd:CI_Date>
                 </gmd:date>
@@ -1005,7 +1019,19 @@
             <template>
               <values readonlyIf="count(@xlink:href) > 0">
                 <key label="individualName" tooltip="gmd:individualName" xpath="gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
-                <key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
+                <!--<key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>-->
+                <key label="organisationName"
+                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName"
+                     use="data-gn-keyword-picker"
+                     tooltip="gmd:organisationName">
+                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
+                                       data-template-field="true"
+                                       data-template-field-element="gco:CharacterString"
+                                       data-template-field-element-with-concept-id="gmx:Anchor"
+                                       data-template-field-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/*/text()"
+                                       data-template-field-concept-id-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor/@xlink:href"
+                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+                </key>
                 <key label="positionName" tooltip="gmd:positionName" xpath="gmd:CI_ResponsibleParty/gmd:positionName/gco:CharacterString"/>
                 <key label="voice" tooltip="gmd:voice" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
                 <key label="facsimile" tooltip="gmd:facsimile" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:facsimile/gco:CharacterString"/>
@@ -1026,9 +1052,7 @@
                     <gmd:individualName>
                       <gco:CharacterString>{{individualName}}</gco:CharacterString>
                     </gmd:individualName>
-                    <gmd:organisationName>
-                      <gco:CharacterString>{{organisationName}}</gco:CharacterString>
-                    </gmd:organisationName>
+                    <gmd:organisationName>{{organisationName}}</gmd:organisationName>
                     <gmd:positionName>
                       <gco:CharacterString>{{positionName}}</gco:CharacterString>
                     </gmd:positionName>
@@ -1313,7 +1337,7 @@
                     <gmd:temporalElement>
                       <gmd:EX_TemporalExtent>
                         <gmd:extent>
-                          <gml:TimePeriod id="">
+                          <gml:TimePeriod gml:id="">
                             <gml:beginPosition></gml:beginPosition>
                             <gml:endPosition></gml:endPosition>
                           </gml:TimePeriod>
@@ -1367,8 +1391,8 @@
           <!-- access constraints -->
           <field name="legalAccessConstraints" or="resourceConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_LegalConstraints/gmd:accessConstraints]"/>
 
-          <action type="add" btnLabel="addOtherConstraints" name="otherConstraints" or="otherConstraints" 
-          in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints">
+          <action type="add" btnLabel="addOtherConstraints" name="otherConstraints" or="otherConstraints"
+          in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints">
             <template>
               <snippet>
                 <gmd:otherConstraints>
@@ -1384,7 +1408,7 @@
                 <gmd:resourceConstraints>
                   <gmd:MD_LegalConstraints>
                     <gmd:accessConstraints>
-                      <gmd:MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode" codeListValue="otherRestrictions"/>
+                      <gmd:MD_RestrictionCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml" codeListValue="otherRestrictions"/>
                     </gmd:accessConstraints>
                     <gmd:otherConstraints>
                       <gmx:Anchor xlink:href=""></gmx:Anchor>
@@ -1466,7 +1490,19 @@
             <template>
               <values readonlyIf="count(@xlink:href) > 0">
                 <key label="individualName" tooltip="gmd:individualName" xpath="gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
-                <key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
+                <!--<key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>-->
+                <key label="organisationName"
+                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName"
+                     use="data-gn-keyword-picker"
+                     tooltip="gmd:organisationName">
+                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
+                                       data-template-field="true"
+                                       data-template-field-element="gco:CharacterString"
+                                       data-template-field-element-with-concept-id="gmx:Anchor"
+                                       data-template-field-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/*/text()"
+                                       data-template-field-concept-id-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor/@xlink:href"
+                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+                </key>
                 <key label="positionName" tooltip="gmd:positionName" xpath="gmd:CI_ResponsibleParty/gmd:positionName/gco:CharacterString"/>
                 <key label="voice" tooltip="gmd:voice" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
                 <key label="facsimile" tooltip="gmd:facsimile" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:facsimile/gco:CharacterString"/>
@@ -1487,9 +1523,7 @@
                     <gmd:individualName>
                       <gco:CharacterString>{{individualName}}</gco:CharacterString>
                     </gmd:individualName>
-                    <gmd:organisationName>
-                      <gco:CharacterString>{{organisationName}}</gco:CharacterString>
-                    </gmd:organisationName>
+                    <gmd:organisationName>{{organisationName}}</gmd:organisationName>
                     <gmd:positionName>
                       <gco:CharacterString>{{positionName}}</gco:CharacterString>
                     </gmd:positionName>
@@ -1574,17 +1608,19 @@
                 <key label="turnaround" xpath="gmd:MD_StandardOrderProcess/gmd:turnaround/gco:CharacterString" tooltip="gmd:turnaround"/>
               </values>
               <snippet>
+              <gmd:distributionOrderProcess>
                 <gmd:MD_StandardOrderProcess>
                   <gmd:fees>
                     <gco:CharacterString>{{fees}}</gco:CharacterString>
                   </gmd:fees>
-                  <gmd:turnaround>
-                    <gco:CharacterString>{{turnaround}}</gco:CharacterString>
-                  </gmd:turnaround>
                   <gmd:orderingInstructions>
                     <gco:CharacterString>{{orderingInstructions}}</gco:CharacterString>
                   </gmd:orderingInstructions>
+                  <gmd:turnaround>
+                    <gco:CharacterString>{{turnaround}}</gco:CharacterString>
+                  </gmd:turnaround>
                 </gmd:MD_StandardOrderProcess>
+                </gmd:distributionOrderProcess>
               </snippet>
             </template>
           </field>
@@ -1597,12 +1633,12 @@
                     <gmd:fees>
                       <gco:CharacterString></gco:CharacterString>
                     </gmd:fees>
-                    <gmd:turnaround>
-                      <gco:CharacterString></gco:CharacterString>
-                    </gmd:turnaround>
                     <gmd:orderingInstructions>
                       <gco:CharacterString></gco:CharacterString>
                     </gmd:orderingInstructions>
+                    <gmd:turnaround>
+                      <gco:CharacterString></gco:CharacterString>
+                    </gmd:turnaround>
                   </gmd:MD_StandardOrderProcess>
                 </gmd:distributionOrderProcess>
               </snippet>
@@ -1648,12 +1684,13 @@
           templateModeOnly="true" notDisplayedIfMissing="true" del=".">
             <template>
               <values>
-                <key label="levelDescription" tooltip="gmd:features" xpath="gmd:features/@xlink:title">
-                </key>
+                <key label="levelDescription" required="true" tooltip="levelDescriptionDesc" xpath="gmd:MD_ScopeDescription/gmd:features/@xlink:title"></key>
               </values>
               <snippet>
                 <gmd:levelDescription>
-                  <gmd:features xlink:title="{{levelDescription}}" />
+                  <gmd:MD_ScopeDescription>
+                    <gmd:features xlink:title="{{levelDescription}}" />
+                  </gmd:MD_ScopeDescription>
                 </gmd:levelDescription>
               </snippet>
             </template>
@@ -1663,7 +1700,9 @@
             <template>
               <snippet>
                 <gmd:levelDescription>
+                <gmd:MD_ScopeDescription>
                   <gmd:features xlink:title="" />
+                  </gmd:MD_ScopeDescription>
                 </gmd:levelDescription>
               </snippet>
             </template>
@@ -1704,22 +1743,16 @@
             <template>
               <values>
                 <key label="value" tooltip="gmd:value" xpath="gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:value/gco:Record"></key>
-                <key label="valueUnit" tooltip="gmd:valueUnit" xpath="gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
-                  <helper name="gml:identifier" />
+                <key label="valueUnit" tooltip="gmd:valueUnit" xpath="gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/@xlink:href">
+                  <helper name="valueUnitHref" />
                 </key>
-                <key label="unitsSystem" tooltip="gml:unitsSystem" xpath="gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem/@xlink:href"></key>
               </values>
               <snippet>
               <gmd:report>
                   <gmd:DQ_CompletenessOmission>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
-                        <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="">
-                             <gml:identifier codeSpace="http://www.opengis.net/def">{{valueUnit}}</gml:identifier>
-                             <gml:unitsSystem xlink:href="{{unitsSystem}}"/>
-                          </gml:BaseUnit>
-                        </gmd:valueUnit>
+                        <gmd:valueUnit xlink:href="{{valueUnit}}"/>
                         <gmd:value>
                           <gco:Record>{{value}}</gco:Record>
                         </gmd:value>
@@ -1741,12 +1774,7 @@
                   <gmd:DQ_CompletenessOmission>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
-                        <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="">
-                             <gml:identifier codeSpace="http://www.opengis.net/def"/>
-                             <gml:unitsSystem xlink:href="http://www.opengis.net/def/uom"/>
-                          </gml:BaseUnit>
-                        </gmd:valueUnit>
+                        <gmd:valueUnit xlink:href=""/>
                         <gmd:value>
                           <gco:Record></gco:Record>
                         </gmd:value>
@@ -1765,22 +1793,16 @@
             <template>
               <values>
                 <key label="value" tooltip="gmd:value" xpath="gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:value/gco:Record"></key>
-                <key label="valueUnit" tooltip="gmd:valueUnit" xpath="gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
-                  <helper name="gml:identifier" />
+                <key label="valueUnit" tooltip="gmd:valueUnit" xpath="gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/@xlink:href">
+                  <helper name="valueUnitHref" />
                 </key>
-                <key label="unitsSystem" tooltip="gml:unitsSystem" xpath="gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem/@xlink:href"></key>
               </values>
               <snippet>
               <gmd:report>
                   <gmd:DQ_TopologicalConsistency>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
-                        <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="">
-                             <gml:identifier codeSpace="http://www.opengis.net/def">{{valueUnit}}</gml:identifier>
-                             <gml:unitsSystem xlink:href="{{unitsSystem}}"/>
-                          </gml:BaseUnit>
-                        </gmd:valueUnit>
+                        <gmd:valueUnit xlink:href="{{valueUnit}}"/>
                         <gmd:value>
                           <gco:Record>{{value}}</gco:Record>
                         </gmd:value>
@@ -1803,12 +1825,7 @@
                   <gmd:DQ_TopologicalConsistency>
                    <gmd:result>
                       <gmd:DQ_QuantitativeResult>
-                        <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="">
-                             <gml:identifier codeSpace="http://www.opengis.net/def"/>
-                             <gml:unitsSystem xlink:href="http://www.opengis.net/def/uom"/>
-                          </gml:BaseUnit>
-                        </gmd:valueUnit>
+                        <gmd:valueUnit xlink:href=""/>
                         <gmd:value>
                           <gco:Record></gco:Record>
                         </gmd:value>
@@ -1827,22 +1844,16 @@
             <template>
               <values>
                 <key label="value" tooltip="gmd:value" xpath="gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:value/gco:Record"></key>
-                <key label="valueUnit" tooltip="gmd:valueUnit" xpath="gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier">
-                  <helper name="gml:identifier" />
+                <key label="valueUnit" tooltip="gmd:valueUnit" xpath="gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/@xlink:href">
+                  <helper name="valueUnitHref" />
                 </key>
-                <key label="unitsSystem" tooltip="gml:unitsSystem" xpath="gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:unitsSystem/@xlink:href"></key>
               </values>
               <snippet>
               <gmd:report>
                   <gmd:DQ_AbsoluteExternalPositionalAccuracy>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
-                        <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="">
-                             <gml:identifier codeSpace="http://www.opengis.net/def">{{valueUnit}}</gml:identifier>
-                             <gml:unitsSystem xlink:href="{{unitsSystem}}"/>
-                          </gml:BaseUnit>
-                        </gmd:valueUnit>
+                        <gmd:valueUnit xlink:href="{{valueUnit}}"/>
                         <gmd:value>
                           <gco:Record>{{value}}</gco:Record>
                         </gmd:value>
@@ -1865,12 +1876,7 @@
                   <gmd:DQ_AbsoluteExternalPositionalAccuracy>
                   <gmd:result>
                       <gmd:DQ_QuantitativeResult>
-                        <gmd:valueUnit>
-                          <gml:BaseUnit gml:id="">
-                             <gml:identifier codeSpace="http://www.opengis.net/def"/>
-                             <gml:unitsSystem xlink:href="http://www.opengis.net/def/uom"/>
-                          </gml:BaseUnit>
-                        </gmd:valueUnit>
+                        <gmd:valueUnit xlink:href=""/>
                         <gmd:value>
                           <gco:Record></gco:Record>
                         </gmd:value>
@@ -2039,7 +2045,19 @@
             <template>
               <values readonlyIf="count(@xlink:href) > 0">
                 <key label="individualName" tooltip="gmd:individualName" xpath="gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
-                <key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
+                <!--<key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>-->
+                <key label="organisationName"
+                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName"
+                     use="data-gn-keyword-picker"
+                     tooltip="gmd:organisationName">
+                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
+                                       data-template-field="true"
+                                       data-template-field-element="gco:CharacterString"
+                                       data-template-field-element-with-concept-id="gmx:Anchor"
+                                       data-template-field-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/*/text()"
+                                       data-template-field-concept-id-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor/@xlink:href"
+                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+                </key>
                 <key label="positionName" tooltip="gmd:positionName" xpath="gmd:CI_ResponsibleParty/gmd:positionName/gco:CharacterString"/>
                 <key label="voice" tooltip="gmd:voice" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
                 <key label="facsimile" tooltip="gmd:facsimile" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:facsimile/gco:CharacterString"/>
@@ -2060,9 +2078,7 @@
                     <gmd:individualName>
                       <gco:CharacterString>{{individualName}}</gco:CharacterString>
                     </gmd:individualName>
-                    <gmd:organisationName>
-                      <gco:CharacterString>{{organisationName}}</gco:CharacterString>
-                    </gmd:organisationName>
+                    <gmd:organisationName>{{organisationName}}</gmd:organisationName>
                     <gmd:positionName>
                       <gco:CharacterString>{{positionName}}</gco:CharacterString>
                     </gmd:positionName>
@@ -2238,7 +2254,7 @@
       <tab id="identificationInfo" default="true">
         <text ref="fullViewTitle"/>
         <text ref="fullViewDescription"/>
-        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|dataset"/>
+        <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|dataset|fcats|sibling|associated"/>
         <section xpath="/gmd:MD_Metadata/gmd:identificationInfo" or="identificationInfo"
                  in="/gmd:MD_Metadata"/>
       </tab>

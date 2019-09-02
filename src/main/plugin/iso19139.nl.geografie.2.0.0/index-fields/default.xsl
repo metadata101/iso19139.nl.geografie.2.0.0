@@ -39,6 +39,7 @@
 
   <xsl:include href="../../iso19139/convert/functions.xsl"/>
   <xsl:include href="../../../xsl/utils-fn.xsl"/>
+  <xsl:include href="index-utils-fn.xsl"/>
   <xsl:include href="../../iso19139/index-fields/inspire-util.xsl"/>
 
   <!-- This file defines what parts of the metadata are indexed by Lucene
@@ -533,63 +534,103 @@
         <xsl:for-each select="*/gmd:accessConstraints/gmd:MD_RestrictionCode/@codeListValue">
           <Field name="accessConstr" string="{string(.)}" store="true" index="true"/>
         </xsl:for-each>
-        <xsl:for-each select="*/gmd:otherConstraints/gco:CharacterString">
-          <Field name="otherConstr" string="{string(.)}" store="true" index="true"/>
+
+        <xsl:for-each select="*/gmd:otherConstraints">
+
+          <xsl:variable name="otherConstrCS" select="gco:CharacterString"/>
+          <xsl:variable name="otherConstrAnchor" select="./gmx:Anchor"/>
+          <!-- gmd:OtherConstraints can contain a gco:CharacterString or a gmx:Anchor -->
+          <xsl:choose>
+            <xsl:when test="$otherConstrCS">
+              <Field name="otherConstr" string="{normalize-space(string($otherConstrCS))}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:when test="$otherConstrAnchor">
+              <Field name="otherConstr" string="{normalize-space(string($otherConstrAnchor/@xlink:href))}" store="true" index="true"/>
+            </xsl:when>
+          </xsl:choose>
+
+
+
 
           <!-- Index a list of license information values usually stored
                     in gmd:otherConstraints. If no constraint of that type found
-                    the item is dropped.
-
-                    -->
+                    the item is dropped. -->
           <xsl:variable name="licenseMap">
-            <license value="http://creativecommons.org/publicdomain/mark/1.0/deed.nl">Public Domain</license>
-            <license value="http://creativecommons.org/licenses/publicdomain/deed.nl">Public Domain</license>
+            <!-- valid licenses from Codelist INSPIRE LimitationsOnPublicAccess -->
+            <!-- https://docs.geostandaarden.nl/md/mdprofiel-iso19119/#Codelijst-INSPIRE-LimitationsOnPublicAccess -->
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1a">INSPIRE_Directive_Article13_1a</license>
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1b">INSPIRE_Directive_Article13_1b</license>
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1c">INSPIRE_Directive_Article13_1c</license>
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d">INSPIRE_Directive_Article13_1d</license>
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1e">INSPIRE_Directive_Article13_1e</license>
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1f">INSPIRE_Directive_Article13_1f</license>
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1g">INSPIRE_Directive_Article13_1g</license>
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1h">INSPIRE_Directive_Article13_1h</license>
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations">noLimitations</license>
+
+            <!-- INSPIRE codelist Conditions Applying To Access and Use -->
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply">noConditionsApply</license>
+            <license value="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/conditionsUnknown">conditionsUnknown</license>
+
+            <!-- http://creativecommons.org -->
+            <license value="http://creativecommons.org/publicdomain/mark/">Public Domain</license>
+            <license value="http://creativecommons.org/publicdomain/zero/">CC0</license>
+            <license value="http://creativecommons.org/licenses/by/">CC BY</license>
+            <license value="http://creativecommons.org/licenses/by-sa/">CC BY-SA</license>
+            <license value="http://creativecommons.org/licenses/by-nc/">CC BY-NC</license>
+            <license value="http://creativecommons.org/licenses/by-nc-sa/">CC BY-NC-SA</license>
+            <license value="http://creativecommons.org/licenses/by-nd/">CC BY-ND</license>
+            <license value="http://creativecommons.org/licenses/by-nc-nd/">CC BY-NC-ND</license>
           </xsl:variable>
 
-          <xsl:variable name="otherConstraint" select="."/>
 
           <xsl:choose>
-            <!--
-                            https://eos.geocat.net/redmine/issues/show/2692
+            <xsl:when test="$licenseMap/license[starts-with($otherConstrAnchor/@xlink:href, @value)]">
+              <Field name="license" string="{$licenseMap/license[starts-with($otherConstrAnchor/@xlink:href, @value)]}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:when test="$licenseMap/license[starts-with($otherConstrCS, @value)]">
+              <Field name="license" string="{$licenseMap/license[starts-with($otherConstrCS, @value)]}" store="true" index="true"/>
+            </xsl:when>
 
-                        In case of the value "Geo Gedeeld licentie" it should be nice if
-                        this is also a part of the licences filter
-                        -->
-            <xsl:when test=".='Public Domain'
-							or .='http://creativecommons.org/publicdomain/mark/1.0/deed.nl'
-							or .='http://creativecommons.org/licenses/publicdomain/deed.nl'
+            <xsl:when test="$otherConstrCS='Public Domain'
 							or .='Open Database License (ODbL)'">
-              <Field name="license" string="{if ($licenseMap/license[@value=$otherConstraint])
-								then $licenseMap/license[@value=$otherConstraint]
-								else $otherConstraint}" store="true" index="true"/>
+              <Field name="license" string="{$otherConstrCS}" store="true" index="true"/>
             </xsl:when>
-            <xsl:when test="contains(.,'Geo Gedeeld licentie')">
-              <Field name="license" string="Geo Gedeeld licentie" store="true" index="true"/>
-            </xsl:when>
-            <xsl:when test="starts-with($otherConstraint, 'http://creativecommons.org/publicdomain/zero/')
-							or .='Creative Commons CC0'">
+
+            <xsl:when test="contains(lower-case($otherConstrCS),'cc0')">
               <Field name="license" string="CC0" store="true" index="true"/>
             </xsl:when>
-            <xsl:when test="starts-with($otherConstraint, 'http://creativecommons.org/licenses/by/')">
-              <Field name="license" string="CC-BY" store="true" index="true"/>
+
+            <!-- This allow to index a gmx:Anchor with `geo gedeeld licentie` value and a random URL in xlink:href as a-->
+            <xsl:when test="contains(lower-case($otherConstrCS),'geo gedeeld licentie') or contains(lower-case($otherConstrAnchor), 'geo gedeeld licentie')">
+              <Field name="license" string="Geo Gedeeld licentie" store="true" index="true"/>
             </xsl:when>
-            <!-- In case of a public domain or CC0 license please take
+
+
+            <xsl:when test="$otherConstrCS and normalize-space(lower-case($otherConstrCS))='geen beperkingen'">
+              <!-- In case of a public domain or CC0 license please take
                             not into account the otherConstraint element containing
                             geen beperking.
                         -->
-            <xsl:when test=".='Geen beperkingen'"></xsl:when>
+            </xsl:when>
             <xsl:otherwise>
               <!-- 14-11 JB: OtherConstraints no longer needed -->
               <!--Field name="license" string="OtherConstraints" store="true" index="true"/-->
             </xsl:otherwise>
+
+
           </xsl:choose>
 
-          <xsl:if test="starts-with($otherConstraint, 'http')">
-            <Field name="licenseLink" string="{$otherConstraint}" store="true" index="true"/>
+          <xsl:if test="$otherConstrAnchor and starts-with($otherConstrAnchor/@xlink:href, 'http') and not($otherConstrAnchor/@xlink:href='http://creativecommons.org/licenses/Verwijzing naar een geldige URL van de licentie')">
+            <Field name="licenseLink" string="{$otherConstrAnchor/@xlink:href}" store="true" index="true"/>
+          </xsl:if>
+          <xsl:if test="$otherConstrCS and starts-with($otherConstrCS, 'http')">
+            <Field name="licenseLink" string="{$otherConstrCS}" store="true" index="true"/>
           </xsl:if>
 
-
         </xsl:for-each>
+
+
         <xsl:for-each select="//gmd:classification/gmd:MD_ClassificationCode/@codeListValue">
           <Field name="classif" string="{string(.)}" store="true" index="true"/>
         </xsl:for-each>
@@ -791,29 +832,37 @@
       </xsl:for-each>
     </xsl:for-each>
 
+
+
+    <xsl:variable name="protocolText">
+      <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/*/text()">
+        <xsl:value-of select="."/>
+        <xsl:if test="position() != last()"><xsl:text>,</xsl:text></xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+
     <xsl:if test="gmd:hierarchyLevel/gmd:MD_ScopeCode/@codeListValue='dataset'
           and
             (not (
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'download')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'dataset')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'WFS')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'WCS')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'CSW')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'SOS')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'INSPIRE Atom')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'WMTS')] or
-              gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString[contains(., 'WMS')]
-              )
-              and not (
-              //srv:serviceType/gco:LocalName[contains(., 'download')] or
-              //srv:serviceType/gco:LocalName[contains(., 'dataset')] or
-              //srv:serviceType/gco:LocalName[contains(., 'WFS')] or
-              //srv:serviceType/gco:LocalName[contains(., 'WCS')] or
-              //srv:serviceType/gco:LocalName[contains(., 'CSW')] or
-              //srv:serviceType/gco:LocalName[contains(., 'SOS')] or
-              //srv:serviceType/gco:LocalName[contains(., 'INSPIRE Atom')] or
-              //srv:serviceType/gco:LocalName[contains(., 'WMTS')] or
-              //srv:serviceType/gco:LocalName[contains(., 'WMS')]
+              contains($protocolText, 'WFS') or
+              contains($protocolText, 'WCS') or
+              contains($protocolText, 'INSPIRE Atom') or
+              contains($protocolText, 'OGC:SensorThings') or
+              contains($protocolText, 'OASIS:OData') or
+              contains($protocolText, 'W3C:SPARQL') or
+              contains($protocolText, 'OAS') or
+              contains($protocolText, 'gml') or
+              contains($protocolText, 'kml') or
+              contains($protocolText, 'geojson') or
+              contains($protocolText, 'gpkg') or
+              contains($protocolText, 'json') or
+              contains($protocolText, 'jsonld') or
+              contains($protocolText, 'rdf-xml') or
+              contains($protocolText, 'xml') or
+              contains($protocolText, 'zip') or
+              contains($protocolText, 'jp2') or
+              contains($protocolText, 'tiff') or
+              contains($protocolText, 'csv')
               )
             )">
       <Field name="nodynamicdownload" string="true" store="false" index="true"/>
@@ -830,17 +879,17 @@
 
       <!-- index online protocol -->
       <xsl:for-each select="gmd:transferOptions/gmd:MD_DigitalTransferOptions">
-        <xsl:variable name="tPosition" select="position()"></xsl:variable>
+        <xsl:variable name="tPosition" select="position()" />
         <xsl:for-each select="gmd:onLine/gmd:CI_OnlineResource[gmd:linkage/gmd:URL!='']">
           <xsl:variable name="download_check">
             <xsl:text>&amp;fname=&amp;access</xsl:text>
           </xsl:variable>
           <xsl:variable name="linkage" select="gmd:linkage/gmd:URL"/>
           <xsl:variable name="title" select="normalize-space(gmd:name/gco:CharacterString|gmd:name/gmx:MimeFileType)"/>
-          <xsl:variable name="desc" select="normalize-space(gmd:description/gco:CharacterString)"/>
-          <xsl:variable name="protocol" select="normalize-space(gmd:protocol/gco:CharacterString)"/>
+          <xsl:variable name="desc" select="normalize-space(gmd:description/gmx:Anchor/text())"/>
+          <xsl:variable name="protocol" select="normalize-space(gmd:protocol/gco:CharacterString|gmd:protocol/gmx:Anchor/text())"/>
           <xsl:variable name="mimetype"
-                        select="geonet:protocolMimeType($linkage, $protocol, gmd:name/gmx:MimeFileType/@type)"/>
+                        select="geonet:protocolMimeType_iso19139.nl.geografie.2.0.0($linkage, $protocol, gmd:name/gmx:MimeFileType/@type)"/>
 
           <!-- If the linkage points to WMS service and no protocol specified, manage as protocol OGC:WMS -->
           <xsl:variable name="wmsLinkNoProtocol"
@@ -856,8 +905,8 @@
           <!-- ignore empty downloads -->
           <xsl:if test="string($linkage)!='' and not(contains($linkage,$download_check))">
             <xsl:variable name="protocols"
-                          select="'|OGC:CSW|OGC:WMS|OGC:WMTS|OGC:WFS|OGC:WCS|OGC:WCTS|OGC:WPS|OGC:WMC|OGC:GPKG|OGC:OWS-C|OGC:KML|OGC:GML|OGC:WFS-G|OGC:SOS|OGC:SPS|OGC:SAS|OGC:WNS|OGC:ODS|OGC:OGS|OGC:OUS|OGC:OPS|OGC:ORS|INSPIRE Atom|UKST|SPARQL|download|website|'"/>
-            <xsl:if test="contains($protocols,concat('|',string($protocol),'|'))">
+                          select="'|OGC:CSW|OGC:WMS|OGC:WMTS|OGC:WFS|OGC:WCS|OGC:SOS|INSPIRE Atom|OGC:WCTS|OGC:WPS|OGC:WFS-G|OGC:SPS|OGC:SAS|OGC:WNS|OGC:ODS|OGC:OGS|OGC:OUS|OGC:OPS|OGC:ORS|OGC:SensorThings|W3C:SPARQL|OASIS:OData|OAS|landingpage|application|dataset|UKST|'"/>
+            <xsl:if test="contains($protocols, concat('|', string($protocol), '|'))">
               <Field name="protocol" string="{string($protocol)}" store="true" index="true"/>
             </xsl:if>
           </xsl:if>
@@ -870,13 +919,22 @@
             <Field name="mimetype" string="{$mimetype}" store="true" index="true"/>
           </xsl:if>
 
-          <xsl:if test="contains($protocol, 'WWW:DOWNLOAD')">
+
+          <!-- downloadable protocols -->
+          <xsl:variable name="downloadableProtocols" select="'|OGC:WFS|OGC:WCS|OGC:SOS|INSPIRE Atom|OASIS:OData|OGC:SensorThings|W3C:SPARQL|OAS|'"/>
+          <xsl:if
+            test="contains($downloadableProtocols, concat('|', $protocol, '|')) or $wfsLinkNoProtocol or $wcsLinkNoProtocol">
             <Field name="download" string="true" store="false" index="true"/>
           </xsl:if>
 
+          <!-- media type downloadable protocols -->
+          <!-- see https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-mediatypes -->
+          <!-- All media types in the above link are downloadable except PNG, GIF, mapbox-vector-tile, they are links -->
+          <xsl:variable name="downloadableMediaTypes" select="'|gml|kml|geojson|gpkg|json|jsonld|rdf-xml|xml|zip|jp2|tiff|csv|'" />
           <xsl:if
-            test="contains($protocol, 'OGC:WFS') or contains($protocol, 'OGC:WCS') or contains($protocol, 'OGC:SOS') or contains($protocol, 'INSPIRE Atom') or $wfsLinkNoProtocol or $wcsLinkNoProtocol">
+            test="contains($downloadableMediaTypes,concat('|',string($protocol),'|'))">
             <Field name="download" string="true" store="false" index="true"/>
+
           </xsl:if>
 
           <xsl:if
@@ -1020,28 +1078,7 @@
                   count(gmd:hierarchyLevel[gmd:MD_ScopeCode/@codeListValue='dataset']) > 0 or
                   count(gmd:hierarchyLevel) = 0"/>
 
-    <xsl:variable name="isMapDigital" select="count(gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/
-                        gmd:presentationForm[gmd:CI_PresentationFormCode/@codeListValue = 'mapDigital']) > 0"/>
-    <xsl:variable name="isStatic" select="count(gmd:distributionInfo/gmd:MD_Distribution/
-                        gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString[contains(., 'PDF') or contains(., 'PNG') or contains(., 'JPEG')]) > 0"/>
-    <xsl:variable name="isInteractive" select="count(gmd:distributionInfo/gmd:MD_Distribution/
-                        gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString[contains(., 'OGC:WMC') or contains(., 'OGC:OWS-C')]) > 0"/>
-    <xsl:variable name="isPublishedWithWMCProtocol" select="count(gmd:distributionInfo/gmd:MD_Distribution/
-                        gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol[starts-with(gco:CharacterString, 'OGC:WMC')]) > 0"/>
-
     <xsl:choose>
-      <!--<xsl:when test="$isDataset and $isMapDigital and
-                      ($isStatic or $isInteractive or $isPublishedWithWMCProtocol)">
-           <Field name="type" string="map" store="true" index="true"/>
-          <xsl:choose>
-              <xsl:when test="$isStatic">
-                 <Field name="type" string="staticMap" store="true" index="true"/>
-              </xsl:when>
-              <xsl:when test="$isInteractive or $isPublishedWithWMCProtocol">
-                  <Field name="type" string="interactiveMap" store="true" index="true"/>
-              </xsl:when>
-          </xsl:choose>
-      </xsl:when>-->
       <xsl:when test="$isDataset">
         <Field name="type" string="dataset" store="true" index="true"/>
       </xsl:when>

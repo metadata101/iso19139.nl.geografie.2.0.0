@@ -23,21 +23,15 @@
 		<sch:let name="thesaurus4" value="normalize-space(string-join(/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords[4]/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title[gco:CharacterString or gmx:Anchor]//text(), ''))"/>
 		<sch:let name="thesaurus" value="concat(string($thesaurus1),string($thesaurus2),string($thesaurus3),string($thesaurus4))"/>
 		<sch:let name="thesaurus_INSPIRE_Exsists" value="contains($thesaurus,'GEMET - INSPIRE themes, version 1.0')"/>
-		<sch:let name="conformity_Spec_Title1" value="normalize-space(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[1]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString)"/>
-		<sch:let name="conformity_Spec_Title2" value="normalize-space(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[2]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString)"/>
-		<sch:let name="conformity_Spec_Title3" value="normalize-space(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[3]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString)"/>
-		<sch:let name="conformity_Spec_Title4" value="normalize-space(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[4]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString)"/>
+		<sch:let name="conformity_Spec_Title1" value="normalize-space(string-join(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[1]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title[./gco:CharacterString or ./gmx:Anchor]//text(), ''))"/>
+		<sch:let name="conformity_Spec_Title2" value="normalize-space(string-join(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[2]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title[./gco:CharacterString or ./gmx:Anchor]//text(), ''))"/>
+		<sch:let name="conformity_Spec_Title3" value="normalize-space(string-join(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[3]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title[./gco:CharacterString or ./gmx:Anchor]//text(), ''))"/>
+		<sch:let name="conformity_Spec_Title4" value="normalize-space(string-join(//gmd:MD_Metadata/gmd:dataQualityInfo[1]/gmd:DQ_DataQuality/gmd:report[4]/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title[./gco:CharacterString or ./gmx:Anchor]//text(), ''))"/>
 		<sch:let name="conformity_Spec_Title_All" value="concat(string($conformity_Spec_Title1),string($conformity_Spec_Title2),string($conformity_Spec_Title3),string($conformity_Spec_Title4))"/>
 		<sch:let name="conformity_Spec_Title_Exsists" value="contains($conformity_Spec_Title_All,'VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens')"/>
 
 		<sch:rule id="Algemene_metadata_regels" etf_name="Algemene metadata regels" context="/gmd:MD_Metadata">
 
-		<!-- schemalocatie controleren, overeenkomstig inspire en nl profiel -->
-
-			<sch:assert id="Schema_locatie" etf_name="Schema locatie" test="contains(normalize-space(@xsi:schemaLocation), 'http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd')">Het ISO 19139 XML document mist een verplichte schema locatie. De schema locatie http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd moet aanwezig zijn.
-			</sch:assert>
-			<sch:report id="Schema_locatie_info" etf_name="Schema locatie info" test="contains(normalize-space(@xsi:schemaLocation), 'http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd')">Het ISO 19139 XML document bevat de schema locatie http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd
-			</sch:report>
 
 		<!--  fileIdentifier for report https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#metadata-unieke-identifier -->
 			<sch:let name="fileIdentifier" value="normalize-space(gmd:fileIdentifier/gco:CharacterString)"/>
@@ -207,6 +201,8 @@
 			<!-- Docs: Altijd de 2e set elementen van resourceConstraints, want useLimitation is de 1e (overgenomen uit profiel 1.3) -->
 			<sch:let name="accessConstraints_value" value="normalize-space(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:accessConstraints/*[@codeListValue = 'otherRestrictions']/@codeListValue)"/>
 
+			<sch:let name="nrMDLegalConstraints" value="count(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints)"/>
+
 			<!-- Omgrenzende rechthoek https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#omgrenzende-rechthoek -->
 
 			<sch:let name="west" value="number(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement[1]/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal)"/>
@@ -230,7 +226,7 @@
 			</sch:report>
 
 			<!-- Datum van de bron en Datum type van de bron, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#datum-van-de-bron en https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#datum-type-van-de-bron-->
-			<sch:assert id="Datum_van_de_bronISO_nr_394_en_Datumtype_ISO_nr395" etf_name="Datum van de bron(ISO nr. 394) en Datumtype (ISO nr.395)" test="$publicationDate or $creationDate or $revisionDate">Datum van de bron(https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#datum-van-de-bron) of Datumtype (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#datum-type-van-de-bron) ontbreken of heeft het verkeerde formaat (YYYY-MM-DD)</sch:assert>
+			<sch:assert id="Datum_van_de_bronISO_nr_394_en_Datumtype_ISO_nr395" etf_name="Datum van de bron(ISO nr. 394) en Datumtype (ISO nr.395)" test="$publicationDate or $creationDate or $revisionDate">Datum van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#datum-van-de-bron) of Datumtype (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#datum-type-van-de-bron) ontbreken of heeft het verkeerde formaat (YYYY-MM-DD)</sch:assert>
 			<sch:report id="Datum_van_de_bronISO_nr_394_en_Datatype_ISO_nr395_info" etf_name="Datum van de bron(ISO nr. 394) en Datatype (ISO nr.395) info" test="$publicationDate or $creationDate or $revisionDate">Tenminste 1 datum van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#datum-van-de-bron) is gevonden</sch:report>
 
 			<!-- 5.2.5 Samenvatting https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#samenvatting -->
@@ -269,9 +265,14 @@
 		<!-- eind	-->
 
 			<!-- 5.2.4 Unieke Identifier van de bron https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron -->
-			<sch:assert id="Unieke_Identifier_van_de_bron_ISO_nr_207" etf_name="Unieke Identifier van de bron (ISO nr. 207)" test="$identifierString or $identifierURI">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron) ontbreekt</sch:assert>
-			<sch:report id="Unieke_Identifier_van_de_bron_ISO_nr_207_info" etf_name="Unieke Identifier van de bron (ISO nr. 207) info" test="$identifierString or $identifierURI">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron): <sch:value-of select="$identifierString"/><sch:value-of select="$identifierURI"/>
+			<sch:assert id="Unieke_Identifier_van_de_bron_ISO_nr_207" etf_name="Unieke Identifier van de bron (ISO nr. 207)" test="$identifierString">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron) ontbreekt</sch:assert>
+			<sch:report id="Unieke_Identifier_van_de_bron_ISO_nr_207_info" etf_name="Unieke Identifier van de bron (ISO nr. 207) info" test="$identifierString">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron): <sch:value-of select="$identifierString"/>.
 			</sch:report>
+
+		    <!-- 5.2.4 Unieke Identifier van de bron https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron met een URI, dan beginnen met HTTP-->
+		    <sch:assert id="Unieke_Identifier_van_de_bron_ISO_nr_207_URI" etf_name="Unieke Identifier van de bron (ISO nr. 207)" test=" not($identifierURI) or ($identifierURI and starts-with($identifierURI, 'http'))">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron) met een URI moet beginnen met HTTP </sch:assert>
+		    <sch:report id="Unieke_Identifier_van_de_bron_ISO_nr_207_URI_info" etf_name="Unieke Identifier van de bron (ISO nr. 207) info" test="$identifierURI">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron): <sch:value-of select="$identifierURI"/>.
+		    </sch:report>
 
 			<!-- conditioneel: dus niet op testen als assertion -->
 			<sch:report id="Dataset_taal_ISO_nr_39_info" etf_name="Dataset taal (ISO nr. 39) info" test="$language">Dataset taal (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#taal-van-de-bron): <sch:value-of select="$language"/>
@@ -317,6 +318,8 @@
 			<!-- Voor NL GI-beraad moet accessConstraints_value aanwezig zijn -->
 			<sch:assert id="Juridische_toegangsrestricties_verplicht_met_'otherRestrictions'_aanwezig" etf_name="Juridische toegangsrestricties verplicht met 'otherRestrictions' aanwezig" test="$accessConstraints_value">Het element Juridische toegangsrestricties met de waarde 'otherRestrictions' is niet aanwezig, maar is wel verplicht voor organisaties die zich conformeren aan afspraken in het GI-beraad (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties).</sch:assert>
 
+			<sch:assert id="Juridische_toegangsrestricties:_het_element__MD_LegalConstraints_moet_2_maal_aanwezig_zijn" etf_name="Juridische toegangsrestricties: het element MD_LegalConstraints moet 2 maal aanwezig zijn" test="$nrMDLegalConstraints = 2">Het element MD_LegalConstraints moet 2 maal aanwezig zijn, maar is dat niet (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties).</sch:assert>
+
 			<sch:assert id="Overige_beperkingen_ISO_nr_72" etf_name="Overige beperkingen (ISO nr 72)" test="not($accessConstraints_value = 'otherRestrictions') or ($accessConstraints_value = 'otherRestrictions' and $otherConstraint1 and $otherConstraint2) or ($accessConstraints_value = 'otherRestrictions' and $otherConstraintURI1 and $otherConstraintURI1/@xlink:href)">Het element overige beperkingen (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#overige-beperkingen) dient twee maal binnen dezelfde toegangsrestricties voor te komen; één met de beschrijving en één met de URL, in 2 elementen of in 1 Anchor. De URL moet verwijzen naar de publiek domein, CC0 of GeoGedeeld licentie,als (juridische) toegangsrestricties (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#juridische-toegangsrestricties) de waarde 'anders' heeft</sch:assert>
 			<sch:report id="Overige_beperkingen_ISO_nr_72_1_info" etf_name="Overige beperkingen (ISO nr 72) 1 info" test="$otherConstraint1">Overige beperkingen (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#overige-beperkingen) 1: <sch:value-of select="$otherConstraint1"/>
 			</sch:report>
@@ -327,7 +330,7 @@
 			</sch:report>
 
 			<!-- Thijs Brentjens: nieuwe controle op codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties -->
-			<sch:assert id="Overige_beperkingen_en_codelijst_Datalicenties" etf_name="Overige beperkingen en codelijst Datalicenties" test="not($accessConstraints_value = 'otherRestrictions') or ($accessConstraints_value = 'otherRestrictions' and $otherConstraintIsCodelistdatalicense)">Als het element juridische toegangsrestricties de waarde otherRestrictions bevat dient een link uit de codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties naar de licentie en de bijbehorende beschrijving opgenomen te worden. Opgenomen informatie: <sch:value-of select="$otherConstraint1"/> met licentie:<sch:value-of select="normalize-space($otherConstraintURI1/@xlink:href)"/> <sch:value-of select="$otherConstraint2"/> en <sch:value-of select="$otherConstraint2"/> <sch:value-of select="normalize-space($otherConstraintURI2/@xlink:href)"/> <sch:value-of select="$otherConstraint1"/></sch:assert>
+			<sch:assert id="Overige_beperkingen_en_codelijst_Datalicenties" etf_name="Overige beperkingen en codelijst Datalicenties" test="not($accessConstraints_value = 'otherRestrictions') or ($accessConstraints_value = 'otherRestrictions' and $otherConstraintIsCodelistdatalicense)">Als het element juridische toegangsrestricties de waarde otherRestrictions bevat dient een link uit de codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-datalicenties naar de licentie en de bijbehorende beschrijving opgenomen te worden. Opgenomen informatie:&#160;<sch:value-of select="$otherConstraint1"/>&#160;met licentie:&#160;<sch:value-of select="$otherConstraintURI1/@xlink:href"/>&#160;<sch:value-of select="$otherConstraint2"/>&#160;en&#160;<sch:value-of select="$otherConstraint2"/>&#160;<sch:value-of select="$otherConstraintURI2/@xlink:href"/>&#160;<sch:value-of select="$otherConstraint1"/></sch:assert>
 
 			<!-- <sch:report id="Datalicenties_info" etf_name="Datalicenties info" test="not($accessConstraints_value = 'otherRestrictions') and not($accessConstraints_value = 'otherRestrictions' and $otherConstraintIsCodelistdatalicense)"><sch:value-of select="$otherConstraint1"/> met licentie:<sch:value-of select="$otherConstraintURI1/@xlink:href"/><sch:value-of select="$otherConstraint2"/> en <sch:value-of select="$otherConstraint2"/> <sch:value-of select="$otherConstraintURI2/@xlink:href"/><sch:value-of select="$otherConstraint1"/></sch:report> -->
 
@@ -507,7 +510,6 @@
 			<sch:assert id="INSPIRE_Specificatie_datum_ISO_nr_394" etf_name="INSPIRE Specificatie datum (ISO nr. 394" test="$conformity_Date">Specificatie datum (ISO nr. 394) ontbreekt.</sch:assert>
 			<sch:assert id="INSPIRE_Specificatiedatum_type_ISO_nr_395" etf_name="INSPIRE Specificatiedatum type (ISO nr. 395)" test="$conformity_Datetype">Specificatiedatum type (ISO nr. 395) ontbreekt.</sch:assert>
 			<sch:assert id="INSPIRE_Conformiteitindicatie_met_de_specificatie__ISO_nr_132" etf_name="INSPIRE Conformiteitindicatie met de specificatie  (ISO nr. 132)" test="$conformity_Pass">Conformiteitindicatie met de specificatie  (ISO nr. 132) ontbreekt.</sch:assert>
-
 		-->
 		<!-- eind Specificatie alleen voor INSPIRE-->
 
@@ -537,14 +539,10 @@
 		<!-- INSPIRE specification titel -->
 		<!--
 			<sch:rule id="INSPIRE_specificaties" etf_name="INSPIRE specificaties" context="//gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation">
-
 		    <sch:let name="all_conformity_Spec_Titles" value="ancestor::gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title"/>
-
 			<sch:let name="INSPIRE_conformity_Spec_Title" value="normalize-space(gmd:title/gco:CharacterString)"/>
-
 				<sch:assert id="INSPIRE_Specificatie_ISO_nr_360_titel" etf_name="INSPIRE Specificatie (ISO nr. 360) titel" test="$all_conformity_Spec_Titles[normalize-space(gco:CharacterString/text()) =  'VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens']">Specificatie (ISO nr. 360) verwijst niet naar de VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens</sch:assert>
 				<sch:report id="INSPIRE_Specificatie_ISO_nr_360_titel_info" etf_name="INSPIRE Specificatie (ISO nr. 360) titel info" test="$INSPIRE_conformity_Spec_Title">Specificatie titel (ISO nr. 360) is: <sch:value-of select="$INSPIRE_conformity_Spec_Title"/></sch:report>
-
 			</sch:rule>
 		-->
 		<!-- eind  INSPIRE specification titel -->
@@ -595,6 +593,8 @@
 			<sch:report id="Code_referentiesysteem_ISO_nr_207_info" etf_name="Code referentiesysteem (ISO nr. 207) info" test="$referenceSystemInfo_CodeString or $referenceSystemInfo_CodeURI">Code referentiesysteem (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem): <sch:value-of select="$referenceSystemInfo_CodeString"/> <sch:value-of select="$referenceSystemInfo_CodeURI"/>
 			</sch:report>
 
+			<sch:assert id="Code_referentiesysteem_ISO_nr_207_is_een_URI" etf_name="Code referentiesysteem (ISO nr. 207) is een URI" test="starts-with($referenceSystemInfo_CodeString,'http') or starts-with($referenceSystemInfo_CodeURI,'http')">Code referentiesysteem (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codereferentiesysteem) moet een URI zijn, maar is dat niet. Opgegeven waarde: <sch:value-of select="$referenceSystemInfo_CodeString"/> <sch:value-of select="$referenceSystemInfo_CodeURI"/></sch:assert>
+
 		</sch:rule>
 
         <!-- Tests rondom Thesauri Controlled originating vocabulary, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#thesaurus e.v. -->
@@ -618,7 +618,6 @@
 
             <!-- Thesaurus titel alleen voor INSPIRE -->
 			<!--
-
 			<sch:assert id="INSPIRE_Thesaurus_title_ISO_nr_360" etf_name="INSPIRE Thesaurus title (ISO nr. 360)" test="$all_thesaurus_Titles[normalize-space(*/text()) = 'GEMET - INSPIRE themes, version 1.0']">Thesaurus title (ISO nr. 360) ontbreekt of heeft de verkeerde waarde. Eén Thesaurus titel dient de waarde 'GEMET - INSPIRE themes, version 1.0 ' te bevatten.</sch:assert>
 			 <sch:report id="INSPIRE_Thesaurus_title_ISO_nr_360_info" etf_name="INSPIRE Thesaurus title (ISO nr. 360) info" test="$thesaurus_Title">Thesaurus title (ISO nr. 360) is: <sch:value-of select="$thesaurus_Title"/></sch:report>
 			-->
