@@ -516,9 +516,7 @@
             </template>
           </action>
 
-          <action type="add" btnLabel="addLegalAccessConstraints" name="legalAccessConstraints" or="resourceConstraints" forceLabel="true" 
-          in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification" 
-          if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints)=0">
+          <action type="add" btnLabel="addLegalAccessConstraints" name="legalAccessConstraints" or="resourceConstraints" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
               <snippet>
                 <gmd:resourceConstraints>
