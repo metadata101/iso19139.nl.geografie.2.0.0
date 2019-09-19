@@ -891,7 +891,7 @@
   <title><xsl:apply-templates mode="getMetadataTitle" select="$metadata"/></title>
   <xsl:variable name="abs"><xsl:apply-templates mode="getMetadataAbstract" select="$metadata"/></xsl:variable>
   <meta name="description" content="{normalize-space($abs)}"/>
-  <link href="{$baseUrl}../../static/gn_search_ngr.css" rel="stylesheet" media="screen"></link>
+  <link href="{$baseUrl}../../static/gn_search_dutch.css" rel="stylesheet" media="screen"></link>
   </head>
   
 	<body>
