@@ -1304,7 +1304,7 @@
   <xsl:template match="gmd:resourceConstraints|@xsi:type|gmd:lineage|@codelist|@gml:id" mode="free-text"
                 priority="10"></xsl:template>
 
-  <xsl:template match="@*|gco:*|gmd:URL|gmd:*[string(@codeList)]" mode="free-text">
+  <xsl:template match="@*|gco:*|gmd:URL|gmd:*[string(@codeList)]|gmx:Anchor" mode="free-text">
     <xsl:value-of select="normalize-space(string(.))"/><xsl:text> </xsl:text>
   </xsl:template>
 
