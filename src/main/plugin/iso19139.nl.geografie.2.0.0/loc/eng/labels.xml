@@ -2190,7 +2190,7 @@
       <option type="accessPoint"
         id="https://www.oasis-open.org/committees/odata" value="OASIS:OData" title="OData">OData</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/csw" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
+        id="http://www.opengeospatial.org/standards/cat" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
       <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wcts" value="OGC:WCTS" title="Web Coordinate Transformation">WCTS</option>
       <option type="accessPoint"
