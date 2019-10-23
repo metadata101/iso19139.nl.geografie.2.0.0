@@ -1293,7 +1293,7 @@
     <helper>
       <option value="" title="separator">-- AccessPoints --</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/csw" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
+        id="http://www.opengeospatial.org/standards/cat" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
       <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wms" value="OGC:WMS" title="Web Map service">WMS</option>
       <option type="accessPoint"
