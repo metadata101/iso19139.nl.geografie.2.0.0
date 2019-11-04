@@ -101,6 +101,8 @@
       <xsl:copy-of select="@*" />
 
       <xsl:variable name="protocol" select="gmd:protocol/*/text()" />
+      <xsl:variable name="applicationProfile" select="gmd:applicationProfile/*/text()" />
+      <xsl:variable name="separator" select="'\|'"/>
 
       <xsl:choose>
         <!-- Add request=GetCapabilities if missing -->
@@ -141,7 +143,6 @@
 
 
       <xsl:apply-templates select="gmd:protocol" />
-      <xsl:apply-templates select="gmd:applicationProfile" />
       <xsl:apply-templates select="gmd:name" />
 
       <!-- gmd:description -->
@@ -198,6 +199,20 @@
         <!-- Other cases: copy current gmd:description element -->
         <xsl:otherwise>
           <xsl:apply-templates select="gmd:description" />
+        </xsl:otherwise>
+      </xsl:choose>
+
+      <!-- gmd:applicationProfile -->
+      <xsl:choose>
+        <xsl:when test="geonet:contains-any-of($applicationProfile, ('discovery','view','download','transformation','invoke','other'))">
+          <gmd:applicationProfile>
+              <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/{$applicationProfile}">
+              {$applicationProfile}</gmx:Anchor>
+          </gmd:applicationProfile>
+        </xsl:when>
+
+        <xsl:otherwise>
+          <xsl:apply-templates select="gmd:applicationProfile" />
         </xsl:otherwise>
       </xsl:choose>
 
