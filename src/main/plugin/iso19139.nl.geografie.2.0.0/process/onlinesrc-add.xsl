@@ -39,7 +39,6 @@
                         normalize-space($updateKey) = concat(
                         gmd:CI_OnlineResource/gmd:linkage/gmd:URL,
                         gmd:CI_OnlineResource/gmd:protocol/*/text(),
-                        gmd:CI_OnlineResource/gmd:applicationProfile/*/text(),
                         gmd:CI_OnlineResource/gmd:name/gco:CharacterString,
                         gmd:CI_OnlineResource/gmd:name/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString[@locale = '#DE'])
                         ]">
@@ -110,18 +109,24 @@
                 </gmd:protocol>
 
                 <!-- gmd:applicationProfile -->
-                <xsl:choose>
-                  <xsl:when test="geonet:contains-any-of($applicationProfile, ('discovery','view','download','transformation','invoke','other'))">
-                    <gmd:applicationProfile>
-                      <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/{$applicationProfile}">
-                        {$applicationProfile}
-                      </gmx:Anchor>
-                    </gmd:applicationProfile>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:apply-templates select="gmd:applicationProfile"/>
-                  </xsl:otherwise>
-                </xsl:choose>
+                <xsl:if test="$applicationProfile != ''">
+                  <xsl:choose>
+                    <xsl:when test="geonet:contains-any-of($applicationProfile, ('discovery','view','download','transformation','invoke','other'))">
+                      <gmd:applicationProfile>
+                        <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/{$applicationProfile}">
+                          <xsl:value-of select="$applicationProfile" />
+                        </gmx:Anchor>
+                      </gmd:applicationProfile>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <gmd:applicationProfile>
+                        <gco:CharacterString>
+                          <xsl:value-of select="$applicationProfile"/>
+                        </gco:CharacterString>
+                      </gmd:applicationProfile>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:if>
 
                 <xsl:variable name="curName" select="."></xsl:variable>
                 <xsl:if test="$curName != ''">
@@ -260,18 +265,24 @@
               </xsl:if>
 
               <!-- gmd:applicationProfile -->
-              <xsl:choose>
-                <xsl:when test="geonet:contains-any-of($applicationProfile, ('discovery','view','download','transformation','invoke','other'))">
-                  <gmd:applicationProfile>
-                    <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/{$applicationProfile}">
-                      {$applicationProfile}
-                    </gmx:Anchor>
-                  </gmd:applicationProfile>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:apply-templates select="gmd:applicationProfile"/>
-                </xsl:otherwise>
-              </xsl:choose>
+              <xsl:if test="$applicationProfile != ''">
+                <xsl:choose>
+                  <xsl:when test="geonet:contains-any-of($applicationProfile, ('discovery','view','download','transformation','invoke','other'))">
+                    <gmd:applicationProfile>
+                      <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/{$applicationProfile}">
+                        <xsl:value-of select="$applicationProfile" />
+                      </gmx:Anchor>
+                    </gmd:applicationProfile>
+                  </xsl:when>
+                  <xsl:otherwise>
+                     <gmd:applicationProfile>
+                        <gco:CharacterString>
+                          <xsl:value-of select="$applicationProfile"/>
+                        </gco:CharacterString>
+                     </gmd:applicationProfile>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
 
               <xsl:if test="$name != ''">
                 <gmd:name>
