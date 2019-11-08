@@ -101,10 +101,12 @@
       <xsl:copy-of select="@*" />
 
       <xsl:variable name="protocol" select="gmd:protocol/*/text()" />
+      <xsl:variable name="applicationProfile" select="gmd:applicationProfile/*/text()" />
+      <xsl:variable name="separator" select="'\|'"/>
 
       <xsl:choose>
         <!-- Add request=GetCapabilities if missing -->
-        <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WMS', 'OGC:WMTS', 'OGC:WFS', 'OGC:WCS'))">
+        <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WMS', 'OGC:WMTS', 'OGC:WFS', 'OGC:WCS', 'OGC:CSW', 'OGC:WPS', 'OGC:SOS'))">
           <xsl:variable name="url" select="gmd:linkage/gmd:URL" />
           <xsl:variable name="paramRequest" select="'request=GetCapabilities'" />
 
@@ -139,9 +141,22 @@
         </xsl:otherwise>
       </xsl:choose>
 
-
       <xsl:apply-templates select="gmd:protocol" />
-      <xsl:apply-templates select="gmd:applicationProfile" />
+
+      <!-- gmd:applicationProfile -->
+      <xsl:choose>
+        <xsl:when test="geonet:contains-any-of($applicationProfile, ('discovery','view','download','transformation','invoke','other'))">
+          <gmd:applicationProfile>
+              <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/{$applicationProfile}">
+              <xsl:value-of select="$applicationProfile" /></gmx:Anchor>
+          </gmd:applicationProfile>
+        </xsl:when>
+
+        <xsl:otherwise>
+          <xsl:apply-templates select="gmd:applicationProfile" />
+        </xsl:otherwise>
+      </xsl:choose>
+
       <xsl:apply-templates select="gmd:name" />
 
       <!-- gmd:description -->
@@ -167,7 +182,7 @@
           <xsl:choose>
             <!-- Access points -->
             <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WMS', 'OGC:WMTS', 'OGC:WFS', 'OGC:WCS', 'INSPIRE Atom',
-          'landingpage', 'application', 'dataset', 'OGC:WPS', 'OGC:SOS',
+          'landingpage', 'application', 'dataset', 'OGC:WPS', 'OGC:SOS', 'TMS',
           'OGC:SensorThings', 'OAS', 'W3C:SPARQL', 'OASIS:OData', 'OGC:CSW',
           'OGC:WCTS', 'OGC:WFS-G', 'OGC:SPS', 'OGC:SAS', 'OGC:WNS', 'OGC:ODS', 'OGC:OGS', 'OGC:OUS', 'OGC:OPS', 'OGC:ORS', 'UKST'))">
 
