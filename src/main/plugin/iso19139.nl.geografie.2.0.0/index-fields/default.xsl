@@ -25,7 +25,6 @@
 <xsl:stylesheet xmlns:gmd="http://www.isotc211.org/2005/gmd"
                 xmlns:gco="http://www.isotc211.org/2005/gco"
                 xmlns:gml="http://www.opengis.net/gml"
-                xmlns:srv="http://www.isotc211.org/2005/srv"
                 xmlns:geonet="http://www.fao.org/geonetwork"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xsi="http://www.w3.org/1999/XSI"
@@ -180,8 +179,7 @@
 
 
     <xsl:for-each select="gmd:identificationInfo//gmd:MD_DataIdentification|
-                gmd:identificationInfo//*[contains(@gco:isoType, 'MD_DataIdentification')]|
-                gmd:identificationInfo/srv:SV_ServiceIdentification">
+                gmd:identificationInfo//*[contains(@gco:isoType, 'MD_DataIdentification')]">
 
       <xsl:for-each select="gmd:citation/gmd:CI_Citation">
         <!-- INSPIRE uses only gmd:MD_Identifier -->
@@ -705,54 +703,6 @@
         <Field name="updateFrequency" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
 
-
-      <!-- TODO: Review this was commented in Dutch 1.3, but not in ISO19139
-           P: afaik 'otherconstraints' should not be indexed seperately from the accessconstraints or usagelimitation it refers to.
-      -->
-      <!--
-                  <xsl:for-each select="gmd:resourceConstraints/*">
-                      <xsl:variable name="fieldPrefix" select="local-name()"/>
-
-                      <xsl:for-each select="gmd:accessConstraints/gmd:MD_RestrictionCode/@codeListValue[string(.) != 'otherRestrictions']">
-                          <Field name="{$fieldPrefix}AccessConstraints"
-                                 string="{string(.)}" store="true" index="true"/>
-                      </xsl:for-each>
-
-                      <xsl:for-each select="gmd:otherConstraints/gco:CharacterString">
-                          <Field name="{$fieldPrefix}OtherConstraints"
-                                 string="{string(.)}" store="true" index="true"/>
-                      </xsl:for-each>
-
-                      <xsl:for-each select="gmd:useLimitation/gco:CharacterString">
-                          <Field name="{$fieldPrefix}UseLimitation"
-                                 string="{string(.)}" store="true" index="true"/>
-                      </xsl:for-each>
-                  </xsl:for-each>
-      -->
-
-      <!-- Index aggregation info and provides option to query by type of association
-              and type of initiative
-
-      Aggregation info is indexed by adding the following fields to the index:
-       * agg_use: boolean
-       * agg_with_association: {$associationType}
-       * agg_{$associationType}: {$code}
-       * agg_{$associationType}_with_initiative: {$initiativeType}
-       * agg_{$associationType}_{$initiativeType}: {$code}
-
-          Sample queries:
-           * Search for records with siblings: http://localhost:8080/geonetwork/srv/fre/q?agg_use=true
-           * Search for records having a crossReference with another record:
-           http://localhost:8080/geonetwork/srv/fre/q?agg_crossReference=23f0478a-14ba-4a24-b365-8be88d5e9e8c
-           * Search for records having a crossReference with another record:
-           http://localhost:8080/geonetwork/srv/fre/q?agg_crossReference=23f0478a-14ba-4a24-b365-8be88d5e9e8c
-           * Search for records having a crossReference of type "study" with another record:
-           http://localhost:8080/geonetwork/srv/fre/q?agg_crossReference_study=23f0478a-14ba-4a24-b365-8be88d5e9e8c
-           * Search for records having a crossReference of type "study":
-           http://localhost:8080/geonetwork/srv/fre/q?agg_crossReference_with_initiative=study
-           * Search for records having a "crossReference" :
-           http://localhost:8080/geonetwork/srv/fre/q?agg_with_association=crossReference
-      -->
       <xsl:for-each select="gmd:aggregationInfo/gmd:MD_AggregateInformation">
         <xsl:variable name="code" select="gmd:aggregateDataSetIdentifier/gmd:MD_Identifier/gmd:code/gco:CharacterString|
                                                   gmd:aggregateDataSetIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString"/>
@@ -768,71 +718,6 @@
           <Field name="agg_use" string="true" store="false" index="true"/>
         </xsl:if>
       </xsl:for-each>
-
-      <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-      <!--  Fields use to search on Service -->
-
-      <xsl:for-each select="srv:serviceType/gco:LocalName">
-        <xsl:variable name="srvTypes" select="'|view|download|invoke|discovery|transformation|other|'"/>
-        <xsl:if test="contains($srvTypes,concat('|',string(.),'|'))">
-          <Field name="serviceType" string="{string(.)}" store="true" index="true"/>
-        </xsl:if>
-        <xsl:if test=". = 'view'">
-          <Field name="dynamic" string="true" store="false" index="true"/>
-        </xsl:if>
-        <xsl:if test=". = 'download'">
-          <Field name="wfsdownload" string="true" store="false" index="true"/>
-          <Field name="download" string="true" store="false" index="true"/>
-        </xsl:if>
-      </xsl:for-each>
-
-      <xsl:for-each select="srv:serviceTypeVersion/gco:CharacterString">
-        <Field name="serviceTypeVersion" string="{string(.)}" store="true" index="true"/>
-      </xsl:for-each>
-
-
-      <xsl:for-each select="srv:coupledResource">
-        <xsl:for-each select="srv:SV_CoupledResource/srv:identifier/gco:CharacterString">
-          <Field name="operatesOnIdentifier" string="{string(.)}" store="true" index="true"/>
-        </xsl:for-each>
-
-        <xsl:for-each select="srv:SV_CoupledResource/srv:operationName/gco:CharacterString">
-          <Field name="operatesOnName" string="{string(.)}" store="true" index="true"/>
-        </xsl:for-each>
-      </xsl:for-each>
-
-      <xsl:for-each select="//srv:SV_CouplingType/@codeListValue">
-        <Field name="couplingType" string="{string(.)}" store="true" index="true"/>
-      </xsl:for-each>
-
-      <xsl:for-each select="//srv:SV_OperationMetadata/srv:operationName/gco:CharacterString">
-        <Field name="operation" string="{string(.)}" store="true" index="true"/>
-      </xsl:for-each>
-
-      <xsl:for-each select="srv:operatesOn/@uuidref">
-        <Field name="operatesOn" string="{string(.)}" store="true" index="true"/>
-      </xsl:for-each>
-
-      <xsl:for-each select="srv:operatesOn/@xlink:href">
-        <!-- extract the uuid from csw request and add as operateson -->
-        <Field name="operatesOn" string="{tokenize(tokenize(string(.),'&amp;id=')[2],'&amp;')[1]}" store="true"
-               index="true"/>
-      </xsl:for-each>
-
-      <xsl:for-each
-        select="gmd:graphicOverview/gmd:MD_BrowseGraphic[normalize-space(gmd:fileName/gco:CharacterString) != '']">
-        <xsl:variable name="fileName" select="gmd:fileName/gco:CharacterString"/>
-        <xsl:variable name="fileDescr" select="gmd:fileDescription/gco:CharacterString"/>
-        <xsl:variable name="thumbnailType"
-                      select="if (position() = 1) then 'thumbnail' else 'overview'"/>
-        <!-- First thumbnail is flagged as thumbnail and could be considered the main one -->
-        <Field name="image"
-               string="{concat($thumbnailType, '|', $fileName, '|', $fileDescr)}"
-               store="true" index="false"/>
-      </xsl:for-each>
-    </xsl:for-each>
-
-
 
     <xsl:variable name="protocolText">
       <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/*/text()">
@@ -1092,17 +977,6 @@
       </xsl:when>
     </xsl:choose>
 
-
-    <xsl:choose>
-      <!-- Check if metadata is a service metadata record -->
-      <xsl:when test="gmd:identificationInfo/srv:SV_ServiceIdentification">
-        <Field name="type" string="service" store="false" index="true"/>
-      </xsl:when>
-      <!-- <xsl:otherwise>
-      ... gmd:*_DataIdentification / hierachicalLevel is used and return dataset, serie, ...
-      </xsl:otherwise>-->
-    </xsl:choose>
-
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <xsl:for-each select="gmd:hierarchyLevelName/gco:CharacterString">
@@ -1253,10 +1127,8 @@
       </xsl:attribute>
     </Field>
 
-
     <xsl:variable name="identification" select="gmd:identificationInfo//gmd:MD_DataIdentification|
-                        gmd:identificationInfo//*[contains(@gco:isoType, 'MD_DataIdentification')]|
-                        gmd:identificationInfo/srv:SV_ServiceIdentification"/>
+                        gmd:identificationInfo//*[contains(@gco:isoType, 'MD_DataIdentification')]"/>
 
 
     <xsl:for-each
