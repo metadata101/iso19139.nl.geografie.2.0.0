@@ -677,6 +677,8 @@
         <xsl:for-each select="gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator/gco:Integer">
           <xsl:if test="string(number(.)) != 'NaN'">
             <Field name="denominator" string="{string(.)}" store="true" index="true"/>
+            <Field name="denominatorAsc" string="{string(.)}" store="true" index="true"/>
+            <Field name="denominatorDesc" string="{string(.)}" store="true" index="true"/>
           </xsl:if>
         </xsl:for-each>
 

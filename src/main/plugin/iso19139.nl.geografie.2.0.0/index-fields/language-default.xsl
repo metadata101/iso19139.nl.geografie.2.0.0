@@ -434,6 +434,8 @@
       <xsl:for-each select="gmd:spatialResolution/gmd:MD_Resolution">
         <xsl:for-each select="gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator/gco:Integer">
           <Field name="denominator" string="{string(.)}" store="true" index="true"/>
+          <Field name="denominatorAsc" string="{string(.)}" store="true" index="true"/>
+          <Field name="denominatorDesc" string="{string(.)}" store="true" index="true"/>
         </xsl:for-each>
 
         <xsl:for-each select="gmd:distance/gco:Distance">

@@ -1292,19 +1292,20 @@
     </description>
     <helper>
       <option value="" title="separator">-- AccessPoints --</option>
+       <option type="accessPoint"
+        id="http://www.opengis.net/def/serviceType/ogc/csw" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/cat" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
+        id="http://www.opengis.net/def/serviceType/ogc/wms" value="OGC:WMS" title="Web Map service">WMS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/wms" value="OGC:WMS" title="Web Map service">WMS</option>
+       id="http://www.opengis.net/def/serviceType/ogc/wmts" value="OGC:WMTS" group="22" title="Web Mapping Tiling Service">WMTS</option>
       <option type="accessPoint"
-       id="http://www.opengeospatial.org/standards/wmts" value="OGC:WMTS" group="22" title="Web Mapping Tiling Service">WMTS</option>
+       id="http://www.opengis.net/def/serviceType/ogc/wfs" value="OGC:WFS" group="45" title="Web Feature Service">WFS</option>
       <option type="accessPoint"
-       id="http://www.opengeospatial.org/standards/wfs" value="OGC:WFS" group="45" title="Web Feature Service">WFS</option>
+       id="http://www.opengis.net/def/serviceType/ogc/wcs" value="OGC:WCS" group="22" title="Web Coverage Service">WCS</option>
       <option type="accessPoint"
-       id="http://www.opengeospatial.org/standards/wcs" value="OGC:WCS" group="22" title="Web Coverage Service">WCS</option>
+        id="http://www.opengis.net/def/serviceType/ogc/sos" value="OGC:SOS" title="Sensor Observation Service">SOS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/sos" value="OGC:SOS" title="Sensor Observation Service">SOS</option>
-      <option type="accessPoint"
+        id="https://tools.ietf.org/html/rfc4287"
         value="INSPIRE Atom" title="INSPIRE Atom Feed met links naar datasets">Atom Feed</option>
       <option type="accessPoint"
         id="http://www.opengeospatial.org/standards/wcts" value="OGC:WCTS" title="Web Coordinate Transformation">WCTS</option>
