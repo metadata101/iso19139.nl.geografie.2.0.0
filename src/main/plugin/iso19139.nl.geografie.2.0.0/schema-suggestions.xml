@@ -84,12 +84,12 @@
   </field>
   <field name="gmd:distributionFormat">
       <suggest name="gmd:MD_Format"/>
-  </field> 
+  </field>
   <field name="gmd:MD_Format">
       <suggest name="gmd:name"/>
       <suggest name="version"/>
       <suggest name="specification"/>
-  </field> 
+  </field>
 
   <field name="gmd:transferOptions">
     <suggest name="gmd:MD_DigitalTransferOptions"/>
@@ -281,5 +281,8 @@
     <suggest name="gmd:useLimitation"/>
   </field>
 
+  <field name="gmd:dateOfNextUpdate">
+    <suggest name="gco:Date"/>
+  </field>
 
 </fields>
