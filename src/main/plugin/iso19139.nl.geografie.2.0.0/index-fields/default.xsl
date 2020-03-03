@@ -720,6 +720,10 @@
           <Field name="agg_use" string="true" store="false" index="true"/>
         </xsl:if>
       </xsl:for-each>
+    </xsl:for-each>
+
+
+
 
     <xsl:variable name="protocolText">
       <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/*/text()">
