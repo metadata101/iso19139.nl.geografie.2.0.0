@@ -30,6 +30,7 @@
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:geonet="http://www.fao.org/geonetwork"
                 xmlns:java="java:org.fao.geonet.util.XslUtil"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 version="2.0" exclude-result-prefixes="#all">
   <xsl:import href="../iso19139/update-fixed-info.xsl"/>
 
@@ -298,5 +299,15 @@
     </xsl:copy>
   </xsl:template>
 
+
+  <xsl:template match="gmd:MD_Metadata" priority="200">
+    <xsl:copy>
+      <!-- Hardcode schemaLocation -->
+      <xsl:attribute name="xsi:schemaLocation">http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd http://www.isotc211.org/2005/gmx http://schemas.opengis.net/iso/19139/20060504/gmx/gmx.xsd</xsl:attribute>
+      <xsl:copy-of select="@*[name() != 'xsi:schemaLocation']" />
+
+      <xsl:apply-templates select="*" />
+    </xsl:copy>
+  </xsl:template>
 
 </xsl:stylesheet>

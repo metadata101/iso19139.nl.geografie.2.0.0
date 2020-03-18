@@ -2185,7 +2185,7 @@
           id="http://www.opengeospatial.org/standards/wps"
           value="OGC:WPS" title="Web Processing Service">WPS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/sensorthings" value="OGC:SensorThings" title="SensorThings API">SensorThings API</op
+        id="http://www.opengeospatial.org/standards/sensorthings" value="OGC:SensorThings" title="SensorThings API">SensorThings API</option>
       <option type="accessPoint"
         id="https://github.com/OAI/OpenAPI-Specification" value="OAS" title="Open API Specification">Open API Specification</option>
       <option type="accessPoint"

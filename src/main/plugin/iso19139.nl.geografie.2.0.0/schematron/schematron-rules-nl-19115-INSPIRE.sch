@@ -469,8 +469,7 @@
 			<sch:let name="codelistNew" value="'http://www.opengis.net/def/serviceType/ogc/csw=OGC:CSW, http://www.opengis.net/def/serviceType/ogc/wms=OGC:WMS, http://www.opengis.net/def/serviceType/ogc/wmts=OGC:WMTS, http://www.opengis.net/def/serviceType/ogc/wfs=OGC:WFS, http://www.opengis.net/def/serviceType/ogc/wcs=OGC:WCS, http://www.opengis.net/def/serviceType/ogc/sos=OGC:SOS, https://tools.ietf.org/html/rfc4287=INSPIRE Atom'" />
 			<sch:let name="codelistNewServiceTypes" value="'OGC:CSW, OGC:WMS, OGC:WFS, OGC:WMTS, OGC:SOS, OGC:WCS, INSPIRE Atom'"/>
 			<!-- <sch:assert id="Codelijst_protocol_oude_URI_in_gebruik" etf_name="Codelijst protocol: er zijn nog codes voor protocol in gebruik uit de codelijst protocol die gaan vervallen" test="contains($codelist, $combination)">De combinatie van de URI '<sch:value-of select="$anchorUri"/>' en waarde '<sch:value-of select="$txt"/>' komt binnenkort te vervallen uit de codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-protocol. Zie http://inspire.ec.europa.eu/metadata-codelist/ProtocolValue voor de codes die gebruikt gaan worden</sch:assert> -->
-			<sch:assert id="Waarschuwing_Codelijst_protocol_combinatie_van_URI_en_waarde_oud" etf_name="Waarschuwing - Codelijst protocol: geldige combinatie van URI en waarde INSPIRE codelist protocol" test="contains($codelistNew, $combination) or not(contains($codelistNewServiceTypes, $txt))">De combinatie van de URI '<sch:value-of select="$anchorUri"/>' en waarde '<sch:value-of select="$txt"/>' is binnenkort geen geldige combinatie meer. De codelijst http://inspire.ec.europa.eu/metadata-codelist/ProtocolValue bevat de nieuwe codes voor Protocol voor de service types: <sch:value-of select="$codelistNewServiceTypes"/>. Advies is om de nieuwe URI te gebruiken uit de codelist http://inspire.ec.europa.eu/metadata-codelist/ProtocolValue.</sch:assert>
-
+			
 		</sch:rule>
 
 		<sch:rule id="Codelijst_media_types" etf_name="Codelijst media types" context="//gmd:CI_OnlineResource/gmd:protocol/gmx:Anchor[text() = 'gml' or text() = 'kml' or text() = 'geojson' or text() = 'gpkg' or text() = 'json' or text() = 'jsonld' or text() = 'rdf-xml' or text() = 'xml' or text() = 'zip' or text() = 'png' or text() = 'png' or text() = 'gif' or text() = 'jp2' or text() = 'tiff' or text() = 'csv' or text() = 'mapbox-vector-tile']">
@@ -702,48 +701,6 @@ Er moeten keywords uit de GEMET - INSPIRE themes thesaurus komen. Gevonden keywo
 		   <sch:assert id="INSPIRE_spatialscope_Trefwoorden_ISO_nr_53_Anchor" etf_name="INSPIRE spatialscope Anchor correct" test="( normalize-space(../../gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title/gco:CharacterString)='Ruimtelijke dekking' or ( normalize-space(../../gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor)='Ruimtelijke dekking' and ../../gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href='http://inspire.ec.europa.eu/metadata-codelist/SpatialScope' ))">
 		   Als de Thesaurus voor ruimtelijke dekking wordt opgegeven via een Anchor, moet de URI van het Anchor http://inspire.ec.europa.eu/metadata-codelist/SpatialScope zijn en het label Ruimtelijke dekking. Dit is niet het geval. Opgegeven URI: <sch:value-of select="normalize-space(../../gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href)"/> , opgegeven label: <sch:value-of select="../../gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor"/> </sch:assert>
 		</sch:rule>
-
-
-
-
-
-		<sch:rule id="Waarschuwingen_-_INSPIRE_dataservice_koppeling" etf_name="Waarschuwingen - INSPIRE dataservice koppeling" context="//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions">
-
-			<sch:let name="nrOnLine_Protocol_Without_Description" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[not(./gmd:description)])"/>
-
-			<sch:assert id="Omschrijving_verplicht_voor_een_URL" etf_name="Omschrijving accessPoint of endPoint is verplicht voor een URL" test="$nrOnLine_Protocol_Without_Description = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat alle distributie URLs een omschrijving (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#description) hebben. Voor <sch:value-of select="$nrOnLine_Protocol_Without_Description"/> URL(s) ontbreekt echter een omschrijving. Zie de URLs: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL[not(../../gmd:description)], ', '))"/>.
-		    </sch:assert>
-
-			<sch:let name="nr_onLine_Description_with_CharacterStrings" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:description/gco:CharacterString)"/>
-
-			<sch:assert id="Anchor_verplicht_voor_omschrijving" etf_name="Anchor verplicht voor element omschrijving accessPoint of endPoint" test="$nr_onLine_Description_with_CharacterStrings = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat in het element omschrijving van een URL (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#description) in een Anchor is opgenomen. Voor <sch:value-of select="$nr_onLine_Description_with_CharacterStrings"/> URL(s) is de omschrijving in een CharacterString opgenomen. Zie de omschrijvingen: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:description/gco:CharacterString, ', '))"/>.</sch:assert>
-
-			<!-- Protocol moet altijd opgegeven zijn. Iets andere test dan eerdere test op protocol en URL, daarin wordt tegen een specifieke codelijst getest. Voor de INSPIRE dataset service koppeling kan die codelijst anders worden, dus deze test controleert alleen of er een element protocol is opgegeven -->
-			<sch:let name="nrOnLine_URL_Without_Protocol" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[not(./gmd:protocol)])"/>
-			<sch:assert id="Protocol_verplicht_voor_een_URL" etf_name="Protocol verplicht voor een URL" test="$nrOnLine_URL_Without_Protocol = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat alle distributie URLs een protocol (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol) hebben. Voor <sch:value-of select="$nrOnLine_URL_Without_Protocol"/> URL(s) ontbreekt echter een protocol. Zie de URLs: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL[not(../../gmd:protocol)], ', '))"/>.
-		  </sch:assert>
-
-			<!-- protocol moet een anchor zijn, altijd verplicht.  -->
-			<sch:let name="nrOnLine_Protocol_not_Anchor" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol[not(./gmx:Anchor)])"/>
-
-			<sch:assert id="Protocol_moet_altijd_een_Anchor_zijn" etf_name="Anchor verplicht voor protocol" test="$nrOnLine_Protocol_not_Anchor = 0">Voor de INSPIRE dataservice koppeling is het verplicht dat het element protocol (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol) via een Anchor is beschreven. Voor <sch:value-of select="$nrOnLine_Protocol_not_Anchor"/> element(en) is dat niet het geval. Zie de protocol elementen: <sch:value-of select="normalize-space(string-join(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol[not(./gmx:Anchor)], ', '))"/>.
-		    </sch:assert>
-
-
-			<!-- applicatieprofiel: moet er minimaal eentje aanwezig zijn, voor een omschrijving=accesspoint
-			NB: aanname: alleen gebruik Anchors
-			-->
-
-			<!-- Use a schematron var to do the filtering (with a contains function) in the next step . Because if the xlink:href attribute is spread over multiple lines (so cntains a line ending, which is valid), the filter won't work if the value is used directly. wWthout http:// for this value,because of schematron syntax  -->
-			<sch:let name="accessPointUri" value="inspire.ec.europa.eu/metadata-codelist/OnLineDescriptionCode/accessPoint"/>
-
-			<sch:let name="nr_onLine_ApplicationProfile" value="count(gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[contains(gmd:description/gmx:Anchor/@xlink:href, $accessPointUri)]/gmd:applicationProfile/gmx:Anchor[normalize-space(@xlink:href) = 'http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view' or normalize-space(@xlink:href) = 'http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download'])"/>
-
-			<sch:assert id="Minimaal_applicationProfile_View_Download" etf_name="Er is minimaal een applicationProfile opgegeven voor een View en Download service" test="$nr_onLine_ApplicationProfile &gt; 1">Voor de INSPIRE dataservice koppeling is het verplicht dat tenminste voor een View en Download service het applicatie profiel is opgegeven, met een waarde uit de codelijst ServiceType (http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/). Het applicatie profiel moet opgegeven zijn via een Anchor.
-			</sch:assert>
-
-		</sch:rule>
-
 
 	</sch:pattern>
 </sch:schema>
