@@ -6,7 +6,7 @@ Dutch profile for datasets v2 (iso19139.nl.geografie.2.0.0).
 
 ### GeoNetwork version to use with this plugin
 
-Use GeoNetwork 3.4+. It's not supported in older versions so don't plug it into it!
+Use GeoNetwork 3.10.
 
 ### Adding the plugin to the source code
 
@@ -14,7 +14,7 @@ The best approach is to add the plugin as a submodule into GeoNetwork schema mod
 
 ```
 cd schemas
-git submodule add -b 3.4.x https://github.com/metadata101/iso19139.nl.geografie.2.0.0 iso19139.nl.geografie.2.0.0
+git submodule add -b 3.10.x https://github.com/metadata101/iso19139.nl.geografie.2.0.0 iso19139.nl.geografie.2.0.0
 ```
 
 Add the new module to the schema/pom.xml:
@@ -77,6 +77,29 @@ After building the application, it's possible to deploy the schema plugin manual
 
 - Copy the content of the folder schemas/iso19139.nl.geografie.2.0.0/src/main/plugin to INSTALL_DIR/geonetwork/WEB-INF/data/config/schema_plugins/iso19139.nl.geografie.2.0.0
 
-- Copy the jar file schemas/iso19139.nl.geografie.2.0.0/target/schema-iso19139.nl.geografie.2.0.0-3.4.jar to INSTALL_DIR/geonetwork/WEB-INF/lib.
+- Copy the jar file schemas/iso19139.nl.geografie.2.0.0/target/schema-iso19139.nl.geografie.2.0.0-3.10.jar to INSTALL_DIR/geonetwork/WEB-INF/lib.
 
 If there's no changes to the profile Java code or the configuration (config-spring-geonetwork.xml), the jar file is not required to be deployed each time.
+
+### Setup xml snippets
+
+The editor uses a snippet-directive for the conformance field which allows to select a snippet from the catalogue, to be introduced at that location.
+Unzip [snippets.zip](snippets.zip) to a folder, use import (select type 'subtemplate') to import all the files into the catalogue.
+
+### Setup thesauri
+
+The editor uses a number of thesauri as pick lists for various fields. These thesauri can be downloaded from the INSPIRE registry and Nationaalgeoregister.nl.
+
+  - [INSPIRE themes](http://inspire.ec.europa.eu/theme),
+
+  - [Priority Dataset](http://inspire.ec.europa.eu/metadata-codelist/PriorityDataset),
+
+  - [Protocol Value](http://inspire.ec.europa.eu/metadata-codelist/ProtocolValue),
+
+  - [Spatial Data Service Category](https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory),
+
+  - [Quality Of Service Criteria](http://inspire.ec.europa.eu/metadata-codelist/QualityOfServiceCriteria),
+
+  - [Spatial Scope](http://inspire.ec.europa.eu/metadata-codelist/SpatialScope),
+
+  - [Spatial DataService Type](https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType).
