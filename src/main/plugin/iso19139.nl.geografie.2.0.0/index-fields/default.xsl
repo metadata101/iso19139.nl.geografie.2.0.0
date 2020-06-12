@@ -937,7 +937,7 @@
         <Field name="degree" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
 
-      <xsl:for-each select="./*/gmd:specification/*/gmd:title/gco:CharacterString">
+      <xsl:for-each select="./*/gmd:specification/*/gmd:title/(gco:CharacterString|gmx:Anchor)">
         <Field name="specificationTitle" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
 
