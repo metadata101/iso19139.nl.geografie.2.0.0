@@ -9,7 +9,10 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
+  <groupId>org.geonetwork-opensource</groupId>
   <artifactId>schema-iso19139.nl.geografie.2.0.0</artifactId>
+  <version>3.10.3-SNAPSHOT</version>
+
   <name>ISO 19139 Dutch Data Profile 2.0.0</name>
   <description>
     GeoNetwork schema plugin for Dutch profile for datasets v2.
@@ -19,22 +22,26 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>schema-core</artifactId>
-      <version>${project.version}</version>
+      <version>${gn.schemas.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>schema-iso19139</artifactId>
-      <version>${project.version}</version>
+      <version>${gn.schemas.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.xmlunit</groupId>
       <artifactId>xmlunit-core</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.xmlunit</groupId>
       <artifactId>xmlunit-matchers</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
