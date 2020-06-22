@@ -31,6 +31,26 @@
 
   <bean id="iso19139.nl.geografie.2.0.0SchemaPlugin"
         class="org.fao.geonet.schema.iso19139.ISO19139SchemaPlugin">
+    <property name="xpathTitle">
+      <util:list value-type="java.lang.String">
+        <value>gmd:identificationInfo/*/gmd:citation/*/gmd:title/gco:CharacterString</value>
+        <value>gmd:identificationInfo/*/gmd:citation/*/gmd:title/*/gmd:textGroup/gmd:LocalisedCharacterString</value>
+      </util:list>
+    </property>
+    <property name="analyzedLinks">
+      <util:list value-type="java.lang.String">
+        <bean class="org.fao.geonet.kernel.schema.HttpLink">
+          <property name="xpath"
+                    value="*//gmd:CI_OnlineResource/gmd:linkage/gmd:URL[starts-with(normalize-space(text()), 'http')]/text()"/>
+          <property name="protocol"
+                    value="../../gmd:protocol/gco:CharacterString"/>
+        </bean>
+        <bean class="org.fao.geonet.kernel.schema.HttpLink">
+          <property name="xpath"
+                    value="*//gmd:graphicOverview/*/gmd:fileName/gco:CharacterString[starts-with(normalize-space(text()), 'http')]/text()"/>
+        </bean>
+      </util:list>
+    </property>
     <property name="elementsToProcess">
       <util:list value-type="java.lang.String">
         <value>gco:CharacterString</value>
@@ -38,9 +58,23 @@
         <value>gmd:featureTypes</value>
       </util:list>
     </property>
+    <property name="savedQueries">
+      <list>
+        <bean class="org.fao.geonet.kernel.schema.SavedQuery">
+          <property name="id" value="wfs-indexing-config"/>
+          <property name="xpath"
+                    value="*//gmd:CI_OnlineResource[contains(gmd:protocol/gco:CharacterString, '{{protocol}}') and gmd:name/gco:CharacterString = '{{name}}' and (gmd:linkage/gmd:URL = '{{url}}' or gmd:linkage/gmd:URL = translate('{{url}}', 'wms', 'wfs'))]/gmd:applicationProfile/gco:CharacterString/text()"/>
+        </bean>
+        <bean class="org.fao.geonet.kernel.schema.SavedQuery">
+          <property name="id" value="doi-get"/>
+          <property name="xpath"
+                    value="*//gmd:CI_OnlineResource[gmd:protocol/gco:CharacterString = 'DOI']/gmd:linkage/gmd:URL/text()"/>
+        </bean>
+      </list>
+    </property>
   </bean>
-  
 
-  
+
+
 
 </beans>
