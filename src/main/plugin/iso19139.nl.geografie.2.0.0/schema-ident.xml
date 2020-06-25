@@ -29,7 +29,8 @@
   <id>6b76bf55-da03-4b86-acaa-a81bd982e07a</id>
   <version>1.0</version>
   <appMinorVersionSupported>3.4.0</appMinorVersionSupported>
-  <title>Dutch profile for datasets v2</title>
+  <title xml:lang="en">Dutch metadata profile on ISO 19115 for geography version 2.0.0</title>
+  <title xml:lang="nl">Nederlands metadata profiel op ISO 19115 voor geografie versie 2.0.0</title>
   <description>Dutch profile for datasets v2</description>
   <standardUrl>http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=53798</standardUrl>
   <depends>iso19139</depends>
