@@ -469,6 +469,17 @@
             </template>
           </action>
 
+          <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language" in="/gmd:MD_Metadata"/>
+          <action type="add" btnLabel="addLanguage" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language) = 0" or="language" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
+            <template>
+              <snippet>
+                <gmd:language>
+                  <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="dut"/>
+                </gmd:language>
+              </snippet>
+            </template>
+          </action>
+
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory/gmd:MD_TopicCategoryCode"/>
 
           <action type="add" btnLabel="addTopic" name="topicCategory" or="topicCategory" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory/gmd:MD_TopicCategoryCode) = 0" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">

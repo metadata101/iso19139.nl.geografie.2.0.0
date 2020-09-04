@@ -204,17 +204,17 @@
 
   <!-- New strings added for the AngularJS editor -->
   <!-- View and tabs -->
-  <viewTitle><h3>Nederlands profiel op ISO 19115 voor Geografie versie 2.0 - Basis</h3></viewTitle>
+  <viewTitle><h3>Nederlands profiel op ISO 19115 voor Geografie versie 2.1.0 - Basis</h3></viewTitle>
   <viewDescription><div>Het basis formulier kan gebruikt worden voor het bewerken van metadata van Nederlandstalige datasets die gebaseerd zijn op het Rijksdriehoekstelsel. 
   Dit formulier toont een beperkte set van elementen en doet een aantal aannames. Voor het bewerken van alle elementen uit het Nederlands profiel gebruikt u het formulier met titel 
   "Nederlands Profiel" (via de weergave knop met het "oogje" aan de rechter zijkant).
   Op de <a href="catalog.search#/page/Help?page=Help" target="_blank">Help pagina</a> vindt u meer informatie over deze applicatie.</div></viewDescription>
 
-  <dutchProfileTitle><h3>Nederlands profiel op ISO 19115 voor Geografie versie 2.0 - Optionele &amp; conditionele elementen</h3></dutchProfileTitle>
+  <dutchProfileTitle><h3>Nederlands profiel op ISO 19115 voor Geografie versie 2.1.0 - Optionele &amp; conditionele elementen</h3></dutchProfileTitle>
   <dutchProfileDescription><div>In deze weergave worden ook optionele en conditionele elementen van het Nederlands profiel voor datasets en series getoond.
   Op de <a href="catalog.search#/page/Help?page=Help" target="_blank">Help pagina</a> vindt u meer informatie over deze applicatie.</div></dutchProfileDescription>
 
-  <fullViewTitle><h3>Nederlands profiel op ISO 19115 voor Geografie versie 2.0 - Volledige iso19139</h3></fullViewTitle>
+  <fullViewTitle><h3>Nederlands profiel op ISO 19115 voor Geografie versie 2.1.0 - Volledige iso19139</h3></fullViewTitle>
   <fullViewDescription><div>Deze volledige weergave toont alle ISO elementen. Op de <a href="catalog.search#/page/Help?page=Help" target="_blank">Help pagina</a> vindt u meer informatie over deze applicatie.</div></fullViewDescription>
 
   <xmlViewTitle><h3>XML weergave</h3></xmlViewTitle>

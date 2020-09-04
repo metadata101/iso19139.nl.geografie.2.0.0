@@ -7,6 +7,12 @@
     <xsl:apply-templates select="gmd:MD_Metadata"/>
   </xsl:template>
 
+  <xsl:template match="gmd:metadataStandardVersion">
+    <gmd:metadataStandardVersion>
+    <gco:CharacterString>Nederlands metadata profiel op ISO 19115 voor geografie 2.1.0</gco:CharacterString>
+    </gmd:metadataStandardVersion>
+  </xsl:template>
+
   <!-- Inflate organisation name and role if required -->
   <xsl:template match="gmd:CI_ResponsibleParty">
     <xsl:copy>

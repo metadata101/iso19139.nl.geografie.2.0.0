@@ -25,10 +25,6 @@
         "function": {
           "isMultilingual": false,
           "tooltip": "gmd:function"
-        },
-        "applicationProfile": {
-          "isMultilingual": false,
-          "tooltip": "gmd:applicationProfile"
         }
       }
     }, {

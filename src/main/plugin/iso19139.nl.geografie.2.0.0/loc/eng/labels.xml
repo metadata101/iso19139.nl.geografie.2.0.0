@@ -1422,14 +1422,14 @@
   <element name="gmd:language" id="3.0">
     <label>Metadata language</label>
     <description>Language used for documenting metadata</description>
-    <condition>conditional</condition>
+    <condition>mandatory</condition>
   </element>
   <element name="gmd:language" context="gmd:MD_DataIdentification"
            id="39.0">
     <label>Language</label>
     <description>Language(s) used within the dataset</description>
     <help>language(s) used within the dataset</help>
-    <_condition>Mandatory</_condition>
+    <_condition>mandatory</_condition>
   </element>
   <element name="gmd:language" context="gmd:MD_FeatureCatalogueDescription"
            id="235.0">
