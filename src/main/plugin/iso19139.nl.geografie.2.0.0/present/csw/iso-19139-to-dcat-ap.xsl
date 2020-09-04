@@ -266,8 +266,14 @@
     </xsl:param>
 
     <xsl:param name="UniqueResourceIdentifier">
-      <xsl:for-each select="gmd:identificationInfo[1]/*/gmd:citation/*/gmd:identifier/gmd:RS_Identifier">
+      <xsl:for-each select="gmd:identificationInfo[1]/*/gmd:citation/*/gmd:identifier/*">
         <xsl:choose>
+          <xsl:when test="starts-with(./gmd:code/gmx:Anchor/@xlink:href,'http')">
+            <xsl:value-of select="./gmd:code/gmx:Anchor/@xlink:href"/>
+          <xsl:when>
+          <xsl:when test="starts-with(./gmd:code/*/text(),'http')">
+            <xsl:value-of select="./gmd:code/*/text()"/>
+          <xsl:when>
           <xsl:when test="gmd:codeSpace/gco:CharacterString/text() != ''">
             <xsl:value-of select="concat(translate(gmd:codeSpace/gco:CharacterString/text(),' ','%20'),translate(gmd:code/gco:CharacterString/text(),' ','%20'))"/>
           </xsl:when>

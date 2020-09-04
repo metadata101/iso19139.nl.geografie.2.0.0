@@ -39,6 +39,7 @@
   <advanced>Full</advanced>
   <dutchprofile>Dutch profile</dutchprofile>
   <default>Simple</default>
+  <Basis>Standard</Basis>
   <simple>Simple</simple>
   <inspire>INSPIRE</inspire>
   <inspire_sds>SDS</inspire_sds>
@@ -176,19 +177,19 @@
   <!-- TODO: Review - specific Dutch schema strings -->
   <!-- New strings added for the AngularJS editor -->
   <!-- View and tabs -->
-  <viewTitle><h3>Basis weergave</h3></viewTitle>
-  <viewDescription><div>Het basis formulier kan gebruikt worden voor het bewerken van metadata van Nederlandstalige datasets die gebaseerd zijn op het Rijksdriehoekstelsel. Dit formulier toont een beperkte set van elementen en doet een aantal aannames. Voor het bewerken van alle elementen uit het Nederlands profiel gebruikt u het formulier met titel "Nederlands profiel" (via de weergave knop met het "oogje" aan de rechter zijkant).</div></viewDescription>
+ <viewTitle><h3>Dutch profile on ISO 19115 voor Geografie version 2.1.0 - Standard</h3></viewTitle>
+  <viewDescription><div></div></viewDescription>
 
-  <dutchProfileTitle><h3>Nederlands profiel weergave</h3></dutchProfileTitle>
-  <dutchProfileDescription><div>In deze weergave worden alle elementen van het Nederlands profiel getoond.</div></dutchProfileDescription>
+  <dutchProfileTitle><h3>Dutch profile on ISO 19115 voor Geografie version 2.1.0 - Optional &amp; conditional elements</h3></dutchProfileTitle>
+  <dutchProfileDescription><div></div></dutchProfileDescription>
 
-  <fullViewTitle><h3>Volledige weergave</h3></fullViewTitle>
-  <fullViewDescription><div>De volledige weergave toont alle ISO elementen.</div></fullViewDescription>
+  <fullViewTitle><h3>Dutch profile on ISO 19115 voor Geografie version 2.1.0 - Full iso19139</h3></fullViewTitle>
+  <fullViewDescription><div></div></fullViewDescription>
 
   <xmlViewTitle><h3>XML weergave</h3></xmlViewTitle>
-  <xmlViewDescription><div>In deze weergave worden alle ingevulde elementen getoond in XML.</div></xmlViewDescription>
+  <xmlViewDescription><div></div></xmlViewDescription>
 
-  <dutchprofile>Nederlands profiel</dutchprofile>
+  <dutchprofile>Dutch profile</dutchprofile>
 
   <!-- Data quality reports -->
   <conformance>Conformance</conformance>

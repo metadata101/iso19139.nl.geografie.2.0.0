@@ -833,7 +833,7 @@
   <element name="gmd:language" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language">
     <label>Taal van de bron</label>
     <description>De taal waarin eventuele tekst in de bron is opgenomen. Verplicht als de dataset  tekstuele informatie bevat. </description>
-    
+    <condition>mandatory</condition>
   </element>
   <!-- ==================================================== -->
   <element name="gmd:languageCode" context="/gmd:MD_Metadata/gmd:locale/gmd:PT_Locale/gmd:languageCode">
