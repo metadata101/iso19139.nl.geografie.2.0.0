@@ -870,33 +870,17 @@
         </xsl:for-each>
       </xsl:for-each>
 
-      <!-- index distributor -->
+      <!-- index distributor
+       -->
       <xsl:for-each
-        select="gmd:distributorContact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString|gmd:distributorContact/gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor">
+        select="gmd:distributor/gmd:MD_Distributor/gmd:distributorContact">
 
-        <xsl:variable name="role" select="../../gmd:role/*/@codeListValue"/>
-        <xsl:variable name="roleTranslation"
-                      select="util:getCodelistTranslation('gmd:CI_RoleCode', string($role), string($isoLangId))"/>
-        <xsl:variable name="logo" select="../..//gmx:FileName/@src"/>
-        <xsl:variable name="email"
-                      select="../../gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress/gco:CharacterString"/>
-        <xsl:variable name="phone"
-                      select="../../gmd:contactInfo/*/gmd:phone/*/gmd:voice[normalize-space(.) != '']/*/text()"/>
-        <xsl:variable name="individualName" select="../../gmd:individualName/gco:CharacterString/text()"/>
-        <xsl:variable name="positionName" select="../../gmd:positionName/gco:CharacterString/text()"/>
-        <xsl:variable name="address"
-                      select="string-join(../../gmd:contactInfo/*/gmd:address/*/gmd:deliveryPoint/gco:CharacterString/text(), ', ')"/>
-        <xsl:variable name="city"
-                      select="string-join(../../gmd:contactInfo/*/gmd:address/*/gmd:city/gco:CharacterString/text(), ', ')"/>
-        <xsl:variable name="postalcode"
-                      select="string-join(../../gmd:contactInfo/*/gmd:address/*/gmd:postalCode/gco:CharacterString/text(), ', ')"/>
-        <xsl:variable name="country"
-                      select="string-join(../../gmd:contactInfo/*/gmd:address/*/(gmd:administrativeArea|gmd:country)/gco:CharacterString/text(), ', ')"/>
-        <xsl:variable name="web" select="../../gmd:contactInfo/*/gmd:onlineResource/*/gmd:linkage/gmd:URL/text()"/>
+      <xsl:apply-templates mode="index-contact" select="*">
+        <xsl:with-param name="type" select="'distributor'"/>
+        <xsl:with-param name="fieldPrefix" select="'responsibleParty'"/>
+        <xsl:with-param name="position" select="position()"/>
+      </xsl:apply-templates>
 
-        <Field name="responsibleParty"
-               string="{concat($roleTranslation, '|distributor|', ., '|', $logo, '|',  string-join($email, ','), '|', $individualName, '|', $positionName, '|', $address, '|', $postalcode , '|', $city , '|', $country , '|',  string-join($phone, ','), '|',  string-join($web, ','))}"
-               store="true" index="false"/>
       </xsl:for-each>
 
     </xsl:for-each>
@@ -1216,6 +1200,8 @@
                   select="gmd:individualName/gco:CharacterString/text()"/>
     <xsl:variable name="positionName"
                   select="gmd:positionName/gco:CharacterString/text()"/>
+    <xsl:variable name="aUrl"
+                  select="string-join(gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL/text(), ', ')"/>
     <xsl:variable name="address" select="string-join(gmd:contactInfo/*/gmd:address/*/(
                                         gmd:deliveryPoint|gmd:postalCode|gmd:city|
                                         gmd:administrativeArea|gmd:country)/gco:CharacterString/text(), ', ')"/>
@@ -1230,7 +1216,8 @@
                              $address, '|',
                              string-join($phone, ','), '|',
                              $uuid, '|',
-                             $position)}"
+                             $position, '|',
+                             $aUrl)}"
            store="true" index="false"/>
 
     <xsl:for-each select="$email">
