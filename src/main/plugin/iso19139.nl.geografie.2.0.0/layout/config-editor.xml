@@ -370,7 +370,7 @@
         <col xpath="gmd:description"/>
         <col xpath="gmd:dateTime"/>
         <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:organisationName"/>
-        <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:address/gmd:CI_Address/gmd:electronicMailAddress" />
+        <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress" />
         <col xpath="gmd:processor/gmd:CI_ResponsibleParty/gmd:role"/>
         <col del=".."/>
       </row>
