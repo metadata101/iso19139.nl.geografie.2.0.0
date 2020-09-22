@@ -62,8 +62,8 @@
 
     <for name="gmd:supplementalInformation" use="data-gn-anchor-switcher"/>
     <for name="gmd:organisationName" use="data-gn-keyword-picker">
-                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
-                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
+      <directiveAttributes data-thesaurus-key="external.theme.organisatie"
+                           data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
     </for>
     <!-- TODO: Specific in Dutch schema - data-hide-time -->
     <for name="gco:Date" use="data-gn-date-picker">
@@ -315,12 +315,14 @@
     <table for="gmd:CI_ResponsibleParty">
       <header>
         <!-- TODO: Add label from strings.xml / label with context-->
+        <col label="individualName"/>
         <col label="organisationName" class="gn-required"/>
         <col label="electronicMailAddress" class="gn-required"/>
         <col label="role" class="gn-required"/>
         <col/>
       </header>
       <row>
+        <col xpath="gmd:individualName"/>
         <col xpath="gmd:organisationName"/>
         <col xpath="gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress"/>
         <col xpath="gmd:role"/>
@@ -541,6 +543,9 @@
               <snippet>
                 <gmd:pointOfContact>
                   <gmd:CI_ResponsibleParty>
+                    <gmd:individualName>
+                      <gco:CharacterString />
+                    </gmd:individualName>
                     <gmd:organisationName>
                       <gco:CharacterString />
                     </gmd:organisationName>
@@ -727,9 +732,8 @@
               <snippet>
                 <gmd:contact>
                   <gmd:CI_ResponsibleParty>
-                    <gmd:organisationName>
-                      <gco:CharacterString />
-                    </gmd:organisationName>
+                    <individualName><gco:CharacterString /></individualName>
+                    <gmd:organisationName><gco:CharacterString /></gmd:organisationName>
                     <gmd:contactInfo>
                       <gmd:CI_Contact>
                         <gmd:address>
@@ -1093,9 +1097,8 @@
               <snippet>
                 <gmd:pointOfContact>
                   <gmd:CI_ResponsibleParty>
-                    <gmd:organisationName>
-                      <gco:CharacterString></gco:CharacterString>
-                    </gmd:organisationName>
+                  <gmd:individualName><gco:CharacterString/></gmd:individualName>
+                    <gmd:organisationName><gco:CharacterString/></gmd:organisationName>
                     <gmd:contactInfo>
                       <gmd:CI_Contact>
                         <gmd:address>
@@ -1566,9 +1569,19 @@
                   <gmd:MD_Distributor>
                     <gmd:distributorContact>
                       <gmd:CI_ResponsibleParty>
-                        <gmd:organisationName>
-                          <gco:CharacterString></gco:CharacterString>
-                        </gmd:organisationName>
+                        <gmd:individualName><gco:CharacterString/></gmd:individualName>
+                        <gmd:organisationName><gco:CharacterString/></gmd:organisationName>
+                        <gmd:contactInfo>
+                          <gmd:CI_Contact>
+                            <gmd:address>
+                              <gmd:CI_Address>
+                                <gmd:electronicMailAddress>
+                                  <gco:CharacterString >{{electronicMailAddress}}</gco:CharacterString>
+                                </gmd:electronicMailAddress>
+                              </gmd:CI_Address>
+                            </gmd:address>
+                          </gmd:CI_Contact>
+                        </gmd:contactInfo>
                         <gmd:role>
                           <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
                         </gmd:role>
@@ -1885,16 +1898,19 @@
                     </gmd:dateTime>
                     <gmd:processor>
                       <gmd:CI_ResponsibleParty>
-                        <gmd:organisationName>
-                          <gco:CharacterString/>
-                        </gmd:organisationName>
-                        <gmd:address>
-                          <gmd:CI_Address>
-                            <gmd:electronicMailAddress>
-                              <gco:CharacterString />
-                            </gmd:electronicMailAddress>
-                          </gmd:CI_Address>
-                        </gmd:address>
+                        <gmd:individualName><gco:CharacterString/></gmd:individualName>
+                        <gmd:organisationName><gco:CharacterString/></gmd:organisationName>
+                        <gmd:contactInfo>
+                          <gmd:CI_Contact>
+                            <gmd:address>
+                              <gmd:CI_Address>
+                                <gmd:electronicMailAddress>
+                                  <gco:CharacterString >{{electronicMailAddress}}</gco:CharacterString>
+                                </gmd:electronicMailAddress>
+                              </gmd:CI_Address>
+                            </gmd:address>
+                          </gmd:CI_Contact>
+                        </gmd:contactInfo>
                         <gmd:role>
                           <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
                         </gmd:role>
@@ -1927,16 +1943,19 @@
                         </gmd:dateTime>
                         <gmd:processor>
                           <gmd:CI_ResponsibleParty>
-                            <gmd:organisationName>
-                              <gco:CharacterString></gco:CharacterString>
-                            </gmd:organisationName>
-                            <gmd:address>
-                              <gmd:CI_Address>
-                                <gmd:electronicMailAddress>
-                                  <gco:CharacterString />
-                                </gmd:electronicMailAddress>
-                              </gmd:CI_Address>
-                            </gmd:address>
+                            <gmd:individualName><gco:CharacterString/></gmd:individualName>
+                            <gmd:organisationName><gco:CharacterString/></gmd:organisationName>
+                            <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                <gmd:address>
+                                  <gmd:CI_Address>
+                                    <gmd:electronicMailAddress>
+                                      <gco:CharacterString >{{electronicMailAddress}}</gco:CharacterString>
+                                    </gmd:electronicMailAddress>
+                                  </gmd:CI_Address>
+                                </gmd:address>
+                              </gmd:CI_Contact>
+                            </gmd:contactInfo>
                             <gmd:role>
                               <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
                             </gmd:role>
@@ -2119,10 +2138,19 @@
               <snippet>
                 <gmd:contact>
                   <gmd:CI_ResponsibleParty>
-                    <gmd:organisationName>
-                      <gco:CharacterString></gco:CharacterString>
-                    </gmd:organisationName>
-
+                    <gmd:individualName><gco:CharacterString/></gmd:individualName>
+                    <gmd:organisationName><gco:CharacterString/></gmd:organisationName>
+                    <gmd:contactInfo>
+                      <gmd:CI_Contact>
+                        <gmd:address>
+                          <gmd:CI_Address>
+                            <gmd:electronicMailAddress>
+                              <gco:CharacterString >{{electronicMailAddress}}</gco:CharacterString>
+                            </gmd:electronicMailAddress>
+                          </gmd:CI_Address>
+                        </gmd:address>
+                      </gmd:CI_Contact>
+                    </gmd:contactInfo>
                     <gmd:role>
                       <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact"/>
                     </gmd:role>
