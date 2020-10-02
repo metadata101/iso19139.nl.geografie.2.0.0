@@ -14,8 +14,8 @@
 	<sch:let name="gemet-nl" value="document('GEMET-InspireThemes-nl.rdf')"/>
 	-->
 
-	<sch:pattern id="Validatie tegen het Nederlands metadata profiel op ISO 19115 versie 2">
-		<sch:title>Validatie tegen het Nederlands profiel op ISO 19115 voor geografie versie 2.0.0 (2017)</sch:title>
+	<sch:pattern id="Validatie tegen het Nederlands metadata profiel op ISO 19115 versie 2.1.0">
+		<sch:title>Validatie tegen het Nederlands metadata profiel op ISO 19115 voor geografie versie 2.1.0 (2020)</sch:title>
 		<!-- INSPIRE Thesaurus en Conformiteit-->
 		<sch:let name="thesaurus1" value="normalize-space(string-join(/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords[1]/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title[gco:CharacterString or gmx:Anchor]//text(), ''))"/>
 		<sch:let name="thesaurus2" value="normalize-space(string-join(/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords[2]/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title[gco:CharacterString or gmx:Anchor]//text(), ''))"/>
@@ -51,8 +51,10 @@
 			<sch:let name="mdResponsibleParty_OrganisationURI" value="normalize-space(gmd:contact[1]/gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor/@xlink:href)"/>
 			<sch:let name="mdResponsibleParty_OrganisationAnchorLabel" value="normalize-space(gmd:contact[1]/gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor)"/>
 
-		<!-- Metadata verantwoordelijke organisatie (role) NL profiel https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verantwoordelijke-organisatie-metadata:-rol -->
-			<sch:let name="mdResponsibleParty_Role" value="gmd:contact[1]/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'resourceProvider' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'custodian' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'owner' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'user' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'distributor' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'owner' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'originator' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'pointOfContact' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'principalInvestigator' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'processor' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'publisher' or gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'author'"/>
+			<!-- Metadata verantwoordelijke organisatie (role) NL profiel https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verantwoordelijke-organisatie-metadata:-rol -->
+			<!-- fix role for https://github.com/Geonovum/metadata-schematron/issues/20, choose the first element where it is a match in the codelist -->
+			<!-- Thijs: todo, fox for #20 seems to break things -->
+			<sch:let name="mdResponsibleParty_Role" value="gmd:contact/gmd:CI_ResponsibleParty/gmd:role/*[@codeListValue = 'resourceProvider' or @codeListValue = 'custodian' or @codeListValue = 'owner' or @codeListValue = 'user' or @codeListValue = 'distributor' or @codeListValue = 'owner' or @codeListValue = 'originator' or @codeListValue = 'pointOfContact' or @codeListValue = 'principalInvestigator' or @codeListValue = 'processor' or @codeListValue = 'publisher' or @codeListValue = 'author'][1]"/>
 
 		<!--  voor INSPIRE toegestane waarde in combi met INSPIRE specificatie -->
 
@@ -89,11 +91,11 @@
 			<sch:assert id="Naam_organisatie_metadata_ISO_nr_376" etf_name="Naam organisatie metadata (ISO nr. 376)" test="$mdResponsibleParty_OrganisationString or ($mdResponsibleParty_OrganisationURI and $mdResponsibleParty_OrganisationAnchorLabel)">Naam en/of de URI (in geval van een Anchor) van de organisatie metadata (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verantwoordelijke-organisatie-metadata) ontbreekt.</sch:assert>
 			<sch:report id="Naam_organisatie_metadata_ISO_nr_376_info" etf_name="Naam organisatie metadata (ISO nr. 376) info" test="$mdResponsibleParty_OrganisationString or $mdResponsibleParty_OrganisationURI">Naam organisatie metadata (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verantwoordelijke-organisatie-metadata): <sch:value-of select="$mdResponsibleParty_OrganisationString"/><sch:value-of select="$mdResponsibleParty_OrganisationURI"/>
 			</sch:report>
+
 			<sch:assert id="Rol_organisatie_metadata_ISO_nr_379" etf_name="Rol organisatie metadata (ISO nr. 379)" test="$mdResponsibleParty_Role">Rol organisatie metadata (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verantwoordelijke-organisatie-bron:-rol) ontbreekt of heeft een verkeerde waarde</sch:assert>
-			<sch:report id="Rol_organisatie_metadata_ISO_nr_379_info" etf_name="Rol organisatie metadata (ISO nr. 379) info" test="$mdResponsibleParty_Role">Rol organisatie metadata (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verantwoordelijke-organisatie-bron:-rol): <sch:value-of select="$mdResponsibleParty_Role"/>
-			</sch:report>
+
 		<!-- In geval van INSPIRE: Rol organisatie metadata in combi met specificatie INSPIRE -->
-			<sch:assert id="Rol_organisatie_metadata_ISO_nr_379" etf_name="Rol organisatie metadata (ISO nr. 379)" test="not($conformity_Spec_Title_Exsists) or ($conformity_Spec_Title_Exsists and $mdResponsibleParty_Role_INSPIRE)">Rol organisatie metadata (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verantwoordelijke-organisatie-bron:-rol) ontbreekt of heeft een verkeerde waarde, deze dient voor INSPIRE contactpunt te zijn</sch:assert>
+			<sch:assert id="INSPIRE_Rol_organisatie_metadata_ISO_nr_379" etf_name="INSPIRE Rol organisatie metadata (ISO nr. 379)" test="not($conformity_Spec_Title_Exsists) or ($conformity_Spec_Title_Exsists and $mdResponsibleParty_Role_INSPIRE)">Rol organisatie metadata (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verantwoordelijke-organisatie-bron:-rol) ontbreekt of heeft een verkeerde waarde, deze dient voor INSPIRE contactpunt te zijn</sch:assert>
 		<!-- eind INSPIRE in combi met specificatie INSPIRE -->
 			<sch:assert id="E-mail_organisatie_metadata_ISO_nr_386" etf_name="E-mail organisatie metadata (ISO nr. 386)"  test="$mdResponsibleParty_Mail">E-mail organisatie metadata (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verantwoordelijke-organisatie-metadata:-e-mail) ontbreekt</sch:assert>
 			<sch:report id="E-mail_organisatie_metadata_ISO_nr_386_info" etf_name="E-mail organisatie metadata (ISO nr. 386) info" test="$mdResponsibleParty_Mail">E-mail organisatie metadata (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#verantwoordelijke-organisatie-metadata:-e-mail): <sch:value-of select="$mdResponsibleParty_Mail"/>
@@ -159,7 +161,7 @@
 
 		<!-- Taal van de bron, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#taal-van-de-bron -->
 			<sch:let name="language" value="(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/*/@codeListValue = 'dut' or gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/*/@codeListValue = 'eng')"/>
-            <sch:let name="language_value" value="string(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/*/@codeListValue)"/>
+      <sch:let name="language_value" value="string(gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/*/@codeListValue)"/>
 
 		<!-- Dataset karakterset, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#karakterset-van-de-bron:
 		 optioneel in v2.0.0, geen test meer
@@ -274,9 +276,8 @@
 		    <sch:report id="Unieke_Identifier_van_de_bron_ISO_nr_207_URI_info" etf_name="Unieke Identifier van de bron (ISO nr. 207) info" test="$identifierURI">Unieke Identifier van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron): <sch:value-of select="$identifierURI"/>.
 		    </sch:report>
 
-			<!-- conditioneel: dus niet op testen als assertion -->
-			<sch:report id="Dataset_taal_ISO_nr_39_info" etf_name="Dataset taal (ISO nr. 39) info" test="$language">Dataset taal (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#taal-van-de-bron): <sch:value-of select="$language"/>
-			</sch:report>
+			<!-- v.2.1.0: taal van de bron is verplicht geworden: dus niet op testen als assertion -->
+			<sch:assert id="Taal_van_de_bron_ISO_nr_39" etf_name="Taal van de bron (ISO nr. 39)" test="$language">Taal van de bron (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#taal-van-de-bron) is verplicht, maar ontbreekt of heeft een verkeerde waarde. Dit hoort een waarde en verwijzing naar de codelijst te zijn.</sch:assert>
 
 			<!-- 5.2.8 Karakterset van de bron: conditioneel geworden. Geen assertion meer, bevestigd door Ine. https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#karakterset-van-de-bron -->
 			<!-- <sch:assert id="Dataset_karakterset_ISO_nr_40" etf_name="Dataset karakterset (ISO nr. 40)" test="not($characterset) or $characterset_value">Dataset karakterset (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#karakterset-van-de-bron) ontbreekt of heeft een verkeerde waarde</sch:assert>
@@ -344,32 +345,17 @@
 			<sch:let name="distributionFormatVersion" value="normalize-space(gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:version/gco:CharacterString)"/>
 			<sch:let name="distributionFormatSpecification" value="normalize-space(gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:specification/gco:CharacterString)"/>
 
-		<!-- Naam distributie formaat, distributie format voor INSPIRE geharmoniseerd https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#naam-distributie-formaat -->
-		<!-- Anchor, maar alleen voor INSPIRE geharmoniseerd verplicht  -->
-		<!--
-			<sch:assert id="Naam_distributie_formaat_ISO_nr_285" etf_name="Naam distributie formaat (ISO nr. 285)" test="$distributionFormatName">Naam distributie formaat (ISO nr. 285) ontbreekt</sch:assert>
-			<sch:report id="Naam_distributie_formaat_ISO_nr_285_info" etf_name="Naam distributie formaat (ISO nr. 285) info" test="$distributionFormatName">Naam distributie formaat (ISO nr. 285): <sch:value-of select="$distributionFormatName"/>
-		</sch:report> -->
-			<!-- Versie distributie formaat, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#versie-distributie-formaat -->
-			<!--
-			<sch:assert id="Versie_distributie_formaat_ISO_nr_286" etf_name="Versie distributie formaat (ISO nr. 286)" test="$distributionFormatVersion">Versie distributie formaat (ISO nr. 286) ontbreekt</sch:assert>
-			<sch:report id="Versie_distributie_formaat_ISO_nr_286_info" etf_name="Versie distributie formaat (ISO nr. 286) info" test="$distributionFormatVersion">Versie distributie formaat (ISO nr. 286): <sch:value-of select="$distributionFormatVersion"/>
-		</sch:report>  -->
-		<!-- Specificatie distributie formaat https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatie-distributie-formaat -->
-		<!-- Anchor, maar alleen voor INSPIRE geharmoniseerd verplicht  -->
-		<!--
-			<sch:assert id="Specificatie_distributie_formaat_ISO_nr_288" etf_name="Specificatie distributie formaat (ISO nr. 288)" test="$distributionFormatSpecification">Specificatie distributie formaat (ISO nr. 288) ontbreekt</sch:assert>
-			<sch:report id="Specificatie_distributie_formaat_ISO_nr_288_info" etf_name="Specificatie distributie formaat (ISO nr. 288) info" test="$distributionFormatSpecification">Specificatie distributie formaat (ISO nr. 288): <sch:value-of select="$distributionFormatSpecification"/>
-			</sch:report>
-		-->
-		<!-- eind distributie format voor INSPIRE geharmoniseerd -->
-
-
 	  <!-- Thijs: om fouten in de validator te voorkomen als er metadata is aangeleverd met meerdere blokken dataQualityInfo (de NGR editor kan dit soort fouten veroorzaken), gebruik altijd alleen het eerste blok. Doe dit bij alle elementen gmd:dataQualityInfo -->
 		<!-- alle regels over elementen binnen gmd:dataQualityInfo -->
 			<sch:let name="dataQualityInfo" value="gmd:dataQualityInfo[1]/gmd:DQ_DataQuality"/>
 		<!-- Algemene beschrijving herkomst, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#algemene-beschrijving-herkomst  -->
 			<sch:let name="statement" value="normalize-space($dataQualityInfo/gmd:lineage/gmd:LI_Lineage/gmd:statement/gco:CharacterString)"/>
+
+			<sch:let name="dataQualityInfoCount" value="count(gmd:dataQualityInfo)" />
+			<sch:assert id="dataQualityInfo_1_keer" etf_name="Kwaliteitsbeschrijving 1 keer" test="$dataQualityInfoCount &lt; 2">Set elementen kwaliteitsbeschrijving komt maximaal 1 keer voor</sch:assert>
+
+			<sch:let name="levelCount" value="count($dataQualityInfo/gmd:scope/gmd:DQ_Scope/gmd:level)" />
+			<sch:assert id="level_1_keer" etf_name="Niveau kwaliteitsbeschrijving 1 keer" test="$levelCount &lt; 2">Niveau kwaliteitsbeschrijving (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#niveau-kwaliteitsbeschrijving) komt vaker dan 1 keer voor</sch:assert>
 
 		<!--  Niveau kwaliteitsbeschrijving, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#niveau-kwaliteitsbeschrijving -->
 			<sch:let name="level" value="string($dataQualityInfo/gmd:scope/gmd:DQ_Scope/gmd:level/*/@codeListValue[. = 'dataset' or . = 'series'])"/>
@@ -402,11 +388,12 @@
 		<!-- URL, https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#url -->
 			<sch:let name="transferOptions_URL" value="normalize-space(gmd:CI_OnlineResource/gmd:linkage/gmd:URL)"/>
 		<!-- Protocol https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#protocol -->
-		<!-- TODO: Ook de URIs voor Anchors inbouwen of niet?
+		<!--
 		MediaType
 		Protocol
 	 	-->
-			<sch:let name="transferOptions_Protocol" value="gmd:CI_OnlineResource/gmd:protocol/*[text() = 'OGC:CSW' or text() = 'OGC:WMS' or text() = 'OGC:WMTS' or text() = 'OGC:WFS' or text() = 'OGC:WCS' or text() = 'OGC:WCTS' or text() = 'OGC:WPS' or text() = 'UKST' or text() = 'INSPIRE Atom' or text() = 'OGC:WFS-G' or text() = 'OGC:SOS' or text() = 'OGC:SPS' or text() = 'OGC:SAS' or text() = 'OGC:WNS' or text() = 'OGC:ODS' or text() = 'OGC:OGS' or text() = 'OGC:OUS' or text() = 'OGC:OPS' or text() = 'OGC:ORS' or text() = 'OGC:SensorThings' or text() = 'W3C:SPARQL' or text() = 'OASIS:OData' or text() = 'OAS' or text() = 'landingpage'  or text() = 'dataset' or text() = 'application' or text() = 'UKST' ]"/>
+			<sch:let name="transferOptions_Protocol" value="gmd:CI_OnlineResource/gmd:protocol/*[normalize-space(text()) = 'OGC:CSW' or normalize-space(text()) = 'OGC:WMS' or normalize-space(text()) = 'OGC:WMTS' or normalize-space(text()) = 'OGC:WFS' or normalize-space(text()) = 'OGC:WCS' or normalize-space(text()) = 'INSPIRE Atom' or normalize-space(text()) = 'OGC:SOS' or normalize-space(text()) = 'OGC:API features' or normalize-space(text()) = 'OGC:SensorThings' or normalize-space(text()) = 'W3C:SPARQL' or normalize-space(text()) = 'OASIS:OData' or normalize-space(text()) = 'OAS' or normalize-space(text()) = 'landingpage'  or normalize-space(text()) = 'OGC:OLS' ]"/>
+
 
 			<!-- Mediatypes: https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-mediatypes -->
 			<sch:let name="transferOptions_Mediatype" value="gmd:CI_OnlineResource/gmd:protocol/*[translate(text(), $uppercase, $lowercase) = 'gml' or translate(text(), $uppercase, $lowercase) = 'kml' or translate(text(), $uppercase, $lowercase) = 'geojson' or translate(text(), $uppercase, $lowercase) = 'gpkg' or translate(text(), $uppercase, $lowercase) = 'json' or translate(text(), $uppercase, $lowercase) = 'jsonld' or translate(text(), $uppercase, $lowercase) = 'rdf-xml' or translate(text(), $uppercase, $lowercase) = 'xml' or translate(text(), $uppercase, $lowercase) = 'zip' or translate(text(), $uppercase, $lowercase) = 'png' or translate(text(), $uppercase, $lowercase) = 'png' or translate(text(), $uppercase, $lowercase) = 'gif' or translate(text(), $uppercase, $lowercase) = 'jp2' or translate(text(), $uppercase, $lowercase) = 'tiff' or translate(text(), $uppercase, $lowercase) = 'csv' or translate(text(), $uppercase, $lowercase) = 'mapbox-vector-tile']"/>
@@ -446,19 +433,17 @@
 		<!-- TODO: codelijst check moet niet-hoofdlettergevoelig zijn ?
 		Let op de manier van de codelijst checken, zie ook mediatype: alles naar kleine letters omschrijven
 		-->
-		<sch:rule id="Codelijst_protocol" etf_name="Codelijst protocol" context="//gmd:CI_OnlineResource/gmd:protocol/gmx:Anchor[text() = 'OGC:CSW' or text() = 'OGC:WMS' or text() = 'OGC:WMTS' or text() = 'OGC:WFS' or text() = 'OGC:WCS' or text() = 'OGC:WCTS' or text() = 'OGC:WPS' or text() = 'UKST' or text() = 'INSPIRE Atom' or text() = 'OGC:WFS-G' or text() = 'OGC:SOS' or text() = 'OGC:SPS' or text() = 'OGC:SAS' or text() = 'OGC:WNS' or text() = 'OGC:ODS' or text() = 'OGC:OGS' or text() = 'OGC:OUS' or text() = 'OGC:OPS' or text() = 'OGC:ORS' or text() = 'OGC:SensorThings' or text() = 'W3C:SPARQL' or text() = 'OASIS:OData' or text() = 'OAS' or text() = 'landingpage'  or text() = 'dataset' or text() = 'application' or text() = 'UKST']">
+		<sch:rule id="Codelijst_protocol" etf_name="Codelijst protocol" context="//gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/gmx:Anchor[text() = 'OGC:CSW' or text() = 'OGC:WMS' or text() = 'OGC:WMTS' or text() = 'OGC:WFS' or text() = 'OGC:WCS' or text() = 'OGC:WCTS' or text() = 'OGC:WPS' or text() = 'UKST' or text() = 'INSPIRE Atom' or text() = 'OGC:WFS-G' or text() = 'OGC:SOS' or text() = 'OGC:SPS' or text() = 'OGC:SAS' or text() = 'OGC:WNS' or text() = 'OGC:ODS' or text() = 'OGC:OGS' or text() = 'OGC:OUS' or text() = 'OGC:OPS' or text() = 'OGC:ORS' or text() = 'OGC:SensorThings' or text() = 'W3C:SPARQL' or text() = 'OASIS:OData' or text() = 'OAS' or text() = 'landingpage'  or text() = 'dataset' or text() = 'application' or text() = 'UKST']">
 
 			<sch:let name="anchorUri" value="normalize-space(@xlink:href)"/>
 			<sch:let name="txt" value="normalize-space(text())"/>
 			<sch:let name="combination" value="concat($anchorUri, '=', $txt)"/>
-			<sch:let name="codelist" value="'http://www.opengeospatial.org/standards/cat=OGC:CSW, http://www.opengeospatial.org/standards/wms=OGC:WMS, http://www.opengeospatial.org/standards/wmts=OGC:WMTS, http://www.opengeospatial.org/standards/wfs=OGC:WFS, http://www.opengeospatial.org/standards/wcs=OGC:WCS, http://www.opengeospatial.org/standards/sos=OGC:SOS, =INSPIRE Atom, http://www.opengis.net/def/serviceType/ogc/csw=OGC:CSW, http://www.opengis.net/def/serviceType/ogc/wms=OGC:WMS, http://www.opengis.net/def/serviceType/ogc/wmts=OGC:WMTS, http://www.opengis.net/def/serviceType/ogc/wfs=OGC:WFS, http://www.opengis.net/def/serviceType/ogc/wcs=OGC:WCS, http://www.opengis.net/def/serviceType/ogc/sos=OGC:SOS, https://tools.ietf.org/html/rfc4287=INSPIRE Atom, http://www.opengeospatial.org/standards/=OGC:WCTS, http://www.opengeospatial.org/standards/wps=OGC:WPS, =OGC:WFS-G, http://www.opengeospatial.org/standards/sps=OGC:SPS, http://www.ogcnetwork.net/SAS=OGC:SAS, =OGC:WNS, http://www.opengeospatial.org/standards/ols#ODS=OGC:ODS, http://www.opengeospatial.org/standards/ols#OGS=OGC:OGS, http://www.opengeospatial.org/standards/ols#OUS=OGC:OUS, http://www.opengeospatial.org/standards/ols#OPS=OGC:OPS, http://www.opengeospatial.org/standards/ols#ORS=OGC:ORS, http://www.opengeospatial.org/standards/sensorthings=OGC:SensorThings, https://www.w3.org/TR/rdf-sparql-query/=W3C:SPARQL, https://www.oasis-open.org/committees/odata=OASIS:OData, https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md=OAS, =landingpage, =application, =dataset, =UKST'" />
+			<sch:let name="codelist" value="'http://www.opengis.net/def/serviceType/ogc/csw=OGC:CSW, http://www.opengis.net/def/serviceType/ogc/wms=OGC:WMS, http://www.opengis.net/def/serviceType/ogc/wmts=OGC:WMTS, http://www.opengis.net/def/serviceType/ogc/wfs=OGC:WFS, http://www.opengis.net/def/serviceType/ogc/wcs=OGC:WCS, http://www.opengis.net/def/serviceType/ogc/sos=OGC:SOS, https://tools.ietf.org/html/rfc4287=INSPIRE Atom, http://www.opengis.net/def/interface/ogcapi-features=OGC:API features, http://www.opengeospatial.org/standards/ols=OGC:OLS, http://www.opengis.net/def/serviceType/ogc/ols=OGC:OLS, http://www.opengeospatial.org/standards/sensorthings=OGC:SensorThings, https://www.w3.org/TR/rdf-sparql-query/=W3C:SPARQL, https://www.oasis-open.org/committees/odata=OASIS:OData, https://github.com/OAI/OpenAPI-Specification/=OAS, https://www.w3.org/TR/vocab-dcat-2/#Property:resource_landing_page=landingpage'" />
 
 			<sch:assert id="Codelijst_protocol:_geldige_combinatie_van_URI_en_waarde" etf_name="Codelijst protocol: geldige combinatie van URI en waarde" test="contains($codelist, $combination)">De combinatie van de URI '<sch:value-of select="$anchorUri"/>' en waarde '<sch:value-of select="$txt"/>' is geen geldige combinatie uit de codelijst protocol https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-protocol</sch:assert>
 
-			<sch:let name="codelistNew" value="'http://www.opengis.net/def/serviceType/ogc/csw=OGC:CSW, http://www.opengis.net/def/serviceType/ogc/wms=OGC:WMS, http://www.opengis.net/def/serviceType/ogc/wmts=OGC:WMTS, http://www.opengis.net/def/serviceType/ogc/wfs=OGC:WFS, http://www.opengis.net/def/serviceType/ogc/wcs=OGC:WCS, http://www.opengis.net/def/serviceType/ogc/sos=OGC:SOS, https://tools.ietf.org/html/rfc4287=INSPIRE Atom'" />
-			<sch:let name="codelistNewServiceTypes" value="'OGC:CSW, OGC:WMS, OGC:WFS, OGC:WMTS, OGC:SOS, OGC:WCS, INSPIRE Atom'"/>
-			<!-- <sch:assert id="Codelijst_protocol_oude_URI_in_gebruik" etf_name="Codelijst protocol: er zijn nog codes voor protocol in gebruik uit de codelijst protocol die gaan vervallen" test="contains($codelist, $combination)">De combinatie van de URI '<sch:value-of select="$anchorUri"/>' en waarde '<sch:value-of select="$txt"/>' komt binnenkort te vervallen uit de codelijst https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#codelist-protocol. Zie http://inspire.ec.europa.eu/metadata-codelist/ProtocolValue voor de codes die gebruikt gaan worden</sch:assert> -->
 		</sch:rule>
+
 
 
 		<sch:rule id="Codelijst_media_types" etf_name="Codelijst media types" context="//gmd:CI_OnlineResource/gmd:protocol/gmx:Anchor[translate(text(), $uppercase, $lowercase) = 'gml' or translate(text(), $uppercase, $lowercase) = 'kml' or translate(text(), $uppercase, $lowercase) = 'geojson' or translate(text(), $uppercase, $lowercase) = 'gpkg' or translate(text(), $uppercase, $lowercase) = 'json' or translate(text(), $uppercase, $lowercase) = 'jsonld' or translate(text(), $uppercase, $lowercase) = 'rdf-xml' or translate(text(), $uppercase, $lowercase) = 'xml' or translate(text(), $uppercase, $lowercase) = 'zip' or translate(text(), $uppercase, $lowercase) = 'png' or translate(text(), $uppercase, $lowercase) = 'png' or translate(text(), $uppercase, $lowercase) = 'gif' or translate(text(), $uppercase, $lowercase) = 'jp2' or translate(text(), $uppercase, $lowercase) = 'tiff' or translate(text(), $uppercase, $lowercase) = 'csv' or translate(text(), $uppercase, $lowercase) = 'mapbox-vector-tile']">
@@ -539,18 +524,6 @@
 			<sch:report id="Datum_ISO_nr_394_en_datum_type_ISO_nr_395_info" etf_name="Datum (ISO nr. 394) en datum type (ISO nr. 395) info" test="$conformity_SpecCreationDate or $conformity_SpecPublicationDate or $conformity_SpecRevisionDate">Datum (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatiedatum) en datum type (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#specificatiedatum-type) zijn aanwezig voor specificatie.</sch:report>
 		</sch:rule>
 
-		<!-- INSPIRE specification titel -->
-		<!--
-			<sch:rule id="INSPIRE_specificaties" etf_name="INSPIRE specificaties" context="//gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation">
-		    <sch:let name="all_conformity_Spec_Titles" value="ancestor::gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title"/>
-			<sch:let name="INSPIRE_conformity_Spec_Title" value="normalize-space(gmd:title/gco:CharacterString)"/>
-				<sch:assert id="INSPIRE_Specificatie_ISO_nr_360_titel" etf_name="INSPIRE Specificatie (ISO nr. 360) titel" test="$all_conformity_Spec_Titles[normalize-space(gco:CharacterString/text()) =  'VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens']">Specificatie (ISO nr. 360) verwijst niet naar de VERORDENING (EU) Nr. 1089/2010 VAN DE COMMISSIE van 23 november 2010 ter uitvoering van Richtlijn 2007/2/EG van het Europees Parlement en de Raad betreffende de interoperabiliteit van verzamelingen ruimtelijke gegevens en van diensten met betrekking tot ruimtelijke gegevens</sch:assert>
-				<sch:report id="INSPIRE_Specificatie_ISO_nr_360_titel_info" etf_name="INSPIRE Specificatie (ISO nr. 360) titel info" test="$INSPIRE_conformity_Spec_Title">Specificatie titel (ISO nr. 360) is: <sch:value-of select="$INSPIRE_conformity_Spec_Title"/></sch:report>
-			</sch:rule>
-		-->
-		<!-- eind  INSPIRE specification titel -->
-
-
    		<!-- Resolutie en toepassingschaal -->
 		<sch:rule id="Resolutie_en_toepassingschaal" etf_name="Resolutie en toepassingschaal" context="//gmd:identificationInfo/gmd:MD_DataIdentification">
        			<sch:let name="distance" value="gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/*/text()"/>
@@ -619,16 +592,22 @@
 			<sch:let name="thesaurus_CreationDate" value="((number(substring(substring-before($thesaurus_creationDateString,'-'),1,4)) &gt; 1000 ))"/>
 			<sch:let name="thesaurus_RevisionDate" value="((number(substring(substring-before($thesaurus_revisionDateString,'-'),1,4)) &gt; 1000 ))"/>
 
-            <!-- Thesaurus titel alleen voor INSPIRE -->
-			<!--
-			<sch:assert id="INSPIRE_Thesaurus_title_ISO_nr_360" etf_name="INSPIRE Thesaurus title (ISO nr. 360)" test="$all_thesaurus_Titles[normalize-space(*/text()) = 'GEMET - INSPIRE themes, version 1.0']">Thesaurus title (ISO nr. 360) ontbreekt of heeft de verkeerde waarde. Eén Thesaurus titel dient de waarde 'GEMET - INSPIRE themes, version 1.0 ' te bevatten.</sch:assert>
-			 <sch:report id="INSPIRE_Thesaurus_title_ISO_nr_360_info" etf_name="INSPIRE Thesaurus title (ISO nr. 360) info" test="$thesaurus_Title">Thesaurus title (ISO nr. 360) is: <sch:value-of select="$thesaurus_Title"/></sch:report>
-			-->
-        	<!-- Eind Thesaurus titel alleen voor INSPIRE-->
-
         	<!-- Thesaurus datum en datumtype 5.2.15 Thesaurusdatum https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#thesaurusdatum en
 			 5.2.16 Thesaurusdatum type https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#thesaurusdatum-type -->
 			<sch:assert id="thesaurus_datum_ISO_nr394_en_datumtype_ISO_nr_395" etf_name="thesaurus datum (ISO nr.394) en datumtype (ISO nr. 395)" test="($thesaurus_TitleString or $thesaurus_TitleURI) and ($thesaurus_CreationDate or $thesaurus_PublicationDate or $thesaurus_RevisionDate)">Een thesaurus datum (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#thesaurusdatum) en datumtype (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#thesaurusdatum-type) is verplicht als Thesaurus title (https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#thesaurus) is opgegeven. Datum formaat moet YYYY-MM-DD zijn. (Thesaurus: <sch:value-of select="$thesaurus_TitleString"/><sch:value-of select="$thesaurus_TitleURI"/>) </sch:assert>
+
+		</sch:rule>
+
+		<sch:rule id="Temporele_dekking" etf_name="Temporele dekking" context="//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/*/gmd:extent">
+			<!-- section 6.2 https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Tempporele-dekking -->
+			<sch:let name="timePeriodBegin" value="gml:TimePeriod/gml:beginPosition"/>
+			<sch:let name="timePeriodEnd" value="gml:TimePeriod/gml:endPosition"/>
+			<sch:let name="timePosition" value="gml:TimeInstant/gml:timePosition"/>
+			<sch:assert id="Temporele_dekking_period_of_position" etf_name="Temporele dekking is een periode of individuele datum" test="$timePeriodBegin or $timePosition">De Temporele dekking is opgegeven. Er moet dan een tijdsperiode of individuele datum worden opgegeven conform https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Tempporele-dekking, maar dat is niet het geval.</sch:assert>
+
+			<sch:assert id="Temporele_dekking_beginposition_indeterminate" etf_name="Het attribuut indeterminatePosition ontbreekt bij een lege beginPosition" test="(string-length(normalize-space($timePeriodBegin)) &lt; 4 and ($timePeriodBegin/@indeterminatePosition='unknown' or $timePeriodBegin/@indeterminatePosition='now')) or string-length(normalize-space($timePeriodBegin)) &gt; 3">De beginPosition van de Temporele Dekking is opgegeven, maar leeg. In dat geval moet het attribuut indeterminatePosition opgegeven zijn, maar dat is niet het geval. Zie https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Tempporele-dekking</sch:assert>
+
+			<sch:assert id="Temporele_dekking_endposition_indeterminate" etf_name="Het attribuut indeterminatePosition ontbreekt bij een lege endPosition" test="(string-length(normalize-space($timePeriodEnd)) &lt; 4 and ($timePeriodEnd/@indeterminatePosition='unknown' or $timePeriodEnd/@indeterminatePosition='now')) or string-length(normalize-space($timePeriodEnd)) &gt; 3">De endPosition van de Temporele Dekking is opgegeven, maar leeg. In dat geval moet het attribuut indeterminatePosition opgegeven zijn, maar dat is niet het geval. Zie https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Tempporele-dekking</sch:assert>
 
 		</sch:rule>
 
@@ -682,14 +661,10 @@ Deze keywords moeten uit GEMET- INSPIRE themes thesaurus komen. Gevonden keyword
 
 		<!--eind  Controlled originating vocabulary -  -->
 
-
-		 <!--  voor externe thesaurus
- 		-->
-		 <!--
-     		<sch:assert id="INSPIRE_thesaurus_Trefwoorden_ISO_nr_53" etf_name="INSPIRE thesaurus Trefwoorden (ISO nr. 53)" test="$gemet-nl//skos:prefLabel[normalize-space(text()) = normalize-space(current())]">Keywords [<sch:value-of select="$gemet-nl//skos:prefLabel "/>]   moeten uit GEMET- INSPIRE themes thesaurus komen. gevonden keywords: <sch:value-of select="."/></sch:assert>
-		 -->
-
 		</sch:rule>
+
+		<-- Rule id="Waarschuwingen_-_INSPIRE_dataservice_koppeling" moved to dataset/sch_19115_warnings.xml -->
+
 
 	</sch:pattern>
 </sch:schema>
