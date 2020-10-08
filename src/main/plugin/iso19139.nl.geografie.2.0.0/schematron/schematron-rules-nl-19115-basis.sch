@@ -663,7 +663,7 @@ Deze keywords moeten uit GEMET- INSPIRE themes thesaurus komen. Gevonden keyword
 
 		</sch:rule>
 
-		<-- Rule id="Waarschuwingen_-_INSPIRE_dataservice_koppeling" moved to dataset/sch_19115_warnings.xml -->
+		<!-- Rule id="Waarschuwingen_-_INSPIRE_dataservice_koppeling" moved to dataset/sch_19115_warnings.xml -->
 
 
 	</sch:pattern>
