@@ -769,6 +769,25 @@
 
       </tab>
 
+
+      <!-- Elements that should not use the "flat" mode -->
+      <flatModeExceptions>
+        <for name="gmd:descriptiveKeywords"/>
+        <for name="gmd:otherConstraints"/>
+        <for name="gmd:useConstraints"/>
+        <for name="gmd:keyword"/>
+        <for name="gmd:spatialResolution"/>
+        <for name="gmd:pointOfContact"/>
+        <for name="gmd:distributor"/>
+        <for name="gmd:contact" excludeFrom="gmd:MD_MaintenanceInformation"/>
+        <for name="gmd:processor"/>
+        <for name="gmd:topicCategory"/>
+        <for name="gmd:distributionFormat"/>
+        <for name="gmd:resourceConstraints"/>
+        <for name="gmd:dateOfNextUpdate" />
+        <for name="gmd:report" />
+      </flatModeExceptions>
+
       <!--
       To configure the type of transformations
       or the number of keyword allowed for e
