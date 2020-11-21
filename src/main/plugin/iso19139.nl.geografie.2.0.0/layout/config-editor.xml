@@ -546,6 +546,7 @@
             </template>
           </action>
 
+          <field name="MD_SecurityConstraints" or="resourceConstraints" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints[gmd:MD_SecurityConstraints]" />
 
           <field name="pointOfContact" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact"/>
 
@@ -743,7 +744,7 @@
               <snippet>
                 <gmd:contact>
                   <gmd:CI_ResponsibleParty>
-                    <individualName><gco:CharacterString /></individualName>
+                    <gmd:individualName><gco:CharacterString /></gmd:individualName>
                     <gmd:organisationName><gco:CharacterString /></gmd:organisationName>
                     <gmd:contactInfo>
                       <gmd:CI_Contact>
@@ -1028,99 +1029,7 @@
           <!-- 29 pointofcontact-->
 
           <!--           5.44 Verantwoordelijke organisatie bron ... -->
-          <field name="pointOfContact" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact" templateModeOnly="true" notDisplayedIfMissing="true" del="." if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification) > 0">
-
-            <template>
-              <values readonlyIf="count(@xlink:href) > 0">
-                <key label="individualName" tooltip="gmd:individualName" xpath="gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
-                <!--<key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>-->
-                <key label="organisationName"
-                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName"
-                     use="data-gn-keyword-picker"
-                     tooltip="gmd:organisationName">
-                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
-                                       data-template-field="true"
-                                       data-template-field-element="gco:CharacterString"
-                                       data-template-field-element-with-concept-id="gmx:Anchor"
-                                       data-template-field-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/*/text()"
-                                       data-template-field-concept-id-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor/@xlink:href"
-                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
-                </key>
-                <key label="positionName" tooltip="gmd:positionName" xpath="gmd:CI_ResponsibleParty/gmd:positionName/gco:CharacterString"/>
-                <key label="voice" tooltip="gmd:voice" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
-                <key label="facsimile" tooltip="gmd:facsimile" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:facsimile/gco:CharacterString"/>
-                <key label="deliveryPoint" tooltip="gmd:deliveryPoint" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString"/>
-                <key label="city" tooltip="gmd:city" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString"/>
-                <key label="administrativeArea" tooltip="gmd:administrativeArea" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea/gco:CharacterString"/>
-                <key label="postalCode" tooltip="gmd:postalCode" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString"/>
-                <key label="country" tooltip="gmd:country" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString"/>
-                <key label="electronicMailAddress" tooltip="gmd:electronicMailAddress" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString" use="email" required="true"/>
-                <key label="onlineResource" tooltip="gmd:onlineResource" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
-                <key label="role" required="true" tooltip="gmd:CI_RoleCode" xpath="gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue">
-                  <codelist name="gmd:CI_RoleCode"/>
-                </key>
-              </values>
-              <snippet>
-                <gmd:pointOfContact>
-                  <gmd:CI_ResponsibleParty>
-                    <gmd:individualName>
-                      <gco:CharacterString>{{individualName}}</gco:CharacterString>
-                    </gmd:individualName>
-                    <gmd:organisationName>{{organisationName}}</gmd:organisationName>
-                    <gmd:positionName>
-                      <gco:CharacterString>{{positionName}}</gco:CharacterString>
-                    </gmd:positionName>
-                    <gmd:contactInfo>
-                      <gmd:CI_Contact>
-                        <gmd:phone>
-                          <gmd:CI_Telephone>
-                            <gmd:voice>
-                              <gco:CharacterString>{{voice}}</gco:CharacterString>
-                            </gmd:voice>
-                            <gmd:facsimile>
-                              <gco:CharacterString>{{facsimile}}</gco:CharacterString>
-                            </gmd:facsimile>
-                          </gmd:CI_Telephone>
-                        </gmd:phone>
-                        <gmd:address>
-                          <gmd:CI_Address>
-                            <gmd:deliveryPoint>
-                              <gco:CharacterString>{{deliveryPoint}}</gco:CharacterString>
-                            </gmd:deliveryPoint>
-                            <gmd:city>
-                              <gco:CharacterString >{{city}}</gco:CharacterString>
-                            </gmd:city>
-                            <gmd:administrativeArea>
-                              <gco:CharacterString >{{administrativeArea}}</gco:CharacterString>
-                            </gmd:administrativeArea>
-                            <gmd:postalCode>
-                              <gco:CharacterString >{{postalCode}}</gco:CharacterString>
-                            </gmd:postalCode>
-                            <gmd:country>
-                              <gco:CharacterString >{{country}}</gco:CharacterString>
-                            </gmd:country>
-                            <gmd:electronicMailAddress>
-                              <gco:CharacterString >{{electronicMailAddress}}</gco:CharacterString>
-                            </gmd:electronicMailAddress>
-                          </gmd:CI_Address>
-                        </gmd:address>
-                        <gmd:onlineResource>
-                          <gmd:CI_OnlineResource>
-                            <gmd:linkage>
-                              <gmd:URL>{{onlineResource}}</gmd:URL>
-                            </gmd:linkage>
-                          </gmd:CI_OnlineResource>
-                        </gmd:onlineResource>
-                      </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    <gmd:role>
-                      <gmd:CI_RoleCode codeListValue="{{role}}" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
-                    </gmd:role>
-                  </gmd:CI_ResponsibleParty>
-                </gmd:pointOfContact>
-              </snippet>
-            </template>
-          </field>
+          <field name="pointOfContact" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact"/>
 
           <action type="add" btnLabel="addPointOfContact" name="pointOfContact" or="pointOfContact" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
             <template>
@@ -1496,101 +1405,9 @@
 
           <!-- distributeur -->
           <field name="distributorContact"
-            templateModeOnly="true" notDisplayedIfMissing="true"
-            removable="true" xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributor/gmd:MD_Distributor/gmd:distributorContact"
-            del="../.." if="count(gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution) > 0">
-
-            <template>
-              <values readonlyIf="count(@xlink:href) > 0">
-                <key label="individualName" tooltip="gmd:individualName" xpath="gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
-                <!--<key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>-->
-                <key label="organisationName"
-                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName"
-                     use="data-gn-keyword-picker"
-                     tooltip="gmd:organisationName">
-                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
-                                       data-template-field="true"
-                                       data-template-field-element="gco:CharacterString"
-                                       data-template-field-element-with-concept-id="gmx:Anchor"
-                                       data-template-field-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/*/text()"
-                                       data-template-field-concept-id-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor/@xlink:href"
-                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
-                </key>
-                <key label="positionName" tooltip="gmd:positionName" xpath="gmd:CI_ResponsibleParty/gmd:positionName/gco:CharacterString"/>
-                <key label="voice" tooltip="gmd:voice" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
-                <key label="facsimile" tooltip="gmd:facsimile" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:facsimile/gco:CharacterString"/>
-                <key label="deliveryPoint" tooltip="gmd:deliveryPoint" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString"/>
-                <key label="city" tooltip="gmd:city" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString"/>
-                <key label="administrativeArea" tooltip="gmd:administrativeArea" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea/gco:CharacterString"/>
-                <key label="postalCode" tooltip="gmd:postalCode" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString"/>
-                <key label="country" tooltip="gmd:country" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString"/>
-                <key label="electronicMailAddress" tooltip="gmd:electronicMailAddress" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString" use="email" required="true"/>
-                <key label="onlineResource" tooltip="gmd:onlineResource" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
-                <key label="role" required="true" tooltip="gmd:CI_RoleCode" xpath="gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue">
-                  <codelist name="gmd:CI_RoleCode"/>
-                </key>
-              </values>
-              <snippet>
-                <gmd:distributorContact>
-                  <gmd:CI_ResponsibleParty>
-                    <gmd:individualName>
-                      <gco:CharacterString>{{individualName}}</gco:CharacterString>
-                    </gmd:individualName>
-                    <gmd:organisationName>{{organisationName}}</gmd:organisationName>
-                    <gmd:positionName>
-                      <gco:CharacterString>{{positionName}}</gco:CharacterString>
-                    </gmd:positionName>
-                    <gmd:contactInfo>
-                      <gmd:CI_Contact>
-                        <gmd:phone>
-                          <gmd:CI_Telephone>
-                            <gmd:voice>
-                              <gco:CharacterString>{{voice}}</gco:CharacterString>
-                            </gmd:voice>
-                            <gmd:facsimile>
-                              <gco:CharacterString>{{facsimile}}</gco:CharacterString>
-                            </gmd:facsimile>
-                          </gmd:CI_Telephone>
-                        </gmd:phone>
-                        <gmd:address>
-                          <gmd:CI_Address>
-                            <gmd:deliveryPoint>
-                              <gco:CharacterString>{{deliveryPoint}}</gco:CharacterString>
-                            </gmd:deliveryPoint>
-                            <gmd:city>
-                              <gco:CharacterString >{{city}}</gco:CharacterString>
-                            </gmd:city>
-                            <gmd:administrativeArea>
-                              <gco:CharacterString >{{administrativeArea}}</gco:CharacterString>
-                            </gmd:administrativeArea>
-                            <gmd:postalCode>
-                              <gco:CharacterString >{{postalCode}}</gco:CharacterString>
-                            </gmd:postalCode>
-                            <gmd:country>
-                              <gco:CharacterString >{{country}}</gco:CharacterString>
-                            </gmd:country>
-                            <gmd:electronicMailAddress>
-                              <gco:CharacterString >{{electronicMailAddress}}</gco:CharacterString>
-                            </gmd:electronicMailAddress>
-                          </gmd:CI_Address>
-                        </gmd:address>
-                        <gmd:onlineResource>
-                          <gmd:CI_OnlineResource>
-                            <gmd:linkage>
-                              <gmd:URL>{{onlineResource}}</gmd:URL>
-                            </gmd:linkage>
-                          </gmd:CI_OnlineResource>
-                        </gmd:onlineResource>
-                      </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    <gmd:role>
-                      <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="{{role}}"/>
-                    </gmd:role>
-                  </gmd:CI_ResponsibleParty>
-                </gmd:distributorContact>
-              </snippet>
-            </template>
-          </field>
+             notDisplayedIfMissing="true"
+             xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributor/gmd:MD_Distributor/gmd:distributorContact"/>
+            
 
           <action type="add" btnLabel="addDistributor" or="distributor" in="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution">
             <template>
@@ -2070,98 +1887,7 @@
           </action>
 
           <!--  5.49 Verantwoordelijke organisatie metadata  -->
-          <field name="metadataPointOfContact" templateModeOnly="true" notDisplayedIfMissing="true" xpath="/gmd:MD_Metadata/gmd:contact" del=".">
-            <template>
-              <values readonlyIf="count(@xlink:href) > 0">
-                <key label="individualName" tooltip="gmd:individualName" xpath="gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
-                <!--<key label="organisationName" required="true" tooltip="gmd:organisationName" xpath="gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>-->
-                <key label="organisationName"
-                     xpath="gmd:CI_ResponsibleParty/gmd:organisationName"
-                     use="data-gn-keyword-picker"
-                     tooltip="gmd:organisationName">
-                  <directiveAttributes data-thesaurus-key="external.theme.organisatie"
-                                       data-template-field="true"
-                                       data-template-field-element="gco:CharacterString"
-                                       data-template-field-element-with-concept-id="gmx:Anchor"
-                                       data-template-field-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/*/text()"
-                                       data-template-field-concept-id-value="eval#gmd:CI_ResponsibleParty/gmd:organisationName/gmx:Anchor/@xlink:href"
-                                       data-thesaurus-concept-id-attribute="xlinkCOLONhref"/>
-                </key>
-                <key label="positionName" tooltip="gmd:positionName" xpath="gmd:CI_ResponsibleParty/gmd:positionName/gco:CharacterString"/>
-                <key label="voice" tooltip="gmd:voice" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
-                <key label="facsimile" tooltip="gmd:facsimile" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:facsimile/gco:CharacterString"/>
-                <key label="deliveryPoint" tooltip="gmd:deliveryPoint" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString"/>
-                <key label="city" tooltip="gmd:city" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString"/>
-                <key label="administrativeArea" tooltip="gmd:administrativeArea" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea/gco:CharacterString"/>
-                <key label="postalCode" tooltip="gmd:postalCode" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString"/>
-                <key label="country" tooltip="gmd:country" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString"/>
-                <key label="electronicMailAddress" tooltip="gmd:electronicMailAddress" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString" use="email" required="true"/>
-                <key label="onlineResource" tooltip="gmd:onlineResource" xpath="gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
-                <key label="role" required="true" tooltip="gmd:CI_RoleCode" xpath="gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue">
-                  <codelist name="gmd:CI_RoleCode"/>
-                </key>
-              </values>
-              <snippet>
-                <gmd:contact>
-                  <gmd:CI_ResponsibleParty>
-                    <gmd:individualName>
-                      <gco:CharacterString>{{individualName}}</gco:CharacterString>
-                    </gmd:individualName>
-                    <gmd:organisationName>{{organisationName}}</gmd:organisationName>
-                    <gmd:positionName>
-                      <gco:CharacterString>{{positionName}}</gco:CharacterString>
-                    </gmd:positionName>
-                    <gmd:contactInfo>
-                      <gmd:CI_Contact>
-                        <gmd:phone>
-                          <gmd:CI_Telephone>
-                            <gmd:voice>
-                              <gco:CharacterString>{{voice}}</gco:CharacterString>
-                            </gmd:voice>
-                            <gmd:facsimile>
-                              <gco:CharacterString>{{facsimile}}</gco:CharacterString>
-                            </gmd:facsimile>
-                          </gmd:CI_Telephone>
-                        </gmd:phone>
-                        <gmd:address>
-                          <gmd:CI_Address>
-                            <gmd:deliveryPoint>
-                              <gco:CharacterString>{{deliveryPoint}}</gco:CharacterString>
-                            </gmd:deliveryPoint>
-                            <gmd:city>
-                              <gco:CharacterString >{{city}}</gco:CharacterString>
-                            </gmd:city>
-                            <gmd:administrativeArea>
-                              <gco:CharacterString >{{administrativeArea}}</gco:CharacterString>
-                            </gmd:administrativeArea>
-                            <gmd:postalCode>
-                              <gco:CharacterString >{{postalCode}}</gco:CharacterString>
-                            </gmd:postalCode>
-                            <gmd:country>
-                              <gco:CharacterString >{{country}}</gco:CharacterString>
-                            </gmd:country>
-                            <gmd:electronicMailAddress>
-                              <gco:CharacterString >{{electronicMailAddress}}</gco:CharacterString>
-                            </gmd:electronicMailAddress>
-                          </gmd:CI_Address>
-                        </gmd:address>
-                        <gmd:onlineResource>
-                          <gmd:CI_OnlineResource>
-                            <gmd:linkage>
-                              <gmd:URL>{{onlineResource}}</gmd:URL>
-                            </gmd:linkage>
-                          </gmd:CI_OnlineResource>
-                        </gmd:onlineResource>
-                      </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    <gmd:role>
-                      <gmd:CI_RoleCode codeListValue="{{role}}" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"/>
-                    </gmd:role>
-                  </gmd:CI_ResponsibleParty>
-                </gmd:contact>
-              </snippet>
-            </template>
-          </field>
+          <field name="metadataPointOfContact" notDisplayedIfMissing="true" xpath="/gmd:MD_Metadata/gmd:contact" del="." />
 
           <action type="add" name="metadataPointOfContact" btnLabel="addPointOfContact" or="contact" in="/gmd:MD_Metadata">
             <template>
