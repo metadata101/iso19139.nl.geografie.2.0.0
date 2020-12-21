@@ -11,7 +11,7 @@
 
   <groupId>org.geonetwork-opensource</groupId>
   <artifactId>schema-iso19139.nl.geografie.2.0.0</artifactId>
-  <version>3.10.5-0</version>
+  <version>3.10.5-1</version>
 
   <name>ISO 19139 Dutch Data Profile 2.0.0</name>
   <description>
