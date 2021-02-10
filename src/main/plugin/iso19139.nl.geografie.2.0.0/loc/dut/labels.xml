@@ -805,16 +805,9 @@
     <description>In dit element wordt de waarde die een dataset uniek identificeert opgenomen. Er wordt sterk geadviseerd om gebruik te maken van een anchor met een verwijzing naar een URI, voor INSPIRE datasets is het gebruik van een URI verplicht. Deze identifier moet geldig en beschikbaar blijven voor de gehele beschikbaarheidstermijn van de dataset. Lees verder &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron' target='_blank'&gt;unieke identifier van de bron&lt;/a&gt; en &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen' target='_blank'&gt;string elementen&lt;/a&gt;.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:individualName" context="/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:individualName">
+  <element name="gmd:individualName">
     <label>Naam Contactpersoon</label>
-    <description>Volledige naam van de contactpersoon.</description>
-  </element>
-  <element name="gmd:individualName" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:individualName">
-    <label>Naam Contactpersoon</label>
-    <description>Volledige naam van de contactpersoon.</description>
-  </element>
-  <element name="gmd:individualName" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributor/gmd:MD_Distributor/gmd:distributorContact/gmd:CI_ResponsibleParty/gmd:individualName">
-    <label>Naam Contactpersoon</label>
+    <btnLabel>Naam toevoegen</btnLabel>
     <description>Volledige naam van de contactpersoon.</description>
   </element>
   <!-- ==================================================== -->

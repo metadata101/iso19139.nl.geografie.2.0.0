@@ -365,7 +365,6 @@
   <restrictions>Beperkingen</restrictions>
   <addParentIdentifier>Voeg parent toe</addParentIdentifier>
 
-  <Basis>Basis</Basis>
   <Extra>Extra</Extra>
 
   <!-- missing-->
@@ -374,7 +373,7 @@
   <distributionFormat>Distributie formaat</distributionFormat>
   <DQ_ConformanceResult>Conformiteit</DQ_ConformanceResult>
   <addLegaluseConstraints>Juridische gebruiks beperkingen toevoegen</addLegaluseConstraints>
-
+  <referenceSystemIdentifier>Referentie Systeem Identifier</referenceSystemIdentifier>
   <ConformanceResult>Conformiteit</ConformanceResult>
   <DomainConsistency>Conformiteit met een domein specificatie</DomainConsistency>
   <TopologicalConsistency>Topologische samenhang</TopologicalConsistency>

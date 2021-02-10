@@ -38,8 +38,7 @@
   <!-- View and tabs -->
   <advanced>Full</advanced>
   <dutchprofile>Dutch profile</dutchprofile>
-  <default>Simple</default>
-  <Basis>Standard</Basis>
+  <default>Standard</default>
   <simple>Simple</simple>
   <inspire>INSPIRE</inspire>
   <inspire_sds>SDS</inspire_sds>

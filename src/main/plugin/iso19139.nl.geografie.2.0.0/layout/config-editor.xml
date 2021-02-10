@@ -385,7 +385,7 @@
     <!-- ======================================= -->
     <!-- =========== default =================== -->
     <!-- ======================================= -->
-    <view name="Basis" default="true" hideTimeInCalendar="true" upAndDownControlHidden="true" displayTooltips="true" displayTooltipsMode="icon">
+    <view name="default" default="true" hideTimeInCalendar="true" upAndDownControlHidden="true" displayTooltips="true" displayTooltipsMode="icon">
       <sidePanel>
         <directive data-gn-validation-report=""/>
         <directive data-gn-suggestion-list=""/>
