@@ -600,9 +600,9 @@
 
 		<sch:rule id="Temporele_dekking" etf_name="Temporele dekking" context="//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/*/gmd:extent">
 			<!-- section 6.2 https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Tempporele-dekking -->
-			<sch:let name="timePeriodBegin" value="gml:TimePeriod/gml:beginPosition"/>
-			<sch:let name="timePeriodEnd" value="gml:TimePeriod/gml:endPosition"/>
-			<sch:let name="timePosition" value="gml:TimeInstant/gml:timePosition"/>
+			<sch:let name="timePeriodBegin" value="gml:TimePeriod/*/gml:beginPosition"/>
+			<sch:let name="timePeriodEnd" value="gml:TimePeriod/*/gml:endPosition"/>
+			<sch:let name="timePosition" value="gml:TimeInstant/*/gml:timePosition"/>
 			<sch:assert id="Temporele_dekking_period_of_position" etf_name="Temporele dekking is een periode of individuele datum" test="$timePeriodBegin or $timePosition">De Temporele dekking is opgegeven. Er moet dan een tijdsperiode of individuele datum worden opgegeven conform https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Tempporele-dekking, maar dat is niet het geval.</sch:assert>
 
 			<sch:assert id="Temporele_dekking_beginposition_indeterminate" etf_name="Het attribuut indeterminatePosition ontbreekt bij een lege beginPosition" test="(string-length(normalize-space($timePeriodBegin)) &lt; 4 and ($timePeriodBegin/@indeterminatePosition='unknown' or $timePeriodBegin/@indeterminatePosition='now')) or string-length(normalize-space($timePeriodBegin)) &gt; 3">De beginPosition van de Temporele Dekking is opgegeven, maar leeg. In dat geval moet het attribuut indeterminatePosition opgegeven zijn, maar dat is niet het geval. Zie https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Tempporele-dekking</sch:assert>
