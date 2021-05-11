@@ -722,7 +722,18 @@
       </xsl:for-each>
     </xsl:for-each>
 
-
+    <xsl:for-each
+        select="gmd:graphicOverview/gmd:MD_BrowseGraphic[normalize-space(gmd:fileName/gco:CharacterString) != '']">
+        <xsl:variable name="fileName" select="gmd:fileName/gco:CharacterString"/>
+        <xsl:variable name="fileDescr" select="gmd:fileDescription/gco:CharacterString"/>
+        <xsl:variable name="thumbnailType"
+                      select="if (position() = 1) then 'thumbnail' else 'overview'"/>
+        <!-- First thumbnail is flagged as thumbnail and could be considered the main one -->
+        <Field name="image"
+               string="{concat($thumbnailType, '|', $fileName, '|', $fileDescr)}"
+               store="true" index="false"/>
+      </xsl:for-each>
+    </xsl:for-each>
 
 
     <xsl:variable name="protocolText">
