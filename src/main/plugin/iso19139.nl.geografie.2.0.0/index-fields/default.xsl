@@ -720,9 +720,8 @@
           <Field name="agg_use" string="true" store="false" index="true"/>
         </xsl:if>
       </xsl:for-each>
-    </xsl:for-each>
 
-    <xsl:for-each
+      <xsl:for-each
         select="gmd:graphicOverview/gmd:MD_BrowseGraphic[normalize-space(gmd:fileName/gco:CharacterString) != '']">
         <xsl:variable name="fileName" select="gmd:fileName/gco:CharacterString"/>
         <xsl:variable name="fileDescr" select="gmd:fileDescription/gco:CharacterString"/>
