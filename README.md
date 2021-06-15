@@ -84,7 +84,7 @@ If there's no changes to the profile Java code or the configuration (config-spri
 ### Setup xml snippets
 
 The editor uses a snippet-directive for the conformance field which allows to select a snippet from the catalogue, to be introduced at that location.
-Unzip [https://github.com/metadata101/iso19139.nl.geografie.2.0.0/raw/3.10.x/snippets.zip](snippets.zip) to a folder, use import (select type 'subtemplate') to import all the files into the catalogue.
+Unzip [snippets.zip](https://github.com/metadata101/iso19139.nl.geografie.2.0.0/raw/3.10.x/snippets.zip) to a folder, use import (select type 'subtemplate') to import all the files into the catalogue.
 
 ### Setup thesauri
 
