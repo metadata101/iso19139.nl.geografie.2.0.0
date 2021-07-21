@@ -51,7 +51,7 @@
       <xsl:apply-templates select="@*"/>
       <xsl:attribute name="codeList">
         <xsl:value-of
-          select="concat('http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#',local-name(.))"/>
+          select="concat('http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#',local-name(.))"/>
       </xsl:attribute>
 
       <xsl:if test="string(@codeListValue)">

@@ -48,7 +48,7 @@
 
       <xsl:if test="not(gmd:role)">
         <gmd:role>
-          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+          <gmd:CI_RoleCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
                            codeListValue=""/>
         </gmd:role>
       </xsl:if>

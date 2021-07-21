@@ -705,7 +705,7 @@
 
                 <gmd:DQ_Scope>
                   <gmd:level>
-                    <gmd:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset"/>
+                    <gmd:MD_ScopeCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset"/>
                   </gmd:level>
                 </gmd:DQ_Scope>
 
@@ -933,7 +933,7 @@
                 <gmd:resourceMaintenance>
                   <gmd:MD_MaintenanceInformation>
                     <gmd:maintenanceAndUpdateFrequency>
-                      <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml"
+                      <gmd:MD_MaintenanceFrequencyCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/codelist/gmxCodelists.xml"
                                                        codeListValue=""></gmd:MD_MaintenanceFrequencyCode>
                     </gmd:maintenanceAndUpdateFrequency>
                     <gmd:dateOfNextUpdate><gco:Date /></gmd:dateOfNextUpdate>
@@ -1554,7 +1554,7 @@
               <snippet>
                 <gmd:DQ_Scope>
                   <gmd:level>
-                    <gmd:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset"/>
+                    <gmd:MD_ScopeCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset"/>
                   </gmd:level>
                 </gmd:DQ_Scope>
               </snippet>
@@ -1950,7 +1950,7 @@
                       </gmd:CI_Contact>
                     </gmd:contactInfo>
                     <gmd:role>
-                      <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact"/>
+                      <gmd:CI_RoleCode codeList="http://schemas.opengis.net/iso/19139/20060504/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact"/>
                     </gmd:role>
                   </gmd:CI_ResponsibleParty>
                 </gmd:contact>
