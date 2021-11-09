@@ -41,7 +41,7 @@
   <inspire>INSPIRE</inspire>
   <inspire_sds>SDS</inspire_sds>
 
-  <overviews>Overviews</overviews>
+  <overviews>Overzicht</overviews>
   <metadataInXML>XML</metadataInXML>
   <providedBy>Provided by</providedBy>
   <shareOnSocialSite>Share on social sites</shareOnSocialSite>
@@ -65,6 +65,7 @@
   <applicationSchemaInfo>Schema info</applicationSchemaInfo>
   <noThesaurusName>Trefwoorden</noThesaurusName>
   <bboxesSection>Geografische dekking</bboxesSection>
+  <spatialExtent>Ruimtelijke dekking</spatialExtent>
 
   <!-- INSPIRE view labels and help -->
   <url>url</url>
@@ -205,8 +206,8 @@
   <!-- New strings added for the AngularJS editor -->
   <!-- View and tabs -->
   <viewTitle><h3>Nederlands profiel op ISO 19115 voor Geografie versie 2.1.0 - Basis</h3></viewTitle>
-  <viewDescription><div>Het basis formulier kan gebruikt worden voor het bewerken van metadata van Nederlandstalige datasets die gebaseerd zijn op het Rijksdriehoekstelsel. 
-  Dit formulier toont een beperkte set van elementen en doet een aantal aannames. Voor het bewerken van alle elementen uit het Nederlands profiel gebruikt u het formulier met titel 
+  <viewDescription><div>Het basis formulier kan gebruikt worden voor het bewerken van metadata van Nederlandstalige datasets die gebaseerd zijn op het Rijksdriehoekstelsel.
+  Dit formulier toont een beperkte set van elementen en doet een aantal aannames. Voor het bewerken van alle elementen uit het Nederlands profiel gebruikt u het formulier met titel
   "Nederlands Profiel" (via de weergave knop met het "oogje" aan de rechter zijkant).
   Op de <a href="catalog.search#/page/Help?page=Help" target="_blank">Help pagina</a> vindt u meer informatie over deze applicatie.</div></viewDescription>
 
@@ -275,7 +276,7 @@
   <purpose>Doel van vervaardiging</purpose>
   <supplementalInformation>Extra informatie</supplementalInformation>
   <edition>Versie</edition>
- 
+
   <ResourceCharacterset>Karakterset resource</ResourceCharacterset>
   <DescriptionTemporalExtent>Omschrijving temporele geldigheid</DescriptionTemporalExtent>
 
