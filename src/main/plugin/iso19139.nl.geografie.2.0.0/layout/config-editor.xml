@@ -398,7 +398,7 @@
 
         <directive data-gn-onlinesrc-list="" types="thumbnail|onlinesrc|parent|fcats|sibling|associated"/>
 
-        <section name="Basis">
+        <section name="dataIdentificatie">
 
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:title"/>
 
@@ -582,13 +582,13 @@
           </action>
 
         </section>
-        <section name="spatial">
+        <section name="spatialInfo">
 
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/
               gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox"/>
 
-          <action type="add" btnLabel="addGeographicBoundingBox" or="extent" name="geographicElement" 
-            forceLabel="true" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification" 
+          <action type="add" btnLabel="addGeographicBoundingBox" or="extent" name="geographicElement"
+            forceLabel="true" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
             if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement)=0">
             <template>
               <snippet>
@@ -615,7 +615,7 @@
               </snippet>
             </template>
           </action>
-          
+
           <!-- scale -->
           <field name="scale" or="MD_Resolution" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution[gmd:MD_Resolution/gmd:equivalentScale]"/>
           <action type="add" btnLabel="addScale" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale) = 0" name="equivalentScale" or="spatialResolution" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification">
@@ -1449,7 +1449,7 @@
           <field name="distributorContact"
              notDisplayedIfMissing="true"
              xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributor/gmd:MD_Distributor/gmd:distributorContact"/>
-            
+
 
           <action type="add" btnLabel="addDistributor" or="distributor" in="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution">
             <template>
