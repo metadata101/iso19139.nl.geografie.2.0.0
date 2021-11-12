@@ -199,7 +199,7 @@
   <element name="gmd:characterSet" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:characterSet">
     <label>Karakterset van de bron</label>
     <description>Volledige naam van de karakter codeerstandaard welke gebruikt is voor de dataset.</description>
-    
+
   </element>
   <!-- ==================================================== -->
   <element name="gmd:CI_Address" context="/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address">
@@ -360,7 +360,7 @@
   <element name="gmd:classification" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_SecurityConstraints/gmd:classification">
     <label>Veiligheidsrestricties</label>
     <description>Beperkingen die zijn opgelegd op basis van vertrouwelijkheid.</description>
-    
+
   </element>
   <!-- ==================================================== -->
   <element name="gmd:code" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
@@ -375,9 +375,9 @@
   <element name="gmd:code" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code">
     <label>Unieke Identifier van de bron</label>
     <description>
-    In dit element wordt de waarde die een dataset uniek identificeert opgenomen. Er wordt sterk geadviseerd om gebruik 
-    te maken van een anchor met een verwijzing naar een URI, voor INSPIRE datasets is het gebruik van een URI verplicht. 
-    Deze identifer moet  geldig en beschikbaar blijven voor de gehele beschikbaarheidstermijn van de  dataset. 
+    In dit element wordt de waarde die een dataset uniek identificeert opgenomen. Er wordt sterk geadviseerd om gebruik
+    te maken van een anchor met een verwijzing naar een URI, voor INSPIRE datasets is het gebruik van een URI verplicht.
+    Deze identifer moet  geldig en beschikbaar blijven voor de gehele beschikbaarheidstermijn van de  dataset.
     Lees verder over &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#unieke-identifier-van-de-bron' target='blank'&gt;string elementen&lt;/&gt;
     en &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#string-elementen' target='blank'&gt;string elementen&lt;/&gt;
     </description>
@@ -386,7 +386,7 @@
   <element name="gmd:code" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicDescription/gmd:geographicIdentifier/gmd:MD_Identifier/gmd:code">
     <label>Identifier Geografisch gebied</label>
     <description>
-      Referentie naar een geografisch gebied dat de spreiding van de data aangeeft. 
+      Referentie naar een geografisch gebied dat de spreiding van de data aangeeft.
       Gebruik bij voorkeur een waarde uit &lt;a href='https://standaarden.overheid.nl/owms/4.0/doc/waardelijsten' target='blank'&gt;OWMS waardelijsten&lt;/&gt;.
     </description>
   </element>
@@ -502,7 +502,7 @@
   <element name="gmd:dateType" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType">
     <label>Thesaurus datum type</label>
     <description>Dit element bevat het type gebeurtenis waar de datum betrekking op heeft.</description>
-    
+
   </element>
   <element name="gmd:dateType" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:aggregationInfo/gmd:MD_AggregateInformation/gmd:aggregateDataSetName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType">
     <label>Gerelateerde dataset datum type</label>
@@ -512,7 +512,7 @@
   <element name="gmd:dateType" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType">
     <label>Specificatie datum type</label>
     <description>Dit element bevat het type gebeurtenis waar de datum betrekking op heeft. Het is alleen verplicht als de dataset een INSPIRE bron is of als de informatie is gemodelleerd volgens een specifiek informatie model.Type gebeurtenis wordt gekozen uit codelijst B.5.2. Mogelijke gebeurtenissen zijn: creatie, publicatie of revisie. </description>
-    
+
   </element>
   <element name="gmd:dateType" context="/gmd:MD_Metadata/gmd:contentInfo/gmd:MD_FeatureCatalogueDescription/gmd:featureCatalogueCitation/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType">
     <label>Datum type</label>
@@ -562,7 +562,7 @@
   <element name="gmd:distance" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance">
     <label>Resolutie</label>
     <description>Indien er een resolutie gespecificeerd kan worden is het verplicht. Naast de resolutie moet de meeteenheid voor lengte uit de ISOStandardUnits, de meter, worden opgenomen. Resolutie is verplicht voor rasterdata. Voor vectordata laat u dit element leeg en vult u het element Toepassingsschaal in.</description>
-    
+
   </element>
 
   <!-- ==================================================== -->
@@ -721,7 +721,7 @@
   <element name="gmd:explanation" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:explanation">
     <label>Verklaring</label>
     <description>Het is alleen verplicht als de dataset een INSPIRE bron is of als de informatie is gemodelleerd volgens een specifiek informatie model. Aangegeven kan worden op welke punten de dataset wel of niet conform een informatiemodel of dataspecificatie is.</description>
-    
+
   </element>
   <!-- ==================================================== -->
   <element name="gmd:extent" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent">
@@ -921,7 +921,7 @@
   <element name="gmd:MD_CharacterSetCode" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:characterSet/gmd:MD_CharacterSetCode">
     <label>Karakterset van de bron</label>
     <description>Code van de karakterset die is gebruikt. Voor INSPIRE conditioneel, het is verplicht als voor de uitwisseling van de bron geen GML wordt gebruikt en de gebruikte karakterset geen utf8 is. </description>
-    
+
   </element>
   <!-- ==================================================== -->
   <element name="gmd:MD_ClassificationCode" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_SecurityConstraints/gmd:classification/gmd:MD_ClassificationCode">
@@ -1111,17 +1111,17 @@
   <element name="gmd:name" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name">
     <label>Naam distributie formaat</label>
     <description>Naam van het distributie formaat. Indien het een INSPIRE dataset is dient de naam van het distributie formaat opgenomen te worden. Deze informatie is te vinden in de INSPIRE dataspecificaties in de paragraaf genaamd Encoding</description>
-    
+
   </element>
   <element name="gmd:version" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:version">
     <label>Versie distributie formaat</label>
     <description>Versie  van het distributie formaat. Indien het een INSPIRE dataset is dient de versie van het distributie formaat opgenomen te worden.</description>
-    
+
   </element>
   <element name="gmd:specification" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:specification">
     <label>Specificatie distributie formaat</label>
     <description>Specificatie van het distributie formaat. Het is verplicht als de dataset een geharmoniseerde INSPIRE bron is.</description>
-    
+
   </element>
   <element name="gmd:name" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:name">
     <label>Naam</label>
@@ -1198,13 +1198,13 @@
   <element name="gmd:parentIdentifier" context="/gmd:MD_Metadata/gmd:parentIdentifier">
     <label>Parent unieke identifier</label>
     <description>Unieke ID van de metadata waarvan deze metadata een subset (child) is. Dit element is conditioneel, het is verplicht indien een dataset (serie) met hogere hierarchie bestaat.</description>
-    
+
   </element>
   <!-- ==================================================== -->
   <element name="gmd:pass" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:pass">
     <label>Conformiteit indicatie met de specificatie</label>
     <description>Indicatie van conformiteit met de specificatie. Het is alleen verplicht als de dataset een INSPIRE bron is of als de informatie is gemodelleerd volgens een specifiek informatie model.</description>
-    
+
   </element>
   <!-- ==================================================== -->
   <element name="gmd:phone" context="/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone">
@@ -1266,7 +1266,7 @@
     <label>Uitgevoerde bewerking</label>
     <description>Informatie over een bewerking in het proces waarmee de dataset tot stand is gekomen of bewerkt.</description>
   </element>
-  
+
 <!-- ==================================================== -->
   <element name="gmd:description" alias="description" context="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:description">
     <label>Omschrijving</label>
@@ -1274,7 +1274,7 @@
       Als de URL van het type 'endPoint' is opgegeven wordt dat hier aangegeven dat het een endPoint is met een waarde uit een waarde uit de &lt;a href='https://docs.geostandaarden.nl/md/mdprofiel-iso19115/#Codelist-INSPIRE-OnLineDescriptionCode' target='_blank'&gt;codelijst OnLineDescriptionCode&lt;/a&gt;.
     </description>
   </element>
-  
+
   <!-- ==================================================== -->
   <element name="gmd:protocol" alias="protocol">
     <label>Protocol</label>
@@ -1536,7 +1536,7 @@
     <label>Thesaurus</label>
     <description>Naam van de thesaurus. Indien voor trefwoorden gebruik wordt gemaakt van een thesaurus dient hier de thesaurusnaam opgenomen te worden. Voor INSPIRE is dat;
       GEMET - INSPIRE themes, version 1.0 </description>
-    
+
   </element>
   <element name="gmd:title" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:aggregationInfo/gmd:MD_AggregateInformation/gmd:aggregateDataSetName/gmd:CI_Citation/gmd:title">
     <label>Naam gerelateerde dataset</label>
@@ -1545,7 +1545,7 @@
   <element name="gmd:title" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title">
     <label>Titel</label>
     <description>Naam van de specificatie. Indien het een INSPIRE dataset is dient de specificatie opgenomen te worden</description>
-    
+
   </element>
   <element name="gmd:title" context="/gmd:MD_Metadata/gmd:contentInfo/gmd:MD_FeatureCatalogueDescription/gmd:featureCatalogueCitation/gmd:CI_Citation/gmd:title">
     <label>Titel van de featurecatalog</label>
@@ -1708,7 +1708,7 @@
     <label>Afstand</label>
     <description></description>
   </element>
-  
+
   <!-- ==================================================== -->
   <!-- === Other labels //FIXME -->
   <!-- ==================================================== -->
@@ -1724,14 +1724,14 @@
   </element>
   <element name="codeSpace" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/gml:identifier/@codeSpace">
     <label>Organisatie die de meeteenheid beheert</label>
-    <description>Organisatie die de meeteenheid beheert</description>    
+    <description>Organisatie die de meeteenheid beheert</description>
   </element>
   <!-- ==================================================== -->
   <element name="uom" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/gco:Distance/@uom">
     <label>Eenheid</label>
     <description>De eenheid van het coordinaatsysteem, bijvoorbeeld 'm'</description>
   </element>
- 
+
   <!-- ========================  GCO namespace ============================ -->
   <element name="gco:Record" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:value/gco:Record">
     <label>Compleetheid</label>
@@ -1777,7 +1777,7 @@
   <element name="gml:id" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_TopologicalConsistency/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit/@gml:id">
     <label>Topologische samenhang</label>
     <description>juistheid van de topologische samenhang</description>
-    
+
   </element>
   <element name="gml:BaseUnit" context="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_QuantitativeResult/gmd:valueUnit/gml:BaseUnit">
     <label>Basis eenheid</label>
@@ -1799,7 +1799,7 @@
   <element name="gml:endPosition" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition">
     <label>Einddatum</label>
     <description>Einddatum (YYYY-MM-DD).</description>
-    
+
   </element>
 
   <!-- ==================================================== -->
@@ -1894,12 +1894,17 @@
       <option value="urn:ogc:def:uom:OGC::percent">Procent</option>
       <option value="http://www.opengis.net/def/uom/SI/second">Seconde</option>
       <option value="http://www.opengis.net/def/uom/SI/ampere">Ampere</option>
-      <option value="http://www.opengis.net/def/uom/SI/candela">Candela</option>	
+      <option value="http://www.opengis.net/def/uom/SI/candela">Candela</option>
       <option value="http://www.opengis.net/def/uom/SI/kelvin	">Kelvin</option>
-      <option value="http://www.opengis.net/def/uom/SI/kilogram">Kilo</option>	
-      <option value="http://www.opengis.net/def/uom/SI/metre">Meter</option>	
-      <option value="http://www.opengis.net/def/uom/SI/mole">Mol</option>	
+      <option value="http://www.opengis.net/def/uom/SI/kilogram">Kilo</option>
+      <option value="http://www.opengis.net/def/uom/SI/metre">Meter</option>
+      <option value="http://www.opengis.net/def/uom/SI/mole">Mol</option>
       <option value="http://www.opengis.net/def/uom/OGC/1.0/unity">Eenheden</option>
     </helper>
+  </element>
+
+  <element name="levelDescriptionDesc">
+    <label>Beschrijving niveau kwaliteits beschrijving </label>
+    <description>Vul hier de featuretypen in waar deze kwaliteitsindicatie op van toepassing is</description>
   </element>
 </labels>

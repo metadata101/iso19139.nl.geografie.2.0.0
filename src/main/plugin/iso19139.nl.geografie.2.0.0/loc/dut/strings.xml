@@ -386,7 +386,6 @@
   <levelDescription>Beschrijving niveau kwaliteits beschrijving</levelDescription>
   <levelLink>Link naar featuretype</levelLink>
   <levelLinkDesc>Link naar meer informatie over het feature type</levelLinkDesc>
-  <levelDescriptionDesc>Vul hier de featuretypen in waar deze kwaliteitsindicatie op van toepassing is</levelDescriptionDesc>
 
   <nameOfMeasure>Indicator</nameOfMeasure>
   <measureDescription>Omschrijving indicator</measureDescription>

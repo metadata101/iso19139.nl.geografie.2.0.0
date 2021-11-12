@@ -1897,7 +1897,7 @@
 
           <!-- todo: or via related items -->
           <field xpath="/gmd:MD_Metadata/gmd:parentIdentifier" />
-          `          <action type="add" btnLabel="addParentIdentifier" name="parentIdentifier" or="parentIdentifier" in="/gmd:MD_Metadata">
+          <action type="add" btnLabel="addParentIdentifier" name="parentIdentifier" or="parentIdentifier" in="/gmd:MD_Metadata">
             <template>
               <snippet>
                 <gmd:parentIdentifier></gmd:parentIdentifier>
