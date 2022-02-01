@@ -22,23 +22,7 @@
   ~ Rome - Italy. email: geonetwork@osgeo.org
   -->
 
-<xsl:stylesheet xmlns:gmd="http://www.isotc211.org/2005/gmd"
-                xmlns:gco="http://www.isotc211.org/2005/gco"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:util="java:org.fao.geonet.util.XslUtil"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version="2.0">
-
   <xsl:import href="../../iso19139/index-fields/index-subtemplate.xsl"/>
-
-  <xsl:template mode="index" match="gmd:DQ_DomainConsistency[count(ancestor::node()) =  1]">
-
-    <xsl:variable name="date"
-                  select="gmd:result/*/gmd:specification/*/gmd:date/*/gmd:date/gco:Date"/>
-    <Field name="_title"
-           string="{gmd:result/*/gmd:specification/*/gmd:title/gco:CharacterString}{if ($date != '') then concat(' (', $date, ')') else ''}"
-           store="true" index="true"/>
-
-    <xsl:call-template name="subtemplate-common-fields"/>
-  </xsl:template>
-
 </xsl:stylesheet>

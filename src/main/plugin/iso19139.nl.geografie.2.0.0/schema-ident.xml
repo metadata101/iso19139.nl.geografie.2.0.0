@@ -28,7 +28,7 @@
   <name>iso19139.nl.geografie.2.0.0</name>
   <id>6b76bf55-da03-4b86-acaa-a81bd982e07a</id>
   <version>2.1.0</version>
-  <appMinorVersionSupported>3.12.0</appMinorVersionSupported>
+  <appMinorVersionSupported>4.0.6</appMinorVersionSupported>
   <title xml:lang="en">Dutch metadata profile on ISO 19115 for geography version 2.1.0</title>
   <title xml:lang="nl">Nederlands metadata profiel op ISO 19115 voor geografie versie 2.1.0</title>
   <description>Geonovum ontwikkelt en beheert het Nederlandse metadata profiel voor het beschrijven van geografische datasets. Dit profiel is een verbijzondering van de internationale metadatastandaarden van ISO en is bedoeld om de interoperabiliteit binnen Nederland te bevorderen.</description>
