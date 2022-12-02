@@ -185,7 +185,7 @@
             </xsl:when>
 
             <xsl:when test="$licenseMap/license[starts-with($otherConstrCS, @value)]">
-              <license><xsl:value-of select="$licenseMap/license[starts-with($otherConstrCS/@xlink:href, @value)]" /></license>
+              <license><xsl:value-of select="$licenseMap/license[starts-with($otherConstrCS, @value)]" /></license>
             </xsl:when>
 
             <xsl:when test="$otherConstrCS='Public Domain'
