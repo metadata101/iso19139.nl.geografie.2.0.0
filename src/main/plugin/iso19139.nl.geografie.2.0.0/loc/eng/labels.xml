@@ -2162,95 +2162,97 @@
     <helper>
       <option value="" title="separator">-- AccessPoints --</option>
       <option type="accessPoint"
-        id="http://www.opengis.net/def/serviceType/ogc/csw" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
+              id="http://www.opengis.net/def/serviceType/ogc/csw" value="OGC:CSW" title="Catalog service voor het Web">OGC:CSW</option>
       <option type="accessPoint"
-        id="http://www.opengis.net/def/serviceType/ogc/wms" value="OGC:WMS" title="Web Map service">WMS</option>
+              id="http://www.opengis.net/def/serviceType/ogc/wms" value="OGC:WMS" title="Web Map service">OGC:WMS</option>
       <option type="accessPoint"
-       id="http://www.opengis.net/def/serviceType/ogc/wmts" value="OGC:WMTS" group="22" title="Web Mapping Tiling Service">WMTS</option>
+              id="http://www.opengis.net/def/serviceType/ogc/wmts" value="OGC:WMTS" group="22" title="Web Mapping Tiling Service">OGC:WMTS</option>
       <option type="accessPoint"
-       id="http://www.opengis.net/def/serviceType/ogc/wfs" value="OGC:WFS" group="45" title="Web Feature Service">WFS</option>
+              id="http://www.opengis.net/def/serviceType/ogc/wfs" value="OGC:WFS" group="45" title="Web Feature Service">OGC:WFS</option>
       <option type="accessPoint"
-       id="http://www.opengis.net/def/serviceType/ogc/wcs" value="OGC:WCS" group="22" title="Web Coverage Service">WCS</option>
+              id="http://www.opengis.net/def/serviceType/ogc/wcs" value="OGC:WCS" group="22" title="Web Coverage Service">OGC:WCS</option>
       <option type="accessPoint"
-        id="http://www.opengis.net/def/serviceType/ogc/sos" value="OGC:SOS" title="Sensor Observation Service">SOS</option>
+              id="http://www.opengis.net/def/serviceType/ogc/sos" value="OGC:SOS" title="Sensor Observation Service">OGC:SOS</option>
       <option type="accessPoint"
-        id="https://tools.ietf.org/html/rfc4287"
-        value="INSPIRE Atom" title="INSPIRE Atom Feed met links naar datasets">Atom Feed</option>
-      <option type="accessPoint" value="landingpage" title="Een webpagina die toegang geeft tot de dataset of overige informatie bevat">Webpagina</option>
-      <option type="accessPoint" value="application" title="Een (web) applicatie die rechtstreeks toegang geeft tot de dataset">Web applicatie</option>
-      <option type="accessPoint" value="dataset" title="Referentie naar een locale dataset locatie">
-        Locale dataset referentie
-      </option>
+              id="https://tools.ietf.org/html/rfc4287"
+              value="INSPIRE Atom" title="INSPIRE Atom Feed met links naar datasets">INSPIRE Atom</option>
       <option type="accessPoint"
-          id="http://www.opengeospatial.org/standards/wps"
-          value="OGC:WPS" title="Web Processing Service">WPS</option>
+              id="http://www.opengeospatial.org/standards/wcts" value="OGC:WCTS" title="Web Coordinate Transformation">OGC:WCTS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/sensorthings" value="OGC:SensorThings" title="SensorThings API">SensorThings API</option>
+              id="http://www.opengis.net/def/interface/ogcapi-features" value="OGC:API features" title="OGC API features">OGC:API features</option>
       <option type="accessPoint"
-        id="https://github.com/OAI/OpenAPI-Specification" value="OAS" title="Open API Specification">Open API Specification</option>
+              id="http://www.opengeospatial.org/standards/ols" value="OGC:OLS" title="OpenLS Service">OGC:OLS</option>
       <option type="accessPoint"
-        id="https://www.w3.org/TR/rdf-sparql-query" value="W3C:SPARQL" title="SPARQL Query Language for RDF">SPARQL</option>
+              id="http://www.opengeospatial.org/standards/wps"
+              value="OGC:WPS" title="Web Processing Service">WPS</option>
       <option type="accessPoint"
-        id="https://www.oasis-open.org/committees/odata" value="OASIS:OData" title="OData">OData</option>
+              id="http://www.opengeospatial.org/standards/wfs-g" value="OGC:WFS-G" title="WFS Gazzetteer service">OGC:WFS-G</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/cat" value="OGC:CSW" title="Catalog service voor het Web">CSW</option>
+              id="http://www.opengeospatial.org/standards/sps" value="OGC:SPS" title="Sensor Planning Service">OGC:SPS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/wcts" value="OGC:WCTS" title="Web Coordinate Transformation">WCTS</option>
+              id="http://www.opengeospatial.org/standards/sas" value="OGC:SAS" title="Sensor Alert Service">OGC:SAS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/wfs-g" value="OGC:WFS-G" title="WFS Gazzetteer service">WFS-G</option>
+              id="http://www.opengeospatial.org/standards/wns" value="OGC:WNS" title="Web Notification Service">OGC:WNS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/sps" value="OGC:SPS" title="Sensor Planning Service">SPS</option>
+              id="http://www.opengeospatial.org/standards/ols#ODS" value="OGC:ODS" title="OpenLS Directory Service">OGC:ODS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/sas" value="OGC:SAS" title="Sensor Alert Service">SAS</option>
+              id="http://www.opengeospatial.org/standards/ols#OGS" value="OGC:OGS" title="OpenLS Gateway Service">OGC:OGS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/wns" value="OGC:WNS" title="Web Notification Service">WNS</option>
+              id="http://www.opengeospatial.org/standards/ols#OUS" value="OGC:OUS" title="OpenLS Utility Service">OGC:OUS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#ds" value="OGC:ODS" title="OpenLS Directory Service">OpenLS DS</option>
+              id="http://www.opengeospatial.org/standards/ols#OPS" value="OGC:OPS" title="OpenLS Presentation Service">OGC:OPS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#gs" value="OGC:OGS" title="OpenLS Gateway Service">OpenLS GS</option>
+              id="http://www.opengeospatial.org/standards/ols#ORS" value="OGC:ORS" title="OpenLS Route Service">OGC:ORS</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#us" value="OGC:OUS" title="OpenLS Utility Service">OpenLS US</option>
+              id="http://www.opengeospatial.org/standards/sensorthings" value="OGC:SensorThings" title="SensorThings API">OGC:SensorThings</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#ps" value="OGC:OPS" title="OpenLS Presentation Service">OpenLS PS</option>
+              id="https://www.w3.org/TR/rdf-sparql-query/" value="W3C:SPARQL" title="SPARQL Query Language for RDF">W3C:SPARQL</option>
       <option type="accessPoint"
-        id="http://www.opengeospatial.org/standards/ols#rs" value="OGC:ORS" title="OpenLS Route Service">OpenLS RS</option>
+              id="https://github.com/OAI/OpenAPI-Specification/" value="OAS" title="Open API Specification">OAS</option>
       <option type="accessPoint"
-         value="UKST" title="Onbekend Service Type"> Onbekend Service Type</option>
-<!-- endpoints -->
+              id="https://www.oasis-open.org/committees/odata" value="OASIS:OData" title="Open data protocol">OASIS:OData</option>
+      <option type="accessPoint"
+              id="https://www.w3.org/TR/vocab-dcat-2/#Property:resource_landing_page" value="landingpage" title="Een webpagina die toegang geeft tot de dataset of overige informatie bevat">landingpage</option>
+      <option type="accessPoint" value="application" title="Een (web) applicatie die rechtstreeks toegang geeft tot de dataset">application</option>
+      <option type="accessPoint"
+              id="https://www.w3.org/TR/vocab-dcat-2/#Property:catalog_dataset" value="dataset" title="Referentie naar een locale dataset locatie">dataset</option>
+      <option type="accessPoint"
+              value="UKST" title="Onbekend Service Type">UKST</option>
+      <!-- endpoints -->
       <option value="" title="separator">-- EndPoints --</option>
       <option id="https://www.iana.org/assignments/media-types/application/gml+xml" type="endpoint"
-        value="gml" title="Geography Markup Language">GML</option>
+              value="gml" title="Geography Markup Language">gml</option>
       <option id="https://www.iana.org/assignments/media-types/application/geo+json" type="endpoint"
-        value="geojson" title="Vector data geencodeerd in JSON">GeoJSON</option>
+              value="geojson" title="Vector data geencodeerd in JSON">geojson</option>
       <option id="https://www.iana.org/assignments/media-types/application/geopackage+sqlite3" type="endpoint"
-        value="gpkg" title="GeoPackage">GeoPackage</option>
+              value="gpkg" title="GeoPackage">gpkg</option>
       <option id="https://www.iana.org/assignments/media-types/image/tiff" type="endpoint"
-        value="tiff" title="TIFF">GeoTIFF</option>
+              value="tiff" title="TIFF">tiff</option>
       <option id="http://www.iana.org/assignments/media-types/application/vnd.google-earth.kml+xml" type="endpoint"
-        value="kml" title="Keyhole Mark-up Language">KML</option>
+              value="kml" title="Keyhole Mark-up Language">kml</option>
       <option id="https://www.iana.org/assignments/media-types/text/csv" type="endpoint"
-        value="csv" title="Komma gescheiden waarden">CSV</option>
+              value="csv" title="Komma gescheiden waarden">csv</option>
       <option id="https://www.iana.org/assignments/media-types/application/zip" type="endpoint"
-        value="zip" title="Bestands archief">ZIP</option>
+              value="zip" title="Bestands archief">zip</option>
       <option type="endpoint"
-        value="wmc" title="Web Map Context">Web Map Context</option>
+              value="wmc" title="Web Map Context">wmc</option>
       <option id="https://www.iana.org/assignments/media-types/application/json" type="endpoint"
-        value="json" title="Javascript object notation">JSON</option>
+              value="json" title="Javascript object notation">json</option>
       <option id="https://www.iana.org/assignments/media-types/application/ld+json" type="endpoint"
-        value="jsonld" title="RDF geencodeerd in JSON">JSON-LD</option>
+              value="jsonld" title="RDF geencodeerd in JSON">jsonld</option>
       <option id="https://www.iana.org/assignments/media-types/application/rdf+xml" type="endpoint"
-        value="rdf-xml" title="RDF geencodeerd in XML">RDF/XML</option>
+              value="rdf-xml" title="RDF geencodeerd in XML">rdf-xml</option>
       <option id="https://www.iana.org/assignments/media-types/application/xml" type="endpoint"
-        value="xml" title="Extensible Markup Language">XML</option>
+              value="xml" title="Extensible Markup Language">xml</option>
       <option id="https://www.iana.org/assignments/media-types/image/png" type="endpoint"
-        value="png" title="Portable Network Graphics">PNG</option>
+              value="png" title="Portable Network Graphics">png</option>
       <option id="https://www.iana.org/assignments/media-types/image/gif" type="endpoint"
-        value="gif" title="Graphics Interchange Format">GIF</option>
+              value="gif" title="Graphics Interchange Format">gif</option>
       <option id="https://www.iana.org/assignments/media-types/image/jp2" type="endpoint"
-        value="jp2" title="JPEG 2000">JPEG 2000</option>
+              value="jp2" title="JPEG 2000">jp2</option>
       <option id="https://www.iana.org/assignments/media-types/application/vnd.mapbox-vector-tile" type="endpoint"
-        value="mapbox-vector-tile" title="Mapbox vector tile">Mapbox vector tile</option>
-      <option value="UKMT" type="endPoint" title="Onbekend Mediatype">Onbekend Mediatype</option>
+              value="mapbox-vector-tile" title="Mapbox vector tile">mapbox-vector-tile</option>
+      <option type="endPoint" value="UKMT" title="Onbekend Mediatype">UKMT</option>
     </helper>
     <condition>conditional</condition>
   </element>
