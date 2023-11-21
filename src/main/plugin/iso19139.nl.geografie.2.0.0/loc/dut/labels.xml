@@ -363,7 +363,7 @@
 
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:code" context="/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code">
+  <element name="gmd:code" context="gmd:RS_Identifier">
     <label>Code referentie systeem</label>
     <description>
       Het referentiesysteem wordt met een URI (die ook de code bevat) opgenomen. Voor RD is dat
@@ -372,7 +372,7 @@
     </description>
     <condition>mandatory</condition>
   </element>
-  <element name="gmd:code" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code">
+  <element name="gmd:code" context="gmd:MD_Identifier">
     <label>Unieke Identifier van de bron</label>
     <description>
     In dit element wordt de waarde die een dataset uniek identificeert opgenomen. Er wordt sterk geadviseerd om gebruik
