@@ -192,11 +192,11 @@
     <description>Korte titel, afkorting of titel in een andere taal.</description>
   </element>
   <!-- ==================================================== -->
-  <element name="gmd:characterSet" context="/gmd:MD_Metadata/gmd:characterSet">
+  <element name="gmd:characterSet" context="gmd:MD_Metadata">
     <label>Metadata karakterset</label>
     <description>Volledige naam van de karakter codeerstandaard waarin de metadata set is beschreven. Meestal is dat utf8.</description>
   </element>
-  <element name="gmd:characterSet" context="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:characterSet">
+  <element name="gmd:characterSet" context="gmd:MD_DataIdentification">
     <label>Karakterset van de bron</label>
     <description>Volledige naam van de karakter codeerstandaard welke gebruikt is voor de dataset.</description>
 
