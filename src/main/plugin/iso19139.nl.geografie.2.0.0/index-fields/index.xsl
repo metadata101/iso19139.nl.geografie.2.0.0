@@ -106,11 +106,21 @@
     </xsl:if>
 
     <xsl:variable name="isDownloadable">
-      <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol/*/text()">
-        <xsl:if test="count($downloadableProtocols/downloadableProtocol[@value = .]) = 1 or
-                      count($downloadableMediaTypes/downloadableMediaType[@value = .]) = 1">
+      <xsl:for-each select="gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource">
+
+        <xsl:variable name="linkage" select="gmd:linkage/gmd:URL"/>
+        <xsl:variable name="protocol" select="gmd:protocol/*/text()"/>
+
+        <xsl:variable name="wfsLinkNoProtocol"
+                      select="contains(lower-case($linkage), 'service=wfs') and not(string($protocol))"/>
+        <xsl:variable name="wcsLinkNoProtocol"
+                      select="contains(lower-case($linkage), 'service=wcs') and not(string($protocol))"/>
+
+        <xsl:if test="count($downloadableProtocols/downloadableProtocol[@value = $protocol]) = 1 or
+                      count($downloadableMediaTypes/downloadableMediaType[@value = $protocol]) = 1 or $wfsLinkNoProtocol or $wcsLinkNoProtocol">
           downloadable
         </xsl:if>
+
       </xsl:for-each>
     </xsl:variable>
 
