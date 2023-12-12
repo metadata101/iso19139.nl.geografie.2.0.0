@@ -116,7 +116,7 @@
         <xsl:variable name="wcsLinkNoProtocol"
                       select="contains(lower-case($linkage), 'service=wcs') and not(string($protocol))"/>
 
-        <xsl:if test="count($downloadableProtocols/downloadableProtocol[@value = $protocol]) = 1 or
+        <xsl:if test="count($downloadableProtocols/protocol[@value = $protocol]) = 1 or
                       count($downloadableMediaTypes/downloadableMediaType[@value = $protocol]) = 1 or $wfsLinkNoProtocol or $wcsLinkNoProtocol">
           downloadable
         </xsl:if>
