@@ -136,7 +136,7 @@
                       select="contains(lower-case($linkage), 'service=wmts') and not(string($protocol))"/>
 
         <xsl:if
-          test="contains(., 'OGC:WMS') or contains(., 'OGC:WMTS') or $wmsLinkNoProtocol or $wmtsLinkNoProtocol">
+          test="((contains($protocol, 'OGC:WMS') or contains($protocol, 'OGC:WMTS')) and string($linkage)) or $wmsLinkNoProtocol or $wmtsLinkNoProtocol">
           dynamic
         </xsl:if>
 
