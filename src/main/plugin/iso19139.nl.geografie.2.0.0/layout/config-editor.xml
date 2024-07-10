@@ -104,15 +104,15 @@
     <!--
     Enable the following to use subtemplates for extent type.
     <for name="gmd:extent" addDirective="data-gn-directory-entry-selector">
-      <directiveAttributes data-template-add-action="true" data-search-action="true" data-popup-action="true" data-template-type="extent" data-filter='{"_root": "gmd:EX_Extent"}' data-insert-modes=""/>
+      <directiveAttributes data-template-add-action="true" data-search-action="true" data-popup-action="true" data-template-type="extent" data-filter='{"root": "gmd:EX_Extent"}' data-insert-modes=""/>
     </for>
 
     for formats:
     <for name="gmd:resourceFormat" addDirective="data-gn-directory-entry-selector">
-      <directiveAttributes data-template-add-action="false" data-search-action="true" data-popup-action="true" data-template-type="format" data-filter='{"_root": "gmd:MD_Format"}' data-insert-modes="xlink"/>
+      <directiveAttributes data-template-add-action="false" data-search-action="true" data-popup-action="true" data-template-type="format" data-filter='{"root": "gmd:MD_Format"}' data-insert-modes="xlink"/>
     </for>
     <for name="gmd:distributionFormat" addDirective="data-gn-directory-entry-selector">
-      <directiveAttributes data-template-add-action="false" data-search-action="true" data-popup-action="true" data-template-type="format" data-filter='{"_root": "gmd:MD_Format"}' data-insert-modes="xlink"/>
+      <directiveAttributes data-template-add-action="false" data-search-action="true" data-popup-action="true" data-template-type="format" data-filter='{"root": "gmd:MD_Format"}' data-insert-modes="xlink"/>
     </for>
     -->
 
@@ -133,7 +133,7 @@
       <directiveAttributes data-template-add-action="true" data-search-action="true" data-popup-action="true" data-template-type="contact" data-insert-modes="text" data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"/>
     </for>
     <for name="gmd:report" addDirective="data-gn-directory-entry-selector" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result">
-      <directiveAttributes data-template-add-action="true" data-search-action="true" data-popup-action="false" data-filter='{"_root": "gmd:DQ_DomainConsistency"}' data-template-type="report" data-insert-modes="text" />
+      <directiveAttributes data-template-add-action="true" data-search-action="true" data-popup-action="false" data-filter='{"root": "gmd:DQ_DomainConsistency"}' data-template-type="report" data-insert-modes="text" />
     </for>
 
 
