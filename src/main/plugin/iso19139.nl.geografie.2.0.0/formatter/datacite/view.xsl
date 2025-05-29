@@ -525,6 +525,23 @@ eg.
   <xsl:template mode="toDatacite"
                 match="gmd:resourceConstraints[1]">
     <datacite:rightsList>
+      <xsl:for-each select="$metadata//gmd:resourceConstraints[*/gmd:accessConstraints]/*/gmd:otherConstraints[*/text() != '']">
+        <xsl:apply-templates mode="toDataciteLocalized" select=".">
+          <xsl:with-param name="template">
+            <datacite:rights>
+              <xsl:if test="gmx:Anchor/@xlink:href">
+                <xsl:attribute name="rightsURI"
+                               select="replace(gmx:Anchor/@xlink:href, 'deed.nl', '')"/>
+              </xsl:if>
+            </datacite:rights>
+          </xsl:with-param>
+        </xsl:apply-templates>
+      </xsl:for-each>
+    </datacite:rightsList>
+  </xsl:template>
+  <xsl:template mode="toDatacite"
+                match="gmd:resourceConstraints[1]">
+    <datacite:rightsList>
       <xsl:for-each select="$metadata//gmd:useLimitation[*/text() != '']">
         <xsl:apply-templates mode="toDataciteLocalized" select=".">
           <xsl:with-param name="template">
