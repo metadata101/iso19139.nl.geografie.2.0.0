@@ -639,10 +639,10 @@ using the region API -->
                         <xsl:variable name="topicCategoryValue" select="*/text()" />
                         <xsl:variable name="isoTopicTheme" select="$isoTopicToEuDcatApThemes[iso = $topicCategoryValue]/@key" />
 
-                        <xsl:if test="string($isoTopicTheme)">
-                          <xsl:variable name="translation" select="$dcatApThemesTranslations/entry[@key = $isoTopicTheme]" />
-                          <theme><xsl:value-of select="if (string($translation)) then $translation else $isoTopicTheme" /></theme>
-                        </xsl:if>
+                        <xsl:for-each select="$isoTopicTheme">
+                          <xsl:variable name="translation" select="$dcatApThemesTranslations/entry[@key = current()]" />
+                          <theme><xsl:value-of select="if (string($translation)) then $translation else ." /></theme>
+                        </xsl:for-each>
 
                       </xsl:for-each>
 
