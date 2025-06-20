@@ -38,7 +38,7 @@
         "thumbnailMaker": true
       },
       "icon": "fa gn-icon-thumbnail",
-      "fileStoreFilter": "*.{jpg,JPG,png,PNG,gif,GIF}",
+      "fileStoreFilter": "*.{jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}",
       "process": "thumbnail-add",
       "fields": {
         "url": {
@@ -54,6 +54,51 @@
     "addInspireDescription": true,
     "wmsResources": {
       "addLayerNamesMode": "resourcename"
+    },
+    "associatedResourcesTypes": [{
+      "type": "parent",
+      "label": "linkToParent",
+      "config": {
+        "sources": {
+          "metadataStore": {
+            "label": "linkToParent",
+            "params": {
+              "resourceType": ["series"],
+              "isTemplate": "n"
+            }
+          },
+          "remoteurl": {"multiple": false}
+        }
+      }
+    }, {
+      "type": "fcats",
+      "label": "linkToFeatureCatalog",
+      "config": {
+        "sources": {
+          "metadataStore": {
+            "label": "linkToFeatureCatalog",
+            "params": {
+              "resourceType": ["featureCatalog"],
+              "isTemplate": "n"
+            }
+          },
+          "remoteurl": {"multiple": false}
+        }
+      }
+    }, {
+      "type": "siblings",
+      "label": "linkToSibling",
+      "config": {
+        "sources": {
+          "metadataStore": {
+            "params": {
+              "isTemplate": "n"
+            }
+          },
+          "remoteurl": {"multiple": true}
+        }
+      }
     }
+    ]
   }
 }
