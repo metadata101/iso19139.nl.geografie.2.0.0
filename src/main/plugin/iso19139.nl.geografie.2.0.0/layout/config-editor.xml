@@ -391,13 +391,14 @@
         <directive data-gn-suggestion-list=""/>
 
         <directive data-gn-overview-manager=""
-                   data-file-types=".png,.gif,.jpeg,.jpg"/>
+                   data-file-types=".png,.gif,.jpeg,.jpg"
+                   data-editable-thumbnail="true" />
 
         <directive data-gn-distribution-resources-panel="gnCurrentEdit.metadata"
                    data-mode="viewConfig.distributionConfig.layout || ''"
                    data-editor-config="default"
                    data-related-config="[{
-                                           title: '',
+                                           title: 'Hyperlinks',
                                            filter: 'protocol:.*',
                                            editActions: ['addOnlinesrc']}]"
         />
@@ -869,13 +870,14 @@
         <directive data-gn-suggestion-list=""/>
 
         <directive data-gn-overview-manager=""
-                   data-file-types=".png,.gif,.jpeg,.jpg"/>
+                   data-file-types=".png,.gif,.jpeg,.jpg"
+                   data-editable-thumbnail="true" />
 
         <directive data-gn-distribution-resources-panel="gnCurrentEdit.metadata"
                    data-mode="viewConfig.distributionConfig.layout || ''"
                    data-editor-config="default"
                    data-related-config="[{
-                                           title: '',
+                                           title: 'Hyperlinks',
                                            filter: 'protocol:.*',
                                            editActions: ['addOnlinesrc']}]"
         />
@@ -2082,7 +2084,8 @@
         <directive data-gn-suggestion-list=""/>
 
         <directive data-gn-overview-manager=""
-                   data-file-types=".png,.gif,.jpeg,.jpg"/>
+                   data-file-types=".png,.gif,.jpeg,.jpg"
+                   data-editable-thumbnail="true" />
 
         <directive data-gn-distribution-resources-panel="gnCurrentEdit.metadata"
                    data-mode="viewConfig.distributionConfig.layout || ''"
