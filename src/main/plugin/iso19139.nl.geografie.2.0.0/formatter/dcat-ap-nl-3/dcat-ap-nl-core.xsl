@@ -10,6 +10,7 @@
                 xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
                 xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0"
                 xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
+                xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:dct="http://purl.org/dc/terms/"
                 exclude-result-prefixes="#all">
@@ -21,8 +22,8 @@
   <xsl:import href="./dcat-ap-nl-core-lineage.xsl"/>
   <xsl:import href="./dcat-ap-nl-core-distribution.xsl"/>
   <xsl:import href="./dcat-ap-nl-core-contact.xsl"/>
-  <xsl:import href="./dcat-ap-nl-core-resource.xsl"/>
   <xsl:import href="./dcat-ap-nl-core-dataset.xsl"/>
+  <xsl:import href="./dcat-ap-nl-core-resource.xsl"/>
 
   <xsl:variable name="isoContactRoleToDcatCommonNames"
                 as="node()*">

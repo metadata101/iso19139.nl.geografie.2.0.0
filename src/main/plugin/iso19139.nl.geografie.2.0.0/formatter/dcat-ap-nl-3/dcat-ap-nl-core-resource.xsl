@@ -30,15 +30,20 @@
    * dct:rights
    * odrl:hasPolicy
    -->
-  <!--<xsl:template mode="iso19115-3-to-dcat-resource"
-                name="iso19115-3-to-dcat-resource"
-                match="mdb:MD_Metadata">
-    <xsl:message>Start DCAT-AP-NL-3</xsl:message>
+  <xsl:template name="iso19115-3-to-dcat-ap-nl-resource"
+                match="mdb:MD_Metadata" >
+
+    <xsl:variable name="isServiceMetadata" select="name(mdb:identificationInfo/*[1]) = 'srv:SV_ServiceIdentification'" />
+
+    <xsl:if test="$isServiceMetadata">
+      <xsl:apply-templates mode="iso19115-3-to-dcat"
+                           select="mdb:metadataIdentifier" />
+    </xsl:if>
     <xsl:apply-templates mode="iso19115-3-to-dcat"
                          select="mdb:identificationInfo/*/mri:citation/*/cit:title
                                   |mdb:identificationInfo/*/mri:abstract
                                   |mdb:identificationInfo/*/mri:citation/*/cit:identifier
-                                  |mdb:identificationInfo/*/mri:citation/*/cit:date/*[cit:dateType/*/@codeListValue = $isoDateTypeToDcatCommonNames/text()]/cit:date
+                                  |mdb:identificationInfo/*/mri:citation/*/cit:date
                                   |mdb:identificationInfo/*/mri:citation/*/cit:edition
                                   |mdb:identificationInfo/*/mri:defaultLocale
                                   |mdb:identificationInfo/*/mri:otherLocale
@@ -54,8 +59,7 @@
 
     <xsl:call-template name="related-record"/>
 
-  </xsl:template>-->
-
+  </xsl:template>
 
 
 <!--  <xsl:template mode="iso19115-3-to-eu-dcat-ap"
@@ -106,9 +110,9 @@
           <dct:references rdf:resource="{$recordUri}"/>
         </xsl:when>
         <xsl:when test="local-name() = 'datasets'">
-          <dcat:servesDataset>
+          <!--<dcat:servesDataset>
             <dcat:Dataset rdf:about="{$recordUri}"/>
-          </dcat:servesDataset>
+          </dcat:servesDataset>-->
         </xsl:when>
         <xsl:when test="local-name() = 'services'">
 
