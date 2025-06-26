@@ -18,6 +18,7 @@
   <xsl:import href="./dcat-ap-nl-utils.xsl" />
   <xsl:import href="../../../iso19115-3.2018/formatter/eu-geodcat-ap/eu-geodcat-ap-core.xsl"/>
   <xsl:import href="../../../iso19115-3.2018/formatter/eu-dcat-ap-hvd/eu-dcat-ap-hvd-core.xsl"/>
+  <xsl:import href="./dcat-ap-nl-core-dataservice.xsl"/>
   <xsl:import href="./dcat-ap-nl-core-access-and-use.xsl"/>
   <xsl:import href="./dcat-ap-nl-core-lineage.xsl"/>
   <xsl:import href="./dcat-ap-nl-core-distribution.xsl"/>
