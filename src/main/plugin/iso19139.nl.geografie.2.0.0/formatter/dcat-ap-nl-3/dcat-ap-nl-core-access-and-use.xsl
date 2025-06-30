@@ -172,7 +172,7 @@
           </xsl:if>
         </xsl:for-each>-->
 
-        <xsl:for-each select="distinct-values(../../mri:resourceConstraints/*[mco:accessConstraints]/mco:otherConstraints/(gco:CharacterString|gcx:Anchor))">
+        <xsl:for-each select="distinct-values(../../mri:resourceConstraints/*[mco:accessConstraints]/mco:otherConstraints/(gco:CharacterString|gcx:Anchor/@xlink:href))">
           <xsl:variable name="dcatAccessType"
                         select="$dcatApAccessTypes[(lower-case(.) = lower-case(current()) and not(@match)) or
                                                    (starts-with(lower-case(current()), lower-case(.)) and (@match = 'start'))] "/>
