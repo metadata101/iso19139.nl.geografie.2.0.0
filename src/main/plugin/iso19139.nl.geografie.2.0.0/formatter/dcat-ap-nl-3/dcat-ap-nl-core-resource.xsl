@@ -110,9 +110,9 @@
           <dct:references rdf:resource="{$recordUri}"/>
         </xsl:when>
         <xsl:when test="local-name() = 'datasets'">
-          <!--<dcat:servesDataset>
+          <dcat:servesDataset>
             <dcat:Dataset rdf:about="{$recordUri}"/>
-          </dcat:servesDataset>-->
+          </dcat:servesDataset>
         </xsl:when>
         <xsl:when test="local-name() = 'services'">
 
