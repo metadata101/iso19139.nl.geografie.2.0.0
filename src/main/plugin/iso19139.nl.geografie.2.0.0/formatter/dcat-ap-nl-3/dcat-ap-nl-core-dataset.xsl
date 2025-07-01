@@ -20,9 +20,9 @@
                 xmlns:dct="http://purl.org/dc/terms/"
                 exclude-result-prefixes="#all">
 
-  <!-- Used for metadata that does not have ISO topic categories (for example service metadata) and does not have also INSPIRE GEMET Themes keywords -->
-  <xsl:variable name="fallbackDcatApThemes">
-    <entry key="http://publications.europa.eu/resource/authority/data-theme/GOVE" />
+  <!-- Used for metadata that does not have ISO topic categories (for example, service metadata) and does not have also INSPIRE GEMET Themes keywords -->
+  <xsl:variable name="fallbackDcatApThemes" as="node()*">
+    <!-- <entry key="http://publications.europa.eu/resource/authority/data-theme/GOVE" /> -->
   </xsl:variable>
 
   <!--
@@ -211,9 +211,10 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
       </dcat:theme>
     </xsl:for-each>
 
+
     <!-- Add harcoded theme if not present -->
-    <xsl:if test="count($theme) = 0 and count($fallbackDcatApThemes/entry) > 0">
-      <xsl:for-each select="$fallbackDcatApThemes/entry">
+    <xsl:if test="count($theme) = 0 and count($fallbackDcatApThemes) > 0">
+      <xsl:for-each select="$fallbackDcatApThemes">
         <xsl:variable name="entryKey" select="@key"/>
         <dcat:theme>
           <xsl:choose>
