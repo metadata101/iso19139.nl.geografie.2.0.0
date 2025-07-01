@@ -140,7 +140,7 @@
 
             This protocol list is GeoNetwork specific. It is not part of the ISO 19115-3 standard.
             -->
-            <xsl:if test="matches($protocol, '.*DOWNLOAD.*|DB:.*|FILE:.*')">
+            <xsl:if test="matches($protocol, 'gml|geojson|gpkg|tiff|kml|csv|zip|wmc|json|jsonld|rdf-xml|xml|png|gif|jp2|mapbox-vector-tile|UKMT')">
               <dcat:downloadURL rdf:resource="{$url}"/>
             </xsl:if>
 
