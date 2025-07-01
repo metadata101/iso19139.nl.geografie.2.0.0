@@ -686,7 +686,7 @@ using the region API -->
                       <th>Toegangsrechten</th>
                       <td>
                         <xsl:variable name="rightsStatements">
-                          <xsl:for-each select="distinct-values($metadata/gmd:identificationInfo/*/gmd:resourceConstraints/*[gmd:accessConstraints]/gmd:otherConstraints/(gco:CharacterString|gmx:Anchor))">
+                          <xsl:for-each select="distinct-values($metadata/gmd:identificationInfo/*/gmd:resourceConstraints/*[gmd:accessConstraints]/gmd:otherConstraints/(gco:CharacterString|gmx:Anchor/@xlink:href))">
                             <xsl:variable name="dcatAccessType"
                                           select="$dcatApAccessTypes[(lower-case(.) = lower-case(current()) and not(@match)) or
                                                      (starts-with(lower-case(current()), lower-case(.)) and (@match = 'start'))] "/>
