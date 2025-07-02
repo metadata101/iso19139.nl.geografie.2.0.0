@@ -174,8 +174,6 @@
   <xsl:function name="geonet:isValidLicense" as="xs:boolean">
     <xsl:param name="resourceConstraints"  as="node()*" />
 
-    <!--<xsl:message><xsl:copy-of select="$resourceConstraints/*/gmd:useLimitation" /></xsl:message>-->
-
     <xsl:variable name="euLicenses"
       select="document('../formatter/dcat-ap-nl-3/vocabularies/licences-skos.rdf')"/>
 
@@ -260,7 +258,7 @@
 
     <xsl:variable name="rightsStatements">
 
-      <xsl:for-each select="distinct-values($resourceConstraints/*[gmd:accessConstraints]/gmd:otherConstraints/(gco:CharacterString|gmx:Anchor))">
+      <xsl:for-each select="distinct-values($resourceConstraints/*[gmd:accessConstraints]/gmd:otherConstraints/(gco:CharacterString|gmx:Anchor/@xlink:href))">
         <xsl:variable name="dcatAccessType"
                       select="$dcatApAccessTypes[(lower-case(.) = lower-case(current()) and not(@match)) or
                                                    (starts-with(lower-case(current()), lower-case(.)) and (@match = 'start'))] "/>
@@ -346,13 +344,28 @@
         <sch:assert test="geonet:hasEuDcatApThemes($nodes)">Een onderwerp categorie of een INSPIRE-thema trefwoord is vereist</sch:assert>
       </xsl:if>
 
+      <!-- Dataset title present -->
+      <sch:assert test="gmd:citation/*/gmd:title">Titel van de dataset ontbreekt</sch:assert>
+
+      <!-- Dataset abstract present -->
+      <sch:assert test="gmd:abstract">Omschrijving van de inhoud van de dataset ontbreekt</sch:assert>
+
+      <!-- Dataset language present -->
+      <sch:assert test="gmd:language">De taal van de dataset moet Nederlands of Engels zijn</sch:assert>
+
+      <!-- Dataset identifier present -->
+      <sch:assert test="gmd:citation/*/gmd:identifier/gmd:MD_Identifier/gmd:code">Unieke Identifier van de dataset ontbreekt</sch:assert>
+
+      <!-- Dataset status present -->
+      <sch:assert test="gmd:status">Status van de dataset ontbreekt</sch:assert>
+
       <!-- License -->
       <sch:assert test="geonet:isValidLicense(gmd:resourceConstraints)">Een geldige Creative Commons-licentie voor Overige beperkingen / (Juridische) toegangs restricties is vereist. Zie https://definities.geostandaarden.nl/dcat-ap-nl/nl/</sch:assert>
 
       <!-- Rights -->
       <sch:assert test="geonet:isValidRights(gmd:resourceConstraints)">Een geldige Creative Commons-licentie voor Overige beperkingen / (Juridische) gebruiksbeperking is vereist. Zie https://definities.geostandaarden.nl/dcat-ap-nl/nl/</sch:assert>
 
-      <!-- Dataset contact -->
+      <!-- Dataset contact present -->
       <sch:let name="hasContact" value="count(gmd:pointOfContact) > 0"/>
       <sch:assert test="$hasContact = true()">Informatie die nodig is om contact op te nemen met de verantwoordelijke persoon of organisatie ontbreekt</sch:assert>
     </sch:rule>
