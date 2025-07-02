@@ -1021,17 +1021,25 @@ using the region API -->
                       </tr>
                     </xsl:if>
 
-                    <xsl:for-each select="$metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text())]">
-                      <tr>
-                        <th>Distributie</th>
-                        <td>
+                    <xsl:if test="count($metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text())]) > 0">
 
-                          <a href="{*/gmd:linkage/*/text()}" target="_blank"><xsl:value-of select="if (string(*/gmd:name/*/text())) then */gmd:name/*/text() else */gmd:linkage/*/text()" /></a>
-                          <p><xsl:value-of select="*/gmd:description/*/text()"/></p>
+                        <tr>
+                          <th>Distributies</th>
+                          <td>
+                            <ul>
+                              <xsl:for-each select="$metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text())]">
+                                <li><a href="{*/gmd:linkage/*/text()}" target="_blank"><xsl:value-of select="if (string(*/gmd:name/*/text())) then */gmd:name/*/text() else */gmd:linkage/*/text()" /></a>
+                                <xsl:if test="string(*/gmd:description/*/text())"><span>(<xsl:value-of select="*/gmd:description/*/text()"/>)</span></xsl:if>
+                                </li>
+                              </xsl:for-each>
+                            </ul>
 
-                        </td>
-                      </tr>
-                    </xsl:for-each>
+
+                          </td>
+                        </tr>
+
+                    </xsl:if>
+
                   </tbody>
                 </table>
 
