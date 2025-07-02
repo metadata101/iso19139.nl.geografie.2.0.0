@@ -12,6 +12,8 @@
                 xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0"
                 xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0"
                 xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0"
+                xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
+                xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 xmlns:dcat="http://www.w3.org/ns/dcat#"
@@ -232,6 +234,76 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
             </xsl:otherwise>
           </xsl:choose>
         </dcat:theme>
+      </xsl:for-each>
+    </xsl:if>
+  </xsl:template>
+
+  <!--
+RDF Property:	dcterms:spatial
+Definition:	The geographical area covered by the dataset.
+Range:	dcterms:Location (A spatial region or named place)
+Usage note:	The spatial coverage of a dataset may be encoded as an instance of dcterms:Location,
+or may be indicated using an IRI reference (link) to a resource describing a location. It is recommended that links are to entries in a well maintained gazetteer such as Geonames.
+-->
+  <xsl:template mode="iso19115-3-to-dcat"
+                match="mri:extent/*/gex:geographicElement/gex:EX_GeographicBoundingBox">
+    <xsl:variable name="isServiceMetadata" select="exists(//mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification)" />
+
+    <xsl:if test="not($isServiceMetadata)">
+      <xsl:variable name="north" select="gex:northBoundLatitude/gco:Decimal"/>
+      <xsl:variable name="east" select="gex:eastBoundLongitude/gco:Decimal"/>
+      <xsl:variable name="south" select="gex:southBoundLatitude/gco:Decimal"/>
+      <xsl:variable name="west" select="gex:westBoundLongitude/gco:Decimal"/>
+
+      <xsl:variable name="geojson"
+                    as="xs:string"
+                    select="concat('{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[[[',
+                                     $west, ',', $north, '],[',
+                                     $east, ',', $north, '],[',
+                                     $east, ',', $south, '],[',
+                                     $west, ',', $south, '],[',
+                                     $west, ',', $north, ']]]}')"/>
+
+      <dct:spatial>
+        <rdf:Description>
+          <rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
+          <dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#geoJSONLiteral">
+            <xsl:value-of select="$geojson"/>
+          </dcat:bbox>
+        </rdf:Description>
+      </dct:spatial>
+    </xsl:if>
+  </xsl:template>
+
+
+  <xsl:template mode="iso19115-3-to-dcat"
+                match="mri:extent/*/gex:geographicElement/gex:EX_GeographicDescription">
+    <xsl:variable name="isServiceMetadata" select="exists(//mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification)" />
+
+    <xsl:if test="not($isServiceMetadata)">
+      <xsl:for-each select="gex:geographicIdentifier/*">
+        <xsl:variable name="uri"
+                      as="xs:string?"
+                      select="mcc:code/*/@xlink:href"/>
+        <xsl:choose>
+          <xsl:when test="string($uri)">
+            <dct:spatial>
+              <dct:Location rdf:about="{$uri}"/>
+            </dct:spatial>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:for-each select="mcc:code">
+              <dct:spatial>
+                <rdf:Description>
+                  <rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
+                  <xsl:call-template name="rdf-localised">
+                    <xsl:with-param name="nodeName" select="'skos:prefLabel'"/>
+                  </xsl:call-template>
+                </rdf:Description>
+              </dct:spatial>
+            </xsl:for-each>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:for-each>
     </xsl:if>
   </xsl:template>
