@@ -233,9 +233,10 @@
               </xsl:when>
               <xsl:otherwise>
                 <xsl:choose>
-                  <xsl:when test="starts-with($protocol, 'WWW:DOWNLOAD:')">
+                  <xsl:when test="matches($protocol, 'gml|geojson|gpkg|tiff|kml|csv|zip|wmc|json|jsonld|rdf-xml|xml|png|gif|jp2|mapbox-vector-tile|UKMT')">
                     <xsl:call-template name="rdf-format-as-mediatype">
-                      <xsl:with-param name="format" select="substring-after($protocol, 'WWW:DOWNLOAD:')"/>
+                      <xsl:with-param name="elementName" select="'dcat:mediaType'"/>
+                      <xsl:with-param name="format" select="$protocol"/>
                     </xsl:call-template>
                   </xsl:when>
                   <xsl:otherwise>
