@@ -258,6 +258,142 @@ using the region API -->
 
   </xsl:function>
 
+  <xsl:variable name="formatLabelToUri"
+                  as="node()*">
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GRID_ASCII">aaigrid</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GRID">aig</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/ATOM">atom</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/ATOM">atom:feed</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/CSV">text/csv</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/CSV">csv</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">csw</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/DBF">dbf</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/BIN">dgn</entry>
+    <entry key="https://www.iana.org/assignments/media-types/image/vn.djvu">djvu</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/DOC">doc</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/DOCX">docx</entry>
+    <entry key="https://www.iana.org/assignments/media-types/image/vn.dxf">dxf</entry>
+    <entry key="https://www.iana.org/assignments/media-types/image/vn.dwg">image/vnd.dwg</entry>
+    <entry key="https://www.iana.org/assignments/media-types/image/vn.dwg">dwg</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/ECW">ecw</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/ECW">ecwp</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/EXE">elp</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/EPUB">epub</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GDB">fgeo</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GDB">gdb</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GDB">application/x-filegdb</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GDB">ESRI File Geodatabase (.fgdb)</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GEOJSON">geojson</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GEOJSON">application/geo+json</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GPKG">application/geopackage+vnd.sqlite3</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GPKG">application/geopackage+sqlite3</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GPKG">geopackage</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RSS">georss</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/TIFF">image/tiff</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GEOTIFF">geotiff</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GEOTIFF">application/x-worldfile</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GIF">gif</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GML">gml</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GML">application/gml+xml</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GMZ">gmz</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GMZ">application/x-gmz</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GPKG">gpkg</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">gpx</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GRID">grid</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GRID_ASCII">grid_ascii</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/CSV">gtfs</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/TIFF">gtiff</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GZIP">gzip</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/HTML">text/html</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/HTML">html</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/JPEG">jpeg</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/JPEG">jpg</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/JPEG2000">image/jp2</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/JSON">json</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/JSON">OGC API - Coverages</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/JSON">OGC API - Records</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GEOJSON">OGC API - Features</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/JSON_LD">json-ld</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/JSON_LD">json_ld</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/JSON_LD">jsonld</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/KML">kml</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/KMZ">kmz</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/LAS">las</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/LAZ">laz</entry>
+    <entry key="https://www.iana.org/assignments/media-types/application/marc">marc</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/MDB">mdb</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/MXD">mxd</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RDF_N_TRIPLES">n-triples</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/N3">n3</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/NETCDF">netcdf</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/ODS">ods</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/ODT">odt</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">ogc:csw</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">ogc:sos</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/WCS_SRVC">ogc:wcs</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/WFS_SRVC">ogc:wfs</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GML">ogc:wfs-g</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">ogc:wmc</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/WMS_SRVC">ogc:wms</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/WMTS_SRVC">ogc:wmts</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GML">ogc:wps</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/TXT">pc-axis</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/PDF">pdf</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/PDF">application/pdf</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/MDB">pgeo</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/PNG">png</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RAR">rar</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/rdf/RDF_XML">xml</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/N3">rdf-n3</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE">rdf-turtle</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RDF_XML">rdf-xml</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RDF_N_TRIPLES">rdf_n_triples</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/N3">rdf_n3</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE">rdf_turtle</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RDF_XML">rdf_xml</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RSS">rss</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RTF">rtf</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/ZIP">application/zip</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/ZIP">scorm</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/SHP">shp</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/SHP">application/vnd.shp</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/SHP">application/x-shapefile</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/REST">ESRI:REST</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/SHP">ESRI Shapefile</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/SHP">ESRI Shapefile (.shp)</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">sos</entry>
+    <entry key="https://www.iana.org/assignments/media-types/application/vnd.sqlite3">spatialite</entry>
+    <entry key="https://www.iana.org/assignments/media-types/application/vnd.sqlite3">sqlite</entry>
+    <entry key="https://www.iana.org/assignments/media-types/application/vnd.sqlite3">sqlite3</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/SVG">svg</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/TXT">text</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/TXT">text/csv</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/TIFF">tiff</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/TMX">tmx</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/TSV">tsv</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE">ttl</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE">turtle</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/TXT">txt</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/JSON">vcard-json</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">vcard-xml</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">xbrl</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XHTML">xhtml</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XLS">xls</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XLSX">xlsx</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XLSX">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">application/xml</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">xml</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/WCS_SRVC">wcs</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/WFS_SRVC">wfs</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GML">wfs-g</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/XML">wmc</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/WMS_SRVC">wms</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/WMTS_SRVC">wmts</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/GML">wps</entry>
+    <entry key="http://publications.europa.eu/resource/authority/file-type/ZIP">zip</entry>
+  </xsl:variable>
+
+
   <xsl:variable name="isoTopicToEuDcatApThemes"
                 as="node()*">
     <entry key="http://publications.europa.eu/resource/authority/data-theme/AGRI">
@@ -1031,6 +1167,28 @@ using the region API -->
                                 <xsl:for-each select="$metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text())]">
                                   <li><a href="{*/gmd:linkage/*/text()}" target="_blank"><xsl:value-of select="if (string(*/gmd:name/*/text())) then */gmd:name/*/text() else */gmd:linkage/*/text()" /></a>
                                   <xsl:if test="string(*/gmd:description/*/text())"><span>(<xsl:value-of select="*/gmd:description/*/text()"/>)</span></xsl:if>
+
+                                  <xsl:variable name="protocolAnchor"
+                                                select="*/gmd:protocol/*/@xlink:href"/>
+                                  <xsl:variable name="isIANAFormat"
+                                                select="starts-with($protocolAnchor, 'https://www.iana.org/assignments/media-types/') or
+                                                          starts-with($protocolAnchor, 'http://www.iana.org/assignments/media-types/')"/>
+
+                                    <xsl:variable name="format"
+                                                  select="replace(replace($protocolAnchor, 'https://www.iana.org/assignments/media-types/', ''), 'http://www.iana.org/assignments/media-types/', '')"/>
+
+                                    <xsl:if test="$isIANAFormat and matches($format, '\w+/[-+.\w]+')">
+                                      <p>Media-type: <span class="label label-default"><xsl:value-of select="$format"/></span></p>
+                                    </xsl:if>
+
+
+                                    <xsl:variable name="formatUri"
+                                                  as="xs:string?"
+                                                  select="($formatLabelToUri[lower-case($format) = lower-case(text())]/@key)[1]"/>
+                                    <xsl:if test="$formatUri">
+                                      <p>Format: <span class="label label-default"><xsl:value-of select="replace($formatUri, 'http://publications.europa.eu/resource/authority/file-type/', '')"/></span></p>
+                                    </xsl:if>
+
                                   </li>
                                 </xsl:for-each>
                               </ul>
