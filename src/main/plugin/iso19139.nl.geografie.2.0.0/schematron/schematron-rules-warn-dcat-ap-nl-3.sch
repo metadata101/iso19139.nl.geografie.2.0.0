@@ -34,7 +34,10 @@
       <sch:assert test="gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox[gmd:westBoundLongitude/gco:Decimal != '' and gmd:eastBoundLongitude/gco:Decimal != '' and gmd:southBoundLatitude/gco:Decimal != '' and gmd:northBoundLatitude/gco:Decimal != '']">Het geografische gebied waarop de gegevens in de dataset betrekking hebben, wordt aanbevolen</sch:assert>
 
       <!-- Dataset temporal coverage -->
-       <sch:assert test="gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent//*[gml:beginPosition != '' or gml:endPosition != '']">De periode waarop de dataset betrekking heeft wordt aanbevolen</sch:assert>
+      <sch:assert test="gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent//*[gml:beginPosition != '' or gml:endPosition != '']">De periode waarop de dataset betrekking heeft wordt aanbevolen</sch:assert>
+
+      <!-- Keywords -->
+      <sch:assert test="gmd:descriptiveKeywords/*/gmd:keyword[gmx:Anchor/@xlink:href != '' or gco:CharacterString != '']">Trefwoorden voor datasets worden aanbevolen</sch:assert>
     </sch:rule>
   </sch:pattern>
 
