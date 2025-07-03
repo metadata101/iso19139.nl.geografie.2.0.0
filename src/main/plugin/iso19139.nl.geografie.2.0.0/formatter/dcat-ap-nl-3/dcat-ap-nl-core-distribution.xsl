@@ -21,6 +21,13 @@
                 xmlns:foaf="http://xmlns.com/foaf/0.1/"
                 exclude-result-prefixes="#all">
 
+  <!--
+  Some information are duplicated from the dataset to the distributions.
+  This can be enabled or not here.
+
+  Related discussion:
+  https://github.com/SEMICeu/GeoDCAT-AP/issues/100
+  -->
   <xsl:param name="copyDatasetInfoToDistribution"
              as="xs:string"
              select="'true'"/>
@@ -47,7 +54,7 @@
     <xsl:variable name="isServiceMetadata" select="exists(//mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification)" />
 
     <xsl:variable name="url"
-                  select="*/cit:linkage/gco:CharacterString/text()"/>
+                  select="(*/cit:linkage/gco:CharacterString/text()|gcx:Anchor/@xlink:href)[1]"/>
 
     <xsl:variable name="protocol"
                   select="*/cit:protocol/*/text()"/>
@@ -140,7 +147,7 @@
 
             This protocol list is GeoNetwork specific. It is not part of the ISO 19115-3 standard.
             -->
-            <xsl:if test="matches($protocol, 'gml|geojson|gpkg|tiff|kml|csv|zip|wmc|json|jsonld|rdf-xml|xml|png|gif|jp2|mapbox-vector-tile|UKMT')">
+            <xsl:if test="matches($protocol, 'gml|geojson|gpkg|tiff|kml|csv|zip|wmc|json|jsonld|rdf-xml|xml|png|gif|jp2|mapbox-vector-tile')">
               <dcat:downloadURL rdf:resource="{$url}"/>
             </xsl:if>
 
@@ -154,7 +161,6 @@
 
             TODO: Not supported https://github.com/SEMICeu/GeoDCAT-AP/issues/89
             -->
-
 
 
             <!--
@@ -233,11 +239,27 @@
               </xsl:when>
               <xsl:otherwise>
                 <xsl:choose>
-                  <xsl:when test="matches($protocol, 'gml|geojson|gpkg|tiff|kml|csv|zip|wmc|json|jsonld|rdf-xml|xml|png|gif|jp2|mapbox-vector-tile|UKMT')">
+                  <xsl:when test="matches($protocol, 'OGC:WMS|OGC:WFS|OGC:WMTS|OGC:WCS|gml|geojson|gpkg|tiff|kml|csv|zip|wmc|json|jsonld|rdf-xml|xml|png|gif|jp2|mapbox-vector-tile')">
+                    <xsl:variable name="format"
+                                  select="replace(replace($protocolAnchor, 'https://www.iana.org/assignments/media-types/', ''), 'http://www.iana.org/assignments/media-types/', '')"/>
+
+                    <xsl:variable name="isIANAFormat"
+                                  select="starts-with($protocolAnchor, 'https://www.iana.org/assignments/media-types/') or
+                                          starts-with($protocolAnchor, 'http://www.iana.org/assignments/media-types/')"/>
+
+                    <!-- The file format of the Distribution. -->
                     <xsl:call-template name="rdf-format-as-mediatype">
-                      <xsl:with-param name="elementName" select="'dcat:mediaType'"/>
                       <xsl:with-param name="format" select="$protocol"/>
                     </xsl:call-template>
+
+                    <!-- The media type of the Distribution as defined in the official register of media types managed by IANA. -->
+                    <xsl:if test="$isIANAFormat and matches($format, '\w+/[-+.\w]+')">
+                      <dcat:mediaType>
+                        <dct:MediaType>
+                          <rdfs:label><xsl:value-of select="$format"/></rdfs:label>
+                        </dct:MediaType>
+                      </dcat:mediaType>
+                    </xsl:if>
                   </xsl:when>
                   <xsl:otherwise>
                     <xsl:apply-templates mode="iso19115-3-to-dcat-distribution"
@@ -249,6 +271,7 @@
 
             <xsl:apply-templates mode="iso19115-3-to-dcat-distribution"
                                  select="ancestor::mrd:MD_DigitalTransferOptions/mrd:distributionFormat/*/mrd:fileDecompressionTechnique"/>
+
 
             <xsl:if test="$isCopyingDatasetInfoToDistribution">
 
@@ -332,4 +355,24 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+
+    <xsl:template name="rdf-format-as-mediatype">
+        <xsl:param name="elementName" as="xs:string" select="'dct:format'"/>
+        <xsl:param name="format" as="xs:string"/>
+
+        <xsl:variable name="formatUri"
+                      as="xs:string?"
+                      select="($formatLabelToUri[lower-case($format) = lower-case(text())]/@key)[1]"/>
+
+        <xsl:if test="$formatUri">
+            <xsl:element name="{$elementName}">
+                <xsl:variable name="rangeName"
+                              as="xs:string"
+                              select="if ($elementName = 'dct:format') then 'dct:MediaTypeOrExtent' else 'dct:MediaType'"/>
+                <xsl:element name="{$rangeName}">
+                    <xsl:attribute name="rdf:about" select="$formatUri"/>
+                </xsl:element>
+            </xsl:element>
+        </xsl:if>
+    </xsl:template>
 </xsl:stylesheet>
