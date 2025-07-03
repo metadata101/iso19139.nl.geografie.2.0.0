@@ -1168,6 +1168,8 @@ using the region API -->
                                   <li><a href="{*/gmd:linkage/*/text()}" target="_blank"><xsl:value-of select="if (string(*/gmd:name/*/text())) then */gmd:name/*/text() else */gmd:linkage/*/text()" /></a>
                                   <xsl:if test="string(*/gmd:description/*/text())"><span>(<xsl:value-of select="*/gmd:description/*/text()"/>)</span></xsl:if>
 
+                                  <xsl:variable name="protocol"
+                                                select="*/gmd:protocol/*/text()"/>
                                   <xsl:variable name="protocolAnchor"
                                                 select="*/gmd:protocol/*/@xlink:href"/>
                                   <xsl:variable name="isIANAFormat"
@@ -1180,11 +1182,11 @@ using the region API -->
                                     <xsl:if test="$isIANAFormat and matches($format, '\w+/[-+.\w]+')">
                                       <p>Media-type: <span class="label label-default"><xsl:value-of select="$format"/></span></p>
                                     </xsl:if>
-
-
+                                      
                                     <xsl:variable name="formatUri"
                                                   as="xs:string?"
-                                                  select="($formatLabelToUri[lower-case($format) = lower-case(text())]/@key)[1]"/>
+                                                  select="($formatLabelToUri[lower-case($protocol) = lower-case(text())]/@key)[1]"/>
+
                                     <xsl:if test="$formatUri">
                                       <p>Format: <span class="label label-default"><xsl:value-of select="replace($formatUri, 'http://publications.europa.eu/resource/authority/file-type/', '')"/></span></p>
                                     </xsl:if>
