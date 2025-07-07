@@ -715,7 +715,7 @@ using the region API -->
 
                       <xsl:if test="count($issuedDates/*) > 0">
                         <tr>
-                          <th>Issued</th>
+                          <th>Datum van de bron (aangemaakt) </th>
                           <td>
                             <xsl:value-of select="$issuedDates/*[1]"/>
                           </td>
@@ -742,7 +742,7 @@ using the region API -->
 
                       <xsl:if test="count($modifiedDates/*) > 0">
                         <tr>
-                          <th>Modified</th>
+                          <th>Datum van de bron (laatste wijziging) </th>
                           <td>
                             <xsl:value-of select="$modifiedDates/*[1]"/>
                           </td>
@@ -751,7 +751,7 @@ using the region API -->
 
                       <xsl:if test="count($metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/*[not(gmd:thesaurusName)]/gmd:keyword[string(*/text())]) > 0">
                         <tr>
-                          <th>Trefwoord</th>
+                          <th>Trefwoorden</th>
                           <td>
                             <xsl:for-each select="$metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/*[not(gmd:thesaurusName)]/gmd:keyword[string(*/text())]">
                               <xsl:variable name="keywordValue" select="*/text()" />
@@ -848,7 +848,7 @@ using the region API -->
 
                       <xsl:if test="count($metadata/gmd:dataQualityInfo/*/gmd:report/*/gmd:result[*/gmd:pass/*/text() = 'true']) > 0">
                         <tr>
-                          <th>Conforms to</th>
+                          <th>Conformiteit met specificatie</th>
                           <td>
                             <xsl:for-each
                               select="$metadata/gmd:dataQualityInfo/*/gmd:report/*/gmd:result[*/gmd:pass/*/text() = 'true']/*/gmd:specification">
@@ -945,7 +945,7 @@ using the region API -->
                 </div>
               </tab>
               <tab
-                heading="Contact gevegens"
+                heading="Contact gegevens"
               >
                 <!-- Obtain default iso contact mappings to DCAT contacts -->
                 <xsl:variable name="contactsMapping">
@@ -967,7 +967,7 @@ using the region API -->
                 <table class="table table-striped">
                   <tbody>
                     <tr>
-                      <th>Creator</th>
+                      <th>Aanmaker</th>
                       <td>
                         <xsl:choose>
                           <xsl:when test="$contactsMapping/entry[@key='dct:creator']">
@@ -1002,7 +1002,7 @@ using the region API -->
                     </tr>
 
                     <tr>
-                      <th>Publisher</th>
+                      <th>Publiceerder</th>
                       <td>
                         <xsl:choose>
                           <xsl:when test="$contactsMapping/entry[@key='dct:publisher']">
@@ -1037,7 +1037,7 @@ using the region API -->
                     </tr>
 
                     <tr>
-                      <th>Contact point</th>
+                      <th>Contactpunt</th>
                       <td>
                         <xsl:choose>
                           <xsl:when test="$contactsMapping/entry[@key='dct:contactPoint']">
@@ -1108,7 +1108,7 @@ using the region API -->
 
                       <xsl:if test="count($rights) > 0">
                         <tr>
-                          <th>Rights</th>
+                          <th>Overige beperkingen</th>
                           <td>
                             <xsl:copy-of select="$rights[1]" />
                           </td>
@@ -1182,7 +1182,7 @@ using the region API -->
                                     <xsl:if test="$isIANAFormat and matches($format, '\w+/[-+.\w]+')">
                                       <p>Media-type: <span class="label label-default"><xsl:value-of select="$format"/></span></p>
                                     </xsl:if>
-                                      
+
                                     <xsl:variable name="formatUri"
                                                   as="xs:string?"
                                                   select="($formatLabelToUri[lower-case($protocol) = lower-case(text())]/@key)[1]"/>
