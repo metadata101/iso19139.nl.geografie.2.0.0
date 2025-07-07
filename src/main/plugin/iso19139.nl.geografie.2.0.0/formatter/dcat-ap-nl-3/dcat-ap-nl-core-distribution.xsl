@@ -239,7 +239,7 @@
               </xsl:when>
               <xsl:otherwise>
                 <xsl:choose>
-                  <xsl:when test="matches($protocol, 'OGC:WMS|OGC:WFS|OGC:WMTS|OGC:WCS|gml|geojson|gpkg|tiff|kml|csv|zip|wmc|json|jsonld|rdf-xml|xml|png|gif|jp2|mapbox-vector-tile')">
+                  <xsl:when test="matches($protocol, 'OGC:WMS|OGC:WFS|OGC:WMTS|OGC:WCS|gml|geojson|gpkg|tiff|kml|csv|zip|wmc|json|jsonld|rdf-xml|xml|png|gif|jp2|mapbox-vector-tile', 'i')">
                     <xsl:variable name="format"
                                   select="replace(replace($protocolAnchor, 'https://www.iana.org/assignments/media-types/', ''), 'http://www.iana.org/assignments/media-types/', '')"/>
 
