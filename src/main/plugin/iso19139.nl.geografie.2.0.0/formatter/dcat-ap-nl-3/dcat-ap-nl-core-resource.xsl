@@ -91,6 +91,7 @@
       <xsl:variable name="recordUri"
                           select="if ($resourceIdentifierWithHttpCodeSpace)
                                        then concat($resourceIdentifierWithHttpCodeSpace/codeSpace, $resourceIdentifierWithHttpCodeSpace/code)
+                                       else if (@uuid) then concat($nodeUrl, 'api/records/', @uuid, '#resource')
                                        else @url" />
 
       <xsl:choose>
