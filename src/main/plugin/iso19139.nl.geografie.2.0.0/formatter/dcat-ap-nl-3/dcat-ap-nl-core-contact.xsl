@@ -94,7 +94,7 @@
         </xsl:when>
         <xsl:otherwise>
           <xsl:variable name="dcatElementConfig">
-            <value name="dct:creator" as="{$isoContactRoleToDcatCommonNames/entry[@key = 'dct:creator']/@as}"/>
+            <value name="dct:creator" as="{$isoContactRoleToDcatCommonNames[@key = 'dct:creator']/@as}"/>
           </xsl:variable>
 
           <xsl:variable name="allIndividualOrOrganisationWithoutIndividual"
@@ -155,7 +155,7 @@
         </xsl:when>
         <xsl:otherwise>
           <xsl:variable name="dcatElementConfig">
-            <value name="dct:publisher" as="{$isoContactRoleToDcatCommonNames/entry[@key = 'dct:publisher']/@as}"/>
+            <value name="dct:publisher" as="{$isoContactRoleToDcatCommonNames[@key = 'dct:publisher']/@as}"/>
           </xsl:variable>
 
           <xsl:variable name="allIndividualOrOrganisationWithoutIndividual"
@@ -216,7 +216,7 @@
         </xsl:when>
         <xsl:otherwise>
           <xsl:variable name="dcatElementConfig">
-            <value name="dcat:contactPoint" as="{$isoContactRoleToDcatCommonNames/entry[@key = 'dcat:contactPoint']/@as}"/>
+            <value name="dcat:contactPoint" as="{$isoContactRoleToDcatCommonNames[@key = 'dcat:contactPoint']/@as}"/>
           </xsl:variable>
 
           <xsl:variable name="allIndividualOrOrganisationWithoutIndividual"
