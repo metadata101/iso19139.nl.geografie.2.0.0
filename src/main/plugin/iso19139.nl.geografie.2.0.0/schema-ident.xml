@@ -33,7 +33,6 @@
   <title xml:lang="nl">Nederlands metadata profiel op ISO 19115 voor geografie versie 2.1.0</title>
   <description>Geonovum ontwikkelt en beheert het Nederlandse metadata profiel voor het beschrijven van geografische datasets. Dit profiel is een verbijzondering van de internationale metadatastandaarden van ISO en is bedoeld om de interoperabiliteit binnen Nederland te bevorderen.</description>
   <standardUrl>https://docs.geostandaarden.nl/md/mdprofiel-iso19115</standardUrl>
-  <depends>iso19139</depends>
   <schemaLocation>http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd
                   http://www.isotc211.org/2005/gmx http://schemas.opengis.net/iso/19139/20060504/gmx/gmx.xsd</schemaLocation>
   <autodetect xmlns:gmd="http://www.isotc211.org/2005/gmd"

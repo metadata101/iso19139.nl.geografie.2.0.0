@@ -659,6 +659,8 @@ using the region API -->
     <entry key="eng">Engels</entry>
   </xsl:variable>
 
+  <xsl:variable name="isSeriesMetadata" select="$metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode/@codeListValue = 'series'"/>
+
   <!-- HTML -->
   <xsl:template match="/" priority="100">
     <div class="container-fluid gn-metadata-view gn-schema-{$schema}">
@@ -667,9 +669,11 @@ using the region API -->
           <div class="col-md-9">
             <h1><xsl:value-of select="$metadata/gmd:identificationInfo/*/gmd:citation/*/gmd:title/*/text()"/></h1>
 
+            <xsl:variable name="tabHeader" select="if ($isSeriesMetadata) then 'Series' else 'Dataset'"/>
+
             <tabset id="detail-tabset" type="tabs" justified="false">
               <tab
-                heading="Dataset"
+                heading="{$tabHeader}"
               >
                 <div>
                   <table class="table table-striped">
@@ -688,6 +692,7 @@ using the region API -->
                         </td>
                       </tr>
 
+                      <xsl:if test="not($isSeriesMetadata)">
                       <tr>
                         <th>Taal</th>
                         <td>
@@ -703,6 +708,7 @@ using the region API -->
                           <xsl:value-of select="$metadata/gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:code/*/text()"/>
                         </td>
                       </tr>
+                      </xsl:if>
 
                       <xsl:variable name="issuedDateTypes" select="$isoDateTypeToDcatCommonNames[@key='dct:issued']" />
 
@@ -759,75 +765,78 @@ using the region API -->
                         </tr>
                       </xsl:if>
 
-                      <xsl:if test="count($metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/*[not(gmd:thesaurusName)]/gmd:keyword[string(*/text())]) > 0">
-                        <tr>
-                          <th>Trefwoorden</th>
-                          <td>
-                            <xsl:for-each select="$metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/*[not(gmd:thesaurusName)]/gmd:keyword[string(*/text())]">
-                              <xsl:variable name="keywordValue" select="*/text()" />
-                              <a
-                                href=""
-                                title="{{{{ 'clickToFilterOn' | translate }}}} {{{{'{$keywordValue}' | capitalize}}}}"
-                                aria-label="{{{{ 'clickToFilterOn' | translate }}}} {{{{'{$keywordValue}' | capitalize}}}}"
-                                data-ng-click="filterBy('tag.default', '{$keywordValue}')"
-                              >
-                                <xsl:variable name="firstChar" select="substring($keywordValue,1,1)"/>
+                      <xsl:if test="not($isSeriesMetadata)">
+                        <xsl:if test="count($metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/*[not(gmd:thesaurusName)]/gmd:keyword[string(*/text())]) > 0">
+                          <tr>
+                            <th>Trefwoorden</th>
+                            <td>
+                              <xsl:for-each select="$metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/*[not(gmd:thesaurusName)]/gmd:keyword[string(*/text())]">
+                                <xsl:variable name="keywordValue" select="*/text()" />
+                                <a
+                                  href=""
+                                  title="{{{{ 'clickToFilterOn' | translate }}}} {{{{'{$keywordValue}' | capitalize}}}}"
+                                  aria-label="{{{{ 'clickToFilterOn' | translate }}}} {{{{'{$keywordValue}' | capitalize}}}}"
+                                  data-ng-click="filterBy('tag.default', '{$keywordValue}')"
+                                >
+                                  <xsl:variable name="firstChar" select="substring($keywordValue,1,1)"/>
 
-                                <xsl:value-of select="translate($firstChar,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/><xsl:value-of select="substring-after($keywordValue,$firstChar)"/>
-                              </a>
-                              <xsl:if test="position() != last()">, </xsl:if>
+                                  <xsl:value-of select="translate($firstChar,'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/><xsl:value-of select="substring-after($keywordValue,$firstChar)"/>
+                                </a>
+                                <xsl:if test="position() != last()">, </xsl:if>
+                              </xsl:for-each>
+                            </td>
+                          </tr>
+                        </xsl:if>
+                      </xsl:if>
+
+                      <xsl:if test="not($isSeriesMetadata)">
+                        <xsl:variable name="themes">
+                          <xsl:for-each select="$metadata/gmd:identificationInfo/*/gmd:topicCategory">
+                            <xsl:variable name="topicCategoryValue" select="*/text()" />
+                            <xsl:variable name="isoTopicTheme" select="$isoTopicToEuDcatApThemes[iso = $topicCategoryValue]/@key" />
+
+                            <xsl:for-each select="$isoTopicTheme">
+                              <xsl:variable name="translation" select="$dcatApThemesTranslations/entry[@key = current()]" />
+                              <theme><xsl:value-of select="if (string($translation)) then $translation else ." /></theme>
                             </xsl:for-each>
-                          </td>
-                        </tr>
-                      </xsl:if>
 
-                      <xsl:variable name="themes">
-                        <xsl:for-each select="$metadata/gmd:identificationInfo/*/gmd:topicCategory">
-                          <xsl:variable name="topicCategoryValue" select="*/text()" />
-                          <xsl:variable name="isoTopicTheme" select="$isoTopicToEuDcatApThemes[iso = $topicCategoryValue]/@key" />
-
-                          <xsl:for-each select="$isoTopicTheme">
-                            <xsl:variable name="translation" select="$dcatApThemesTranslations/entry[@key = current()]" />
-                            <theme><xsl:value-of select="if (string($translation)) then $translation else ." /></theme>
                           </xsl:for-each>
 
-                        </xsl:for-each>
+                          <xsl:for-each select="$metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/*[gmd:thesaurusName/*/gmd:title/*/text() = 'GEMET - INSPIRE themes, version 1.0']/gmd:keyword">
+                            <xsl:variable name="gemetValue" select="gmx:Anchor/@xlink:href" />
+                            <xsl:variable name="gemetTheme" select="$isoTopicToEuDcatApThemes[inspire = $gemetValue]/@key" />
 
-                        <xsl:for-each select="$metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/*[gmd:thesaurusName/*/gmd:title/*/text() = 'GEMET - INSPIRE themes, version 1.0']/gmd:keyword">
-                          <xsl:variable name="gemetValue" select="gmx:Anchor/@xlink:href" />
-                          <xsl:variable name="gemetTheme" select="$isoTopicToEuDcatApThemes[inspire = $gemetValue]/@key" />
-
-                          <xsl:for-each select="$gemetTheme">
-                            <xsl:variable name="translation" select="$dcatApThemesTranslations/entry[@key = current()]" />
-                            <theme><xsl:value-of select="if (string($translation)) then $translation else ." /></theme>
+                            <xsl:for-each select="$gemetTheme">
+                              <xsl:variable name="translation" select="$dcatApThemesTranslations/entry[@key = current()]" />
+                              <theme><xsl:value-of select="if (string($translation)) then $translation else ." /></theme>
+                            </xsl:for-each>
                           </xsl:for-each>
-                        </xsl:for-each>
-                      </xsl:variable>
+                        </xsl:variable>
 
-                      <xsl:if test="count($themes/*) > 0">
-                        <tr>
-                          <th>Thema</th>
-                          <td>
-                            <xsl:for-each-group select="$themes/theme" group-by=".">
-                              <xsl:value-of select="current-grouping-key()" /><xsl:if test="position() != last()">, </xsl:if>
-                            </xsl:for-each-group>
-                          </td>
-                        </tr>
-                      </xsl:if>
+                        <xsl:if test="count($themes/*) > 0">
+                          <tr>
+                            <th>Thema</th>
+                            <td>
+                              <xsl:for-each-group select="$themes/theme" group-by=".">
+                                <xsl:value-of select="current-grouping-key()" /><xsl:if test="position() != last()">, </xsl:if>
+                              </xsl:for-each-group>
+                            </td>
+                          </tr>
+                        </xsl:if>
 
-                      <xsl:variable name="dcStatus"
-                                as="xs:string?"
-                                select="$isoStatusToDublinCore[@key = $metadata/gmd:identificationInfo/*/gmd:status/*/@codeListValue]"/>
+                        <xsl:variable name="dcStatus"
+                                  as="xs:string?"
+                                  select="$isoStatusToDublinCore[@key = $metadata/gmd:identificationInfo/*/gmd:status/*/@codeListValue]"/>
 
 
-                      <xsl:if test="string($dcStatus)">
-                        <tr>
-                          <th>Status</th>
-                          <td>
-                            <xsl:value-of select="$dcStatus" />
-                          </td>
-                        </tr>
-                      </xsl:if>
+                        <xsl:if test="string($dcStatus)">
+                          <tr>
+                            <th>Status</th>
+                            <td>
+                              <xsl:value-of select="$dcStatus" />
+                            </td>
+                          </tr>
+                        </xsl:if>
 
                       <tr>
                         <th>Toegangsrechten</th>
@@ -856,6 +865,7 @@ using the region API -->
                         </td>
                       </tr>
 
+
                       <xsl:if test="count($metadata/gmd:dataQualityInfo/*/gmd:report/*/gmd:result[*/gmd:pass/*/text() = 'true']) > 0">
                         <tr>
                           <th>Conformiteit met specificatie</th>
@@ -874,7 +884,6 @@ using the region API -->
                           </td>
                         </tr>
                       </xsl:if>
-
 
                       <xsl:if test="string($metadata/gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/*/text())">
                         <tr>
@@ -895,6 +904,7 @@ using the region API -->
                           </td>
                         </tr>
                       </xsl:if>
+                    </xsl:if>
 
                       <xsl:variable name="frequencies">
                         <xsl:for-each select="$metadata/gmd:identificationInfo//gmd:maintenanceAndUpdateFrequency[*/@codeListValue != '']">
@@ -937,6 +947,7 @@ using the region API -->
                   </table>
                 </div>
               </tab>
+
               <tab
                 heading="Contact gegevens"
               >
@@ -959,6 +970,8 @@ using the region API -->
 
                 <table class="table table-striped">
                   <tbody>
+
+                    <xsl:if test="not($isSeriesMetadata)">
                     <tr>
                       <th>Aanmaker</th>
                       <td>
@@ -993,6 +1006,7 @@ using the region API -->
                         </xsl:choose>
                       </td>
                     </tr>
+                    </xsl:if>
 
                     <tr>
                       <th>Publiceerder</th>
@@ -1067,8 +1081,7 @@ using the region API -->
                 </table>
               </tab>
 
-
-              <xsl:if test="count($metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text())]) > 0">
+              <xsl:if test="not($isSeriesMetadata) and count($metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text())]) > 0">
                 <tab
                   heading="Distributies"
                 >

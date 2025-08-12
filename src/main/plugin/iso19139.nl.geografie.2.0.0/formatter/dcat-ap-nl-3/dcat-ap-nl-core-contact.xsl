@@ -39,6 +39,8 @@
                 name="iso19115-3-to-dcat-agent"
                 match="*[cit:CI_Responsibility]">
 
+    <xsl:variable name="isSeriesMetadata" select="//mdb:MD_Metadata/mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue = 'series'" />
+
     <!-- Process all contacts when processing the first one -->
     <xsl:if test="count(preceding-sibling::*[cit:CI_Responsibility]) = 0">
 
@@ -60,6 +62,7 @@
       </xsl:variable>
 
       <!-- Creator -->
+      <xsl:if test="not($isSeriesMetadata)">
       <xsl:choose>
         <xsl:when test="$contactsMapping/entry[@key='dct:creator']">
           <xsl:variable name="mappingRole" select="$contactsMapping/entry[@key='dct:creator']" />
@@ -119,6 +122,7 @@
           </xsl:for-each>
         </xsl:otherwise>
       </xsl:choose>
+      </xsl:if>
 
       <!-- Publisher -->
       <xsl:choose>

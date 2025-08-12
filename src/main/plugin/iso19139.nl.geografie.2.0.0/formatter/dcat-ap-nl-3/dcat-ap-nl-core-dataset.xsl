@@ -176,7 +176,11 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
                 priority="50">
     <xsl:call-template name="iso19115-3-to-dcat-ap-nl-resource"/>
 
-    <xsl:call-template name="rdf-eu-dcat-ap-nl-theme"/>
+    <xsl:variable name="isSeriesMetadata" select="mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue = 'series'" />
+
+    <xsl:if test="not($isSeriesMetadata)">
+      <xsl:call-template name="rdf-eu-dcat-ap-nl-theme"/>
+    </xsl:if>
   </xsl:template>
 
 

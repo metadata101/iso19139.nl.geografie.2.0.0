@@ -35,12 +35,26 @@
 
     <xsl:variable name="isServiceMetadata" select="name(mdb:identificationInfo/*[1]) = 'srv:SV_ServiceIdentification'" />
 
+    <xsl:variable name="isSeriesMetadata" select="mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue = 'series'" />
+
     <xsl:if test="$isServiceMetadata">
       <xsl:apply-templates mode="iso19115-3-to-dcat"
                            select="mdb:metadataIdentifier" />
     </xsl:if>
-    <xsl:apply-templates mode="iso19115-3-to-dcat"
-                         select="mdb:identificationInfo/*/mri:citation/*/cit:title
+
+    <xsl:choose>
+      <xsl:when test="$isSeriesMetadata">
+        <xsl:apply-templates mode="iso19115-3-to-dcat"
+                             select="mdb:identificationInfo/*/mri:citation/*/cit:title
+                                  |mdb:identificationInfo/*/mri:abstract
+                                  |mdb:identificationInfo/*/mri:citation/*/cit:date
+                                  |mdb:identificationInfo/*/mri:pointOfContact
+                                  |mdb:dataQualityInfo/*/mdq:report/*/mdq:result[mdq:DQ_ConformanceResult and mdq:DQ_ConformanceResult/mdq:pass/*/text() = 'true']
+                          "/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates mode="iso19115-3-to-dcat"
+                             select="mdb:identificationInfo/*/mri:citation/*/cit:title
                                   |mdb:identificationInfo/*/mri:abstract
                                   |mdb:identificationInfo/*/mri:citation/*/cit:identifier
                                   |mdb:identificationInfo/*/mri:citation/*/cit:date
@@ -56,6 +70,9 @@
                                   |mdb:resourceLineage/*/mrl:statement
                                   |mdb:metadataLinkage
                           "/>
+      </xsl:otherwise>
+    </xsl:choose>
+
 
     <xsl:call-template name="related-record"/>
 

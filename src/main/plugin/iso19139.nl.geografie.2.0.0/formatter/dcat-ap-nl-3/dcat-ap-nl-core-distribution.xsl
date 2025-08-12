@@ -52,6 +52,7 @@
                as="node()*"/>
 
     <xsl:variable name="isServiceMetadata" select="exists(//mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification)" />
+    <xsl:variable name="isSeriesMetadata" select="//mdb:MD_Metadata/mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue = 'series'" />
 
     <xsl:variable name="url"
                   select="(*/cit:linkage/gco:CharacterString/text()|gcx:Anchor/@xlink:href)[1]"/>
@@ -72,6 +73,9 @@
     <xsl:variable name="pointsToService" select="false()"/>
 
     <xsl:choose>
+      <xsl:when test="$isServiceMetadata or $isSeriesMetadata">
+        <!-- Don't add distribution for service or series metadata -->
+      </xsl:when>
       <xsl:when test="normalize-space($url) = ''"/>
       <xsl:when test="$function = ('information', 'search', 'completeMetadata', 'browseGraphic', 'upload', 'emailService')
                       or matches($protocol, 'WWW:LINK.*')">
@@ -82,9 +86,6 @@
                                         |*/cit:description[normalize-space(.) != '']"/>
           </foaf:Document>
         </foaf:page>
-      </xsl:when>
-      <xsl:when test="$isServiceMetadata">
-        <!-- Don't add distribution for service metadata -->
       </xsl:when>
       <xsl:otherwise>
         <dcat:distribution>
@@ -375,4 +376,19 @@
             </xsl:element>
         </xsl:if>
     </xsl:template>
+
+  <xsl:template mode="iso19115-3-to-dcat"
+                match="mdb:identificationInfo/*/mri:graphicOverview[*/mcc:fileName/*/text() != '']">
+
+    <xsl:variable name="isSeriesMetadata" select="//mdb:MD_Metadata/mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue = 'series'" />
+
+    <xsl:if test="not($isSeriesMetadata)">
+      <foaf:page>
+        <foaf:Document rdf:about="{*/mcc:fileName/*/text()}">
+          <xsl:apply-templates mode="iso19115-3-to-dcat"
+                               select="*/mcc:fileDescription[normalize-space(.) != '']"/>
+        </foaf:Document>
+      </foaf:page>
+    </xsl:if>
+  </xsl:template>
 </xsl:stylesheet>
