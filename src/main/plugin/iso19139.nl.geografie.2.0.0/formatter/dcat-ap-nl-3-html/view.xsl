@@ -932,23 +932,6 @@ using the region API -->
                           </td>
                         </tr>
                       </xsl:if>
-
-                      <xsl:if test="$metadata/gmd:identificationInfo//gmd:EX_GeographicBoundingBox[gmd:eastBoundLongitude/gco:Decimal castable as xs:double
-                                                         and gmd:southBoundLatitude/gco:Decimal castable as xs:double
-                                                         and gmd:westBoundLongitude/gco:Decimal castable as xs:double
-                                                         and gmd:northBoundLatitude/gco:Decimal castable as xs:double]">
-                        <tr>
-                          <th>Geografische dekking</th>
-                          <td>
-                            <xsl:copy-of select="gn-fn-render:bbox(
-                                  xs:double($metadata/gmd:identificationInfo//gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal),
-                                  xs:double($metadata/gmd:identificationInfo//gmd:EX_GeographicBoundingBox/gmd:southBoundLatitude/gco:Decimal),
-                                  xs:double($metadata/gmd:identificationInfo//gmd:EX_GeographicBoundingBox/gmd:eastBoundLongitude/gco:Decimal),
-                                  xs:double($metadata/gmd:identificationInfo//gmd:EX_GeographicBoundingBox/gmd:northBoundLatitude/gco:Decimal))"/>
-                          </td>
-                        </tr>
-
-                      </xsl:if>
                     </tbody>
 
                   </table>
