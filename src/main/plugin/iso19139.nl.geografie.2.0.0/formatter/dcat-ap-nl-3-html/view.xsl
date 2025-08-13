@@ -997,7 +997,7 @@ using the region API -->
                             <xsl:variable name="rolesForCreator" select="$isoContactRoleToDcatCommonNames[@key = 'dct:creator']/text()" />
 
                             <xsl:variable name="contactsToProcess"
-                                          select="$metadata/gmd:identificationInfo/*/gmd:pointOfContact[gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'originator']" />
+                                          select="$metadata/gmd:identificationInfo/*/gmd:pointOfContact[gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = $rolesForCreator]" />
 
                             <!-- Sorted contacts to process with rolesForCreator ordering -->
                             <xsl:variable name="contactsToProcessSorted">
