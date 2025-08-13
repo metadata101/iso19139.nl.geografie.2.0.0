@@ -65,35 +65,46 @@
       <xsl:if test="not($isSeriesMetadata)">
       <xsl:choose>
         <xsl:when test="$contactsMapping/entry[@key='dct:creator']">
-          <xsl:variable name="mappingRole" select="$contactsMapping/entry[@key='dct:creator']" />
-          <xsl:for-each select="../*[cit:CI_Responsibility]">
-            <xsl:variable name="role"
-                          as="xs:string?"
-                          select="*/cit:role/*/@codeListValue"/>
+          <xsl:variable name="mappingRole" select="$contactsMapping/entry[@key='dct:creator']/text()" />
 
-            <xsl:if test="$role = $mappingRole">
-              <xsl:variable name="dcatElementConfig"
-                            as="node()?"
-                            select="$isoContactRoleToDcatCommonNames[. = $role]"/>
+          <xsl:variable name="rolesForCreator" select="$isoContactRoleToDcatCommonNames[@key = 'dct:creator']/text()" />
+          
+          <xsl:variable name="contactsToProcess"
+                        select="../*[cit:CI_Responsibility/cit:role/*/@codeListValue = $mappingRole]" />
 
-              <xsl:variable name="allIndividualOrOrganisationWithoutIndividual"
-                            select="*/cit:party//cit:CI_Organisation"
-                            as="node()*"/>
 
-              <xsl:for-each-group select="$allIndividualOrOrganisationWithoutIndividual" group-by="cit:name">
-                <xsl:element name="{$dcatElementConfig/@key}">
-                  <xsl:choose>
-                    <xsl:when test="$dcatElementConfig/@as = 'vcard'">
-                      <xsl:call-template name="rdf-contact-vcard"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <xsl:call-template name="rdf-contact-foaf"/>
-                    </xsl:otherwise>
-                  </xsl:choose>
-                </xsl:element>
-              </xsl:for-each-group>
-            </xsl:if>
-          </xsl:for-each>
+          <!-- Sorted contacts to process with rolesForCreator ordering -->
+          <xsl:variable name="contactsToProcessSorted">
+            <xsl:for-each select="$rolesForCreator">
+              <xsl:variable name="creatorRole" select="." />
+
+              <xsl:if test="count($contactsToProcess[cit:CI_Responsibility/cit:role/*/@codeListValue = $creatorRole]) > 0">
+
+                <xsl:variable name="dcatElementConfig"
+                              as="node()?"
+                              select="$isoContactRoleToDcatCommonNames[. = $creatorRole]"/>
+
+                <xsl:variable name="allIndividualOrOrganisationWithoutIndividual"
+                              select="$contactsToProcess[cit:CI_Responsibility/cit:role/*/@codeListValue = $creatorRole]/*/cit:party//cit:CI_Organisation"
+                              as="node()*"/>
+
+                <xsl:for-each-group select="$allIndividualOrOrganisationWithoutIndividual" group-by="cit:name">
+                  <xsl:element name="{$dcatElementConfig/@key}">
+                    <xsl:choose>
+                      <xsl:when test="$dcatElementConfig/@as = 'vcard'">
+                        <xsl:call-template name="rdf-contact-vcard"/>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:call-template name="rdf-contact-foaf"/>
+                      </xsl:otherwise>
+                    </xsl:choose>
+                  </xsl:element>
+                </xsl:for-each-group>
+              </xsl:if>
+            </xsl:for-each>
+          </xsl:variable>
+
+          <xsl:copy-of select="$contactsToProcessSorted/*[1]"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:variable name="dcatElementConfig">

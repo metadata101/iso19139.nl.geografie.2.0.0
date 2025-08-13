@@ -618,6 +618,7 @@ using the region API -->
 
   <xsl:variable name="isoContactRoleToDcatCommonNames"
                 as="node()*">
+    <entry key="dct:creator" as="foaf">originator</entry>
     <entry key="dct:creator" as="foaf">author</entry>
     <!-- Add this? -->
     <!--<entry key="dct:creator" as="foaf">originator</entry>-->
@@ -978,7 +979,25 @@ using the region API -->
                         <xsl:choose>
                           <xsl:when test="$contactsMapping/entry[@key='dct:creator']">
                             <xsl:variable name="mappingRole" select="$contactsMapping/entry[@key='dct:creator']" />
-                            <xsl:for-each select="$metadata/gmd:identificationInfo/*/gmd:pointOfContact">
+
+                            <xsl:variable name="rolesForCreator" select="$isoContactRoleToDcatCommonNames[@key = 'dct:creator']/text()" />
+
+                            <xsl:variable name="contactsToProcess"
+                                          select="$metadata/gmd:identificationInfo/*/gmd:pointOfContact[gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = 'originator']" />
+
+                            <!-- Sorted contacts to process with rolesForCreator ordering -->
+                            <xsl:variable name="contactsToProcessSorted">
+                              <xsl:for-each select="$rolesForCreator">
+                                <xsl:variable name="creatorRole" select="." />
+
+                                <xsl:if test="count($contactsToProcess[gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = $creatorRole]) > 0">
+
+                                  <xsl:copy-of select="$contactsToProcess[gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue = $creatorRole]" />
+                                </xsl:if>
+                              </xsl:for-each>
+                            </xsl:variable>
+
+                            <xsl:for-each select="$contactsToProcessSorted/*[1]">
                               <xsl:variable name="role"
                                             as="xs:string?"
                                             select="*/gmd:role/*/@codeListValue"/>

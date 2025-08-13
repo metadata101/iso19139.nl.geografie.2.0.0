@@ -28,6 +28,7 @@
 
   <xsl:variable name="isoContactRoleToDcatCommonNames"
                 as="node()*">
+    <entry key="dct:creator" as="foaf">originator</entry>
     <entry key="dct:creator" as="foaf">author</entry>
     <!-- Add this? -->
     <!--<entry key="dct:creator" as="foaf">originator</entry>-->
