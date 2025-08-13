@@ -943,6 +943,20 @@ using the region API -->
                           </td>
                         </tr>
                       </xsl:if>
+
+                      <xsl:if test="count($metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text()) and
+                                            */gmd:protocol/gmx:Anchor/@xlink:href='https://www.w3.org/TR/vocab-dcat-2/#Property:resource_landing_page']) > 0">
+
+                      <tr>
+                          <th>Landingspagina</th>
+                          <td>
+                            <xsl:for-each select="$metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text()) and
+                                            */gmd:protocol/gmx:Anchor/@xlink:href='https://www.w3.org/TR/vocab-dcat-2/#Property:resource_landing_page']">
+                              <a href="{*/gmd:linkage/*/text()}" target="_blank" ><xsl:value-of select="*/gmd:linkage/*/text()" /></a>
+                            </xsl:for-each>
+                          </td>
+                        </tr>
+                      </xsl:if>
                     </tbody>
 
                   </table>
@@ -1183,13 +1197,14 @@ using the region API -->
                         </tr>
                       </xsl:if>
 
-                      <xsl:if test="count($metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text())]) > 0">
-
+                      <xsl:if test="count($metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text()) and
+                                            */gmd:protocol/gmx:Anchor/@xlink:href !='https://www.w3.org/TR/vocab-dcat-2/#Property:resource_landing_page']) > 0">
                           <tr>
                             <th>Distributies</th>
                             <td>
                               <ul>
-                                <xsl:for-each select="$metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text())]">
+                                <xsl:for-each select="$metadata/gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine[string(*/gmd:linkage/*/text()) and
+                                            */gmd:protocol/gmx:Anchor/@xlink:href !='https://www.w3.org/TR/vocab-dcat-2/#Property:resource_landing_page']">
                                   <li><a href="{*/gmd:linkage/*/text()}" target="_blank"><xsl:value-of select="if (string(*/gmd:name/*/text())) then */gmd:name/*/text() else */gmd:linkage/*/text()" /></a>
                                   <xsl:if test="string(*/gmd:description/*/text())"><span>(<xsl:value-of select="*/gmd:description/*/text()"/>)</span></xsl:if>
 

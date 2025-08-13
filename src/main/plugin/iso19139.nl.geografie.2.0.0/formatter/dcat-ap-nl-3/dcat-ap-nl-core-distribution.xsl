@@ -73,6 +73,22 @@
     <xsl:variable name="pointsToService" select="false()"/>
 
     <xsl:choose>
+      <xsl:when test="$protocolAnchor = 'https://www.w3.org/TR/vocab-dcat-2/#Property:resource_landing_page'">
+        <dcat:landingPage>
+          <foaf:Document rdf:about="{*/cit:linkage/*/text()}">
+            <xsl:for-each select="*/cit:name">
+              <xsl:call-template name="rdf-localised">
+                <xsl:with-param name="nodeName" select="'dct:title'"/>
+              </xsl:call-template>
+            </xsl:for-each>
+            <xsl:for-each select="*/cit:description">
+              <xsl:call-template name="rdf-localised">
+                <xsl:with-param name="nodeName" select="'dct:description'"/>
+              </xsl:call-template>
+            </xsl:for-each>
+          </foaf:Document>
+        </dcat:landingPage>
+      </xsl:when>
       <xsl:when test="$isServiceMetadata or $isSeriesMetadata">
         <!-- Don't add distribution for service or series metadata -->
       </xsl:when>
