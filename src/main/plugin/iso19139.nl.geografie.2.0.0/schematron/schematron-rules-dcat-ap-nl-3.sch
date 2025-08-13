@@ -289,7 +289,7 @@
 
     <!-- Dataset language -->
     <sch:rule context="//gmd:MD_Metadata/gmd:identificationInfo/*/gmd:language">
-      <sch:let name="mdLanguage" value="(*/@codeListValue = 'dut' or */@codeListValue = 'eng')"/>
+      <sch:let name="mdLanguage" value="(*/@codeListValue = 'dut' or */@codeListValue = 'eng' or */text() = 'dut' or */text() = 'eng')"/>
 
       <sch:assert test="$mdLanguage">De taal van de dataset moet Nederlands of Engels zijn</sch:assert>
     </sch:rule>
