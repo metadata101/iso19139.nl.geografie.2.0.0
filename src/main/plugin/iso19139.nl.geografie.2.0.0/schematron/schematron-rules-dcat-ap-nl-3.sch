@@ -328,7 +328,8 @@
       <!-- Check dataset thema with topic categories and GEMET INSPIRE Themes -->
       <sch:let name="nodes">
         <xsl:copy-of select="../../gmd:topicCategory" />
-        <xsl:copy-of select="../../gmd:descriptiveKeywords/gmd:MD_Keywords[gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href ='http://inspire.ec.europa.eu/theme']/gmd:keyword" />
+        <xsl:copy-of select="../../gmd:descriptiveKeywords/gmd:MD_Keywords[gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href = 'http://inspire.ec.europa.eu/theme' or
+                                                                     gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href = 'http://www.eionet.europa.eu/gemet/inspire_themes']/gmd:keyword" />
       </sch:let>
       <sch:assert test="geonet:hasEuDcatApThemes($nodes)">Een onderwerp categorie of een INSPIRE-thema trefwoord is vereist</sch:assert>
     </sch:rule>
@@ -337,7 +338,8 @@
       <!-- Check dataset thema with GEMET INSPIRE themes only it the metadata does not have topic categories -->
       <xsl:if test="count(gmd:topicCategory) = 0">
         <sch:let name="nodes">
-          <xsl:copy-of select="gmd:descriptiveKeywords/gmd:MD_Keywords[gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href ='http://inspire.ec.europa.eu/theme']/gmd:keyword" />
+          <xsl:copy-of select="gmd:descriptiveKeywords/gmd:MD_Keywords[gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href = 'http://inspire.ec.europa.eu/theme' or
+                                                                       gmd:thesaurusName/gmd:CI_Citation/gmd:title/gmx:Anchor/@xlink:href = 'http://www.eionet.europa.eu/gemet/inspire_themes']/gmd:keyword" />
         </sch:let>
 
         <!-- Dataset thema -->
