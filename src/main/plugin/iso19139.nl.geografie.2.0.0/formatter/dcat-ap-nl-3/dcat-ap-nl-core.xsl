@@ -13,6 +13,7 @@
                 xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:dct="http://purl.org/dc/terms/"
+                xmlns:util="java:org.fao.geonet.util.XslUtil"
                 exclude-result-prefixes="#all">
 
   <xsl:import href="./dcat-ap-nl-utils.xsl" />
@@ -143,6 +144,30 @@
         <xsl:message>WARNING: Unmatched date type <xsl:value-of select="$dateType"/>. If needed, add this type in dcat-variables.xsl and add the element to map to in isoDateTypeToDcatCommonNames.</xsl:message>
       </xsl:otherwise>
     </xsl:choose>-->
+  </xsl:template>
+
+  <xsl:template mode="iso19115-3-to-dcat-catalog-record"
+                name="iso19115-3-to-dcat-ap-nl-catalog-record"
+                match="mdb:MD_Metadata">
+    <xsl:param name="additionalProperties"
+               as="node()*"/>
+    <xsl:variable name="properties" as="node()*">
+      <xsl:variable name="resourcePrefix"
+                    select="concat(util:getSettingValue('nodeUrl'), 'dut/catalog.search#/metadata/')" />
+
+      <xsl:variable name="metadataIdentifier"
+                    as="node()?">
+        <xsl:apply-templates mode="iso19115-3-to-dcat"
+                             select="mdb:metadataIdentifier"/>
+      </xsl:variable>
+
+      <dct:source rdf:resource="{concat($resourcePrefix, $metadataIdentifier)}"/>
+
+      <xsl:copy-of select="$additionalProperties"/>
+    </xsl:variable>
+    <xsl:call-template name="iso19115-3-to-eu-dcat-ap-catalog-record">
+      <xsl:with-param name="additionalProperties" select="$properties"/>
+    </xsl:call-template>
   </xsl:template>
 
 </xsl:stylesheet>
