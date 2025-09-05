@@ -63,11 +63,13 @@
                                   |mdb:identificationInfo/*/mri:otherLocale
                                   |mdb:identificationInfo/*/mri:resourceConstraints/*
                                   |mdb:identificationInfo/*/mri:status
+                                  |mdb:identificationInfo/*/mri:supplementalInformation
                                   |mdb:identificationInfo/*/mri:descriptiveKeywords
                                   |mdb:identificationInfo/*/mri:pointOfContact
                                   |mdb:identificationInfo/*/mri:associatedResource
                                   |mdb:dataQualityInfo/*/mdq:report/*/mdq:result[mdq:DQ_ConformanceResult and mdq:DQ_ConformanceResult/mdq:pass/*/text() = 'true']
                                   |mdb:resourceLineage/*/mrl:statement
+                                  |mdb:resourceLineage/*/mrl:processStep/*/mrl:description
                                   |mdb:metadataLinkage
                           "/>
       </xsl:otherwise>

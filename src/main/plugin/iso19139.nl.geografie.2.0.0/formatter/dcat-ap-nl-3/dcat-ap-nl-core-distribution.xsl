@@ -10,7 +10,9 @@
                 xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
                 xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0"
                 xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
+                xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0"
                 xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
+                xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0"
                 xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
                 xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -19,6 +21,8 @@
                 xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:dcat="http://www.w3.org/ns/dcat#"
                 xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                xmlns:adms="http://www.w3.org/ns/adms#"
+                xmlns:mdUtil="java:org.fao.geonet.api.records.MetadataUtils"
                 exclude-result-prefixes="#all">
 
   <!--
@@ -43,6 +47,40 @@
   Domain:	dcat:Dataset
   Range:	dcat:Distribution
   -->
+
+  <!-- Don't process the following elements as distributions -->
+  <xsl:template mode="iso19115-3-to-dcat"
+                match="mpc:portrayalCatalogueCitation/*/cit:onlineResource
+                      |mrl:additionalDocumentation/*/cit:onlineResource
+                      |mdq:reportReference/*/cit:onlineResource
+                      |mdq:specification/*/cit:onlineResource
+                      |mrc:featureCatalogueCitation/*/cit:onlineResource" />
+
+
+  <!-- DCAT-AP NL: Use supplementalInformation as foaf:page if not series metadata -->
+  <xsl:template mode="iso19115-3-to-dcat"
+                match="mri:supplementalInformation">
+
+    <xsl:variable name="isSeriesMetadata" select="//mdb:MD_Metadata/mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue = 'series'" />
+
+    <xsl:if test="not($isSeriesMetadata)">
+    <xsl:variable name="code" select="(gco:CharacterString|gcx:Anchor)/text()"/>
+    <xsl:variable name="link" select="gcx:Anchor/@xlink:href"/>
+
+    <xsl:variable name="uri"
+                  select="($link, $code[matches(., '^https?://')])[1]"/>
+
+    <xsl:if test="$uri != ''">
+      <foaf:page>
+        <foaf:Document rdf:about="{$uri}">
+          <xsl:call-template name="rdf-localised">
+            <xsl:with-param name="nodeName" select="'dct:description'"/>
+          </xsl:call-template>
+        </foaf:Document>
+      </foaf:page>
+    </xsl:if>
+    </xsl:if>
+  </xsl:template>
 
   <!-- Ignore dcat:accessService as requires additional information about the service contact, etc, that is not available -->
   <xsl:template mode="iso19115-3-to-dcat"
@@ -73,6 +111,16 @@
     <xsl:variable name="pointsToService" select="false()"/>
 
     <xsl:choose>
+      <xsl:when test="$function = ('information', 'search', 'completeMetadata', 'browseGraphic', 'upload', 'emailService')
+                      or matches($protocol, 'WWW:LINK.*')">
+        <foaf:page>
+          <foaf:Document rdf:about="{$url}">
+            <xsl:apply-templates mode="iso19115-3-to-dcat"
+                                 select="*/cit:name[normalize-space(.) != '']
+                                        |*/cit:description[normalize-space(.) != '']"/>
+          </foaf:Document>
+        </foaf:page>
+      </xsl:when>
       <xsl:when test="$protocolAnchor = 'https://www.w3.org/TR/vocab-dcat-2/#Property:resource_landing_page'">
         <dcat:landingPage>
           <foaf:Document rdf:about="{*/cit:linkage/*/text()}">
@@ -93,16 +141,6 @@
         <!-- Don't add distribution for service or series metadata -->
       </xsl:when>
       <xsl:when test="normalize-space($url) = ''"/>
-      <xsl:when test="$function = ('information', 'search', 'completeMetadata', 'browseGraphic', 'upload', 'emailService')
-                      or matches($protocol, 'WWW:LINK.*')">
-        <foaf:page>
-          <foaf:Document rdf:about="{$url}">
-            <xsl:apply-templates mode="iso19115-3-to-dcat"
-                                 select="*/cit:name[normalize-space(.) != '']
-                                        |*/cit:description[normalize-space(.) != '']"/>
-          </foaf:Document>
-        </foaf:page>
-      </xsl:when>
       <xsl:otherwise>
         <dcat:distribution>
           <dcat:Distribution>
@@ -168,6 +206,13 @@
               <dcat:downloadURL rdf:resource="{$url}"/>
             </xsl:if>
 
+            <!-- Add compress format for protocol zip -->
+            <xsl:if test="$protocolAnchor = 'https://www.iana.org/assignments/media-types/application/zip'">
+              <dcat:compressFormat>
+                <dct:MediaType rdf:about="{$protocolAnchor}" />
+              </dcat:compressFormat>
+            </xsl:if>
+
 
             <!--
             RDF Property:	spdx:checksum
@@ -188,11 +233,13 @@
             Usage note:	The size in bytes can be approximated (as a non-negative integer) when the precise size is not known.
             Usage note:	While it is recommended that the size be given as an integer, alternative literals such as '1.5 MB' are sometimes used.
             -->
-            <xsl:for-each select="ancestor::mrd:MD_DigitalTransferOptions/mrd:transferSize/*/text()[. castable as xs:double]">
-              <!-- Not valid for eu-dcat-ap <dcat:byteSize><xsl:value-of select="concat(., ' MB')"/></dcat:byteSize>-->
-              <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"><xsl:value-of select="format-number(. * 1048576, '#')"/></dcat:byteSize>
-            </xsl:for-each>
-
+            <!-- Only add byteSize for distributions that are downloadable and have a size -->
+            <xsl:if test="matches($protocol, 'gml|geojson|gpkg|tiff|kml|csv|zip|wmc|json|jsonld|rdf-xml|xml|png|gif|jp2|mapbox-vector-tile')">
+              <xsl:for-each select="ancestor::mrd:MD_DigitalTransferOptions/mrd:transferSize/*/text()[. castable as xs:double]">
+                <!-- Not valid for eu-dcat-ap <dcat:byteSize><xsl:value-of select="concat(., ' MB')"/></dcat:byteSize>-->
+                <dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"><xsl:value-of select="format-number(. * 1048576, '#')"/></dcat:byteSize>
+              </xsl:for-each>
+            </xsl:if>
 
             <!--
              RDF Property:	dcat:accessService
@@ -200,29 +247,52 @@
              Range:	dcat:DataService
              Usage note:	dcat:accessService SHOULD be used to link to a description of a dcat:DataService that can provide access to this distribution.
             -->
-<!--            <xsl:if test="$function = ('download', 'offlineAccess', 'order', 'browsing', 'fileAccess')
-                          or matches($protocol, 'OGC:WMS|OGC:WFS|OGC:WCS|OGC:WPS|OGC API Features|OGC API Coverages|ESRI:REST')">
-              <dcat:accessService>
-                <rdf:Description>
-                  <rdf:type rdf:resource="http://www.w3.org/ns/dcat#DataService"/>
-                  <xsl:apply-templates mode="iso19115-3-to-dcat"
-                                       select="*/cit:name[normalize-space(.) != '']"/>
-                  <dcat:endpointURL rdf:resource="{$url}"/>
-                  &lt;!&ndash; TODO: GetCapabilities document
-                  <dcat:endpointDescription rdf:resource="{$endpoint-description}"/>
-                   &ndash;&gt;
+            <xsl:if test="matches($protocol, 'OGC:WMS|OGC:WFS|OGC:WCS|OGC:WPS|OGC API Features|OGC API Coverages|ESRI:REST')">
+              <xsl:variable name="associations"
+                            select="mdUtil:getAssociatedAsXml(//mdb:metadataIdentifier/*/mcc:code/*/text())"
+                            as="node()?"/>
 
-                  <xsl:variable name="standardPage"
-                                as="node()?"
-                                select="$protocolToStandardPage[value = lower-case($protocol)]"/>
-                  <xsl:if test="$standardPage">
-                    <dct:conformsTo>
-                      <dct:Standard rdf:about="{$standardPage/@key}"/>
-                    </dct:conformsTo>
-                  </xsl:if>
-                </rdf:Description>
-              </dcat:accessService>
-            </xsl:if>-->
+              <xsl:variable name="serviceMetadataUuid"
+                            select="$associations//services[root/link/protocol = $protocol]/@uuid" />
+
+              <xsl:choose>
+                <xsl:when test="count($serviceMetadataUuid) > 0">
+                  <dcat:accessService rdf:resource="{concat('http://localhost:8080/geonetwork/srv/api/records/', $serviceMetadataUuid[1], '#resource')}"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <dcat:accessService>
+                    <rdf:Description>
+                      <rdf:type rdf:resource="http://www.w3.org/ns/dcat#DataService"/>
+                      <xsl:apply-templates mode="iso19115-3-to-dcat"
+                                           select="*/cit:name[normalize-space(.) != '']"/>
+                      <dcat:endpointURL rdf:resource="{substring-before(normalize-space($url), '?')}"/>
+                      <dcat:endpointDescription rdf:resource="{$url}"/>
+
+                      <xsl:variable name="standardPage"
+                                    as="node()?"
+                                    select="$protocolToStandardPage[value = lower-case($protocol)]"/>
+                      <xsl:if test="$standardPage">
+                        <dct:conformsTo>
+                          <dct:Standard rdf:about="{$standardPage/@key}"/>
+                        </dct:conformsTo>
+
+                        <!-- dct:accessRights -->
+                        <xsl:apply-templates mode="iso19115-3-to-dcat"
+                                             select="ancestor::mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/*"/>
+
+                        <!-- dct:rights, dct:license -->
+                        <xsl:apply-templates mode="iso19115-3-to-dcat-distribution"
+                                             select="ancestor::mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/*"/>
+
+                      </xsl:if>
+                    </rdf:Description>
+                  </dcat:accessService>
+                </xsl:otherwise>
+              </xsl:choose>
+
+
+
+            </xsl:if>
 
             <!--
             RDF Property:	dcat:mediaType
@@ -248,13 +318,13 @@
             * Use WWW:DOWNLOAD:(.*=format) if any
             * fallback to ancestor::mrd:MD_DigitalTransferOptions/mrd:distributionFormat/*/mrd:formatSpecificationCitation
             -->
-            <xsl:choose>
+            <!--<xsl:choose>
               <xsl:when test="$mimeType">
                 <xsl:call-template name="rdf-format-as-mediatype">
                   <xsl:with-param name="format" select="$mimeType"/>
                 </xsl:call-template>
               </xsl:when>
-              <xsl:otherwise>
+              <xsl:otherwise>-->
                 <xsl:choose>
                   <xsl:when test="matches($protocol, 'OGC:WMS|OGC:WFS|OGC:WMTS|OGC:WCS|ArcGIS MapService|gml|geojson|gpkg|tiff|kml|csv|zip|wmc|json|jsonld|rdf-xml|xml|png|gif|jp2|mapbox-vector-tile', 'i')">
                     <xsl:variable name="format"
@@ -265,9 +335,9 @@
                                           starts-with($protocolAnchor, 'http://www.iana.org/assignments/media-types/')"/>
 
                     <!-- The file format of the Distribution. -->
-                    <xsl:call-template name="rdf-format-as-mediatype">
+                    <!--<xsl:call-template name="rdf-format-as-mediatype">
                       <xsl:with-param name="format" select="$protocol"/>
-                    </xsl:call-template>
+                    </xsl:call-template>-->
 
                     <!-- The media type of the Distribution as defined in the official register of media types managed by IANA. -->
                     <xsl:if test="$isIANAFormat and matches($format, '\w+/[-+.\w]+')">
@@ -283,8 +353,8 @@
                                          select="ancestor::mrd:MD_DigitalTransferOptions/mrd:distributionFormat/*/mrd:formatSpecificationCitation"/>
                   </xsl:otherwise>
                 </xsl:choose>
-              </xsl:otherwise>
-            </xsl:choose>
+              <!--</xsl:otherwise>
+            </xsl:choose>-->
 
             <xsl:apply-templates mode="iso19115-3-to-dcat-distribution"
                                  select="ancestor::mrd:MD_DigitalTransferOptions/mrd:distributionFormat/*/mrd:fileDecompressionTechnique"/>
@@ -397,6 +467,7 @@
                 match="mdb:identificationInfo/*/mri:graphicOverview[*/mcc:fileName/*/text() != '']">
 
     <xsl:variable name="isSeriesMetadata" select="//mdb:MD_Metadata/mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue = 'series'" />
+    <xsl:variable name="isServiceMetadata" select="exists(//mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification)" />
 
     <xsl:if test="not($isSeriesMetadata)">
       <foaf:page>
@@ -405,6 +476,16 @@
                                select="*/mcc:fileDescription[normalize-space(.) != '']"/>
         </foaf:Document>
       </foaf:page>
+    </xsl:if>
+
+    <xsl:if test="not($isServiceMetadata)">
+      <adms:sample>
+        <dcat:Distribution>
+        <dcat:accessURL><xsl:value-of select="*/mcc:fileName/*/text()" /></dcat:accessURL>
+        <xsl:apply-templates mode="iso19115-3-to-dcat"
+                             select="*/mcc:fileDescription[normalize-space(.) != '']"/>
+        </dcat:Distribution>
+      </adms:sample>
     </xsl:if>
   </xsl:template>
 </xsl:stylesheet>

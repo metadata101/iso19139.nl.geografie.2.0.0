@@ -7,6 +7,8 @@
                 xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0"
                 xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
                 xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
+                xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
+                xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0"
                 xmlns:dcat="http://www.w3.org/ns/dcat#"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 exclude-result-prefixes="#all">
@@ -53,6 +55,13 @@
     <xsl:variable name="urlValue" select="normalize-space((gco:CharacterString|gcx:Anchor)/text())" />
     <dcat:endpointURL rdf:resource="{if (contains($urlValue, '?')) then substring-before($urlValue, '?') else $urlValue}"/>
     <dcat:endpointDescription rdf:resource="{$urlValue}"/>
+
+    <xsl:variable name="distributionRelatedProtocol" select="//mdb:distributionInfo/*/mrd:transferOptions/*/mrd:onLine[*/cit:linkage/*/text() = $urlValue]/*/cit:protocol/*/text()" />
+    <xsl:if test="string($distributionRelatedProtocol)">
+      <xsl:call-template name="rdf-format-as-mediatype">
+        <xsl:with-param name="format" select="$distributionRelatedProtocol"/>
+      </xsl:call-template>
+    </xsl:if>
   </xsl:template>
 
   <xsl:template mode="iso19115-3-to-dcat"
@@ -62,6 +71,15 @@
                                 or cit:function/*/@codeListValue = 'information']/cit:linkage">
     <dcat:endpointURL rdf:resource="{substring-before(normalize-space((gco:CharacterString|gcx:Anchor)/text()), '?')}"/>
     <dcat:endpointDescription rdf:resource="{normalize-space((gco:CharacterString|gcx:Anchor)/text())}"/>
+
+    <xsl:variable name="urlValue" select="normalize-space((gco:CharacterString|gcx:Anchor)/text())" />
+
+    <xsl:variable name="distributionRelatedProtocol" select="//mdb:distributionInfo/*/mrd:transferOptions/*/mrd:onLine[*/cit:linkage/*/text() = $urlValue]/*/cit:protocol/*/text()" />
+    <xsl:if test="string($distributionRelatedProtocol)">
+      <xsl:call-template name="rdf-format-as-mediatype">
+        <xsl:with-param name="format" select="$distributionRelatedProtocol"/>
+      </xsl:call-template>
+    </xsl:if>
   </xsl:template>
 
 </xsl:stylesheet>

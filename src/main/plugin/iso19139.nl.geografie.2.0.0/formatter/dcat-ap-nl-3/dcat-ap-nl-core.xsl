@@ -11,6 +11,8 @@
                 xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0"
                 xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
                 xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0"
+                xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:util="java:org.fao.geonet.util.XslUtil"
@@ -26,6 +28,18 @@
   <xsl:import href="./dcat-ap-nl-core-contact.xsl"/>
   <xsl:import href="./dcat-ap-nl-core-dataset.xsl"/>
   <xsl:import href="./dcat-ap-nl-core-resource.xsl"/>
+
+  <!-- Check http://publications.europa.eu/resource/dataset/high-value-dataset-category values also -->
+  <xsl:variable name="hvdCategoryThesaurusKey"
+                select="('http://data.europa.eu/bna/asd487ae75', 'http://publications.europa.eu/resource/dataset/high-value-dataset-category')"/>
+
+  <!-- Update mapping to creation: dct:modified instead dct:issued -->
+  <xsl:variable name="isoDateTypeToDcatCommonNames"
+                as="node()*">
+    <entry key="dct:modified">creation</entry>
+    <entry key="dct:issued">publication</entry>
+    <entry key="dct:modified">revision</entry>
+  </xsl:variable>
 
   <xsl:variable name="isoContactRoleToDcatCommonNames"
                 as="node()*">
@@ -146,6 +160,7 @@
     </xsl:choose>-->
   </xsl:template>
 
+  <!-- CatalogRecord template -->
   <xsl:template mode="iso19115-3-to-dcat-catalog-record"
                 name="iso19115-3-to-dcat-ap-nl-catalog-record"
                 match="mdb:MD_Metadata">
@@ -170,4 +185,28 @@
     </xsl:call-template>
   </xsl:template>
 
+  <xsl:template mode="iso19115-3-to-dcat-resource"
+                name="iso19115-3-to-dcat-resource"
+                match="mdb:MD_Metadata"
+                priority="5">
+    <xsl:call-template name="iso19115-3-to-dcat-ap-nl-resource"/>
+
+    <xsl:apply-templates mode="iso19115-3-to-dcat"
+                         select="mdb:referenceSystemInfo/*/mrs:referenceSystemIdentifier/*"/>
+  </xsl:template>
+
+  <!-- Map reference system info to dct:conformsTo -->
+  <xsl:template mode="iso19115-3-to-dcat"
+                match="mdb:referenceSystemInfo/*/mrs:referenceSystemIdentifier/*">
+    <xsl:variable name="code" select="mcc:code/(gco:CharacterString|gcx:Anchor)/text()"/>
+    <xsl:variable name="link" select="mcc:code/gcx:Anchor/@xlink:href"/>
+
+    <xsl:variable name="uri"
+                  select="($link, $code[matches(., '^https?://')])[1]"/>
+    <xsl:if test="$uri != ''">
+      <dct:conformsTo>
+        <dct:Standard rdf:about="{$uri}" />
+      </dct:conformsTo>
+    </xsl:if>
+  </xsl:template>
 </xsl:stylesheet>

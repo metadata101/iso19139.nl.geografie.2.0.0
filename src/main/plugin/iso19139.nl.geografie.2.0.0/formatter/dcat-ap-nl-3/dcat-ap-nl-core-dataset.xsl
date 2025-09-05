@@ -19,6 +19,7 @@
                 xmlns:dcat="http://www.w3.org/ns/dcat#"
                 xmlns:adms="http://www.w3.org/ns/adms#"
                 xmlns:dcatap="http://data.europa.eu/r5r/"
+                xmlns:prov="http://www.w3.org/ns/prov#"
                 xmlns:dct="http://purl.org/dc/terms/"
                 exclude-result-prefixes="#all">
 
@@ -310,5 +311,18 @@ or may be indicated using an IRI reference (link) to a resource describing a loc
         </xsl:choose>
       </xsl:for-each>
     </xsl:if>
+  </xsl:template>
+
+  <!-- Map process steps to prov:wasGeneratedBy -->
+  <xsl:template mode="iso19115-3-to-dcat"
+                match="mdb:resourceLineage/*/mrl:processStep/*/mrl:description">
+
+    <prov:wasGeneratedBy>
+      <prov:Activity>
+        <xsl:call-template name="rdf-localised">
+          <xsl:with-param name="nodeName" select="'prov:label'"/>
+        </xsl:call-template>
+      </prov:Activity>
+    </prov:wasGeneratedBy>
   </xsl:template>
 </xsl:stylesheet>
