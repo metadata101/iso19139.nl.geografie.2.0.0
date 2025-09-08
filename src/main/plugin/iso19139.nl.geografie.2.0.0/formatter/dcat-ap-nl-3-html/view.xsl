@@ -973,11 +973,11 @@ using the region API -->
                             <span><xsl:value-of select="$metadata/gmd:identificationInfo//gmd:temporalElement/*/gmd:extent/gml:TimePeriod/gml:beginPosition|
                                                   $metadata/gmd:identificationInfo//gmd:temporalElement/*/gmd:extent/gml320:TimePeriod/gml320:beginPosition|
                                                   $metadata/gmd:identificationInfo//gmd:temporalElement/*/gmd:extent/gml:TimePeriod/gml:begin/gml:TimeInstant/gml:timePosition|
-                                                  $metadata/gmd:identificationInfo//gmd:temporalElement/*/gmd:extent/gml:TimePeriod/gml320:begin/gml320:TimeInstant/gml320:timePosition" /> -
+                                                  $metadata/gmd:identificationInfo//gmd:temporalElement/*/gmd:extent/gml320:TimePeriod/gml320:begin/gml320:TimeInstant/gml320:timePosition" /> -
                               <xsl:value-of select="$metadata/gmd:identificationInfo//gmd:temporalElement/*/gmd:extent/gml:TimePeriod/gml:endPosition|
                                             $metadata/gmd:identificationInfo//gmd:temporalElement/*/gmd:extent/gml320:TimePeriod/gml320:endPosition|
                                             $metadata/gmd:identificationInfo//gmd:temporalElement/*/gmd:extent/gml:TimePeriod/gml:end/gml:TimeInstant/gml:timePosition|
-                                            $metadata/gmd:identificationInfo//gmd:temporalElement/*/gmd:extent/gml:TimePeriod/gml320:end//gml320:TimeInstant/gml320:timePosition" /></span>
+                                            $metadata/gmd:identificationInfo//gmd:temporalElement/*/gmd:extent/gml320:TimePeriod/gml320:end//gml320:TimeInstant/gml320:timePosition" /></span>
                           </td>
                         </tr>
                       </xsl:if>
