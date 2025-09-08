@@ -53,9 +53,10 @@
                 match="mpc:portrayalCatalogueCitation/*/cit:onlineResource
                       |mrl:additionalDocumentation/*/cit:onlineResource
                       |mdq:reportReference/*/cit:onlineResource
+                      |mdq:reportReference/*/cit:title[gcx:Anchor/@xlink:href]
                       |mdq:specification/*/cit:onlineResource
+                      |mdq:specification/*/cit:title[gcx:Anchor/@xlink:href]
                       |mrc:featureCatalogueCitation/*/cit:onlineResource" />
-
 
   <!-- DCAT-AP NL: Use supplementalInformation as foaf:page if not series metadata -->
   <xsl:template mode="iso19115-3-to-dcat"
