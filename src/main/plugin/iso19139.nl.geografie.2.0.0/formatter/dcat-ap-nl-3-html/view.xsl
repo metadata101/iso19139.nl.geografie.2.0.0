@@ -890,36 +890,38 @@ using the region API -->
                         <tr>
                           <th>Conformiteit met specificatie</th>
                           <td>
-                            <xsl:for-each
-                              select="$metadata/gmd:dataQualityInfo/*/gmd:report/*/gmd:result[*/gmd:pass/*/text() = 'true']/*/gmd:specification">
-                              <xsl:variable name="specificationTitle" select="*/gmd:title/*/text()"/>
-                              <xsl:variable name="specificationHref"
-                                            select="*/gmd:title/*/@xlink:href"/>
-                              <p>
-                                <a href="{$specificationHref}" target="_blank">
-                                  <xsl:value-of select="$specificationTitle"/>
-                                </a>
-                              </p>
-                            </xsl:for-each>
-
-                            <xsl:for-each
-                              select="$metadata/gmd:referenceSystemInfo/*/gmd:referenceSystemIdentifier/*/gmd:code/(gco:CharacterString|gmx:Anchor)[matches(., '^https?://') or matches(@xlink:href, '^https?://')]">
-
-                              <xsl:variable name="uri"
-                                            select="(@xlink:href, matches(., '^https?://'))[1]"/>
-
-                              <xsl:if test="$uri != ''">
-                                <xsl:variable name="specificationTitle" select="."/>
+                            <ul style="padding-left: 1em;">
+                              <xsl:for-each
+                                select="$metadata/gmd:dataQualityInfo/*/gmd:report/*/gmd:result[*/gmd:pass/*/text() = 'true']/*/gmd:specification">
+                                <xsl:variable name="specificationTitle" select="*/gmd:title/*/text()"/>
                                 <xsl:variable name="specificationHref"
-                                              select="$uri"/>
-                                <p>
+                                              select="*/gmd:title/*/@xlink:href"/>
+                                <li>
                                   <a href="{$specificationHref}" target="_blank">
                                     <xsl:value-of select="$specificationTitle"/>
                                   </a>
-                                </p>
-                              </xsl:if>
+                                </li>
+                              </xsl:for-each>
 
-                            </xsl:for-each>
+                              <xsl:for-each
+                                select="$metadata/gmd:referenceSystemInfo/*/gmd:referenceSystemIdentifier/*/gmd:code/(gco:CharacterString|gmx:Anchor)[matches(., '^https?://') or matches(@xlink:href, '^https?://')]">
+
+                                <xsl:variable name="uri"
+                                              select="(@xlink:href, matches(., '^https?://'))[1]"/>
+
+                                <xsl:if test="$uri != ''">
+                                  <xsl:variable name="specificationTitle" select="."/>
+                                  <xsl:variable name="specificationHref"
+                                                select="$uri"/>
+                                  <li>
+                                    <a href="{$specificationHref}" target="_blank">
+                                      <xsl:value-of select="$specificationTitle"/>
+                                    </a>
+                                  </li>
+                                </xsl:if>
+
+                              </xsl:for-each>
+                            </ul>
                           </td>
                         </tr>
                       </xsl:if>
@@ -937,9 +939,13 @@ using the region API -->
                         <tr>
                           <th>Toepasselijke wetgeving</th>
                           <td>
-                            <xsl:for-each select="$metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/*/gmd:keyword[starts-with(*/@xlink:href, 'http://data.europa.eu/eli')]">
-                              <a href="{*/@xlink:href}" target="_blank"><xsl:value-of select="*/@xlink:href" /></a>
-                            </xsl:for-each>
+                            <ul style="padding-left: 1em;">
+                              <xsl:for-each select="$metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/*/gmd:keyword[starts-with(*/@xlink:href, 'http://data.europa.eu/eli')]">
+                                <li>
+                                  <a href="{*/@xlink:href}" target="_blank"><xsl:value-of select="*/@xlink:href" /></a>
+                                </li>
+                              </xsl:for-each>
+                            </ul>
                           </td>
                         </tr>
                       </xsl:if>
