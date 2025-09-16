@@ -52,16 +52,19 @@
                                 or matches(cit:linkage/(gco:CharacterString|gcx:Anchor)/text(), $endpointDescriptionUrlExpression, 'i')
                                 or cit:function/*/@codeListValue = 'information')]/cit:linkage" priority="5">
 
-    <xsl:variable name="urlValue" select="normalize-space((gco:CharacterString|gcx:Anchor)/text())" />
-    <dcat:endpointURL rdf:resource="{if (contains($urlValue, '?')) then substring-before($urlValue, '?') else $urlValue}"/>
-    <dcat:endpointDescription rdf:resource="{$urlValue}"/>
+    <xsl:if test="count(../../preceding-sibling::srv:connectPoint) = 0">
+      <xsl:variable name="urlValue" select="normalize-space((gco:CharacterString|gcx:Anchor)/text())" />
+      <dcat:endpointURL rdf:resource="{if (contains($urlValue, '?')) then substring-before($urlValue, '?') else $urlValue}"/>
+      <dcat:endpointDescription rdf:resource="{$urlValue}"/>
 
-    <xsl:variable name="distributionRelatedProtocol" select="//mdb:distributionInfo/*/mrd:transferOptions/*/mrd:onLine[*/cit:linkage/*/text() = $urlValue]/*/cit:protocol/*/text()" />
-    <xsl:if test="string($distributionRelatedProtocol)">
-      <xsl:call-template name="rdf-format-as-mediatype">
-        <xsl:with-param name="format" select="$distributionRelatedProtocol"/>
-      </xsl:call-template>
+      <xsl:variable name="distributionRelatedProtocol" select="//mdb:distributionInfo/*/mrd:transferOptions/*/mrd:onLine[*/cit:linkage/*/text() = $urlValue][1]/*/cit:protocol/*/text()" />
+      <xsl:if test="string($distributionRelatedProtocol)">
+        <xsl:call-template name="rdf-format-as-mediatype">
+          <xsl:with-param name="format" select="$distributionRelatedProtocol"/>
+        </xsl:call-template>
+      </xsl:if>
     </xsl:if>
+
   </xsl:template>
 
   <xsl:template mode="iso19115-3-to-dcat"
@@ -69,17 +72,21 @@
                                 matches(cit:protocol/(gco:CharacterString|gcx:Anchor)/text(), $endpointDescriptionProtocolsExpression, 'i')
                                 or matches(cit:linkage/(gco:CharacterString|gcx:Anchor)/text(), $endpointDescriptionUrlExpression, 'i')
                                 or cit:function/*/@codeListValue = 'information']/cit:linkage">
-    <dcat:endpointURL rdf:resource="{substring-before(normalize-space((gco:CharacterString|gcx:Anchor)/text()), '?')}"/>
-    <dcat:endpointDescription rdf:resource="{normalize-space((gco:CharacterString|gcx:Anchor)/text())}"/>
 
-    <xsl:variable name="urlValue" select="normalize-space((gco:CharacterString|gcx:Anchor)/text())" />
+    <xsl:if test="count(../../preceding-sibling::srv:connectPoint) = 0">
+      <dcat:endpointURL rdf:resource="{substring-before(normalize-space((gco:CharacterString|gcx:Anchor)/text()), '?')}"/>
+      <dcat:endpointDescription rdf:resource="{normalize-space((gco:CharacterString|gcx:Anchor)/text())}"/>
 
-    <xsl:variable name="distributionRelatedProtocol" select="//mdb:distributionInfo/*/mrd:transferOptions/*/mrd:onLine[*/cit:linkage/*/text() = $urlValue]/*/cit:protocol/*/text()" />
-    <xsl:if test="string($distributionRelatedProtocol)">
-      <xsl:call-template name="rdf-format-as-mediatype">
-        <xsl:with-param name="format" select="$distributionRelatedProtocol"/>
-      </xsl:call-template>
+      <xsl:variable name="urlValue" select="normalize-space((gco:CharacterString|gcx:Anchor)/text())" />
+
+      <xsl:variable name="distributionRelatedProtocol" select="//mdb:distributionInfo/*/mrd:transferOptions/*/mrd:onLine[*/cit:linkage/*/text() = $urlValue][1]/*/cit:protocol/*/text()" />
+      <xsl:if test="string($distributionRelatedProtocol)">
+        <xsl:call-template name="rdf-format-as-mediatype">
+          <xsl:with-param name="format" select="$distributionRelatedProtocol"/>
+        </xsl:call-template>
+      </xsl:if>
     </xsl:if>
+
   </xsl:template>
 
 </xsl:stylesheet>
