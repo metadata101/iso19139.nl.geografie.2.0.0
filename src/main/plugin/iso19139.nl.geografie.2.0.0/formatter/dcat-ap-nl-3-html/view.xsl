@@ -836,7 +836,7 @@ using the region API -->
                       </tr>
 
                       <tr>
-                        <th>Identificatie</th>
+                        <th>Bron identificatie</th>
                         <td>
                           <xsl:value-of select="$metadata/gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:code/*/text()"/>
                         </td>
@@ -987,7 +987,7 @@ using the region API -->
                         </xsl:if>
 
                       <tr>
-                        <th>Toegangsrechten</th>
+                        <th>Gebruiksbeperkingen</th>
                         <td>
                           <!-- Check if there are non PUBLIC constraints -->
                           <xsl:variable name="rightsStatementsNonPublic">
@@ -1058,7 +1058,7 @@ using the region API -->
 
                       <xsl:if test="string($metadata/gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString/text())">
                         <tr>
-                          <th>Herkomst</th>
+                          <th>Algemene beschrijving herkomstg</th>
                           <td>
                             <xsl:value-of select="$metadata/gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString/text()" />
                           </td>
@@ -1095,7 +1095,7 @@ using the region API -->
 
                       <xsl:if test="count($frequencies/*) > 0">
                         <tr>
-                          <th>Ververst Frequentie</th>
+                          <th>Herzieningsfrequentie</th>
                           <td>
                             <xsl:value-of select="$frequencies[1]" />
                           </td>
@@ -1378,7 +1378,7 @@ using the region API -->
 
                       <xsl:if test="count($licenses) > 0">
                         <tr>
-                          <th>Licentie</th>
+                          <th>Licenties</th>
                           <td>
                             <xsl:choose>
                               <xsl:when test="starts-with($licenses[1], 'http')">
