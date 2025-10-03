@@ -1058,7 +1058,7 @@ using the region API -->
 
                       <xsl:if test="string($metadata/gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString/text())">
                         <tr>
-                          <th>Algemene beschrijving herkomstg</th>
+                          <th>Algemene beschrijving herkomst</th>
                           <td>
                             <xsl:value-of select="$metadata/gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString/text()" />
                           </td>
