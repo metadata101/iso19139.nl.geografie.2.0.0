@@ -208,9 +208,7 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
       <inspire>http://www.eionet.europa.eu/gemet/nl/inspire-theme/su</inspire>
       <iso>location</iso>
       <iso>society</iso>
-      <iso>disaster</iso>
       <iso>intelligenceMilitary</iso>
-      <iso>extraTerrestrial</iso>
       <hvd>http://data.europa.eu/bna/c_e1da4e07</hvd> <!-- Statistics -->
       <hvd>http://data.europa.eu/bna/c_04bf94a3</hvd> <!-- Poverty -->
       <hvd>http://data.europa.eu/bna/c_20cd11bb</hvd> <!-- EU International trade in goods statistics ... -->
