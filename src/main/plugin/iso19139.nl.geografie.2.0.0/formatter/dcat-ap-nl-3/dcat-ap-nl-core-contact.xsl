@@ -68,7 +68,7 @@
           <xsl:variable name="mappingRole" select="$contactsMapping/entry[@key='dct:creator']/text()" />
 
           <xsl:variable name="rolesForCreator" select="$isoContactRoleToDcatCommonNames[@key = 'dct:creator']/text()" />
-          
+
           <xsl:variable name="contactsToProcess"
                         select="../*[cit:CI_Responsibility/cit:role/*/@codeListValue = $mappingRole]" />
 
@@ -258,43 +258,45 @@
       </xsl:choose>
 
       <!-- Map all other contacts for prov:qualifiedAttribution -->
-      <xsl:variable name="contactIndexToProcess" select="if ($contactsMapping/entry[@key='dct:creator'] and $contactsMapping/entry[@key='dct:publisher'] and $contactsMapping/entry[@key='dct:contactPoint']) then 0 else 1" />
+      <xsl:if test="not($isSeriesMetadata)">
+        <xsl:variable name="contactIndexToProcess" select="if ($contactsMapping/entry[@key='dct:creator'] and $contactsMapping/entry[@key='dct:publisher'] and $contactsMapping/entry[@key='dct:contactPoint']) then 0 else 1" />
 
-      <xsl:for-each select="../*[cit:CI_Responsibility]">
-        <xsl:if test="position() > $contactIndexToProcess">
-          <xsl:variable name="role"
-                        as="xs:string?"
-                        select="*/cit:role/*/@codeListValue"/>
+        <xsl:for-each select="../*[cit:CI_Responsibility]">
+          <xsl:if test="position() > $contactIndexToProcess">
+            <xsl:variable name="role"
+                          as="xs:string?"
+                          select="*/cit:role/*/@codeListValue"/>
 
-          <!-- Add it when not already mapped to creator, publisher or point of contact -->
-          <xsl:if test="count($contactsMapping/entry[. = $role]) = 0">
-            <xsl:variable name="allIndividualOrOrganisationWithoutIndividual"
-                          select="*/cit:party//(cit:CI_Organisation[not(cit:individual)]|cit:CI_Individual)"
-                          as="node()*"/>
+            <!-- Add it when not already mapped to creator, publisher or point of contact -->
+            <xsl:if test="count($contactsMapping/entry[. = $role]) = 0">
+              <xsl:variable name="allIndividualOrOrganisationWithoutIndividual"
+                            select="*/cit:party//(cit:CI_Organisation[not(cit:individual)]|cit:CI_Individual)"
+                            as="node()*"/>
 
-            <xsl:for-each-group select="$allIndividualOrOrganisationWithoutIndividual" group-by="cit:name">
-              <prov:qualifiedAttribution>
-                <prov:Attribution>
-                  <prov:agent>
-                    <xsl:call-template name="rdf-contact-foaf"/>
-                  </prov:agent>
-                  <dcat:hadRole>
-                    <dcat:Role rdf:about="{concat($isoCodeListBaseUri, $role)}">
-                      <!--
-                          Property needs to have at least 1 value
-                          Location:
-                          [Focus node] - [http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#custodian] -
-                          [Result path] - [http://www.w3.org/2004/02/skos/core#prefLabel]
-                      -->
-                      <skos:prefLabel><xsl:value-of select="$role"/></skos:prefLabel>
-                    </dcat:Role>
-                  </dcat:hadRole>
-                </prov:Attribution>
-              </prov:qualifiedAttribution>
-            </xsl:for-each-group>
+              <xsl:for-each-group select="$allIndividualOrOrganisationWithoutIndividual" group-by="cit:name">
+                <prov:qualifiedAttribution>
+                  <prov:Attribution>
+                    <prov:agent>
+                      <xsl:call-template name="rdf-contact-foaf"/>
+                    </prov:agent>
+                    <dcat:hadRole>
+                      <dcat:Role rdf:about="{concat($isoCodeListBaseUri, $role)}">
+                        <!--
+                            Property needs to have at least 1 value
+                            Location:
+                            [Focus node] - [http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#custodian] -
+                            [Result path] - [http://www.w3.org/2004/02/skos/core#prefLabel]
+                        -->
+                        <skos:prefLabel><xsl:value-of select="$role"/></skos:prefLabel>
+                      </dcat:Role>
+                    </dcat:hadRole>
+                  </prov:Attribution>
+                </prov:qualifiedAttribution>
+              </xsl:for-each-group>
+            </xsl:if>
           </xsl:if>
-        </xsl:if>
-      </xsl:for-each>
+        </xsl:for-each>
+      </xsl:if>
     </xsl:if>
 
   </xsl:template>
