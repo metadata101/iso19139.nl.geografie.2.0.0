@@ -413,21 +413,12 @@
       <!-- Dataset identifier present -->
       <sch:assert test="gmd:citation/*/gmd:identifier/gmd:MD_Identifier/gmd:code">Unieke Identifier van de dataset ontbreekt</sch:assert>
 
-      <!-- Dataset status present -->
-      <sch:assert test="gmd:status">Status van de dataset ontbreekt</sch:assert>
-
       <!-- License -->
       <sch:assert test="geonet:isValidLicense(gmd:resourceConstraints)">Een geldige Creative Commons-licentie voor Overige beperkingen / (Juridische) toegangs restricties is vereist. Zie https://definities.geostandaarden.nl/dcat-ap-nl/nl/</sch:assert>
 
       <!-- Dataset contact present -->
       <sch:let name="hasContact" value="count(gmd:pointOfContact) > 0"/>
       <sch:assert test="$hasContact = true()">Informatie die nodig is om contact op te nemen met de verantwoordelijke persoon of organisatie ontbreekt</sch:assert>
-    </sch:rule>
-
-    <sch:rule context="//gmd:MD_Metadata/gmd:identificationInfo/*/gmd:status">
-      <sch:let name="status" value="*/@codeListValue"/>
-
-      <sch:assert test="$status != ''">Status van de dataset ontbreekt</sch:assert>
     </sch:rule>
 
     <!-- Distribution -->

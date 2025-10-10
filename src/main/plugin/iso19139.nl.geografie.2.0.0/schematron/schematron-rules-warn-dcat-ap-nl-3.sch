@@ -30,6 +30,9 @@
       <!-- Dataset language -->
       <sch:assert test="gmd:language">De taal van de dataset wordt aanbevolen</sch:assert>
 
+      <!-- Dataset status present -->
+      <sch:assert test="string(gmd:status/*/@codeListValue)">Status van de dataset aanbevolen</sch:assert>
+
       <!-- Dataset spatial -->
       <sch:assert test="gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox[gmd:westBoundLongitude/gco:Decimal != '' and gmd:eastBoundLongitude/gco:Decimal != '' and gmd:southBoundLatitude/gco:Decimal != '' and gmd:northBoundLatitude/gco:Decimal != '']">Het geografische gebied waarop de gegevens in de dataset betrekking hebben, wordt aanbevolen</sch:assert>
 
