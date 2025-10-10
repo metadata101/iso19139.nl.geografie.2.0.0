@@ -25,7 +25,11 @@
     <entry key="completed">COMPLETED</entry>
     <entry key="deprecated">DEPRECATED</entry>
     <entry key="underDevelopment">DEVELOP</entry>
+    <entry key="onGoing">DEVELOP</entry>
+    <entry key="planned">DEVELOP</entry>
+    <entry key="required">DEVELOP</entry>
     <entry key="obsolete">DISCONT</entry>
+    <entry key="historicalArchive">DISCONT</entry>
     <!--<entry key="">OP_DATPRO</entry>-->
     <entry key="withdrawn">WITHDRAWN</entry>
   </xsl:variable>
