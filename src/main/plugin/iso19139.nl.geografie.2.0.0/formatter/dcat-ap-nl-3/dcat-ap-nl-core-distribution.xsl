@@ -480,13 +480,7 @@
     </xsl:if>
 
     <xsl:if test="not($isServiceMetadata)">
-      <adms:sample>
-        <dcat:Distribution>
-        <dcat:accessURL><xsl:value-of select="*/mcc:fileName/*/text()" /></dcat:accessURL>
-        <xsl:apply-templates mode="iso19115-3-to-dcat"
-                             select="*/mcc:fileDescription[normalize-space(.) != '']"/>
-        </dcat:Distribution>
-      </adms:sample>
+      <adms:sample rdf:about="{*/mcc:fileName/*/text()}" />
     </xsl:if>
   </xsl:template>
 </xsl:stylesheet>
