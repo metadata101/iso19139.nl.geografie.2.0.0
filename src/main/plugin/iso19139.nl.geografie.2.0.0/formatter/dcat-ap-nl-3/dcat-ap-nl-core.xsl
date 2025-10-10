@@ -13,6 +13,7 @@
                 xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0"
                 xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:dct="http://purl.org/dc/terms/"
                 xmlns:util="java:org.fao.geonet.util.XslUtil"
@@ -185,6 +186,18 @@
     </xsl:call-template>
   </xsl:template>
 
+  <!-- Map spatialRepresentationType to dct:type -->
+  <xsl:template match="mri:spatialRepresentationType/*/@codeListValue"
+                mode="iso19115-3-to-dcat">
+    <xsl:if test="current() != ''">
+      <dct:type>
+        <skos:Concept rdf:about="{concat($isoCodeListBaseUri, current())}">
+          <skos:prefLabel><xsl:value-of select="current()"/></skos:prefLabel>
+        </skos:Concept>
+      </dct:type>
+    </xsl:if>
+  </xsl:template>
+
   <!-- Initial template to create a dcat:Resource: dcat:Dataset, dcat:DataService, dcat:DataSeries -->
   <xsl:template mode="iso19115-3-to-dcat-resource"
                 name="iso19115-3-to-dcat-resource"
@@ -198,6 +211,9 @@
     <xsl:variable name="isSeriesMetadata" select="mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue = 'series'" />
 
     <xsl:if test="not($isSeriesMetadata)">
+      <xsl:apply-templates mode="iso19115-3-to-dcat"
+                           select="mdb:identificationInfo/mri:MD_DataIdentification/mri:spatialRepresentationType/*/@codeListValue"/>
+      
       <xsl:call-template name="rdf-eu-dcat-ap-nl-theme"/>
     </xsl:if>
   </xsl:template>
