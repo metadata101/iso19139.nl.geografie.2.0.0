@@ -77,6 +77,7 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
       <inspire>http://www.eionet.europa.eu/gemet/nl/inspire-theme/er</inspire>
       <inspire>http://inspire.ec.europa.eu/theme/mr</inspire>
       <inspire>http://www.eionet.europa.eu/gemet/nl/inspire-theme/mr</inspire>
+      <iso>economy</iso>
       <hvd>http://data.europa.eu/bna/c_b7de66cd</hvd> <!-- Energy resources -->
     </entry>
     <entry key="http://publications.europa.eu/resource/authority/data-theme/ENVI">
@@ -117,6 +118,9 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
       <iso>inlandWaters</iso>
       <iso>oceans</iso>
       <iso>climatologyMeteorologyAtmosphere</iso>
+      <iso>geoscientificInformation</iso>
+      <iso>imageryBaseMapsEarthCover</iso>
+      <iso>planningCadastre</iso>
       <hvd>http://data.europa.eu/bna/c_164e0bf5</hvd> <!-- Meteorological -->
       <hvd>http://data.europa.eu/bna/c_13e3cf16</hvd> <!-- NWP model data -->
       <hvd>http://data.europa.eu/bna/c_36807466</hvd> <!-- Climate data: validated observations -->
@@ -158,6 +162,8 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
       <inspire>http://www.eionet.europa.eu/gemet/nl/inspire-theme/au</inspire>
       <inspire>http://inspire.ec.europa.eu/theme/us</inspire>
       <inspire>http://www.eionet.europa.eu/gemet/nl/inspire-theme/us</inspire>
+      <iso>boundaries</iso>
+      <iso>utilitiesCommunication</iso>
       <hvd>http://data.europa.eu/bna/c_4ac557e7</hvd> <!-- Government expenditure and revenue -->
     </entry>
     <entry key="http://publications.europa.eu/resource/authority/data-theme/HEAL">
@@ -167,7 +173,9 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
       <hvd>http://data.europa.eu/bna/c_424bb0b4</hvd> <!-- Current healthcare expenditure -->
     </entry>
     <entry key="http://publications.europa.eu/resource/authority/data-theme/INTR"></entry>
-    <entry key="http://publications.europa.eu/resource/authority/data-theme/JUST"></entry>
+    <entry key="http://publications.europa.eu/resource/authority/data-theme/JUST">
+      <iso>intelligenceMilitary</iso>
+    </entry>
     <entry key="http://publications.europa.eu/resource/authority/data-theme/OP_DATPRO"></entry>
     <entry key="http://publications.europa.eu/resource/authority/data-theme/REGI">
       <inspire>http://inspire.ec.europa.eu/theme/ad</inspire>
@@ -189,9 +197,11 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
       <inspire>http://inspire.ec.europa.eu/theme/bu</inspire>
       <inspire>http://www.eionet.europa.eu/gemet/nl/inspire-theme/bu</inspire>
       <iso>planningCadastre</iso>
-      <iso>boundaries</iso>
       <iso>elevation</iso>
       <iso>imageryBaseMapsEarthCover</iso>
+      <iso>geoscientificInformation</iso>
+      <iso>location</iso>
+      <iso>structure</iso>
       <hvd>http://data.europa.eu/bna/c_ac64a52d</hvd> <!-- Geospatial -->
       <hvd>http://data.europa.eu/bna/c_60182062</hvd> <!-- Buildings -->
       <hvd>http://data.europa.eu/bna/c_642643e6</hvd> <!-- Agricultural parcels -->
@@ -206,9 +216,8 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
       <inspire>http://www.eionet.europa.eu/gemet/nl/inspire-theme/pd</inspire>
       <inspire>http://inspire.ec.europa.eu/theme/su</inspire>
       <inspire>http://www.eionet.europa.eu/gemet/nl/inspire-theme/su</inspire>
-      <iso>location</iso>
       <iso>society</iso>
-      <iso>intelligenceMilitary</iso>
+      <iso>boundaries</iso>
       <hvd>http://data.europa.eu/bna/c_e1da4e07</hvd> <!-- Statistics -->
       <hvd>http://data.europa.eu/bna/c_04bf94a3</hvd> <!-- Poverty -->
       <hvd>http://data.europa.eu/bna/c_20cd11bb</hvd> <!-- EU International trade in goods statistics ... -->
@@ -248,9 +257,7 @@ https://github.com/SEMICeu/iso-19139-to-dcat-ap/blob/master/alignments/iso-topic
     <entry key="http://publications.europa.eu/resource/authority/data-theme/TRAN">
       <inspire>http://inspire.ec.europa.eu/theme/tn</inspire>
       <inspire>http://www.eionet.europa.eu/gemet/nl/inspire-theme/tn</inspire>
-      <iso>structure</iso>
       <iso>transportation</iso>
-      <iso>utilitiesCommunication</iso>
       <hvd>http://data.europa.eu/bna/c_b79e35eb</hvd> <!-- Mobility -->
       <hvd>http://data.europa.eu/bna/c_4b74ea13</hvd> <!-- Transport networks -->
       <hvd>http://data.europa.eu/bna/c_b151a0ba</hvd> <!-- Inland waterways datasets -->
