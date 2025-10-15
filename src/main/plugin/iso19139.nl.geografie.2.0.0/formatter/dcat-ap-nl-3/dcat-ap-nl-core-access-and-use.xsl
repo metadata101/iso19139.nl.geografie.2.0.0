@@ -182,16 +182,36 @@
         </xsl:for-each>
       </xsl:variable>
 
-      <!-- If there are non PUBLIC constraints, use the first one, otherwise use PUBLIC -->
+      <xsl:variable name="rightsStatementsPublic">
+        <xsl:for-each select="distinct-values(../../mri:resourceConstraints/*[mco:accessConstraints]/mco:otherConstraints/(gco:CharacterString|gcx:Anchor/@xlink:href))">
+          <xsl:variable name="dcatAccessType"
+                        select="$dcatApAccessTypes[(lower-case(.) = lower-case(current()) and not(@match)) or
+                                                   (starts-with(lower-case(current()), lower-case(.)) and (@match = 'start'))] "/>
+
+          <xsl:if test="$dcatAccessType/@key = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'">
+            <right key="{$dcatAccessType/@key}" />
+          </xsl:if>
+        </xsl:for-each>
+      </xsl:variable>
+
+
+      <!-- If there are non PUBLIC constraints, use the first one.
+           Otherwise, if there are PUBLIC constraints, use the first one.
+           Otherwise use RESTRICTED -->
       <xsl:choose>
         <xsl:when test="count($rightsStatementsNonPublic/right) > 0">
           <dct:accessRights>
             <dct:RightsStatement rdf:about="{$rightsStatementsNonPublic/right[1]/@key}"/>
           </dct:accessRights>
         </xsl:when>
+        <xsl:when test="count($rightsStatementsPublic/right) > 0">
+          <dct:accessRights>
+            <dct:RightsStatement rdf:about="{$rightsStatementsPublic/right[1]/@key}"/>
+          </dct:accessRights>
+        </xsl:when>
         <xsl:otherwise>
           <dct:accessRights>
-            <dct:RightsStatement rdf:about="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
+            <dct:RightsStatement rdf:about="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"/>
           </dct:accessRights>
         </xsl:otherwise>
       </xsl:choose>

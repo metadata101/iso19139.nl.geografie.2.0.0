@@ -1011,13 +1011,34 @@ using the region API -->
                             </xsl:for-each>
                           </xsl:variable>
 
-                          <!-- If there are non PUBLIC constraints, use the first one, otherwise use PUBLIC -->
+                          <xsl:variable name="rightsStatementsPublic">
+                            <xsl:for-each select="distinct-values($metadata/gmd:identificationInfo/*/gmd:resourceConstraints/*[gmd:accessConstraints]/gmd:otherConstraints/(gco:CharacterString|gmx:Anchor/@xlink:href))">
+                              <xsl:variable name="dcatAccessType"
+                                            select="$dcatApAccessTypes[(lower-case(.) = lower-case(current()) and not(@match)) or
+                                                   (starts-with(lower-case(current()), lower-case(.)) and (@match = 'start'))] "/>
+
+                              <xsl:if test="$dcatAccessType/@key = 'http://publications.europa.eu/resource/authority/access-right/PUBLIC'">
+                                <right key="{$dcatAccessType/@key}" />
+                              </xsl:if>
+                            </xsl:for-each>
+                          </xsl:variable>
+
+
+                          <!-- If there are non PUBLIC constraints, use the first one.
+                               Otherwise, if there are PUBLIC constraints, use the first one.
+                               Otherwise use RESTRICTED -->
                           <xsl:choose>
                             <xsl:when test="count($rightsStatementsNonPublic/right) > 0">
-                              Beperkt
+                              <xsl:choose>
+                                <xsl:when test="$rightsStatementsNonPublic/right[1]/@key = 'http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC'">Niet openbaar</xsl:when>
+                                <xsl:otherwise>Beperkt</xsl:otherwise>
+                              </xsl:choose>
+                            </xsl:when>
+                            <xsl:when test="count($rightsStatementsPublic/right) > 0">
+                              Publiek
                             </xsl:when>
                             <xsl:otherwise>
-                              Publiek
+                              Beperkt
                             </xsl:otherwise>
                           </xsl:choose>
                         </td>
