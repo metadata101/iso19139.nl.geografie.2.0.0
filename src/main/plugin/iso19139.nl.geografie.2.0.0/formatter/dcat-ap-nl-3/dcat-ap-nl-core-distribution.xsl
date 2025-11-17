@@ -480,7 +480,7 @@
     </xsl:if>
 
     <xsl:if test="not($isServiceMetadata)">
-      <adms:sample rdf:about="{*/mcc:fileName/*/text()}" />
+      <adms:sample rdf:resource="{*/mcc:fileName/*/text()}" />
     </xsl:if>
   </xsl:template>
 </xsl:stylesheet>
