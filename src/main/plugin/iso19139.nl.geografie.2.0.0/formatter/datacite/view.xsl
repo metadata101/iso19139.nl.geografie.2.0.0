@@ -539,24 +539,6 @@ eg.
       </xsl:for-each>
     </datacite:rightsList>
   </xsl:template>
-  <xsl:template mode="toDatacite"
-                match="gmd:resourceConstraints[1]">
-    <datacite:rightsList>
-      <xsl:for-each select="$metadata//gmd:useLimitation[*/text() != '']">
-        <xsl:apply-templates mode="toDataciteLocalized" select=".">
-          <xsl:with-param name="template">
-            <datacite:rights>
-              <xsl:if test="gmx:Anchor/@xlink:href">
-                <xsl:attribute name="rightsURI"
-                               select="gmx:Anchor/@xlink:href"/>
-              </xsl:if>
-            </datacite:rights>
-          </xsl:with-param>
-        </xsl:apply-templates>
-      </xsl:for-each>
-    </datacite:rightsList>
-  </xsl:template>
-
 
   <!--
   Controlled List Values:
