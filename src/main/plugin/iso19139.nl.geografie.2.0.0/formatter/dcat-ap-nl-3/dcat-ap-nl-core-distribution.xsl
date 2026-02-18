@@ -23,6 +23,7 @@
                 xmlns:foaf="http://xmlns.com/foaf/0.1/"
                 xmlns:adms="http://www.w3.org/ns/adms#"
                 xmlns:mdUtil="java:org.fao.geonet.api.records.MetadataUtils"
+                xmlns:gmd="http://www.isotc211.org/2005/gmd"
                 exclude-result-prefixes="#all">
 
   <!--
@@ -39,6 +40,12 @@
                 as="xs:boolean"
                 select="xs:boolean($copyDatasetInfoToDistribution)"/>
 
+  <!-- Retrieve the metadata relations (associations) -->
+  <!-- $metadata contains the original metadata in ISO19139 format, not the converted to ISO19115-3.2018 -->
+  <xsl:variable name="mdId" select="$metadata/gmd:fileIdentifier/*/text()" />
+  <xsl:variable name="associations"
+                select="mdUtil:getAssociatedAsXml($mdId)"
+                as="node()?"/>
 
     <!--
   RDF Property:	dcat:distribution
@@ -249,10 +256,6 @@
              Usage note:	dcat:accessService SHOULD be used to link to a description of a dcat:DataService that can provide access to this distribution.
             -->
             <xsl:if test="matches($protocol, 'OGC:WMS|OGC:WFS|OGC:WCS|OGC:WPS|OGC API Features|OGC API Coverages|ESRI:REST')">
-              <xsl:variable name="associations"
-                            select="mdUtil:getAssociatedAsXml(//mdb:metadataIdentifier/*/mcc:code/*/text())"
-                            as="node()?"/>
-
               <xsl:variable name="serviceMetadataUuid"
                             select="$associations//services[root/link/protocol = $protocol]/@uuid" />
 
