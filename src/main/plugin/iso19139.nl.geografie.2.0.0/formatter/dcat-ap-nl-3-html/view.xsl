@@ -1067,7 +1067,9 @@ using the region API -->
                                 select="$metadata/gmd:referenceSystemInfo/*/gmd:referenceSystemIdentifier/*/gmd:code/(gco:CharacterString|gmx:Anchor)[matches(., '^https?://') or matches(@xlink:href, '^https?://')]">
 
                                 <xsl:variable name="uri"
-                                              select="(@xlink:href, matches(., '^https?://'))[1]"/>
+                                              select="if (string(@xlink:href))
+                                                                then @xlink:href
+                                                                else ."/>
 
                                 <xsl:if test="$uri != ''">
                                   <xsl:variable name="specificationTitle" select="."/>
