@@ -438,6 +438,16 @@
               -->
               <xsl:apply-templates mode="iso19115-3-to-dcat"
                                    select="ancestor::mdb:MD_Metadata/mdb:dataQualityInfo/*/mdq:report/*/mdq:result[mdq:DQ_ConformanceResult and mdq:DQ_ConformanceResult/mdq:pass/*/text() = 'true']"/>
+
+              <!--
+              applicable legislation	Legal Resource	0..*	The legislation that mandates the creation or management of the Dataset.
+              -->
+              <xsl:apply-templates mode="iso19115-3-to-dcat"
+                                   select="ancestor::mdb:MD_Metadata/mdb:identificationInfo/*/mri:descriptiveKeywords/*/mri:keyword[starts-with(*/@xlink:href, 'http://data.europa.eu/eli')]" />
+
+              <xsl:apply-templates mode="iso19115-3-to-dcat"
+                                   select="ancestor::mdb:MD_Metadata/mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:reference" />
+
             </xsl:if>
 
             <xsl:copy-of select="$additionalProperties"/>
