@@ -315,10 +315,10 @@
     <table for="gmd:CI_ResponsibleParty">
       <header>
         <!-- TODO: Add label from strings.xml / label with context-->
-        <col label="individualName"/>
-        <col label="organisationName" class="gn-required"/>
-        <col label="electronicMailAddress" class="gn-required"/>
-        <col label="role" class="gn-required"/>
+        <col label="gmd:individualName"/>
+        <col label="gmd:organisationName" class="gn-required"/>
+        <col label="gmd:electronicMailAddress" class="gn-required"/>
+        <col label="gmd:role" class="gn-required"/>
         <col/>
       </header>
       <row>
@@ -332,8 +332,8 @@
 
     <table for="gmd:PT_Locale">
       <header>
-        <col label="languageCode"/>
-        <col label="characterEncoding"/>
+        <col label="gmd:languageCode"/>
+        <col label="gmd:characterEncoding"/>
         <col/>
       </header>
       <row>
@@ -990,7 +990,7 @@
           <!-- series -->
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:series/gmd:CI_Series/gmd:name"/>
 
-          <action type="add" btnLabel="addSeries" if="count(gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:series/gmd:CI_Series/gmd:name) = 0" name="name" or="series" in="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation">
+          <action type="add" btnLabel="addSeries" if="count(gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:series/gmd:CI_Series/gmd:name) = 0" name="series" or="series" in="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation">
             <template>
               <snippet>
                 <gmd:series>
@@ -1319,7 +1319,7 @@
             </template>
           </field>
 
-          <action type="add" btnLabel="addTemporalExtent" name="temporalExtent" or="extent" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement) = 0">
+          <action type="add" btnLabel="addTemporalExtent" name="temporalExtent" forceLabel="true" or="extent" in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification" if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement) = 0">
             <template>
               <snippet>
                 <gmd:extent>
@@ -1926,7 +1926,7 @@
           <action type="add" btnLabel="addParentIdentifier" name="parentIdentifier" or="parentIdentifier" in="/gmd:MD_Metadata">
             <template>
               <snippet>
-                <gmd:parentIdentifier></gmd:parentIdentifier>
+                <gmd:parentIdentifier><gco:CharacterString></gco:CharacterString></gmd:parentIdentifier>
               </snippet>
             </template>
           </action>
