@@ -179,6 +179,10 @@
 
       <dct:source rdf:resource="{concat($resourcePrefix, $metadataIdentifier)}"/>
 
+      <dct:conformsTo>
+        <dct:Standard rdf:about="https://docs.geostandaarden.nl/dcat/dcat-ap-nl30/"/>
+      </dct:conformsTo>
+
       <xsl:copy-of select="$additionalProperties"/>
     </xsl:variable>
     <xsl:call-template name="iso19115-3-to-eu-dcat-ap-catalog-record">
@@ -213,7 +217,7 @@
     <xsl:if test="not($isSeriesMetadata)">
       <xsl:apply-templates mode="iso19115-3-to-dcat"
                            select="mdb:identificationInfo/mri:MD_DataIdentification/mri:spatialRepresentationType/*/@codeListValue"/>
-      
+
       <xsl:call-template name="rdf-eu-dcat-ap-nl-theme"/>
     </xsl:if>
   </xsl:template>
