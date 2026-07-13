@@ -144,30 +144,40 @@
 
       <xsl:apply-templates select="gmd:protocol" />
 
-      <gmd:applicationProfile>
+      <!-- Add applicationProfile if missing for INSPIRE metadata (has the conformance report http://data.europa.eu/eli/reg/2010/1089) -->
+      <xsl:variable name="isInspire" select="boolean(//gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification[gmd:CI_Citation/gmd:title/@xlink:href='http://data.europa.eu/eli/reg/2010/1089'])" />
+
       <xsl:choose>
-        <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WMS', 'OGC:WMTS'))">
-              <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">
-              view</gmx:Anchor>
-        </xsl:when>
-        <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WFS', 'OGC:WCS', 'INSPIRE Atom'))">
-              <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">
-              download</gmx:Anchor>
-        </xsl:when>
-        <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WCTS'))">
-              <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/transformation">
-              transformation</gmx:Anchor>
-        </xsl:when>
-        <xsl:when test="geonet:contains-any-of($protocol, ('OGC:CSW'))">
-              <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery">
-              discovery</gmx:Anchor>
+        <xsl:when test="$isInspire">
+          <gmd:applicationProfile>
+            <xsl:choose>
+              <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WMS', 'OGC:WMTS'))">
+                <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">
+                  view</gmx:Anchor>
+              </xsl:when>
+              <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WFS', 'OGC:WCS', 'INSPIRE Atom'))">
+                <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">
+                  download</gmx:Anchor>
+              </xsl:when>
+              <xsl:when test="geonet:contains-any-of($protocol, ('OGC:WCTS'))">
+                <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/transformation">
+                  transformation</gmx:Anchor>
+              </xsl:when>
+              <xsl:when test="geonet:contains-any-of($protocol, ('OGC:CSW'))">
+                <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery">
+                  discovery</gmx:Anchor>
+              </xsl:when>
+              <xsl:otherwise>
+                <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/other">
+                  other</gmx:Anchor>
+              </xsl:otherwise>
+            </xsl:choose>
+          </gmd:applicationProfile>
         </xsl:when>
         <xsl:otherwise>
-              <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/other">
-              other</gmx:Anchor>
+          <xsl:apply-templates select="gmd:applicationProfile" />
         </xsl:otherwise>
       </xsl:choose>
-      </gmd:applicationProfile>
 
       <xsl:apply-templates select="gmd:name" />
 
