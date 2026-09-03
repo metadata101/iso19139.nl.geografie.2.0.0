@@ -92,9 +92,6 @@
     <entry key="http://publications.europa.eu/resource/authority/access-right/PUBLIC" match="start">Niet Commercieel, Geen Afgeleide Werken, Naamsvermelding verplicht,</entry>
     <entry key="http://publications.europa.eu/resource/authority/access-right/PUBLIC">http://creativecommons.org/licenses/by-nc-nd/3.0/deed.nl</entry>
     <entry key="http://publications.europa.eu/resource/authority/access-right/PUBLIC">http://creativecommons.org/licenses/by-nc-nd/4.0/deed.nl</entry>
-
-    <!-- TODO: review other allowed values related to this license -->
-    <entry key="http://publications.europa.eu/resource/authority/access-right/PUBLIC">Geo Gedeeld licentie</entry>
   </xsl:variable>
 
   <!--
@@ -131,28 +128,14 @@
         <xsl:variable name="licenses" as="node()*">
           <xsl:for-each select="$useAccessConstraints">
 
-            <xsl:variable name="isGeoGedeeldLicense" select="*/text() = 'Geo Gedeeld licentie'"/>
+            <xsl:variable name="isGeoGedeeldLicense"
+                          select="(gco:CharacterString|gcx:Anchor)[normalize-space(lower-case(.)) = 'geo gedeeld licentie']"/>
 
             <xsl:variable name="httpUriInAnchorOrText"
                           select="(gcx:Anchor/@xlink:href[starts-with(., 'http')]
                                   |gco:CharacterString[starts-with(., 'http')])[1]"/>
 
             <xsl:choose>
-              <xsl:when test="$isGeoGedeeldLicense">
-                <xsl:variable name="euDcatLicense"
-                              select="$euLicenses/rdf:RDF/skos:Concept[@rdf:about = 'http://definities.geostandaarden.nl/DCAT-AP-NL/id/waarde/licentieValue/niet-open']"/>
-
-                <xsl:if test="count($euDcatLicense) = 1">
-                  <dct:license>
-                    <dct:LicenseDocument rdf:about="{$euDcatLicense/@rdf:about}">
-                      <xsl:copy-of select="$euDcatLicense/(skos:prefLabel[@xml:lang = $languages/@iso2code]
-                                                      |skos:exactMatch)"
-                                   copy-namespaces="no"/>
-                    </dct:LicenseDocument>
-                  </dct:license>
-                </xsl:if>
-
-              </xsl:when>
               <xsl:when test="$httpUriInAnchorOrText != '' and $isMappingResourceConstraintsToEuVocabulary = true()">
 
                 <xsl:variable name="licenseUriWithoutHttp"
@@ -179,6 +162,21 @@
                 <dct:license>
                   <dct:LicenseDocument rdf:about="{$httpUriInAnchorOrText}"/>
                 </dct:license>
+              </xsl:when>
+              <xsl:when test="$isGeoGedeeldLicense">
+                <xsl:variable name="euDcatLicense"
+                              select="$euLicenses/rdf:RDF/skos:Concept[@rdf:about = 'http://definities.geostandaarden.nl/DCAT-AP-NL/id/waarde/licentieValue/niet-open']"/>
+
+                <xsl:if test="count($euDcatLicense) = 1">
+                  <dct:license>
+                    <dct:LicenseDocument rdf:about="{$euDcatLicense/@rdf:about}">
+                      <xsl:copy-of select="$euDcatLicense/(skos:prefLabel[@xml:lang = $languages/@iso2code]
+                                                      |skos:exactMatch)"
+                                   copy-namespaces="no"/>
+                    </dct:LicenseDocument>
+                  </dct:license>
+                </xsl:if>
+
               </xsl:when>
             </xsl:choose>
           </xsl:for-each>
