@@ -75,5 +75,10 @@
     <skos:prefLabel xml:lang="nl">Gebruiksvoorwaarden (CC-by-nc-nd versie 4.0) - http://creativecommons.org/licenses/by-nc-nd/4.0/deed.nl</skos:prefLabel>
     <skos:inScheme rdf:resource="http://geostandaarden.nl/waardelijst/metadata/license" />
   </skos:Concept>
+   <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://definities.geostandaarden.nl/DCAT-AP-NL/id/waarde/licentieValue/niet-open">
+      <skos:scopeNote xml:lang="nl">niet-open</skos:scopeNote>
+      <skos:prefLabel xml:lang="nl">niet-open</skos:prefLabel>
+      <skos:inScheme rdf:resource="http://geostandaarden.nl/waardelijst/metadata/license" />
+    </skos:Concept>
 </rdf:RDF>
 
