@@ -374,13 +374,11 @@
       <sch:assert test="$isValidEmail = true()">Verantwoordelijke organisatie bron e-mail ontbreekt of is ongeldig</sch:assert>
     </sch:rule>
 
-    <sch:rule context="//gmd:MD_Metadata/gmd:identificationInfo/*/gmd:pointOfContact[1]/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage">
-      <sch:let name="url" value="gmd:URL"/>
-
-      <sch:let name="isValidUrl" value="($url = '') or starts-with(lower-case($url), 'http://') or starts-with(lower-case($url), 'https://')" />
-
-      <sch:assert test="$isValidUrl = true()">Verantwoordelijke organisatie bron resource URL is ongeldig</sch:assert>
-    </sch:rule>
+    <!-- The URL of the responsible organisation is not constrained by DCAT-AP NL 3.0:
+         the SHACL shapes for dct:creator, dct:publisher and dcat:contactPoint accept an
+         agent without a URI (sh:BlankNodeOrIRI) and no shape targets the contact URL.
+         A value that is not a full URL is therefore reported as a recommendation in
+         schematron-rules-warn-dcat-ap-nl-3.sch instead of as an error here. -->
 
     <sch:rule context="//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory[1]/gmd:MD_TopicCategoryCode">
       <!-- Check dataset thema with topic categories and GEMET INSPIRE Themes -->

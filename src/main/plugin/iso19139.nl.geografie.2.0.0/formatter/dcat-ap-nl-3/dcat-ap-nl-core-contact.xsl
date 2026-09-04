@@ -19,7 +19,87 @@
                 xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
                 xmlns:org="http://www.w3.org/ns/org#"
                 xmlns:gn-fn-dcat="http://geonetwork-opensource.org/xsl/functions/dcat"
+                xmlns:gn-fn-dcat-nl="http://geonetwork-opensource.org/xsl/functions/dcat-ap-nl"
                 exclude-result-prefixes="#all">
+
+  <!--
+  Override of gn-fn-dcat:rdf-object-ref (iso19115-3.2018/formatter/dcat/dcat-utils.xsl) for
+  agents, ie. the organisation or individual used for dct:creator, dct:publisher and
+  dcat:contactPoint.
+
+  The core implementation uses the contact online resource URL as the URI of the agent. When
+  that URL has no protocol, as in www.example.nl, the result is a relative RDF URI reference,
+  which a parser resolves against the base URI of the document into a URI that does not
+  identify the organisation, for example
+  https://www.nationaalgeoregister.nl/geonetwork/srv/api/records/www.example.nl.
+
+  DCAT-AP NL 3.0 does not require an agent to have a URI: the SHACL shapes for dct:creator,
+  dct:publisher and dcat:contactPoint accept sh:BlankNodeOrIRI. Rather than publish a URI that
+  identifies the wrong thing, a value that is not usable as a URI is dropped and the agent is
+  written as a blank node.
+
+  Only agents are affected. For all other objects the core behaviour is kept unchanged.
+  -->
+  <xsl:function name="gn-fn-dcat:rdf-object-ref" as="xs:string?">
+    <xsl:param name="node" as="node()"/>
+
+    <!-- Candidates, and the order in which they are picked, as in the core implementation. -->
+    <xsl:variable name="reference">
+      <xsl:value-of select="if (name($node) = 'cit:CI_Organisation')
+                            then $node/(cit:partyIdentifier/*/mcc:code/*/text(),
+                             cit:contactInfo/*/cit:onlineResource/*/cit:linkage/gco:CharacterString/text(),
+                             cit:name/gcx:Anchor/@xlink:href,
+                             @uuid
+                            )[1]
+                            else if (name($node) = 'cit:CI_Individual')
+                            then $node/(cit:partyIdentifier/*/mcc:code/*/text(),
+                                  cit:name/gcx:Anchor/@xlink:href,
+                                  @uuid
+                            )[1]
+                            else if ($node/gcx:Anchor/@xlink:href) then $node/gcx:Anchor/@xlink:href
+                            else if ($node/@xlink:href) then $node/@xlink:href
+                            else if ($node/@uuidref) then $node/@uuidref
+                            else if ($node/*/mri:code/*/text() != '') then $node/*/mri:code/*/text()
+                            else ''"/>
+    </xsl:variable>
+
+    <xsl:value-of select="if (name($node) = ('cit:CI_Organisation', 'cit:CI_Individual'))
+                          then gn-fn-dcat-nl:agent-uri($reference)
+                          else string($reference)"/>
+  </xsl:function>
+
+
+  <!--
+  Returns the value to use as the URI of an agent, or an empty string when the value cannot
+  identify it and the agent has to be written as a blank node.
+
+  A host name is completed with https://, as recommended by DCAT-AP NL 3.0 for web addresses,
+  so that www.example.nl identifies the organisation as https://www.example.nl. Any other
+  value that is not an absolute URI, for example an organisation name or a bare UUID, is
+  dropped.
+  -->
+  <xsl:function name="gn-fn-dcat-nl:agent-uri" as="xs:string">
+    <xsl:param name="value" as="item()?"/>
+
+    <xsl:variable name="reference"
+                  as="xs:string"
+                  select="normalize-space(string($value))"/>
+
+    <xsl:choose>
+      <!-- Host name, optionally with a port and a path: www.example.nl, example.nl:8080/contact -->
+      <xsl:when test="matches($reference, '^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)+(:[0-9]+)?([/?#].*)?$')">
+        <xsl:value-of select="concat('https://', $reference)"/>
+      </xsl:when>
+      <!-- Absolute URI: https://www.example.nl, http://standaarden.overheid.nl/owms/terms/... -->
+      <xsl:when test="matches($reference, '^[a-zA-Z][a-zA-Z0-9+.-]*:')">
+        <xsl:value-of select="$reference"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="''"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+
 
   <!--
   RDF Property:	dcat:contactPoint
