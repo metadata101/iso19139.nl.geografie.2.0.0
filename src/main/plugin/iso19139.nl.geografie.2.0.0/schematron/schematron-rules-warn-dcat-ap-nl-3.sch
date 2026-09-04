@@ -42,6 +42,18 @@
       <!-- Keywords -->
       <sch:assert test="gmd:descriptiveKeywords/*/gmd:keyword[gmx:Anchor/@xlink:href != '' or gco:CharacterString != '']">Trefwoorden voor datasets worden aanbevolen</sch:assert>
     </sch:rule>
+
+    <!-- Responsible organisation online resource URL.
+         DCAT-AP NL 3.0 does not require this URL, so a value that is not a full URL is a
+         recommendation and not an error. It is used as the URI of the organisation in the
+         DCAT-AP NL output, so a value without http:// or https:// cannot identify it. -->
+    <sch:rule context="//gmd:MD_Metadata/gmd:identificationInfo/*/gmd:pointOfContact[1]/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage">
+      <sch:let name="url" value="normalize-space(gmd:URL)"/>
+
+      <sch:let name="isFullUrl" value="($url = '') or starts-with(lower-case($url), 'http://') or starts-with(lower-case($url), 'https://')"/>
+
+      <sch:assert test="$isFullUrl = true()">Voor de URL van de verantwoordelijke organisatie wordt een volledige URL aanbevolen die begint met https:// (of http://). Huidige waarde: <sch:value-of select="$url"/></sch:assert>
+    </sch:rule>
   </sch:pattern>
 
 </sch:schema>
