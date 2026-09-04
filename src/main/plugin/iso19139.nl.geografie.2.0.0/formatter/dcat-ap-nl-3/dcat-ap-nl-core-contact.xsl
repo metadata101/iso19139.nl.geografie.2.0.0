@@ -43,19 +43,22 @@
   <xsl:function name="gn-fn-dcat:rdf-object-ref" as="xs:string?">
     <xsl:param name="node" as="node()"/>
 
-    <!-- Candidates, and the order in which they are picked, as in the core implementation. -->
+    <!-- Candidates, and the order in which they are picked, as in the core implementation.
+         For agents the candidates that cannot identify the agent are skipped, so that a
+         contact URL which is not usable as a URI does not hide an organisation URI held in
+         the name anchor. -->
     <xsl:variable name="reference">
       <xsl:value-of select="if (name($node) = 'cit:CI_Organisation')
                             then $node/(cit:partyIdentifier/*/mcc:code/*/text(),
                              cit:contactInfo/*/cit:onlineResource/*/cit:linkage/gco:CharacterString/text(),
                              cit:name/gcx:Anchor/@xlink:href,
                              @uuid
-                            )[1]
+                            )[gn-fn-dcat-nl:agent-uri(.) != ''][1]
                             else if (name($node) = 'cit:CI_Individual')
                             then $node/(cit:partyIdentifier/*/mcc:code/*/text(),
                                   cit:name/gcx:Anchor/@xlink:href,
                                   @uuid
-                            )[1]
+                            )[gn-fn-dcat-nl:agent-uri(.) != ''][1]
                             else if ($node/gcx:Anchor/@xlink:href) then $node/gcx:Anchor/@xlink:href
                             else if ($node/@xlink:href) then $node/@xlink:href
                             else if ($node/@uuidref) then $node/@uuidref
@@ -76,7 +79,7 @@
   A host name is completed with https://, as recommended by DCAT-AP NL 3.0 for web addresses,
   so that www.example.nl identifies the organisation as https://www.example.nl. Any other
   value that is not an absolute URI, for example an organisation name or a bare UUID, is
-  dropped.
+  dropped, as is a value with an inner space, which cannot be part of a URI.
   -->
   <xsl:function name="gn-fn-dcat-nl:agent-uri" as="xs:string">
     <xsl:param name="value" as="item()?"/>
@@ -86,6 +89,11 @@
                   select="normalize-space(string($value))"/>
 
     <xsl:choose>
+      <!-- A URI has no space, so a value with an inner space is dropped rather than written
+           as an invalid URI. Surrounding whitespace is already removed above. -->
+      <xsl:when test="contains($reference, ' ')">
+        <xsl:value-of select="''"/>
+      </xsl:when>
       <!-- Host name, optionally with a port and a path: www.example.nl, example.nl:8080/contact -->
       <xsl:when test="matches($reference, '^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)+(:[0-9]+)?([/?#].*)?$')">
         <xsl:value-of select="concat('https://', $reference)"/>
